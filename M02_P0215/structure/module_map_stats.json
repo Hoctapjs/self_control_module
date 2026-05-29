@@ -1,0 +1,64 @@
+{
+  "module_name": "M02_P0215",
+  "detail_file_count": 79,
+  "relation_count": 118,
+  "top_buckets": [
+    [
+      "notes",
+      29
+    ],
+    [
+      "data",
+      9
+    ],
+    [
+      "models",
+      9
+    ],
+    [
+      "static",
+      8
+    ],
+    [
+      "views",
+      7
+    ],
+    [
+      "migrations",
+      5
+    ],
+    [
+      "wizards",
+      4
+    ],
+    [
+      "controllers",
+      2
+    ],
+    [
+      "security",
+      2
+    ],
+    [
+      "python",
+      1
+    ],
+    [
+      "manifest",
+      1
+    ],
+    [
+      "convention",
+      1
+    ],
+    [
+      "reports",
+      1
+    ]
+  ],
+  "model_count": 8,
+  "view_count": 15,
+  "security_file_count": 2,
+  "controller_file_count": 2,
+  "sample_files": "__init__.py, __manifest__.py, controllers/__init__.py, controllers/portal.py, convention/QUY_UOC_DAT_TEN_VA_RULE.md, data/approval_category_data.xml, data/cron_auto_archive.xml, data/email_template_discipline_done.xml, data/email_template_rejection.xml, data/hr_discipline_action_data.xml"
+}

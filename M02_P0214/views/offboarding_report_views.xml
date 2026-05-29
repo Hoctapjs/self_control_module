@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_psm_offboarding_report_tree" model="ir.ui.view">
+        <field name="name">approval.request.offboarding.report.tree</field>
+        <field name="model">approval.request</field>
+        <field name="group_ids" eval="[(6, 0, [
+            ref('M02_P0200.GDH_RST_HR_HRBP_S'),
+            ref('M02_P0200.GDH_RST_HR_HRBP_M'),
+            ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+            ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+        ])]"/>
+        <field name="arch" type="xml">
+            <list string="Offboarding Report"
+                  create="0" delete="0" edit="0"
+                  default_order="x_psm_0214_resignation_date asc">
+                <field name="name" string="Request Name"/>
+                <field name="x_psm_0214_employee_id" string="Employee" widget="many2one_avatar"/>
+                <field name="x_psm_0214_resignation_date_formatted" string="Expected Resignation Date"/>
+                <field name="x_psm_0214_exit_survey_completed" string="Survey"/>
+                <field name="x_psm_0214_all_activities_completed" string="Activities"/>
+                <field name="request_status" string="Status" widget="badge"
+                       decoration-info="request_status == 'approved'"
+                       decoration-success="request_status == 'done'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_psm_offboarding_report_search" model="ir.ui.view">
+        <field name="name">approval.request.offboarding.report.search</field>
+        <field name="model">approval.request</field>
+        <field name="group_ids" eval="[(6, 0, [
+            ref('M02_P0200.GDH_RST_HR_HRBP_S'),
+            ref('M02_P0200.GDH_RST_HR_HRBP_M'),
+            ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+            ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+        ])]"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="x_psm_0214_employee_id"/>
+                <field name="x_psm_0214_resignation_reason_id"/>
+                <filter name="groupby_reason" string="Group by Resignation Reason" context="{'group_by': 'x_psm_0214_resignation_reason_id'}"/>
+                <filter name="groupby_status" string="Group by Status" context="{'group_by': 'request_status'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_psm_pending_offboarding_activities" model="ir.actions.server">
+        <field name="name">Offboarding Report</field>
+        <field name="model_id" ref="approvals.model_approval_request"/>
+        <field name="group_ids" eval="[(6, 0, [
+            ref('M02_P0200.GDH_RST_HR_HRBP_S'),
+            ref('M02_P0200.GDH_RST_HR_HRBP_M'),
+            ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+            ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+        ])]"/>
+        <field name="state">code</field>
+        <field name="code">
+action = model.action_pending_offboarding_subordinates()
+        </field>
+    </record>
+
+    <menuitem id="menu_psm_rst_reports"
+              name="Report"
+              parent="approvals.approvals_menu_root"
+              groups="M02_P0200.GDH_RST_HR_HRBP_S,M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+              sequence="30"/>
+
+    <menuitem id="menu_psm_pending_offboarding_activities"
+              name="Offboarding Report"
+              parent="menu_psm_rst_reports"
+              action="action_psm_pending_offboarding_activities"
+              groups="M02_P0200.GDH_RST_HR_HRBP_S,M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+              sequence="10"/>
+
+</odoo>
+

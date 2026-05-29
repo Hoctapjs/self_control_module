@@ -1,0 +1,76 @@
+{
+  "file": "data/document_sequence_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "psm_0502_request_sequence",
+      "model": "ir.sequence",
+      "fields": {
+        "name": "0502 Maintenance Request",
+        "code": "psm.maintenance.request",
+        "prefix": "0502/REQ/%(year)s/",
+        "padding": "5",
+        "number_next": "1",
+        "number_increment": "1"
+      }
+    },
+    {
+      "id": "psm_0502_inspection_sequence",
+      "model": "ir.sequence",
+      "fields": {
+        "name": "0502 Inspection Report",
+        "code": "psm.inspection.report",
+        "prefix": "0502/INS/%(year)s/",
+        "padding": "5",
+        "number_next": "1",
+        "number_increment": "1"
+      }
+    },
+    {
+      "id": "psm_0502_proposal_sequence",
+      "model": "ir.sequence",
+      "fields": {
+        "name": "0502 Treatment Proposal",
+        "code": "psm.proposal.document",
+        "prefix": "0502/PRO/%(year)s/",
+        "padding": "5",
+        "number_next": "1",
+        "number_increment": "1"
+      }
+    },
+    {
+      "id": "psm_0502_material_issue_sequence",
+      "model": "ir.sequence",
+      "fields": {
+        "name": "0502 Material Issue Request",
+        "code": "psm.material.issue.request",
+        "prefix": "0502/MAT/%(year)s/",
+        "padding": "5",
+        "number_next": "1",
+        "number_increment": "1"
+      }
+    },
+    {
+      "id": "psm_0502_acceptance_sequence",
+      "model": "ir.sequence",
+      "fields": {
+        "name": "0502 Acceptance Record",
+        "code": "psm.acceptance.record",
+        "prefix": "0502/ACC/%(year)s/",
+        "padding": "5",
+        "number_next": "1",
+        "number_increment": "1"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.sequence"
+  ]
+}

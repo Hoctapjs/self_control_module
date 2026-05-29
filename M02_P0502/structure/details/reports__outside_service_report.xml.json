@@ -1,0 +1,39 @@
+{
+  "file": "reports/outside_service_report.xml",
+  "type": "xml",
+  "bucket": "reports",
+  "summary": "1 templates",
+  "records": [
+    {
+      "id": "action_report_psm_0502_outside_service_quotation_request",
+      "model": "ir.actions.report",
+      "fields": {
+        "name": "0502 Outside Service Quotation Request",
+        "model": "x_psm_outside_service_request",
+        "report_type": "qweb-pdf",
+        "report_name": "M02_P0502.report_psm_0502_outside_service_quotation_request",
+        "report_file": "M02_P0502.report_psm_0502_outside_service_quotation_request",
+        "binding_model_id": {
+          "ref": "model_x_psm_outside_service_request"
+        },
+        "binding_type": "report",
+        "print_report_name": "'0502 Outside Service - %s' % (object.name)"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [
+    {
+      "id": "report_psm_0502_outside_service_quotation_request",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/outside_service_report.xml"
+    }
+  ],
+  "functions": [],
+  "referenced_models": [
+    "ir.actions.report"
+  ]
+}

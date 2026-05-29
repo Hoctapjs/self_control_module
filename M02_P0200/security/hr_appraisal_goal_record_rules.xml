@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- [M02_P0200] RGM: Read goals in own department -->
+    <record id="rule_hr_appraisal_goal_read_own_department_rgm" model="ir.rule">
+        <field name="name">Appraisal Goal: Read own department (Store RGM)</field>
+        <field name="model_id" ref="hr_appraisal.model_hr_appraisal_goal"/>
+        <field name="domain_force">[('employee_ids.department_id.manager_id.user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="groups" eval="[(4, ref('M02_P0200.GDH_OPS_STORE_RGM_M'))]"/>
+    </record>
+
+    <!-- [M02_P0200] RGM: Edit goals in own department -->
+    <record id="rule_hr_appraisal_goal_write_own_department_rgm" model="ir.rule">
+        <field name="name">Appraisal Goal: Edit own department (Store RGM)</field>
+        <field name="model_id" ref="hr_appraisal.model_hr_appraisal_goal"/>
+        <field name="domain_force">[('employee_ids.department_id.manager_id.user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="groups" eval="[(4, ref('M02_P0200.GDH_OPS_STORE_RGM_M'))]"/>
+    </record>
+</odoo>

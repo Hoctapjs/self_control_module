@@ -1,0 +1,81 @@
+{
+  "file": "models/request_source.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: x_psm_request_source; 1 classes; 4 fields",
+  "classes": [
+    {
+      "python_class": "X0502RequestSource",
+      "description": "0502 Request Source",
+      "model": "x_psm_request_source",
+      "inherit": null,
+      "order": "sequence, id",
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "name",
+          "type": "Char",
+          "string": null,
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "code",
+          "type": "Char",
+          "string": null,
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "sequence",
+          "type": "Integer",
+          "string": null,
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": 10,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "active",
+          "type": "Boolean",
+          "string": null,
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": true,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Action -->
+    <record id="mkt_0901_action_report_paf_valuation" model="ir.actions.report">
+        <field name="name">Báo cáo đánh giá PAF Valuation</field>
+        <field name="model">mkt_paf.valuation.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">M09_0901.mkt_0901_report_paf_valuation</field>
+        <field name="report_file">M09_0901.mkt_0901_report_paf_valuation</field>
+        <field name="binding_model_id" ref="model_mkt_paf_valuation_report"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- QWeb Template -->
+    <template id="mkt_0901_report_paf_valuation">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="text-center">
+                            <h2>BÁO CÁO ĐÁNH GIÁ PAF VALUATION</h2>
+                            <h3>Yêu cầu PAF: <span t-field="o.paf_request_id.name"/></h3>
+                        </div>
+                        
+                        <div class="row mt32 mb32">
+                            <div class="col-6">
+                                <strong>Ngày báo cáo:</strong> <span t-field="o.report_date"/><br/>
+                                <strong>Trạng thái:</strong> <span t-field="o.status"/><br/>
+                                <strong>Người tạo PAF:</strong> <span t-field="o.paf_request_id.creator_id.name"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Template PAF:</strong> <span t-field="o.paf_request_id.template_id.name"/><br/>
+                                <strong>Thời gian chạy:</strong> <span t-field="o.paf_request_id.planned_start_date"/> - <span t-field="o.paf_request_id.planned_end_date"/>
+                            </div>
+                        </div>
+
+                        <h4>Bảng so sánh Dự báo (Forecast) vs Thực tế (Actual)</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Chỉ số</th>
+                                    <th>Dự báo (Forecast)</th>
+                                    <th>Thực tế (Actual)</th>
+                                    <th>Chênh lệch</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Doanh thu</strong></td>
+                                    <td><span t-field="o.paf_request_id.forecast_revenue" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                                    <td><span t-field="o.actual_revenue" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                                    <td><span t-esc="o.actual_revenue - o.paf_request_id.forecast_revenue" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Chi phí NVL</strong></td>
+                                    <td><span t-field="o.paf_request_id.total_raw_cost" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                                    <td><span t-field="o.actual_cost" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                                    <td><span t-esc="o.actual_cost - o.paf_request_id.total_raw_cost" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tỷ suất ROI (%)</strong></td>
+                                    <td><span t-field="o.paf_request_id.roi_percent" t-options="{'widget': 'float', 'precision': 2}"/>%</td>
+                                    <td><span t-field="o.actual_roi_percent" t-options="{'widget': 'float', 'precision': 2}"/>%</td>
+                                    <td><span t-field="o.variance_vs_forecast" t-options="{'widget': 'float', 'precision': 2}"/>%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="mt32">
+                            <h4>Tóm tắt đánh giá dự án</h4>
+                            <div t-field="o.summary_html"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

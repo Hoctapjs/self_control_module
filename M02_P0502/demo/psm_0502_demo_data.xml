@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Phase 3G demo partners and departments -->
+        <record id="psm_0502_demo_partner_hanoi_store" model="res.partner">
+            <field name="name">0502 Demo - Hanoi Store</field>
+            <field name="company_type">company</field>
+            <field name="phone">0902000001</field>
+            <field name="email">hanoi.store.demo@psm.local</field>
+        </record>
+
+        <record id="psm_0502_demo_partner_hcm_store" model="res.partner">
+            <field name="name">0502 Demo - HCM Store</field>
+            <field name="company_type">company</field>
+            <field name="phone">0902000002</field>
+            <field name="email">hcm.store.demo@psm.local</field>
+        </record>
+
+        <record id="psm_0502_demo_partner_danang_store" model="res.partner">
+            <field name="name">0502 Demo - Danang Store</field>
+            <field name="company_type">company</field>
+            <field name="phone">0902000003</field>
+            <field name="email">danang.store.demo@psm.local</field>
+        </record>
+
+        <record id="psm_0502_demo_vendor_service" model="res.partner">
+            <field name="name">0502 Demo - Outside Service Vendor</field>
+            <field name="company_type">company</field>
+            <field name="supplier_rank">1</field>
+            <field name="phone">0902999000</field>
+            <field name="email">vendor.demo@psm.local</field>
+        </record>
+
+        <record id="psm_0502_demo_department_hanoi_store" model="hr.department">
+            <field name="name">0502 Demo - Hanoi Store</field>
+            <field name="x_psm_0502_partner_id" ref="psm_0502_demo_partner_hanoi_store"/>
+            <field name="x_psm_0502_proposal_approver_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_proposal_final_approver_id" ref="base.user_admin"/>
+        </record>
+
+        <record id="psm_0502_demo_department_hcm_store" model="hr.department">
+            <field name="name">0502 Demo - HCM Store</field>
+            <field name="x_psm_0502_partner_id" ref="psm_0502_demo_partner_hcm_store"/>
+            <field name="x_psm_0502_proposal_approver_id" ref="base.user_admin"/>
+        </record>
+
+        <record id="psm_0502_demo_department_danang_store" model="hr.department">
+            <field name="name">0502 Demo - Danang Store</field>
+            <field name="x_psm_0502_partner_id" ref="psm_0502_demo_partner_danang_store"/>
+            <field name="x_psm_0502_proposal_approver_id" ref="base.user_admin"/>
+        </record>
+
+        <!-- Phase 3G demo team and stock setup -->
+        <record id="psm_0502_demo_stock_location_maintenance" model="stock.location">
+            <field name="name">0502 Demo Maintenance Stock</field>
+            <field name="usage">internal</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="psm_0502_demo_team_cmt" model="maintenance.team">
+            <field name="name">0502 Demo CMT Team</field>
+            <field name="member_ids" eval="[(4, ref('base.user_admin'))]"/>
+            <field name="x_psm_0502_lead_user_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_proposal_approver_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_proposal_auto_approve_limit">500000</field>
+            <field name="x_psm_0502_material_approver_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_material_auto_approve_limit">300000</field>
+            <field name="x_psm_0502_default_vendor_id" ref="psm_0502_demo_vendor_service"/>
+            <field name="x_psm_0502_material_picking_type_id" ref="stock.picking_type_internal"/>
+            <field name="x_psm_0502_material_source_location_id" ref="stock.stock_location_stock"/>
+            <field name="x_psm_0502_material_destination_location_id" ref="psm_0502_demo_stock_location_maintenance"/>
+            <field name="x_psm_0502_intake_sla_hours">4</field>
+        </record>
+
+        <!-- Phase 3G demo equipment categories and spare parts -->
+        <record id="psm_0502_demo_category_aircon" model="maintenance.equipment.category">
+            <field name="name">0502 Demo - Air Conditioner</field>
+            <field name="technician_user_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_inspection_checklist_template">Check power, filter, water drain, fan, and abnormal noise.</field>
+            <field name="x_psm_0502_inspection_worksheet_template">Record temperature, pressure, symptom, and risk.</field>
+            <field name="x_psm_0502_fsm_task_template">Verify root cause, repair, test under load, and capture final status.</field>
+            <field name="x_psm_0502_fsm_checklist_template">Isolate power; inspect drain; clean filter; test cooling.</field>
+            <field name="x_psm_0502_fsm_material_template">Drain hose, filter cleaner, electrical tape.</field>
+        </record>
+
+        <record id="psm_0502_demo_category_printer" model="maintenance.equipment.category">
+            <field name="name">0502 Demo - POS Printer</field>
+            <field name="technician_user_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_inspection_checklist_template">Check paper sensor, print head, cable, and driver state.</field>
+            <field name="x_psm_0502_fsm_task_template">Clean head, replace cable if needed, run print test.</field>
+        </record>
+
+        <record id="psm_0502_demo_material_drain_hose" model="product.product">
+            <field name="name">0502 Demo Drain Hose</field>
+            <field name="is_storable" eval="True"/>
+            <field name="purchase_ok" eval="True"/>
+            <field name="standard_price">120000</field>
+        </record>
+
+        <record id="psm_0502_demo_material_print_head" model="product.product">
+            <field name="name">0502 Demo POS Print Head</field>
+            <field name="is_storable" eval="True"/>
+            <field name="purchase_ok" eval="True"/>
+            <field name="standard_price">450000</field>
+        </record>
+
+        <!-- Phase 3G demo equipment -->
+        <record id="psm_0502_demo_equipment_aircon_hanoi_front" model="maintenance.equipment">
+            <field name="name">0502 Demo - Hanoi Front Aircon</field>
+            <field name="category_id" ref="psm_0502_demo_category_aircon"/>
+            <field name="owner_user_id" ref="base.user_admin"/>
+            <field name="maintenance_team_id" ref="psm_0502_demo_team_cmt"/>
+            <field name="technician_user_id" ref="base.user_admin"/>
+            <field name="serial_no">0502-HN-AC-001</field>
+            <field name="model">Demo AC 1.5HP</field>
+            <field name="x_psm_0502_department_id" ref="psm_0502_demo_department_hanoi_store"/>
+            <field name="x_psm_0502_enable_preventive_schedule" eval="True"/>
+            <field name="x_psm_0502_preventive_interval_days">30</field>
+            <field name="x_psm_0502_next_preventive_date" eval="DateTime.now().date()"/>
+        </record>
+
+        <record id="psm_0502_demo_equipment_aircon_hcm_kitchen" model="maintenance.equipment">
+            <field name="name">0502 Demo - HCM Kitchen Aircon</field>
+            <field name="category_id" ref="psm_0502_demo_category_aircon"/>
+            <field name="owner_user_id" ref="base.user_admin"/>
+            <field name="maintenance_team_id" ref="psm_0502_demo_team_cmt"/>
+            <field name="technician_user_id" ref="base.user_admin"/>
+            <field name="serial_no">0502-HCM-AC-001</field>
+            <field name="model">Demo AC 2.0HP</field>
+            <field name="x_psm_0502_department_id" ref="psm_0502_demo_department_hcm_store"/>
+            <field name="x_psm_0502_enable_preventive_schedule" eval="True"/>
+            <field name="x_psm_0502_preventive_interval_days">45</field>
+            <field name="x_psm_0502_next_preventive_date" eval="DateTime.now().date()"/>
+        </record>
+
+        <record id="psm_0502_demo_equipment_printer_hanoi" model="maintenance.equipment">
+            <field name="name">0502 Demo - Hanoi POS Printer</field>
+            <field name="category_id" ref="psm_0502_demo_category_printer"/>
+            <field name="owner_user_id" ref="base.user_admin"/>
+            <field name="maintenance_team_id" ref="psm_0502_demo_team_cmt"/>
+            <field name="technician_user_id" ref="base.user_admin"/>
+            <field name="serial_no">0502-HN-PR-001</field>
+            <field name="x_psm_0502_department_id" ref="psm_0502_demo_department_hanoi_store"/>
+        </record>
+
+        <record id="psm_0502_demo_equipment_aircon_danang" model="maintenance.equipment">
+            <field name="name">0502 Demo - Danang Dining Aircon</field>
+            <field name="category_id" ref="psm_0502_demo_category_aircon"/>
+            <field name="owner_user_id" ref="base.user_admin"/>
+            <field name="maintenance_team_id" ref="psm_0502_demo_team_cmt"/>
+            <field name="technician_user_id" ref="base.user_admin"/>
+            <field name="serial_no">0502-DN-AC-001</field>
+            <field name="x_psm_0502_department_id" ref="psm_0502_demo_department_danang_store"/>
+        </record>
+
+        <record id="psm_0502_demo_equipment_printer_hcm" model="maintenance.equipment">
+            <field name="name">0502 Demo - HCM POS Printer</field>
+            <field name="category_id" ref="psm_0502_demo_category_printer"/>
+            <field name="owner_user_id" ref="base.user_admin"/>
+            <field name="maintenance_team_id" ref="psm_0502_demo_team_cmt"/>
+            <field name="technician_user_id" ref="base.user_admin"/>
+            <field name="serial_no">0502-HCM-PR-001</field>
+            <field name="x_psm_0502_department_id" ref="psm_0502_demo_department_hcm_store"/>
+        </record>
+
+        <!-- Phase 3G demo requests across important stages -->
+        <record id="psm_0502_demo_request_intake" model="maintenance.request">
+            <field name="name">0502 Demo - Intake aircon not cooling</field>
+            <field name="equipment_id" ref="psm_0502_demo_equipment_aircon_hanoi_front"/>
+            <field name="maintenance_team_id" ref="psm_0502_demo_team_cmt"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="owner_user_id" ref="base.user_admin"/>
+            <field name="maintenance_type">corrective</field>
+            <field name="priority">2</field>
+            <field name="request_date" eval="DateTime.now().date()"/>
+            <field name="description">&lt;p&gt;Store reports weak cooling at front counter.&lt;/p&gt;</field>
+            <field name="x_psm_0502_request_source_id" ref="psm_request_source_store_request"/>
+            <field name="x_psm_0502_source_system">manual_request</field>
+            <field name="x_psm_0502_department_id" ref="psm_0502_demo_department_hanoi_store"/>
+            <field name="x_psm_0502_request_type_id" ref="psm_request_type_repair"/>
+            <field name="x_psm_0502_intake_problem_detail">Front counter aircon is running but not cooling.</field>
+            <field name="x_psm_0502_intake_impact_scope">degraded</field>
+            <field name="x_psm_0502_intake_contact_name">Store Shift Lead</field>
+            <field name="x_psm_0502_intake_contact_phone">0902000101</field>
+        </record>
+
+        <record id="psm_0502_demo_request_proposed" model="maintenance.request">
+            <field name="name">0502 Demo - Proposed drain repair</field>
+            <field name="equipment_id" ref="psm_0502_demo_equipment_aircon_hcm_kitchen"/>
+            <field name="maintenance_team_id" ref="psm_0502_demo_team_cmt"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="owner_user_id" ref="base.user_admin"/>
+            <field name="maintenance_type">corrective</field>
+            <field name="priority">3</field>
+            <field name="request_date" eval="DateTime.now().date()"/>
+            <field name="schedule_date" eval="DateTime.now()"/>
+            <field name="x_psm_0502_request_source_id" ref="psm_request_source_store_request"/>
+            <field name="x_psm_0502_source_system">manual_request</field>
+            <field name="x_psm_0502_department_id" ref="psm_0502_demo_department_hcm_store"/>
+            <field name="x_psm_0502_request_type_id" ref="psm_request_type_repair"/>
+            <field name="x_psm_0502_intake_problem_detail">Kitchen aircon is leaking water.</field>
+            <field name="x_psm_0502_intake_impact_scope">blocked</field>
+            <field name="x_psm_0502_intake_contact_name">Kitchen Supervisor</field>
+            <field name="x_psm_0502_received_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_received_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_inspection_result">action_needed</field>
+            <field name="x_psm_0502_inspection_symptom_status">confirmed</field>
+            <field name="x_psm_0502_inspection_equipment_status">degraded</field>
+            <field name="x_psm_0502_inspection_safety_risk">medium</field>
+            <field name="x_psm_0502_inspection_action_urgency">urgent</field>
+            <field name="x_psm_0502_inspection_checklist_result">Drain line clogged.</field>
+            <field name="x_psm_0502_inspection_worksheet">Water drain angle needs correction.</field>
+            <field name="x_psm_0502_inspected_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_inspected_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_plan_note">Schedule technician for morning slot.</field>
+            <field name="x_psm_0502_planned_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_planned_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_root_cause_analysis">Drain hose is clogged and installed with insufficient slope.</field>
+            <field name="x_psm_0502_technical_solution">Replace drain hose and test cooling under load.</field>
+            <field name="x_psm_0502_estimated_cost">420000</field>
+            <field name="x_psm_0502_estimated_timeline">Complete within one morning shift.</field>
+            <field name="x_psm_0502_treatment_proposal">Replace drain hose, adjust slope, and test operation.</field>
+            <field name="x_psm_0502_proposed_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_proposed_at" eval="DateTime.now()"/>
+        </record>
+
+        <record id="psm_0502_demo_request_outside" model="maintenance.request">
+            <field name="name">0502 Demo - Outside service printer board</field>
+            <field name="equipment_id" ref="psm_0502_demo_equipment_printer_hanoi"/>
+            <field name="maintenance_team_id" ref="psm_0502_demo_team_cmt"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="owner_user_id" ref="base.user_admin"/>
+            <field name="maintenance_type">corrective</field>
+            <field name="priority">2</field>
+            <field name="request_date" eval="DateTime.now().date()"/>
+            <field name="schedule_date" eval="DateTime.now()"/>
+            <field name="x_psm_0502_request_source_id" ref="psm_request_source_store_request"/>
+            <field name="x_psm_0502_source_system">manual_request</field>
+            <field name="x_psm_0502_department_id" ref="psm_0502_demo_department_hanoi_store"/>
+            <field name="x_psm_0502_request_type_id" ref="psm_request_type_repair"/>
+            <field name="x_psm_0502_intake_problem_detail">POS printer intermittently loses power.</field>
+            <field name="x_psm_0502_intake_impact_scope">degraded</field>
+            <field name="x_psm_0502_intake_contact_name">Cashier Lead</field>
+            <field name="x_psm_0502_received_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_received_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_inspection_result">action_needed</field>
+            <field name="x_psm_0502_inspection_symptom_status">confirmed</field>
+            <field name="x_psm_0502_inspection_equipment_status">stopped</field>
+            <field name="x_psm_0502_inspection_safety_risk">low</field>
+            <field name="x_psm_0502_inspection_action_urgency">normal</field>
+            <field name="x_psm_0502_inspection_checklist_result">Power board likely faulty.</field>
+            <field name="x_psm_0502_inspection_worksheet">Internal team does not stock replacement board.</field>
+            <field name="x_psm_0502_inspected_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_inspected_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_planned_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_planned_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_root_cause_analysis">Printer board requires vendor-level check.</field>
+            <field name="x_psm_0502_technical_solution">Send to outside service vendor for diagnosis and repair.</field>
+            <field name="x_psm_0502_estimated_cost">1200000</field>
+            <field name="x_psm_0502_estimated_timeline">Two working days.</field>
+            <field name="x_psm_0502_treatment_proposal">Vendor diagnosis and board replacement if required.</field>
+            <field name="x_psm_0502_proposed_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_proposed_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_approval_status">approved</field>
+            <field name="x_psm_0502_approval_decided_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_approval_decided_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_need_outside_service" eval="True"/>
+            <field name="x_psm_0502_service_route">outside_service</field>
+            <field name="x_psm_0502_service_route_reason">specialist_required</field>
+            <field name="x_psm_0502_service_assessment_note">Vendor skill is required for board-level repair.</field>
+            <field name="x_psm_0502_service_assessed_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_service_assessed_at" eval="DateTime.now()"/>
+        </record>
+
+        <record id="psm_0502_demo_request_done" model="maintenance.request">
+            <field name="name">0502 Demo - Completed preventive maintenance</field>
+            <field name="equipment_id" ref="psm_0502_demo_equipment_aircon_danang"/>
+            <field name="maintenance_team_id" ref="psm_0502_demo_team_cmt"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="owner_user_id" ref="base.user_admin"/>
+            <field name="maintenance_type">preventive</field>
+            <field name="priority">1</field>
+            <field name="request_date" eval="DateTime.now().date()"/>
+            <field name="schedule_date" eval="DateTime.now()"/>
+            <field name="stage_id" ref="stage_psm_0502_done"/>
+            <field name="x_psm_0502_request_source_id" ref="psm_request_source_preventive_schedule"/>
+            <field name="x_psm_0502_source_system">preventive_cron</field>
+            <field name="x_psm_0502_department_id" ref="psm_0502_demo_department_danang_store"/>
+            <field name="x_psm_0502_request_type_id" ref="psm_request_type_maintenance"/>
+            <field name="x_psm_0502_received_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_received_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_inspection_result">action_needed</field>
+            <field name="x_psm_0502_inspection_symptom_status">confirmed</field>
+            <field name="x_psm_0502_inspection_equipment_status">running</field>
+            <field name="x_psm_0502_inspection_safety_risk">low</field>
+            <field name="x_psm_0502_inspection_action_urgency">normal</field>
+            <field name="x_psm_0502_inspected_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_inspected_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_planned_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_planned_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_root_cause_analysis">Scheduled preventive cleaning and check.</field>
+            <field name="x_psm_0502_technical_solution">Clean filter and verify cooling.</field>
+            <field name="x_psm_0502_estimated_cost">0</field>
+            <field name="x_psm_0502_estimated_timeline">Completed in one hour.</field>
+            <field name="x_psm_0502_treatment_proposal">Preventive checklist completed.</field>
+            <field name="x_psm_0502_proposed_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_proposed_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_approval_status">approved</field>
+            <field name="x_psm_0502_approval_decided_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_approval_decided_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_need_outside_service" eval="False"/>
+            <field name="x_psm_0502_service_route">internal_handling</field>
+            <field name="x_psm_0502_service_route_reason">internal_capable</field>
+            <field name="x_psm_0502_service_assessed_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_service_assessed_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_has_material_request" eval="False"/>
+            <field name="x_psm_0502_material_checked_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_material_checked_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_execution_started_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_execution_started_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_execution_completed_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_execution_completed_at" eval="DateTime.now()"/>
+            <field name="x_psm_0502_execution_note">Preventive maintenance completed and tested.</field>
+            <field name="x_psm_0502_acceptance_result">accepted</field>
+            <field name="x_psm_0502_acceptance_contact_name">Danang Store Lead</field>
+            <field name="x_psm_0502_acceptance_contact_role">Store Lead</field>
+            <field name="x_psm_0502_acceptance_equipment_result">operating_normally</field>
+            <field name="x_psm_0502_acceptance_note">Store accepted the result.</field>
+            <field name="x_psm_0502_acceptance_reviewed_by_id" ref="base.user_admin"/>
+            <field name="x_psm_0502_acceptance_reviewed_at" eval="DateTime.now()"/>
+            <field name="close_date" eval="DateTime.now().date()"/>
+        </record>
+
+        <!-- Phase 3G material, history and outside service demo records -->
+        <record id="psm_0502_demo_material_line_drain" model="x_psm_request_material_line">
+            <field name="x_psm_request_id" ref="psm_0502_demo_request_proposed"/>
+            <field name="x_psm_product_id" ref="psm_0502_demo_material_drain_hose"/>
+            <field name="x_psm_estimated_qty">1</field>
+            <field name="x_psm_estimated_unit_price">120000</field>
+            <field name="x_psm_source_type">warehouse_stock</field>
+            <field name="x_psm_note">Replace clogged drain hose.</field>
+        </record>
+
+        <record id="psm_0502_demo_planning_history" model="x_psm_request_planning_history">
+            <field name="x_psm_request_id" ref="psm_0502_demo_request_proposed"/>
+            <field name="x_psm_revision">1</field>
+            <field name="x_psm_change_type">initial_plan</field>
+            <field name="x_psm_schedule_date" eval="DateTime.now()"/>
+            <field name="x_psm_responsible_user_id" ref="base.user_admin"/>
+            <field name="x_psm_plan_note">Initial demo plan.</field>
+            <field name="x_psm_change_reason">Phase 3G demo history.</field>
+        </record>
+
+        <record id="psm_0502_demo_proposal_history" model="x_psm_request_proposal_history">
+            <field name="x_psm_request_id" ref="psm_0502_demo_request_proposed"/>
+            <field name="x_psm_revision">1</field>
+            <field name="x_psm_change_type">initial_proposal</field>
+            <field name="x_psm_root_cause_analysis">Drain hose clogged.</field>
+            <field name="x_psm_technical_solution">Replace hose and retest.</field>
+            <field name="x_psm_estimated_cost">420000</field>
+            <field name="x_psm_estimated_timeline">One morning shift.</field>
+            <field name="x_psm_change_reason">Phase 3G demo history.</field>
+        </record>
+
+        <record id="psm_0502_demo_outside_service_request" model="x_psm_outside_service_request">
+            <field name="x_psm_request_id" ref="psm_0502_demo_request_outside"/>
+            <field name="x_psm_vendor_id" ref="psm_0502_demo_vendor_service"/>
+            <field name="x_psm_quotation_received" eval="True"/>
+            <field name="x_psm_vendor_quote_amount">1200000</field>
+            <field name="x_psm_vendor_lead_time_days">2</field>
+            <field name="x_psm_scope_of_work">Diagnose and repair POS printer power board.</field>
+            <field name="x_psm_service_type">repair</field>
+            <field name="x_psm_state">quoted</field>
+        </record>
+    </data>
+</odoo>

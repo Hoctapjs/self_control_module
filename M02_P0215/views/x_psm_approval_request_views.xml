@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="x_psm_approval_request_view_form_inherit" model="ir.ui.view">
+        <field name="name">x_psm.approval.request.view.form.inherit</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref="approvals.approval_request_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_psm_open_discipline_record"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-gavel"
+                    invisible="not x_psm_discipline_record_id">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Hồ sơ KL</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="x_psm_discipline_record_id" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,6 @@
+{
+  "file": "tests/TEST_SUMMARY.md",
+  "type": "document",
+  "bucket": "tests",
+  "summary": "# 📊 TEST FILE SUMMARY **Vị trí:** `addons/M02_P0213/tests/test_email_template_fixes.py` --- ## File được tạo ``` tests/ ├── __init__.py (Import test modules)..."
+}

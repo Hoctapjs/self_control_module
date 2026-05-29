@@ -1,0 +1,63 @@
+{
+  "file": "models/approval_request_rst_reminder.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: approval.request; 1 classes; 0 fields; 1 actions",
+  "classes": [
+    {
+      "python_class": "ResignationRequest",
+      "description": "Extends approval.request in models/approval_request_rst_reminder.py.",
+      "model": null,
+      "inherit": "approval.request",
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "_get_rst_reminder_templates",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_send_rst_reminders_by_user",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_cron_send_offboarding_reminders",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_cron_send_manager_approval_reminders",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_cron_send_settlement_upload_reminders",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "action_manual_reminder_extension",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        }
+      ],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

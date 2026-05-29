@@ -1,0 +1,75 @@
+{
+  "file": "views/maintenance_team_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "3 views",
+  "records": [
+    {
+      "id": "view_psm_maintenance_team_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.maintenance.team.form",
+        "model": "maintenance.team",
+        "inherit_id": {
+          "ref": "maintenance.maintenance_team_view_form"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_maintenance_team_list",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.maintenance.team.list",
+        "model": "maintenance.team",
+        "inherit_id": {
+          "ref": "maintenance.maintenance_team_view_tree"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_maintenance_team_search",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.maintenance.team.search",
+        "model": "maintenance.team",
+        "inherit_id": {
+          "ref": "maintenance.maintenance_team_view_search"
+        },
+        "arch": ""
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_maintenance_team_form",
+      "model": "maintenance.team",
+      "name": "psm.maintenance.team.form",
+      "inherit_id": "maintenance.maintenance_team_view_form",
+      "file": "views/maintenance_team_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_team_list",
+      "model": "maintenance.team",
+      "name": "psm.maintenance.team.list",
+      "inherit_id": "maintenance.maintenance_team_view_tree",
+      "file": "views/maintenance_team_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_team_search",
+      "model": "maintenance.team",
+      "name": "psm.maintenance.team.search",
+      "inherit_id": "maintenance.maintenance_team_view_search",
+      "file": "views/maintenance_team_views.xml"
+    }
+  ],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.ui.view",
+    "maintenance.team"
+  ]
+}

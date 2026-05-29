@@ -1,0 +1,53 @@
+{
+  "file": "reports/x_psm_discipline_reports.xml",
+  "type": "xml",
+  "bucket": "reports",
+  "summary": "2 templates",
+  "records": [
+    {
+      "id": "action_psm_report_disciplinary_decision_final",
+      "model": "ir.actions.report",
+      "fields": {
+        "name": "Quyết định Xử lý kỷ luật",
+        "model": "x_psm.hr.discipline.record",
+        "report_type": "qweb-pdf",
+        "report_name": "M02_P0215.report_disciplinary_decision_template",
+        "report_file": "M02_P0215.report_disciplinary_decision_template",
+        "print_report_name": "'Quyet_dinh_ky_luat_%s' % object.name"
+      }
+    },
+    {
+      "id": "action_psm_report_compensation_decision_final",
+      "model": "ir.actions.report",
+      "fields": {
+        "name": "Quyết định Bồi thường thiệt hại",
+        "model": "x_psm.hr.discipline.record",
+        "report_type": "qweb-pdf",
+        "report_name": "M02_P0215.report_compensation_decision_template",
+        "report_file": "M02_P0215.report_compensation_decision_template",
+        "print_report_name": "'Quyet_dinh_boi_thuong_%s' % object.name"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [
+    {
+      "id": "report_disciplinary_decision_template",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/x_psm_discipline_reports.xml"
+    },
+    {
+      "id": "report_compensation_decision_template",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/x_psm_discipline_reports.xml"
+    }
+  ],
+  "functions": [],
+  "referenced_models": [
+    "ir.actions.report"
+  ]
+}

@@ -1,0 +1,2081 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ke thua form view cua maintenance request -->
+    <record id="view_psm_maintenance_request_form" model="ir.ui.view">
+        <field name="name">psm.maintenance.request.form</field>
+        <field name="model">maintenance.request</field>
+
+        <!-- inherit view goc -->
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            <!-- them nut "Receive" vao header -->
+            <xpath expr="//header/button[@name='archive_equipment_request']" position="after">
+                <!-- nut "Receive" -->
+                <button
+                    name="action_psm_receive_request"
+                    string="CMT Receive"
+                    type="object"
+                    class="btn-primary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or x_psm_0502_received_at"
+                />
+
+                <!-- nut "Mark Inspected" -->
+                <button
+                    name="action_psm_mark_inspected"
+                    string="Mark Inspected"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or not x_psm_0502_inspection_result or x_psm_0502_inspected_at"
+                />
+
+                <!-- nut "Notify CMT Lead" -->
+                <!-- nut de thong bao cho CMT Lead  -->
+                <button
+                    name="action_psm_notify_lead"
+                    string="Notify CMT Lead"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or maintenance_type != 'preventive' or x_psm_0502_request_source_code != 'preventive_schedule'"
+                />
+                <button
+                    name="action_psm_acknowledge_lead_assignment"
+                    string="Acknowledge Lead Assignment"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or not x_psm_0502_lead_notified_user_id or x_psm_0502_lead_acknowledgment_status == 'acknowledged' or x_psm_0502_lead_notified_user_id != uid"
+                />
+
+                <!-- nut danh dau request da duoc lap ke hoach xu ly -->
+                <button
+                    name="action_psm_mark_planned"
+                    string="Mark Planned"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_lead"
+                    invisible="archive or not schedule_date or not user_id or x_psm_0502_planned_at or not x_psm_0502_ready_to_plan"
+                />
+
+                <!-- nut tao field service task de dieu phoi ky thuat vien thuc thi -->
+                <button
+                    name="action_psm_create_fsm_task"
+                    string="Create FSM Task"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_lead"
+                    invisible="archive or not x_psm_0502_planned_at or x_psm_0502_fsm_task_id"
+                />
+
+                <!-- nut mo lai field service task da tao -->
+                <button
+                    name="action_psm_open_fsm_task"
+                    string="Open FSM Task"
+                    type="object"
+                    class="btn-secondary"
+                    invisible="archive or not x_psm_0502_fsm_task_id"
+                />
+
+                <!-- nut danh dau da bat dau thuc thi sua chua -->
+                <button
+                    name="action_psm_mark_execution_started"
+                    string="Mark Execution Started"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or not x_psm_0502_fsm_task_id or x_psm_0502_execution_started_at or x_psm_0502_execution_completed_at"
+                />
+
+                <!-- nut danh dau da hoan tat thuc thi sua chua -->
+                <button
+                    name="action_psm_mark_execution_completed"
+                    string="Mark Execution Completed"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or not x_psm_0502_fsm_task_id or not x_psm_0502_execution_started_at or x_psm_0502_execution_completed_at or not x_psm_0502_fsm_is_closed"
+                />
+
+                <!-- nut ghi nhan nghiem thu va danh gia sau bao tri -->
+                <button
+                    name="action_psm_mark_acceptance_reviewed"
+                    string="Mark Acceptance Reviewed"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_store_user,M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or not x_psm_0502_execution_completed_at or not x_psm_0502_acceptance_result or x_psm_0502_acceptance_reviewed_at"
+                />
+
+                <!-- nut mo lai luong thuc thi khi nghiem thu can theo doi hoac lam lai -->
+                <button
+                    name="action_psm_reopen_for_rework"
+                    string="Reopen for Rework"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or not x_psm_0502_acceptance_reviewed_at or x_psm_0502_acceptance_result not in ('follow_up_needed', 'rework_required')"
+                />
+
+                <!-- nut mo lai luong thuc thi va tach sang FSM task moi cho vong lam lai -->
+                <button
+                    name="action_psm_reopen_for_rework"
+                    string="Reopen with New FSM Task"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    context="{'psm_0502_rework_create_new_fsm_task': True}"
+                    invisible="archive or not x_psm_0502_acceptance_reviewed_at or x_psm_0502_acceptance_result not in ('follow_up_needed', 'rework_required')"
+                />
+
+                <!-- nut danh dau request da co de xuat xu ly/bang gia so bo -->
+                <button
+                    name="action_psm_mark_proposed"
+                    string="Mark Proposed"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or not x_psm_0502_root_cause_analysis or not x_psm_0502_technical_solution or not x_psm_0502_estimated_cost or not x_psm_0502_estimated_timeline or x_psm_0502_proposed_at"
+                />
+
+                <!-- nut gui de xuat sang trang thai cho duyet -->
+                <button
+                    name="action_psm_submit_for_approval"
+                    string="Submit for Approval"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or not x_psm_0502_proposed_at or x_psm_0502_approval_status == 'pending' or x_psm_0502_approval_status == 'approved'"
+                />
+
+                <!-- nut danh dau da duoc duyet -->
+                <button
+                    name="action_psm_approve_proposal"
+                    string="Approve Proposal"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_store_approver,M02_P0502.group_psm_0502_store_final_approver,M02_P0502.group_psm_0502_manager"
+                    invisible="archive or x_psm_0502_approval_status != 'pending'"
+                />
+
+                <!-- nut danh dau bi tu choi -->
+                <button
+                    name="action_psm_reject_proposal"
+                    string="Reject Proposal"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_store_approver,M02_P0502.group_psm_0502_store_final_approver,M02_P0502.group_psm_0502_manager"
+                    invisible="archive or x_psm_0502_approval_status != 'pending'"
+                />
+
+                <!-- nut danh dau da tham dinh huong xu ly noi bo hay can thue ngoai -->
+                <button
+                    name="action_psm_mark_service_assessed"
+                    string="Mark Service Assessed"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or x_psm_0502_approval_status != 'approved' or x_psm_0502_service_assessed_at"
+                />
+
+                <!-- nut danh dau da kiem tra co phat sinh vat tu hay khong -->
+                <button
+                    name="action_psm_mark_material_checked"
+                    string="Mark Material Checked"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or not x_psm_0502_service_assessed_at or x_psm_0502_need_outside_service or x_psm_0502_material_checked_at"
+                />
+
+                <!-- nut tao phieu kho noi bo cho request co phat sinh vat tu -->
+                <button
+                    name="action_psm_create_stock_picking"
+                    string="Create Stock Picking"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_lead"
+                    invisible="archive or not x_psm_0502_material_checked_at or not x_psm_0502_has_material_request or x_psm_0502_stock_picking_id"
+                />
+
+                <!-- nut mo lai phieu kho da tao -->
+                <button
+                    name="action_psm_open_stock_picking"
+                    string="Open Stock Picking"
+                    type="object"
+                    class="btn-secondary"
+                    invisible="archive or not x_psm_0502_stock_picking_id"
+                />
+
+                <!-- nut kiem tra ton kho dua tren stock picking da tao -->
+                <button
+                    name="action_psm_check_stock_availability"
+                    string="Check Stock Availability"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_lead"
+                    invisible="archive or not x_psm_0502_stock_picking_id or not x_psm_0502_has_material_request or x_psm_0502_stock_picking_state == 'done' or x_psm_0502_stock_picking_state == 'cancel'"
+                />
+
+                <!-- nut kiem tra lai ton kho sau khi don mua ngoai da xac nhan -->
+                <button
+                    name="action_psm_recheck_stock_after_purchase"
+                    string="Re-check Stock After Purchase"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_lead"
+                    invisible="archive or (x_psm_0502_purchase_order_state != 'purchase' and x_psm_0502_purchase_order_state != 'done') or x_psm_0502_stock_check_result != 'not_available'"
+                />
+
+                <!-- nut gui nhanh vat tu sang trang thai cho duyet -->
+                <button
+                    name="action_psm_submit_material_approval"
+                    string="Submit Material Approval"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_user"
+                    invisible="archive or not x_psm_0502_stock_picking_id or x_psm_0502_stock_check_result != 'available' or x_psm_0502_material_approval_status == 'pending' or x_psm_0502_material_approval_status == 'approved'"
+                />
+
+                <!-- nut duyet nhanh xuat vat tu -->
+                <button
+                    name="action_psm_approve_material_request"
+                    string="Approve Material Request"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_lead"
+                    invisible="archive or x_psm_0502_material_approval_status != 'pending'"
+                />
+
+                <!-- nut tu choi nhanh xuat vat tu -->
+                <button
+                    name="action_psm_reject_material_request"
+                    string="Reject Material Request"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_lead"
+                    invisible="archive or x_psm_0502_material_approval_status != 'pending'"
+                />
+
+                <!-- nut goi flow validate stock picking chuan cua Odoo de thuc hien xuat kho -->
+                <button
+                    name="action_psm_validate_stock_picking"
+                    string="Validate Stock Picking"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_lead"
+                    invisible="archive or not x_psm_0502_stock_picking_id or x_psm_0502_material_approval_status != 'approved' or x_psm_0502_stock_picking_state == 'done' or x_psm_0502_stock_picking_state == 'cancel'"
+                />
+
+                <!-- nut chot dau vet buoc 18 sau khi phieu kho da done -->
+                <button
+                    name="action_psm_mark_stock_issued"
+                    string="Mark Stock Issued"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_lead"
+                    invisible="archive or not x_psm_0502_stock_picking_id or x_psm_0502_stock_picking_state != 'done' or x_psm_0502_stock_issued_at"
+                />
+
+                <!-- nut mo form RFQ/PO mua ngoai khi kho khong du ton -->
+                <button
+                    name="action_psm_create_purchase_order"
+                    string="Create Purchase Order"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_cmt_lead"
+                    invisible="archive or not x_psm_0502_has_material_request or x_psm_0502_need_outside_service or x_psm_0502_stock_check_result != 'not_available' or (x_psm_0502_purchase_order_id and x_psm_0502_purchase_order_state != 'cancel')"
+                />
+
+                <!-- nut mo lai RFQ/PO mua ngoai da lien ket voi request -->
+                <button
+                    name="action_psm_open_purchase_order"
+                    string="Open Purchase Order"
+                    type="object"
+                    class="btn-secondary"
+                    invisible="archive or not x_psm_0502_purchase_order_id"
+                />
+
+                <!-- nut mo outside service request da tao khi route la thue ngoai -->
+                <button
+                    name="action_psm_open_outside_service_request"
+                    string="Open Outside Service"
+                    type="object"
+                    class="btn-secondary"
+                    invisible="archive or not x_psm_0502_outside_service_request_id"
+                />
+
+                <!-- nut in bo chung tu 0502 -->
+                <button
+                    name="action_psm_open_document_pack_wizard"
+                    string="Print 0502 Pack"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_store_user,M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_manager"
+                    invisible="archive"
+                />
+                <button
+                    name="action_psm_print_request_document"
+                    string="Print Request"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_store_user,M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_manager"
+                    invisible="archive"
+                />
+                <button
+                    name="action_psm_print_inspection_report"
+                    string="Print Inspection"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_store_user,M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_manager"
+                    invisible="archive or not x_psm_0502_inspected_at"
+                />
+                <button
+                    name="action_psm_print_treatment_proposal"
+                    string="Print Proposal"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_store_user,M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_manager"
+                    invisible="archive or not x_psm_0502_proposed_at"
+                />
+                <button
+                    name="action_psm_print_material_issue_request"
+                    string="Print Material"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_store_user,M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_manager"
+                    invisible="archive or not x_psm_0502_has_material_request"
+                />
+                <button
+                    name="action_psm_print_acceptance_record"
+                    string="Print Acceptance"
+                    type="object"
+                    class="btn-secondary"
+                    groups="M02_P0502.group_psm_0502_store_user,M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_manager"
+                    invisible="archive or not x_psm_0502_acceptance_reviewed_at"
+                />
+            </xpath>
+
+            <!-- chen cac field moi sau field equipment_id -->
+            <xpath expr="//field[@name='equipment_id']" position="after">
+                <!-- chen them phong ban cua cua hang -->
+                <field name="x_psm_0502_department_id" required="1"/>
+                <!-- chen them field many2one request type -->
+                <field name="x_psm_0502_request_type_id" required="1"/>
+            </xpath>
+
+            <!-- chen field received_by va received_at sau field user_id -->
+            <xpath expr="//field[@name='user_id']" position="after">
+                <!-- field luu user tiep nhan yeu cau bao tri -->
+                <field name="x_psm_0502_received_by_id"/>
+                <!-- field luu tru thoi diem tiep nhan yeu cau bao tri -->
+                <field name="x_psm_0502_received_at"/>
+                <field name="x_psm_0502_intake_owner_user_id" readonly="1"/>
+                <field name="x_psm_0502_intake_sla_deadline_at" readonly="1"/>
+                <field name="x_psm_0502_intake_sla_result" readonly="1"/>
+                <field name="x_psm_0502_intake_age_hours" readonly="1"/>
+                <field name="x_psm_0502_progress_checkpoint" readonly="1"/>
+                <field name="x_psm_0502_supply_branch_status" readonly="1"/>
+                <field name="x_psm_0502_inspection_doc_no" readonly="1"/>
+                <field name="x_psm_0502_proposal_doc_no" readonly="1"/>
+                <field name="x_psm_0502_material_issue_doc_no" readonly="1"/>
+                <field name="x_psm_0502_acceptance_doc_no" readonly="1"/>
+                <!-- field luu user thuc hien kiem tra thuc te ban dau -->
+                <field name="x_psm_0502_inspected_by_id"/>
+                <!-- field luu thoi diem kiem tra ban dau -->
+                <field name="x_psm_0502_inspected_at"/>
+                <!-- field luu user duoc thong bao theo vai tro CMT Lead -->
+                <field name="x_psm_0502_lead_notified_user_id"/>
+                <!-- field luu rule resolve lead da duoc su dung -->
+                <field name="x_psm_0502_lead_notification_rule"/>
+                <!-- field luu thoi diem da thong bao CMT Lead -->
+                <field name="x_psm_0502_lead_notified_at"/>
+                <field name="x_psm_0502_lead_acknowledgment_status" readonly="1"/>
+                <field name="x_psm_0502_lead_acknowledged_by_id" readonly="1"/>
+                <field name="x_psm_0502_lead_acknowledged_at" readonly="1"/>
+                <!-- field luu user xac nhan da lap ke hoach -->
+                <field name="x_psm_0502_planned_by_id"/>
+                <!-- field luu thoi diem xac nhan da lap ke hoach -->
+                <field name="x_psm_0502_planned_at"/>
+                <!-- field luu task fsm duoc tao tu request -->
+                <field name="x_psm_0502_fsm_task_id"/>
+            </xpath>
+
+            <!-- chen field request source sau maintenance_type -->
+            <!-- chen field inspection result sau request source -->
+            <xpath expr="//field[@name='maintenance_type']" position="after">
+                <field name="x_psm_0502_request_source_id" required="1"/>
+                <field name="x_psm_0502_source_system"/>
+                <field name="x_psm_0502_request_origin_group" readonly="1"/>
+                <field name="x_psm_0502_intake_minimum_ready" readonly="1"/>
+                <field name="x_psm_0502_intake_detail_ready" readonly="1"/>
+                <field name="x_psm_0502_source_reference"/>
+                <field name="x_psm_0502_inspection_result"/>
+            </xpath>
+
+            <!-- chen them nhom source metadata sau ghi chu mo ta goc cua request -->
+            <xpath expr="//field[@name='description']" position="after">
+                <separator string="Source Notes"/>
+                <group>
+                    <field name="x_psm_0502_intake_minimum_gap_reason" readonly="1" invisible="x_psm_0502_intake_minimum_ready"/>
+                    <field name="x_psm_0502_intake_detail_gap_reason" readonly="1" invisible="x_psm_0502_intake_detail_ready"/>
+                    <field name="x_psm_0502_source_note" placeholder="Record the upstream source mapping or origin context..."/>
+                </group>
+                <separator string="Request Intake Template"/>
+                <group>
+                    <field name="x_psm_0502_intake_template_guide" readonly="1" widget="text" placeholder="The request type intake guidance will appear here..."/>
+                    <field name="x_psm_0502_intake_example_note" readonly="1" widget="text" invisible="not x_psm_0502_intake_example_note"/>
+                </group>
+                <separator string="Request Intake Detail"/>
+                <group>
+                    <group>
+                        <field name="x_psm_0502_intake_problem_detail" placeholder="Record the detailed initial problem or maintenance need..."/>
+                        <field name="x_psm_0502_intake_impact_scope"/>
+                    </group>
+                    <group>
+                        <field name="x_psm_0502_intake_contact_name"/>
+                        <field name="x_psm_0502_intake_contact_phone"/>
+                    </group>
+                </group>
+            </xpath>
+
+            <!-- chen page moi de ghi nhan ket qua kiem tra ban dau -->
+            <xpath expr="//notebook/page[field[@name='description']]" position="after">
+                <!-- page ghi nhan ket qua kiem tra ban dau -->
+                <page string="Initial Inspection">
+                    <group>
+                        <group>
+                            <field name="x_psm_0502_inspection_result"/>
+                            <field name="x_psm_0502_inspection_symptom_status"/>
+                            <field name="x_psm_0502_inspection_equipment_status"/>
+                        </group>
+                        <group>
+                            <field name="x_psm_0502_inspection_safety_risk"/>
+                            <field name="x_psm_0502_inspection_action_urgency"/>
+                            <field name="x_psm_0502_inspected_by_id" readonly="1"/>
+                            <field name="x_psm_0502_inspected_at" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="x_psm_0502_inspection_note" placeholder="Record the initial on-site inspection findings..."/>
+                        </group>
+                        <group string="Inspection Checklist Template" invisible="not x_psm_0502_inspection_checklist_template">
+                            <field name="x_psm_0502_inspection_checklist_template" readonly="1" widget="text"/>
+                        </group>
+                        <group string="Inspection Checklist Result">
+                            <field name="x_psm_0502_inspection_checklist_result" placeholder="Record the actual checklist result based on the equipment category template..."/>
+                        </group>
+                        <group string="Inspection Worksheet Template" invisible="not x_psm_0502_inspection_worksheet_template">
+                            <field name="x_psm_0502_inspection_worksheet_template" readonly="1" widget="text"/>
+                        </group>
+                        <group string="Inspection Worksheet">
+                            <field name="x_psm_0502_inspection_worksheet" placeholder="Record the structured worksheet note for the initial inspection..."/>
+                        </group>
+                    </group>
+                </page>
+
+                <!-- page ghi nhan ke hoach xu ly o muc don gian cho phase 1 -->
+                <page string="Planning">
+                    <group>
+                        <group>
+                            <field name="x_psm_0502_ready_to_plan" readonly="1"/>
+                            <field name="x_psm_0502_planning_block_reason" readonly="1" invisible="x_psm_0502_ready_to_plan"/>
+                            <field name="schedule_date"/>
+                            <field name="schedule_end"/>
+                            <field name="user_id"/>
+                            <field name="x_psm_0502_planned_by_id" readonly="1"/>
+                            <field name="x_psm_0502_planned_at" readonly="1"/>
+                            <field name="x_psm_0502_planning_revision_count" readonly="1"/>
+                            <field name="x_psm_0502_last_planning_changed_by_id" readonly="1"/>
+                            <field name="x_psm_0502_last_planning_changed_at" readonly="1"/>
+                            <field name="x_psm_0502_fsm_task_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="x_psm_0502_plan_note" placeholder="Record the phase 1 planning note..."/>
+                            <field name="x_psm_0502_plan_change_reason" placeholder="Record the reason when the planned schedule or responsible user is revised..."/>
+                        </group>
+                    </group>
+                    <group string="Planning History">
+                        <field name="x_psm_0502_planning_history_ids" readonly="1">
+                            <list>
+                                <field name="x_psm_revision"/>
+                                <field name="x_psm_change_type"/>
+                                <field name="x_psm_schedule_date"/>
+                                <field name="x_psm_schedule_end"/>
+                                <field name="x_psm_responsible_user_id"/>
+                                <field name="x_psm_changed_by_id"/>
+                                <field name="x_psm_changed_at"/>
+                                <field name="x_psm_change_reason"/>
+                            </list>
+                        </field>
+                    </group>
+                </page>
+
+                <!-- page ghi nhan de xuat xu ly va muc bao gia/timeline so bo cho phase 1 -->
+                <page string="Treatment Proposal">
+                    <group>
+                        <group>
+                            <field name="x_psm_0502_proposed_by_id" readonly="1"/>
+                            <field name="x_psm_0502_proposed_at" readonly="1"/>
+                            <field name="x_psm_0502_proposal_revision_count" readonly="1"/>
+                            <field name="x_psm_0502_last_proposal_changed_by_id" readonly="1"/>
+                            <field name="x_psm_0502_last_proposal_changed_at" readonly="1"/>
+                            <field name="x_psm_0502_estimated_cost"/>
+                            <field name="x_psm_0502_currency_id" invisible="1"/>
+                            <field name="x_psm_0502_estimated_timeline"/>
+                        </group>
+                        <group>
+                            <field name="x_psm_0502_proposal_template_guide" readonly="1" widget="text" placeholder="The request type proposal guidance will appear here..."/>
+                            <field name="x_psm_0502_root_cause_analysis" placeholder="Record the identified root cause..."/>
+                            <field name="x_psm_0502_technical_solution" placeholder="Record the proposed technical solution..."/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="x_psm_0502_cost_note" groups="M02_P0502.group_psm_0502_cmt_user" placeholder="Record the cost assumptions or cost breakdown..."/>
+                        </group>
+                        <group>
+                            <field name="x_psm_0502_timeline_note" placeholder="Record the timeline assumptions or sequencing note..."/>
+                            <field name="x_psm_0502_proposal_change_reason" placeholder="Record the reason when a proposed treatment proposal is revised..."/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Proposal Summary">
+                            <field name="x_psm_0502_treatment_proposal" readonly="1" placeholder="The structured proposal summary will be generated when marking this request as proposed..."/>
+                        </group>
+                        <group string="Proposal Document">
+                            <field name="x_psm_0502_proposal_document" readonly="1" widget="text" placeholder="The proposal document artifact will be generated when marking this request as proposed..."/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Proposal Revision Compare" invisible="not x_psm_0502_proposal_revision_compare">
+                            <field name="x_psm_0502_proposal_revision_compare" readonly="1" widget="text"/>
+                        </group>
+                    </group>
+                    <group string="Proposal History">
+                        <field name="x_psm_0502_proposal_history_ids" readonly="1">
+                            <list>
+                                <field name="x_psm_revision"/>
+                                <field name="x_psm_change_type"/>
+                                <field name="x_psm_estimated_cost"/>
+                                <field name="x_psm_estimated_timeline"/>
+                                <field name="x_psm_changed_by_id"/>
+                                <field name="x_psm_changed_at"/>
+                                <field name="x_psm_change_reason"/>
+                            </list>
+                        </field>
+                    </group>
+                </page>
+
+                <!-- page ghi nhan quyet dinh duyet timeline/cost o muc toi thieu cho phase 1 -->
+                <page string="Approval">
+                    <group>
+                        <group>
+                            <field name="x_psm_0502_approval_required" readonly="1"/>
+                            <field name="x_psm_0502_approval_flow_type" readonly="1"/>
+                            <field name="x_psm_0502_approval_level_count" readonly="1"/>
+                            <field name="x_psm_0502_approval_current_level" readonly="1"/>
+                            <field name="x_psm_0502_approval_user_id" readonly="1"/>
+                            <field name="x_psm_0502_approval_initial_user_id" readonly="1"/>
+                            <field name="x_psm_0502_approval_final_user_id" readonly="1"/>
+                            <field name="x_psm_0502_approval_rule" readonly="1" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                            <field name="x_psm_0502_approval_cost_rule" readonly="1" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                            <field name="x_psm_0502_approval_status"/>
+                            <field name="x_psm_0502_approval_first_decided_by_id" readonly="1"/>
+                            <field name="x_psm_0502_approval_first_decided_at" readonly="1"/>
+                            <field name="x_psm_0502_approval_decided_by_id" readonly="1"/>
+                            <field name="x_psm_0502_approval_decided_at" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="x_psm_0502_approval_note" placeholder="Record the approval or rejection note..."/>
+                        </group>
+                    </group>
+                </page>
+
+                <!-- page ghi nhan ket qua tham dinh xu ly noi bo hay can outside service -->
+                <page string="Service Assessment">
+                    <group>
+                        <group>
+                            <field name="x_psm_0502_service_route"/>
+                            <field name="x_psm_0502_service_route_reason"/>
+                            <field name="x_psm_0502_need_outside_service" readonly="1"/>
+                            <field name="x_psm_0502_service_assessed_by_id" readonly="1"/>
+                            <field name="x_psm_0502_service_assessed_at" readonly="1"/>
+                            <field name="x_psm_0502_outside_service_request_id" readonly="1"/>
+                            <field name="x_psm_0502_outside_service_request_count" readonly="1"/>
+                            <field name="x_psm_0502_outside_service_state" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="x_psm_0502_service_assessment_note" placeholder="Record why the request can be handled internally or why it needs outside service..."/>
+                        </group>
+                    </group>
+                    <group string="Outside Service Requests" invisible="not x_psm_0502_outside_service_request_ids">
+                        <field name="x_psm_0502_outside_service_request_ids" readonly="1" nolabel="1">
+                            <list>
+                                <field name="name"/>
+                                <field name="x_psm_vendor_id"/>
+                                <field name="x_psm_service_type"/>
+                                <field name="x_psm_vendor_quote_amount"/>
+                                <field name="x_psm_expected_complete_date"/>
+                                <field name="x_psm_state"/>
+                            </list>
+                        </field>
+                    </group>
+                </page>
+
+                <!-- page ghi nhan co phat sinh vat tu hay khong cho nhanh kho -->
+                <page string="Material Assessment">
+                    <group>
+                        <group>
+                            <field name="x_psm_0502_material_approval_required" readonly="1"/>
+                            <field name="x_psm_0502_material_approval_user_id" readonly="1"/>
+                            <field name="x_psm_0502_material_approval_rule" readonly="1" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                            <field name="x_psm_0502_material_approval_value" readonly="1" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                            <field name="x_psm_0502_material_approval_value_rule" readonly="1" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                            <field name="x_psm_0502_has_material_request"/>
+                            <field name="x_psm_0502_material_line_count" readonly="1"/>
+                            <field name="x_psm_0502_material_checked_by_id" readonly="1"/>
+                            <field name="x_psm_0502_material_checked_at" readonly="1"/>
+                            <field name="x_psm_0502_stock_picking_id" readonly="1"/>
+                            <field name="x_psm_0502_stock_picking_state" readonly="1"/>
+                            <field name="x_psm_0502_stock_issue_status" readonly="1"/>
+                            <field name="x_psm_0502_stock_issue_synced_at" readonly="1"/>
+                            <field name="x_psm_0502_stock_check_result" readonly="1"/>
+                            <field name="x_psm_0502_stock_checked_by_id" readonly="1"/>
+                            <field name="x_psm_0502_stock_checked_at" readonly="1"/>
+                            <field name="x_psm_0502_material_approval_status"/>
+                            <field name="x_psm_0502_material_approval_decided_by_id" readonly="1"/>
+                            <field name="x_psm_0502_material_approval_decided_at" readonly="1"/>
+                            <field name="x_psm_0502_stock_issued_by_id" readonly="1"/>
+                            <field name="x_psm_0502_stock_issued_at" readonly="1"/>
+                            <field name="x_psm_0502_purchase_order_id" readonly="1"/>
+                            <field name="x_psm_0502_purchase_order_count" readonly="1"/>
+                            <field name="x_psm_0502_purchase_order_state" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="x_psm_0502_stock_availability" readonly="1" invisible="not x_psm_0502_stock_picking_id or x_psm_0502_stock_picking_state == 'done'"/>
+                            <field name="x_psm_0502_stock_availability_state" readonly="1" invisible="not x_psm_0502_stock_picking_id or x_psm_0502_stock_picking_state == 'done'"/>
+                            <field name="x_psm_0502_stock_check_availability" readonly="1"/>
+                            <field name="x_psm_0502_stock_check_availability_state" readonly="1"/>
+                            <field name="x_psm_0502_material_assessment_note" placeholder="Record whether material is required before continuing the repair..."/>
+                            <field name="x_psm_0502_material_approval_note" placeholder="Record the approval or rejection note for the material issue step..."/>
+                        </group>
+                    </group>
+                    <group string="Material Details" invisible="not x_psm_0502_has_material_request">
+                        <field name="x_psm_0502_material_line_ids" nolabel="1" context="{'default_x_psm_request_id': id}">
+                            <list editable="bottom">
+                                <field name="x_psm_sequence" widget="handle"/>
+                                <field name="x_psm_product_id"/>
+                                <field name="x_psm_estimated_qty"/>
+                                <field name="x_psm_uom_id" readonly="1"/>
+                                <field name="x_psm_estimated_unit_price" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                                <field name="x_psm_estimated_subtotal" readonly="1" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                                <field name="x_psm_source_type"/>
+                                <field name="x_psm_note"/>
+                            </list>
+                        </field>
+                    </group>
+                </page>
+
+                <!-- page ghi nhan dau vet thuc thi sua chua, van dung FSM task lam object chinh -->
+                <page string="Execution">
+                    <group>
+                        <group>
+                            <field name="x_psm_0502_fsm_task_id" readonly="1"/>
+                            <field name="x_psm_0502_fsm_stage_id" readonly="1"/>
+                            <field name="x_psm_0502_fsm_is_closed" readonly="1"/>
+                            <field name="x_psm_0502_execution_started_by_id" readonly="1"/>
+                            <field name="x_psm_0502_execution_started_at" readonly="1"/>
+                            <field name="x_psm_0502_execution_completed_by_id" readonly="1"/>
+                            <field name="x_psm_0502_execution_completed_at" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="x_psm_0502_execution_note" readonly="1" placeholder="Execution summary will be synchronized from the linked FSM task when execution is completed..."/>
+                        </group>
+                    </group>
+                </page>
+
+                <!-- page ghi nhan nghiem thu va danh gia sau bao tri -->
+                <page string="Acceptance">
+                    <group>
+                        <group>
+                            <field name="x_psm_0502_acceptance_result"/>
+                            <field name="x_psm_0502_acceptance_contact_name"/>
+                            <field name="x_psm_0502_acceptance_contact_role"/>
+                            <field name="x_psm_0502_acceptance_equipment_result"/>
+                            <field name="x_psm_0502_acceptance_reviewed_by_id" readonly="1"/>
+                            <field name="x_psm_0502_acceptance_reviewed_at" readonly="1"/>
+                            <field name="close_date" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="x_psm_0502_acceptance_note" placeholder="Record the store acceptance conclusion and evaluation after maintenance..."/>
+                            <field name="x_psm_0502_acceptance_follow_up_note" placeholder="Record the follow-up or rework requirement if the maintenance result is not fully accepted..." invisible="x_psm_0502_acceptance_result not in ('follow_up_needed', 'rework_required')"/>
+                        </group>
+                    </group>
+                </page>
+
+                <!-- page luu cac vong mo lai sau nghiem thu chua dat -->
+                <page string="Rework History">
+                    <group>
+                        <group>
+                            <field name="x_psm_0502_rework_round_count" readonly="1"/>
+                            <field name="x_psm_0502_last_rework_at" readonly="1"/>
+                            <field name="x_psm_0502_last_rework_by_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <field name="x_psm_0502_rework_history_ids" readonly="1">
+                        <list string="Rework History" create="0" edit="0" delete="0">
+                            <field name="x_psm_round_number"/>
+                            <field name="x_psm_previous_acceptance_result"/>
+                            <field name="x_psm_rework_reason"/>
+                            <field name="x_psm_linked_fsm_task_id"/>
+                            <field name="x_psm_created_by_id"/>
+                            <field name="x_psm_created_at"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ================= LIST (TREE) VIEW ================= -->
+    <!-- them cot request source vao danh sach -->
+    <record id="view_psm_maintenance_request_list" model="ir.ui.view">
+        <field name="name">psm.maintenance.request.list</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_tree"/>
+        <field name="arch" type="xml">
+            <!-- chen cot sau name -->
+            <xpath expr="//field[@name='name']" position="after">
+                <!-- chen field department -->
+                <field name="x_psm_0502_department_id" optional="show"/>
+                <!-- chen field x_psm_0502_request_type_id -->
+                <field name="x_psm_0502_request_type_id" optional="show"/>
+                <!-- optional=show: co the an/hien, mac dinh dang hien -->
+                <field name="x_psm_0502_request_source_id" optional="show"/>
+                <field name="x_psm_0502_source_system" optional="hide"/>
+                <field name="x_psm_0502_request_origin_group" optional="hide"/>
+                <field name="x_psm_0502_intake_minimum_ready" optional="hide"/>
+                <field name="x_psm_0502_intake_detail_ready" optional="hide"/>
+                <field name="x_psm_0502_source_reference" optional="hide"/>
+                <!-- field luu user tiep nhan yeu cau bao tri -->
+                <field name="x_psm_0502_received_by_id" optional="hide"/>
+                <!-- field luu tru thoi diem tiep nhan yeu cau bao tri -->
+                <field name="x_psm_0502_received_at" optional="hide"/>
+                <field name="x_psm_0502_intake_owner_user_id" optional="hide"/>
+                <field name="x_psm_0502_intake_sla_deadline_at" optional="hide"/>
+                <field name="x_psm_0502_intake_sla_result" optional="hide"/>
+                <field name="x_psm_0502_intake_age_hours" optional="hide"/>
+                <field name="x_psm_0502_progress_checkpoint" optional="hide"/>
+                <field name="x_psm_0502_supply_branch_status" optional="hide"/>
+                <!-- field ghi nhan ket qua kiem tra ban dau -->
+                <field name="x_psm_0502_inspection_result" optional="hide"/>
+                <field name="x_psm_0502_inspection_checklist_result" optional="hide"/>
+                <field name="x_psm_0502_inspection_worksheet" optional="hide"/>
+                <field name="x_psm_0502_inspection_symptom_status" optional="hide"/>
+                <field name="x_psm_0502_inspection_equipment_status" optional="hide"/>
+                <field name="x_psm_0502_inspection_safety_risk" optional="hide"/>
+                <field name="x_psm_0502_inspection_action_urgency" optional="hide"/>
+                <!-- field ghi nhan user thuc hien kiem tra ban dau -->
+                <field name="x_psm_0502_inspected_by_id" optional="hide"/>
+                <!-- field ghi nhan thoi diem kiem tra ban dau -->
+                <field name="x_psm_0502_inspected_at" optional="hide"/>
+                <!-- field ghi nhan user duoc notify theo vai tro CMT Lead -->
+                <field name="x_psm_0502_lead_notified_user_id" optional="hide"/>
+                <!-- field ghi nhan rule resolve lead da duoc su dung -->
+                <field name="x_psm_0502_lead_notification_rule" optional="hide"/>
+                <!-- field ghi nhan thoi diem notify CMT Lead -->
+                <field name="x_psm_0502_lead_notified_at" optional="hide"/>
+                <field name="x_psm_0502_lead_acknowledgment_status" optional="hide"/>
+                <field name="x_psm_0502_lead_acknowledged_by_id" optional="hide"/>
+                <field name="x_psm_0502_lead_acknowledged_at" optional="hide"/>
+                <!-- field ghi nhan request da du dieu kien de lap ke hoach hay chua -->
+                <field name="x_psm_0502_ready_to_plan" optional="hide"/>
+                <field name="x_psm_0502_planning_revision_count" optional="hide"/>
+                <!-- field ghi nhan user da lap ke hoach -->
+                <field name="x_psm_0502_planned_by_id" optional="hide"/>
+                <!-- field ghi nhan thoi diem lap ke hoach -->
+                <field name="x_psm_0502_planned_at" optional="hide"/>
+                <field name="x_psm_0502_last_planning_changed_by_id" optional="hide"/>
+                <field name="x_psm_0502_last_planning_changed_at" optional="hide"/>
+                <!-- field ghi nhan task fsm da tao tu request -->
+                <field name="x_psm_0502_fsm_task_id" optional="hide"/>
+                <!-- field ghi nhan user da chot de xuat xu ly -->
+                <field name="x_psm_0502_proposed_by_id" optional="hide"/>
+                <!-- field ghi nhan thoi diem da chot de xuat xu ly -->
+                <field name="x_psm_0502_proposed_at" optional="hide"/>
+                <field name="x_psm_0502_proposal_revision_count" optional="hide"/>
+                <field name="x_psm_0502_last_proposal_changed_by_id" optional="hide"/>
+                <field name="x_psm_0502_last_proposal_changed_at" optional="hide"/>
+                <!-- field ghi nhan chi phi du kien -->
+                <field name="x_psm_0502_estimated_cost" optional="hide"/>
+                <!-- field ghi nhan timeline du kien -->
+                <field name="x_psm_0502_estimated_timeline" optional="hide"/>
+                <!-- field ghi nhan trang thai duyet -->
+                <field name="x_psm_0502_approval_status" optional="hide"/>
+                <!-- field ghi nhan user quyet dinh duyet -->
+                <field name="x_psm_0502_approval_decided_by_id" optional="hide"/>
+                <!-- field ghi nhan thoi diem quyet dinh duyet -->
+                <field name="x_psm_0502_approval_decided_at" optional="hide"/>
+                <!-- field ghi nhan co can thue ngoai hay khong -->
+                <field name="x_psm_0502_service_route" optional="hide"/>
+                <field name="x_psm_0502_service_route_reason" optional="hide"/>
+                <field name="x_psm_0502_need_outside_service" optional="hide"/>
+                <!-- field ghi nhan user da tham dinh service route -->
+                <field name="x_psm_0502_service_assessed_by_id" optional="hide"/>
+                <!-- field ghi nhan thoi diem da tham dinh service route -->
+                <field name="x_psm_0502_service_assessed_at" optional="hide"/>
+                <!-- field ghi nhan co can vat tu hay khong -->
+                <field name="x_psm_0502_has_material_request" optional="hide"/>
+                <field name="x_psm_0502_material_line_count" optional="hide"/>
+                <!-- field ghi nhan user da danh gia vat tu -->
+                <field name="x_psm_0502_material_checked_by_id" optional="hide"/>
+                <!-- field ghi nhan thoi diem da danh gia vat tu -->
+                <field name="x_psm_0502_material_checked_at" optional="hide"/>
+                <!-- field ghi nhan phieu kho da tao -->
+                <field name="x_psm_0502_stock_picking_id" optional="hide"/>
+                <field name="x_psm_0502_stock_issue_status" optional="hide"/>
+                <field name="x_psm_0502_stock_issue_synced_at" optional="hide"/>
+                <!-- field ghi nhan ket qua kiem tra ton kho -->
+                <field name="x_psm_0502_stock_check_result" optional="hide"/>
+                <field name="x_psm_0502_stock_check_availability_state" optional="hide"/>
+                <field name="x_psm_0502_material_approval_required" optional="hide"/>
+                <field name="x_psm_0502_material_approval_user_id" optional="hide"/>
+                <field name="x_psm_0502_material_approval_value" optional="hide" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                <field name="x_psm_0502_material_approval_value_rule" optional="hide" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                <!-- field ghi nhan trang thai duyet nhanh vat tu -->
+                <field name="x_psm_0502_material_approval_status" optional="hide"/>
+                <!-- field ghi nhan user ra quyet dinh duyet nhanh vat tu -->
+                <field name="x_psm_0502_material_approval_decided_by_id" optional="hide"/>
+                <!-- field ghi nhan thoi diem quyet dinh duyet nhanh vat tu -->
+                <field name="x_psm_0502_material_approval_decided_at" optional="hide"/>
+                <!-- field ghi nhan user da xac nhan xuat kho thuc te -->
+                <field name="x_psm_0502_stock_issued_by_id" optional="hide"/>
+                <!-- field ghi nhan thoi diem xuat kho thuc te -->
+                <field name="x_psm_0502_stock_issued_at" optional="hide"/>
+                <!-- field ghi nhan user da kiem tra ton kho -->
+                <field name="x_psm_0502_stock_checked_by_id" optional="hide"/>
+                <!-- field ghi nhan thoi diem da kiem tra ton kho -->
+                <field name="x_psm_0502_stock_checked_at" optional="hide"/>
+                <!-- field ghi nhan don mua ngoai moi nhat -->
+                <field name="x_psm_0502_purchase_order_id" optional="hide"/>
+                <!-- field ghi nhan trang thai don mua ngoai moi nhat -->
+                <field name="x_psm_0502_purchase_order_state" optional="hide"/>
+                <!-- field ghi nhan stage hien tai cua FSM task -->
+                <field name="x_psm_0502_fsm_stage_id" optional="hide"/>
+                <!-- field ghi nhan thoi diem bat dau thuc thi -->
+                <field name="x_psm_0502_execution_started_at" optional="hide"/>
+                <!-- field ghi nhan thoi diem hoan tat thuc thi -->
+                <field name="x_psm_0502_execution_completed_at" optional="hide"/>
+                <!-- field ghi nhan ket qua nghiem thu -->
+                <field name="x_psm_0502_acceptance_result" optional="hide"/>
+                <field name="x_psm_0502_acceptance_equipment_result" optional="hide"/>
+                <!-- field ghi nhan thoi diem nghiem thu -->
+                <field name="x_psm_0502_acceptance_reviewed_at" optional="hide"/>
+             </xpath>
+        </field>
+    </record>
+
+    <!-- ================= SEARCH VIEW ================= -->
+    <!-- them field request source vao search view -->
+    <record id="view_psm_maintenance_request_search" model="ir.ui.view">
+        <field name="name">psm.maintenance.request.search</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_search"/>
+        <field name="arch" type="xml">
+            <!-- them field vao search bar -->
+            <xpath expr="//search/field[@name='stage_id']" position="after">
+                <!-- chen field phong ban -->
+                <field name="x_psm_0502_department_id"/>
+                <!-- chen field x_psm_0502_request_type_id -->
+                <field name="x_psm_0502_request_type_id"/>
+                <!-- chen field x_psm_0502_request_source_id -->
+                <field name="x_psm_0502_request_source_id"/>
+                <field name="x_psm_0502_source_system"/>
+                <field name="x_psm_0502_request_origin_group"/>
+                <field name="x_psm_0502_intake_minimum_ready"/>
+                <field name="x_psm_0502_intake_detail_ready"/>
+                <field name="x_psm_0502_source_reference"/>
+                <field name="x_psm_0502_intake_owner_user_id"/>
+                <field name="x_psm_0502_intake_sla_deadline_at"/>
+                <field name="x_psm_0502_intake_sla_result"/>
+                <field name="x_psm_0502_intake_age_hours"/>
+                <field name="x_psm_0502_progress_checkpoint"/>
+                <field name="x_psm_0502_supply_branch_status"/>
+                <!-- chen field x_psm_0502_inspection_result -->
+                <field name="x_psm_0502_inspection_result"/>
+                <field name="x_psm_0502_inspection_checklist_result"/>
+                <field name="x_psm_0502_inspection_worksheet"/>
+                <field name="x_psm_0502_inspection_symptom_status"/>
+                <field name="x_psm_0502_inspection_equipment_status"/>
+                <field name="x_psm_0502_inspection_safety_risk"/>
+                <field name="x_psm_0502_inspection_action_urgency"/>
+                <!-- chen field x_psm_0502_inspected_by_id -->
+                <field name="x_psm_0502_inspected_by_id"/>
+                <!-- chen field x_psm_0502_inspected_at -->
+                <field name="x_psm_0502_inspected_at"/>
+                <!-- chen field x_psm_0502_lead_notified_user_id -->
+                <field name="x_psm_0502_lead_notified_user_id"/>
+                <!-- chen field x_psm_0502_ready_to_plan -->
+                <field name="x_psm_0502_ready_to_plan"/>
+                <!-- chen field x_psm_0502_lead_notification_rule -->
+                <field name="x_psm_0502_lead_notification_rule"/>
+                <!-- chen field x_psm_0502_lead_notified_at -->
+                <field name="x_psm_0502_lead_notified_at"/>
+                <field name="x_psm_0502_lead_acknowledgment_status"/>
+                <field name="x_psm_0502_lead_acknowledged_by_id"/>
+                <field name="x_psm_0502_lead_acknowledged_at"/>
+                <!-- chen field x_psm_0502_planned_by_id -->
+                <field name="x_psm_0502_planned_by_id"/>
+                <!-- chen field x_psm_0502_planned_at -->
+                <field name="x_psm_0502_planned_at"/>
+                <field name="x_psm_0502_planning_revision_count"/>
+                <field name="x_psm_0502_last_planning_changed_by_id"/>
+                <field name="x_psm_0502_last_planning_changed_at"/>
+                <!-- chen field x_psm_0502_fsm_task_id -->
+                <field name="x_psm_0502_fsm_task_id"/>
+                <!-- chen field x_psm_0502_proposed_by_id -->
+                <field name="x_psm_0502_proposed_by_id"/>
+                <!-- chen field x_psm_0502_proposed_at -->
+                <field name="x_psm_0502_proposed_at"/>
+                <!-- chen field x_psm_0502_approval_status -->
+                <field name="x_psm_0502_approval_status"/>
+                <field name="x_psm_0502_approval_required"/>
+                <field name="x_psm_0502_approval_user_id"/>
+                <field name="x_psm_0502_approval_rule" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                <field name="x_psm_0502_approval_cost_rule" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                <!-- chen field x_psm_0502_approval_decided_by_id -->
+                <field name="x_psm_0502_approval_decided_by_id"/>
+                <!-- chen field x_psm_0502_approval_decided_at -->
+                <field name="x_psm_0502_approval_decided_at"/>
+                <!-- chen field x_psm_0502_need_outside_service -->
+                <field name="x_psm_0502_service_route"/>
+                <field name="x_psm_0502_service_route_reason"/>
+                <field name="x_psm_0502_need_outside_service"/>
+                <!-- chen field x_psm_0502_service_assessed_by_id -->
+                <field name="x_psm_0502_service_assessed_by_id"/>
+                <!-- chen field x_psm_0502_service_assessed_at -->
+                <field name="x_psm_0502_service_assessed_at"/>
+                <!-- chen field x_psm_0502_has_material_request -->
+                <field name="x_psm_0502_has_material_request"/>
+                <field name="x_psm_0502_material_line_count"/>
+                <!-- chen field x_psm_0502_material_checked_by_id -->
+                <field name="x_psm_0502_material_checked_by_id"/>
+                <!-- chen field x_psm_0502_material_checked_at -->
+                <field name="x_psm_0502_material_checked_at"/>
+                <!-- chen field x_psm_0502_stock_picking_id -->
+                <field name="x_psm_0502_stock_picking_id"/>
+                <field name="x_psm_0502_stock_issue_status"/>
+                <field name="x_psm_0502_stock_issue_synced_at"/>
+                <!-- chen field x_psm_0502_stock_check_result -->
+                <field name="x_psm_0502_stock_check_result"/>
+                <field name="x_psm_0502_stock_check_availability"/>
+                <field name="x_psm_0502_stock_check_availability_state"/>
+                <field name="x_psm_0502_material_approval_required"/>
+                <field name="x_psm_0502_material_approval_user_id"/>
+                <field name="x_psm_0502_material_approval_rule" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                <field name="x_psm_0502_material_approval_value" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                <field name="x_psm_0502_material_approval_value_rule" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                <!-- chen field x_psm_0502_material_approval_status -->
+                <field name="x_psm_0502_material_approval_status"/>
+                <!-- chen field x_psm_0502_material_approval_decided_by_id -->
+                <field name="x_psm_0502_material_approval_decided_by_id"/>
+                <!-- chen field x_psm_0502_material_approval_decided_at -->
+                <field name="x_psm_0502_material_approval_decided_at"/>
+                <!-- chen field x_psm_0502_stock_issued_by_id -->
+                <field name="x_psm_0502_stock_issued_by_id"/>
+                <!-- chen field x_psm_0502_stock_issued_at -->
+                <field name="x_psm_0502_stock_issued_at"/>
+                <!-- chen field x_psm_0502_stock_checked_by_id -->
+                <field name="x_psm_0502_stock_checked_by_id"/>
+                <!-- chen field x_psm_0502_stock_checked_at -->
+                <field name="x_psm_0502_stock_checked_at"/>
+                <!-- chen field x_psm_0502_purchase_order_id -->
+                <field name="x_psm_0502_purchase_order_id"/>
+                <!-- chen field x_psm_0502_purchase_order_state -->
+                <field name="x_psm_0502_purchase_order_state"/>
+                <!-- chen field x_psm_0502_fsm_stage_id -->
+                <field name="x_psm_0502_fsm_stage_id"/>
+                <!-- chen field x_psm_0502_execution_started_at -->
+                <field name="x_psm_0502_execution_started_at"/>
+                <!-- chen field x_psm_0502_execution_completed_at -->
+                <field name="x_psm_0502_execution_completed_at"/>
+                <!-- chen field x_psm_0502_acceptance_result -->
+                <field name="x_psm_0502_acceptance_result"/>
+                <field name="x_psm_0502_acceptance_equipment_result"/>
+                <!-- chen field x_psm_0502_acceptance_reviewed_at -->
+                <field name="x_psm_0502_acceptance_reviewed_at"/>
+            </xpath>
+            <!-- them filter nhanh -->
+            <xpath expr="//search/filter[@name='filter_close_date']" position="after">
+                <!-- filter tong hop cac request 0502 con dang mo de phuc vu monitoring -->
+                <separator/>
+                <filter
+                    name="filter_psm_0502_open_requests"
+                    string="0502 Open Requests"
+                    domain="[('x_psm_0502_request_source_id', '!=', False), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+
+                <!-- filter theo request source -->
+                <separator/>
+                <!-- filter request tu cua hang -->
+                <filter
+                    name="filter_psm_store_request"
+                    string="Store Request"
+                    domain="[('x_psm_0502_request_source_code', '=', 'store_request')]"
+                />
+                <!-- filter request tu lich bao tri -->
+                  <filter
+                      name="filter_psm_preventive_schedule"
+                      string="Preventive Schedule"
+                      domain="[('x_psm_0502_request_source_code', '=', 'preventive_schedule')]"
+                  />
+                  <filter
+                      name="filter_psm_source_manual_request"
+                      string="Manual Request"
+                      domain="[('x_psm_0502_source_system', '=', 'manual_request')]"
+                  />
+                  <filter
+                      name="filter_psm_source_preventive_cron"
+                      string="Preventive Cron"
+                      domain="[('x_psm_0502_source_system', '=', 'preventive_cron')]"
+                  />
+                  <filter
+                      name="filter_psm_source_helpdesk_ticket"
+                      string="Helpdesk Ticket"
+                      domain="[('x_psm_0502_source_system', '=', 'helpdesk_ticket')]"
+                  />
+                  <filter
+                      name="filter_psm_origin_store_need"
+                      string="Store Need"
+                      domain="[('x_psm_0502_request_origin_group', '=', 'store_need')]"
+                  />
+                  <filter
+                      name="filter_psm_origin_preventive_need"
+                      string="Preventive Need"
+                      domain="[('x_psm_0502_request_origin_group', '=', 'preventive_need')]"
+                  />
+                  <filter
+                      name="filter_psm_origin_system_need"
+                      string="System Need"
+                      domain="[('x_psm_0502_request_origin_group', '=', 'system_need')]"
+                  />
+                  <filter
+                      name="filter_psm_intake_minimum_ready"
+                      string="Intake Minimum Ready"
+                      domain="[('x_psm_0502_intake_minimum_ready', '=', True)]"
+                  />
+                  <filter
+                      name="filter_psm_intake_minimum_gap"
+                      string="Intake Minimum Gap"
+                      domain="[('x_psm_0502_intake_minimum_ready', '=', False)]"
+                  />
+                  <filter
+                      name="filter_psm_intake_detail_ready"
+                      string="Intake Detail Ready"
+                      domain="[('x_psm_0502_intake_detail_ready', '=', True)]"
+                  />
+                  <filter
+                      name="filter_psm_intake_detail_gap"
+                      string="Intake Detail Gap"
+                      domain="[('x_psm_0502_intake_detail_ready', '=', False)]"
+                  />
+                  <filter
+                      name="filter_psm_progress_proposal"
+                      string="Progress Proposal"
+                      domain="[('x_psm_0502_progress_checkpoint', '=', 'proposal')]"
+                  />
+                  <filter
+                      name="filter_psm_progress_execution"
+                      string="Progress Execution"
+                      domain="[('x_psm_0502_progress_checkpoint', '=', 'execution')]"
+                  />
+                  <filter
+                      name="filter_psm_progress_acceptance"
+                      string="Progress Acceptance"
+                      domain="[('x_psm_0502_progress_checkpoint', '=', 'acceptance')]"
+                  />
+                  <filter
+                      name="filter_psm_supply_purchase_required"
+                      string="Purchase Required"
+                      domain="[('x_psm_0502_supply_branch_status', '=', 'purchase_required')]"
+                  />
+                  <filter
+                      name="filter_psm_supply_purchase_in_progress"
+                      string="Purchase In Progress"
+                      domain="[('x_psm_0502_supply_branch_status', '=', 'purchase_in_progress')]"
+                  />
+                  <filter
+                      name="filter_psm_supply_pending_stock_issue"
+                      string="Pending Stock Issue"
+                      domain="[('x_psm_0502_supply_branch_status', '=', 'pending_stock_issue')]"
+                  />
+                  <filter
+                      name="filter_psm_intake_sla_pending"
+                      string="Intake SLA Pending"
+                      domain="[('x_psm_0502_intake_sla_result', '=', 'pending')]"
+                  />
+
+                  <!-- filter theo trang thai tiep nhan -->
+                  <separator/>
+                  <filter
+                      name="filter_psm_intake_queue"
+                      string="0502 Intake Queue"
+                      domain="[('archive', '=', False), ('stage_id.done', '=', False), ('x_psm_0502_received_at', '=', False)]"
+                  />
+                  <filter
+                      name="filter_psm_received"
+                      string="Received by CMT"
+                      domain="[('x_psm_0502_received_at', '!=', False)]"
+                  />
+                  <filter
+                      name="filter_psm_not_received"
+                      string="Not Received by CMT"
+                      domain="[('x_psm_0502_received_at', '=', False)]"
+                  />
+                  <filter
+                      name="filter_psm_intake_overdue"
+                      string="Intake Overdue"
+                      domain="[('x_psm_0502_received_at', '=', False), ('x_psm_0502_intake_sla_deadline_at', '!=', False), ('x_psm_0502_intake_sla_deadline_at', '&lt;', context_today().strftime('%Y-%m-%d 23:59:59'))]"
+                  />
+                  <filter
+                      name="filter_psm_intake_sla_late"
+                      string="Received Late"
+                      domain="[('x_psm_0502_intake_sla_result', '=', 'late')]"
+                  />
+                  <filter
+                      name="filter_psm_intake_sla_on_time"
+                      string="Received On Time"
+                      domain="[('x_psm_0502_intake_sla_result', '=', 'on_time')]"
+                  />
+
+                <!-- filter theo ket qua kiem tra ban dau -->
+                <separator/>
+                <filter
+                    name="filter_psm_no_action_needed"
+                    string="No Action Needed"
+                    domain="[('x_psm_0502_inspection_result', '=', 'no_action_needed')]"
+                />
+                  <filter
+                      name="filter_psm_action_needed"
+                      string="Action Needed"
+                      domain="[('x_psm_0502_inspection_result', '=', 'action_needed')]"
+                  />
+                  <filter
+                      name="filter_psm_inspection_high_risk"
+                      string="High Safety Risk"
+                      domain="[('x_psm_0502_inspection_safety_risk', '=', 'high')]"
+                  />
+                  <filter
+                      name="filter_psm_inspection_stopped"
+                      string="Equipment Stopped"
+                      domain="[('x_psm_0502_inspection_equipment_status', '=', 'stopped')]"
+                  />
+                  <filter
+                      name="filter_psm_inspection_checklist_recorded"
+                      string="Inspection Checklist Recorded"
+                      domain="[('x_psm_0502_inspection_checklist_result', '!=', False)]"
+                  />
+                  <filter
+                      name="filter_psm_inspection_worksheet_recorded"
+                      string="Inspection Worksheet Recorded"
+                      domain="[('x_psm_0502_inspection_worksheet', '!=', False)]"
+                  />
+
+                <!-- filter theo trang thai notify CMT Lead -->
+                <separator/>
+                <filter
+                    name="filter_psm_lead_notified"
+                    string="Lead Notified"
+                    domain="[('x_psm_0502_lead_notified_at', '!=', False)]"
+                />
+                <filter
+                    name="filter_psm_team_lead_notify"
+                    string="Team Lead Notify"
+                    domain="[('x_psm_0502_lead_notification_rule', '=', 'team_lead')]"
+                />
+                <filter
+                    name="filter_psm_my_lead_queue"
+                    string="My Lead Queue"
+                    domain="[('x_psm_0502_lead_notified_user_id', '=', uid), ('x_psm_0502_lead_notified_at', '!=', False), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_lead_acknowledged"
+                    string="Lead Acknowledged"
+                    domain="[('x_psm_0502_lead_acknowledgment_status', '=', 'acknowledged')]"
+                />
+                <filter
+                    name="filter_psm_lead_not_acknowledged"
+                    string="Lead Not Acknowledged"
+                    domain="[('x_psm_0502_lead_notified_at', '!=', False), ('x_psm_0502_lead_acknowledgment_status', '=', 'pending')]"
+                />
+                <filter
+                    name="filter_psm_lead_not_notified"
+                    string="Lead Not Notified"
+                    domain="[('x_psm_0502_lead_notified_at', '=', False), ('maintenance_type', '=', 'preventive'), ('x_psm_0502_request_source_code', '=', 'preventive_schedule')]"
+                />
+                <filter
+                    name="filter_psm_ready_to_plan"
+                    string="Ready To Plan"
+                    domain="[('x_psm_0502_ready_to_plan', '=', True), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_planning_blocked"
+                    string="Planning Blocked"
+                    domain="[('x_psm_0502_ready_to_plan', '=', False), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+
+                <!-- filter theo trang thai lap ke hoach -->
+                <separator/>
+                <filter
+                    name="filter_psm_planned"
+                    string="Planned"
+                    domain="[('x_psm_0502_planned_at', '!=', False)]"
+                />
+                <filter
+                    name="filter_psm_not_planned"
+                    string="Not Planned"
+                    domain="[('x_psm_0502_planned_at', '=', False), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_has_planning_history"
+                    string="Has Planning History"
+                    domain="[('x_psm_0502_planning_revision_count', '&gt;', 0)]"
+                />
+                <filter
+                    name="filter_psm_replanned"
+                    string="Replanned"
+                    domain="[('x_psm_0502_planning_revision_count', '&gt;', 1)]"
+                />
+
+                <!-- filter theo trang thai da tao task fsm hay chua -->
+                <separator/>
+                <filter
+                    name="filter_psm_has_fsm_task"
+                    string="Has FSM Task"
+                    domain="[('x_psm_0502_fsm_task_id', '!=', False)]"
+                />
+                <filter
+                    name="filter_psm_no_fsm_task"
+                    string="No FSM Task"
+                    domain="[('x_psm_0502_fsm_task_id', '=', False), ('x_psm_0502_planned_at', '!=', False), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_execution_started"
+                    string="Execution Started"
+                    domain="[('x_psm_0502_execution_started_at', '!=', False)]"
+                />
+                <filter
+                    name="filter_psm_execution_not_started"
+                    string="Execution Not Started"
+                    domain="[('x_psm_0502_fsm_task_id', '!=', False), ('x_psm_0502_execution_started_at', '=', False), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_execution_completed"
+                    string="Execution Completed"
+                    domain="[('x_psm_0502_execution_completed_at', '!=', False)]"
+                />
+                <filter
+                    name="filter_psm_execution_in_progress"
+                    string="Execution In Progress"
+                    domain="[('x_psm_0502_execution_started_at', '!=', False), ('x_psm_0502_execution_completed_at', '=', False), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_acceptance_reviewed"
+                    string="Acceptance Reviewed"
+                    domain="[('x_psm_0502_acceptance_reviewed_at', '!=', False)]"
+                />
+                <filter
+                    name="filter_psm_acceptance_pending"
+                    string="Acceptance Pending"
+                    domain="[('x_psm_0502_execution_completed_at', '!=', False), ('x_psm_0502_acceptance_reviewed_at', '=', False), ('archive', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_accepted"
+                    string="Accepted"
+                    domain="[('x_psm_0502_acceptance_result', '=', 'accepted')]"
+                />
+                <filter
+                    name="filter_psm_follow_up_needed"
+                    string="Follow-up Needed"
+                    domain="[('x_psm_0502_acceptance_result', '=', 'follow_up_needed')]"
+                />
+                <filter
+                    name="filter_psm_rework_required"
+                    string="Rework Required"
+                    domain="[('x_psm_0502_acceptance_result', '=', 'rework_required')]"
+                />
+
+                <!-- filter theo trang thai da co de xuat xu ly hay chua -->
+                <separator/>
+                <filter
+                    name="filter_psm_proposed"
+                    string="Proposed"
+                    domain="[('x_psm_0502_proposed_at', '!=', False)]"
+                />
+                <filter
+                    name="filter_psm_not_proposed"
+                    string="Not Proposed"
+                    domain="[('x_psm_0502_proposed_at', '=', False), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_has_proposal_history"
+                    string="Has Proposal History"
+                    domain="[('x_psm_0502_proposal_revision_count', '>', 0)]"
+                />
+                <filter
+                    name="filter_psm_reproposed"
+                    string="Reproposed"
+                    domain="[('x_psm_0502_proposal_revision_count', '>', 1)]"
+                />
+
+                <!-- filter theo trang thai duyet timeline/cost -->
+                <separator/>
+                <filter
+                    name="filter_psm_pending_approval"
+                    string="Pending Approval"
+                    domain="[('x_psm_0502_approval_status', '=', 'pending')]"
+                />
+                <filter
+                    name="filter_psm_approval_required"
+                    string="Approval Required"
+                    domain="[('x_psm_0502_approval_required', '=', True)]"
+                />
+                <filter
+                    name="filter_psm_auto_approved_under_limit"
+                    string="Auto Approved Under Limit"
+                    domain="[('x_psm_0502_approval_cost_rule', '=', 'auto_approved_under_limit')]"
+                />
+                <filter
+                    name="filter_psm_manual_review_required"
+                    string="Manual Review Required"
+                    domain="[('x_psm_0502_approval_cost_rule', '=', 'manual_review_required')]"
+                />
+                <filter
+                    name="filter_psm_two_level_approval"
+                    string="Two-Level Approval"
+                    domain="[('x_psm_0502_approval_flow_type', '=', 'two_level')]"
+                />
+                <filter
+                    name="filter_psm_pending_final_approval"
+                    string="Pending Final Approval"
+                    domain="[('x_psm_0502_approval_status', '=', 'pending'), ('x_psm_0502_approval_flow_type', '=', 'two_level'), ('x_psm_0502_approval_current_level', '=', 2)]"
+                />
+                <filter
+                    name="filter_psm_my_pending_approval"
+                    string="My Pending Approval"
+                    domain="[('x_psm_0502_approval_status', '=', 'pending'), ('x_psm_0502_approval_user_id', '=', uid)]"
+                />
+                <filter
+                    name="filter_psm_approved"
+                    string="Approved"
+                    domain="[('x_psm_0502_approval_status', '=', 'approved')]"
+                />
+                <filter
+                    name="filter_psm_rejected"
+                    string="Rejected"
+                    domain="[('x_psm_0502_approval_status', '=', 'rejected')]"
+                />
+
+                <!-- filter theo ket qua tham dinh co can outside service hay khong -->
+                <separator/>
+                <filter
+                    name="filter_psm_need_outside_service"
+                    string="Need Outside Service"
+                    domain="[('x_psm_0502_service_route', '=', 'outside_service')]"
+                />
+                <filter
+                    name="filter_psm_internal_service"
+                    string="Internal Service"
+                    domain="[('x_psm_0502_service_assessed_at', '!=', False), ('x_psm_0502_service_route', '=', 'internal_handling')]"
+                />
+                <filter
+                    name="filter_psm_specialist_required"
+                    string="Specialist Required"
+                    domain="[('x_psm_0502_service_route_reason', '=', 'specialist_required')]"
+                />
+
+                <!-- filter theo ket qua danh gia vat tu -->
+                <separator/>
+                <filter
+                    name="filter_psm_has_material_request"
+                    string="Has Material Request"
+                    domain="[('x_psm_0502_has_material_request', '=', True)]"
+                />
+                <filter
+                    name="filter_psm_no_material_request"
+                    string="No Material Request"
+                    domain="[('x_psm_0502_material_checked_at', '!=', False), ('x_psm_0502_has_material_request', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_material_detail_lines"
+                    string="Material Details Recorded"
+                    domain="[('x_psm_0502_material_line_count', '&gt;', 0)]"
+                />
+
+                <!-- filter theo trang thai da tao phieu kho hay chua -->
+                <separator/>
+                <filter
+                    name="filter_psm_has_stock_picking"
+                    string="Has Stock Picking"
+                    domain="[('x_psm_0502_stock_picking_id', '!=', False)]"
+                />
+                <filter
+                    name="filter_psm_no_stock_picking"
+                    string="No Stock Picking"
+                    domain="[('x_psm_0502_has_material_request', '=', True), ('x_psm_0502_stock_picking_id', '=', False)]"
+                />
+
+                <!-- filter theo ket qua kiem tra ton kho -->
+                <separator/>
+                <filter
+                    name="filter_psm_stock_available"
+                    string="Stock Available"
+                    domain="[('x_psm_0502_stock_check_result', '=', 'available')]"
+                />
+                <filter
+                    name="filter_psm_stock_not_available"
+                    string="Stock Not Available"
+                    domain="[('x_psm_0502_stock_check_result', '=', 'not_available')]"
+                />
+                <filter
+                    name="filter_psm_stock_checked"
+                    string="Stock Checked"
+                    domain="[('x_psm_0502_stock_checked_at', '!=', False)]"
+                />
+                <filter
+                    name="filter_psm_stock_not_checked"
+                    string="Stock Not Checked"
+                    domain="[('x_psm_0502_stock_checked_at', '=', False)]"
+                />
+
+                <!-- filter theo trang thai duyet nhanh xuat vat tu -->
+                <separator/>
+                <filter
+                    name="filter_psm_material_approval_required"
+                    string="Material Approval Required"
+                    domain="[('x_psm_0502_material_approval_required', '=', True)]"
+                />
+                <filter
+                    name="filter_psm_material_auto_approved_under_limit"
+                    string="Material Auto Approved Under Limit"
+                    domain="[('x_psm_0502_material_approval_value_rule', '=', 'auto_approved_under_limit')]"
+                />
+                <filter
+                    name="filter_psm_material_manual_review_required"
+                    string="Material Manual Review Required"
+                    domain="[('x_psm_0502_material_approval_value_rule', 'in', ['manual_review_required', 'manual_review_required_source_type'])]"
+                />
+                <filter
+                    name="filter_psm_my_pending_material_approval"
+                    string="My Pending Material Approval"
+                    domain="[('x_psm_0502_material_approval_status', '=', 'pending'), ('x_psm_0502_material_approval_user_id', '=', uid)]"
+                />
+                <filter
+                    name="filter_psm_material_approval_pending"
+                    string="Pending Material Approval"
+                    domain="[('x_psm_0502_material_approval_status', '=', 'pending')]"
+                />
+                <filter
+                    name="filter_psm_material_approval_approved"
+                    string="Approved Material Request"
+                    domain="[('x_psm_0502_material_approval_status', '=', 'approved')]"
+                />
+                <filter
+                    name="filter_psm_material_approval_rejected"
+                    string="Rejected Material Request"
+                    domain="[('x_psm_0502_material_approval_status', '=', 'rejected')]"
+                />
+
+                <!-- filter theo trang thai da xuat kho thuc te hay chua -->
+                <separator/>
+                <filter
+                    name="filter_psm_stock_issued"
+                    string="Stock Issued"
+                    domain="[('x_psm_0502_stock_issue_status', '=', 'issued')]"
+                />
+                <filter
+                    name="filter_psm_stock_not_issued"
+                    string="Stock Not Issued"
+                    domain="[('x_psm_0502_stock_picking_id', '!=', False), ('x_psm_0502_stock_issue_status', '!=', 'issued')]"
+                />
+                <filter
+                    name="filter_psm_stock_issue_cancelled"
+                    string="Stock Flow Cancelled"
+                    domain="[('x_psm_0502_stock_issue_status', '=', 'cancelled')]"
+                />
+
+                <!-- filter theo trang thai da tao RFQ/PO mua ngoai hay chua -->
+                <separator/>
+                <filter
+                    name="filter_psm_has_purchase_order"
+                    string="Has Purchase Order"
+                    domain="[('x_psm_0502_purchase_order_id', '!=', False)]"
+                />
+                <filter
+                    name="filter_psm_no_purchase_order"
+                    string="No Purchase Order"
+                    domain="[('x_psm_0502_stock_check_result', '=', 'not_available'), ('x_psm_0502_purchase_order_id', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_purchase_rfq"
+                    string="Purchase RFQ"
+                    domain="[('x_psm_0502_purchase_order_state', 'in', ['draft', 'sent', 'to approve'])]"
+                />
+                <filter
+                    name="filter_psm_purchased"
+                    string="Purchased"
+                    domain="[('x_psm_0502_purchase_order_state', 'in', ['purchase', 'done'])]"
+                />
+
+                <!-- filter tong hop cac yeu cau ma CMT Lead can gom lai de lap ke hoach -->
+                <separator/>
+                <filter
+                    name="filter_psm_requests_to_plan"
+                    string="Requests To Plan"
+                    domain="['&amp;', '&amp;', ('archive', '=', False), ('stage_id.done', '=', False), '|', '&amp;', '&amp;', ('maintenance_type', '=', 'preventive'), ('x_psm_0502_request_source_code', '=', 'preventive_schedule'), ('x_psm_0502_lead_notified_at', '!=', False), '&amp;', ('x_psm_0502_request_source_code', '=', 'store_request'), ('x_psm_0502_inspection_result', '=', 'action_needed')]"
+                />
+                <filter
+                    name="filter_psm_store_action_needed"
+                    string="Store Action Needed"
+                    domain="[('x_psm_0502_request_source_code', '=', 'store_request'), ('x_psm_0502_inspection_result', '=', 'action_needed'), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_requests_to_plan_store_request"
+                    string="Store Request"
+                    domain="[('x_psm_0502_request_source_code', '=', 'store_request'), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_preventive_queue"
+                    string="Preventive Queue"
+                    domain="[('maintenance_type', '=', 'preventive'), ('x_psm_0502_request_source_code', '=', 'preventive_schedule'), ('x_psm_0502_lead_notified_at', '!=', False), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_preventive_request"
+                    string="Preventive Request"
+                    domain="[('maintenance_type', '=', 'preventive'), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_overdue_queue"
+                    string="0502 Overdue"
+                    domain="['&amp;', '&amp;', ('archive', '=', False), ('stage_id.done', '=', False), '|', '&amp;', ('schedule_date', '!=', False), ('schedule_date', '&lt;', context_today().strftime('%Y-%m-%d 00:00:00')), '&amp;', ('schedule_date', '=', False), ('request_date', '&lt;', context_today())]"
+                />
+                <filter
+                    name="filter_psm_ready_to_plan_queue"
+                    string="Ready To Plan Queue"
+                    domain="[('x_psm_0502_ready_to_plan', '=', True), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_critical_queue"
+                    string="Critical Queue"
+                    domain="['&amp;', '&amp;', ('archive', '=', False), ('stage_id.done', '=', False), '|', '|', ('x_psm_0502_inspection_safety_risk', '=', 'high'), ('x_psm_0502_inspection_action_urgency', '=', 'immediate'), ('x_psm_0502_inspection_equipment_status', '=', 'stopped')]"
+                />
+                <filter
+                    name="filter_psm_lead_assigned_queue"
+                    string="Lead Assigned Queue"
+                    domain="[('x_psm_0502_lead_notified_user_id', '!=', False), ('archive', '=', False), ('stage_id.done', '=', False)]"
+                />
+            </xpath>
+
+            <!-- bo sung group by de CMT Lead tong hop theo dung goc nhin nghiep vu -->
+            <xpath expr="//search/group" position="inside">
+                <filter string="0502 Stage" name="group_psm_0502_stage" domain="[]" context="{'group_by': 'stage_id'}"/>
+                <filter string="Store Department" name="group_psm_department" domain="[]" context="{'group_by': 'x_psm_0502_department_id'}"/>
+                <filter string="Equipment" name="group_psm_equipment" domain="[]" context="{'group_by': 'equipment_id'}"/>
+                <filter string="Team" name="group_psm_team" domain="[]" context="{'group_by': 'maintenance_team_id'}"/>
+                <filter string="Request Type" name="group_psm_request_type" domain="[]" context="{'group_by': 'x_psm_0502_request_type_id'}"/>
+                <filter string="Request Source" name="group_psm_request_source" domain="[]" context="{'group_by': 'x_psm_0502_request_source_id'}"/>
+                <filter string="Source System" name="group_psm_source_system" domain="[]" context="{'group_by': 'x_psm_0502_source_system'}"/>
+                <filter string="Request Origin Group" name="group_psm_request_origin_group" domain="[]" context="{'group_by': 'x_psm_0502_request_origin_group'}"/>
+                <filter string="Intake Detail Ready" name="group_psm_intake_detail_ready" domain="[]" context="{'group_by': 'x_psm_0502_intake_detail_ready'}"/>
+                <filter string="Intake Owner" name="group_psm_intake_owner_user" domain="[]" context="{'group_by': 'x_psm_0502_intake_owner_user_id'}"/>
+                <filter string="Intake SLA Result" name="group_psm_intake_sla_result" domain="[]" context="{'group_by': 'x_psm_0502_intake_sla_result'}"/>
+                <filter string="Progress Checkpoint" name="group_psm_progress_checkpoint" domain="[]" context="{'group_by': 'x_psm_0502_progress_checkpoint'}"/>
+                <filter string="Supply Branch Status" name="group_psm_supply_branch_status" domain="[]" context="{'group_by': 'x_psm_0502_supply_branch_status'}"/>
+                <filter string="Equipment Status" name="group_psm_inspection_equipment_status" domain="[]" context="{'group_by': 'x_psm_0502_inspection_equipment_status'}"/>
+                <filter string="Safety Risk Level" name="group_psm_inspection_safety_risk" domain="[]" context="{'group_by': 'x_psm_0502_inspection_safety_risk'}"/>
+                <filter string="Lead Notified User" name="group_psm_lead_notified_user" domain="[]" context="{'group_by': 'x_psm_0502_lead_notified_user_id'}"/>
+                <filter string="Lead Notify Rule" name="group_psm_lead_notify_rule" domain="[]" context="{'group_by': 'x_psm_0502_lead_notification_rule'}"/>
+                <filter string="Lead Acknowledgment Status" name="group_psm_lead_acknowledgment_status" domain="[]" context="{'group_by': 'x_psm_0502_lead_acknowledgment_status'}"/>
+                <filter string="Ready To Plan" name="group_psm_ready_to_plan" domain="[]" context="{'group_by': 'x_psm_0502_ready_to_plan'}"/>
+                <filter string="Planning Revision Count" name="group_psm_planning_revision_count" domain="[]" context="{'group_by': 'x_psm_0502_planning_revision_count'}"/>
+                <filter string="Planned By" name="group_psm_planned_by" domain="[]" context="{'group_by': 'x_psm_0502_planned_by_id'}"/>
+                <filter string="Last Planning Changed By" name="group_psm_last_planning_changed_by" domain="[]" context="{'group_by': 'x_psm_0502_last_planning_changed_by_id'}"/>
+                <filter string="FSM Task" name="group_psm_fsm_task" domain="[]" context="{'group_by': 'x_psm_0502_fsm_task_id'}"/>
+                <filter string="FSM Stage" name="group_psm_fsm_stage" domain="[]" context="{'group_by': 'x_psm_0502_fsm_stage_id'}"/>
+                <filter string="Proposed By" name="group_psm_proposed_by" domain="[]" context="{'group_by': 'x_psm_0502_proposed_by_id'}"/>
+                <filter string="Proposal Revision Count" name="group_psm_proposal_revision_count" domain="[]" context="{'group_by': 'x_psm_0502_proposal_revision_count'}"/>
+                <filter string="Last Proposal Changed By" name="group_psm_last_proposal_changed_by" domain="[]" context="{'group_by': 'x_psm_0502_last_proposal_changed_by_id'}"/>
+                <filter string="Approval Status" name="group_psm_approval_status" domain="[]" context="{'group_by': 'x_psm_0502_approval_status'}"/>
+                <filter string="Approval Required" name="group_psm_approval_required" domain="[]" context="{'group_by': 'x_psm_0502_approval_required'}"/>
+                <filter string="Approval Flow Type" name="group_psm_approval_flow_type" domain="[]" context="{'group_by': 'x_psm_0502_approval_flow_type'}"/>
+                <filter string="Current Approval Level" name="group_psm_approval_current_level" domain="[]" context="{'group_by': 'x_psm_0502_approval_current_level'}"/>
+                <filter string="Proposal Approver" name="group_psm_approval_user" domain="[]" context="{'group_by': 'x_psm_0502_approval_user_id'}"/>
+                <filter string="Approval Rule" name="group_psm_approval_rule" domain="[]" context="{'group_by': 'x_psm_0502_approval_rule'}" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                <filter string="Approval Cost Rule" name="group_psm_approval_cost_rule" domain="[]" context="{'group_by': 'x_psm_0502_approval_cost_rule'}" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                <filter string="Approval Decided By" name="group_psm_approval_decided_by" domain="[]" context="{'group_by': 'x_psm_0502_approval_decided_by_id'}"/>
+                <filter string="Need Outside Service" name="group_psm_need_outside_service" domain="[]" context="{'group_by': 'x_psm_0502_need_outside_service'}"/>
+                <filter string="Service Route" name="group_psm_service_route" domain="[]" context="{'group_by': 'x_psm_0502_service_route'}"/>
+                <filter string="Service Route Reason" name="group_psm_service_route_reason" domain="[]" context="{'group_by': 'x_psm_0502_service_route_reason'}"/>
+                <filter string="Service Assessed By" name="group_psm_service_assessed_by" domain="[]" context="{'group_by': 'x_psm_0502_service_assessed_by_id'}"/>
+                <filter string="Has Material Request" name="group_psm_has_material_request" domain="[]" context="{'group_by': 'x_psm_0502_has_material_request'}"/>
+                <filter string="Material Checked By" name="group_psm_material_checked_by" domain="[]" context="{'group_by': 'x_psm_0502_material_checked_by_id'}"/>
+                <filter string="Stock Picking" name="group_psm_stock_picking" domain="[]" context="{'group_by': 'x_psm_0502_stock_picking_id'}"/>
+                <filter string="Stock Issue Status" name="group_psm_stock_issue_status" domain="[]" context="{'group_by': 'x_psm_0502_stock_issue_status'}"/>
+                <filter string="Stock Check Result" name="group_psm_stock_check_result" domain="[]" context="{'group_by': 'x_psm_0502_stock_check_result'}"/>
+                <filter string="Stock Checked By" name="group_psm_stock_checked_by" domain="[]" context="{'group_by': 'x_psm_0502_stock_checked_by_id'}"/>
+                <filter string="Material Approver" name="group_psm_material_approval_user" domain="[]" context="{'group_by': 'x_psm_0502_material_approval_user_id'}"/>
+                <filter string="Material Approval Rule" name="group_psm_material_approval_rule" domain="[]" context="{'group_by': 'x_psm_0502_material_approval_rule'}" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                <filter string="Material Approval Value Rule" name="group_psm_material_approval_value_rule" domain="[]" context="{'group_by': 'x_psm_0502_material_approval_value_rule'}" groups="M02_P0502.group_psm_0502_cmt_user"/>
+                <filter string="Material Approval Status" name="group_psm_material_approval_status" domain="[]" context="{'group_by': 'x_psm_0502_material_approval_status'}"/>
+                <filter string="Material Approval Decided By" name="group_psm_material_approval_decided_by" domain="[]" context="{'group_by': 'x_psm_0502_material_approval_decided_by_id'}"/>
+                <filter string="Stock Issued By" name="group_psm_stock_issued_by" domain="[]" context="{'group_by': 'x_psm_0502_stock_issued_by_id'}"/>
+                <filter string="Purchase Order State" name="group_psm_purchase_order_state" domain="[]" context="{'group_by': 'x_psm_0502_purchase_order_state'}"/>
+                <filter string="Execution Started By" name="group_psm_execution_started_by" domain="[]" context="{'group_by': 'x_psm_0502_execution_started_by_id'}"/>
+                <filter string="Execution Completed By" name="group_psm_execution_completed_by" domain="[]" context="{'group_by': 'x_psm_0502_execution_completed_by_id'}"/>
+                <filter string="Acceptance Result" name="group_psm_acceptance_result" domain="[]" context="{'group_by': 'x_psm_0502_acceptance_result'}"/>
+                <filter string="Post-Maintenance Equipment Result" name="group_psm_acceptance_equipment_result" domain="[]" context="{'group_by': 'x_psm_0502_acceptance_equipment_result'}"/>
+                <filter string="Acceptance Reviewed By" name="group_psm_acceptance_reviewed_by" domain="[]" context="{'group_by': 'x_psm_0502_acceptance_reviewed_by_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- action tong hop yeu cau can lap ke hoach cho CMT Lead -->
+    <record id="action_psm_requests_to_plan" model="ir.actions.act_window">
+        <field name="name">0502 Requests To Plan</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="context">{
+            'search_default_active': 1,
+            'search_default_filter_psm_requests_to_plan': 1,
+            'search_default_group_psm_department': 1
+        }</field>
+        <field name="domain">['&amp;', '&amp;', ('archive', '=', False), ('stage_id.done', '=', False), '|', '&amp;', '&amp;', ('maintenance_type', '=', 'preventive'), ('x_psm_0502_request_source_code', '=', 'preventive_schedule'), ('x_psm_0502_lead_notified_at', '!=', False), '&amp;', ('x_psm_0502_request_source_code', '=', 'store_request'), ('x_psm_0502_inspection_result', '=', 'action_needed')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co yeu cau nao can lap ke hoach trong luong 0502.
+            </p>
+            <p>
+                Danh sach nay tong hop cac yeu cau preventive da duoc notify cho CMT Lead
+                va cac yeu cau phat sinh tu cua hang da duoc kiem tra voi ket luan can xu ly.
+            </p>
+        </field>
+    </record>
+
+    <!-- action queue preventive de CMT Lead theo doi rieng nhom preventive da notify -->
+    <record id="action_psm_preventive_queue" model="ir.actions.act_window">
+        <field name="name">0502 Preventive Queue</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="context">{
+            'search_default_active': 1,
+            'search_default_filter_psm_preventive_queue': 1,
+            'search_default_group_psm_team': 1
+        }</field>
+        <field name="domain">[('maintenance_type', '=', 'preventive'), ('x_psm_0502_request_source_code', '=', 'preventive_schedule'), ('x_psm_0502_lead_notified_at', '!=', False), ('archive', '=', False), ('stage_id.done', '=', False)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co preventive request nao trong queue 0502.
+            </p>
+            <p>
+                Danh sach nay giup CMT Lead theo doi rieng cac preventive request da duoc notify.
+            </p>
+        </field>
+    </record>
+
+    <!-- action queue request cua hang da kiem tra va ket luan can xu ly -->
+    <record id="action_psm_store_action_needed_queue" model="ir.actions.act_window">
+        <field name="name">0502 Store Action Needed</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="context">{
+            'search_default_active': 1,
+            'search_default_filter_psm_store_action_needed': 1,
+            'search_default_group_psm_department': 1
+        }</field>
+        <field name="domain">[('x_psm_0502_request_source_code', '=', 'store_request'), ('x_psm_0502_inspection_result', '=', 'action_needed'), ('archive', '=', False), ('stage_id.done', '=', False)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co store request nao can xu ly trong queue 0502.
+            </p>
+            <p>
+                Danh sach nay tap trung vao cac request cua hang da qua kiem tra va duoc ket luan can xu ly.
+            </p>
+        </field>
+    </record>
+
+    <!-- action queue overdue de lead nhin nhanh cac request qua han trong nhom 0502 -->
+    <record id="action_psm_overdue_queue" model="ir.actions.act_window">
+        <field name="name">0502 Overdue Queue</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="context">{
+            'search_default_active': 1,
+            'search_default_filter_psm_overdue_queue': 1,
+            'search_default_group_psm_department': 1
+        }</field>
+        <field name="domain">['&amp;', '&amp;', ('archive', '=', False), ('stage_id.done', '=', False), '|', '&amp;', ('schedule_date', '!=', False), ('schedule_date', '&lt;', context_today().strftime('%Y-%m-%d 00:00:00')), '&amp;', ('schedule_date', '=', False), ('request_date', '&lt;', context_today())]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co request overdue nao trong queue 0502.
+            </p>
+            <p>
+                Danh sach nay giup CMT Lead uu tien cac request da qua han hoac da ton dong.
+            </p>
+        </field>
+    </record>
+
+    <!-- action queue ready to plan de CMT Lead gom cac request da du dieu kien lap ke hoach -->
+    <record id="action_psm_ready_to_plan_queue" model="ir.actions.act_window">
+        <field name="name">0502 Ready To Plan Queue</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="context">{
+            'search_default_active': 1,
+            'search_default_filter_psm_ready_to_plan_queue': 1,
+            'search_default_group_psm_department': 1
+        }</field>
+        <field name="domain">[('x_psm_0502_ready_to_plan', '=', True), ('archive', '=', False), ('stage_id.done', '=', False)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co request nao ready to plan trong queue 0502.
+            </p>
+            <p>
+                Danh sach nay tap trung vao cac request da du dieu kien de CMT Lead lap ke hoach
+                ma khong phai kiem tra lai tung block reason thu cong.
+            </p>
+        </field>
+    </record>
+
+    <!-- action queue critical de lead uu tien cac request can phan ung nhanh -->
+    <record id="action_psm_critical_queue" model="ir.actions.act_window">
+        <field name="name">0502 Critical Queue</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="context">{
+            'search_default_active': 1,
+            'search_default_filter_psm_critical_queue': 1,
+            'search_default_group_psm_department': 1
+        }</field>
+        <field name="domain">['&amp;', '&amp;', ('archive', '=', False), ('stage_id.done', '=', False), '|', '|', ('x_psm_0502_inspection_safety_risk', '=', 'high'), ('x_psm_0502_inspection_action_urgency', '=', 'immediate'), ('x_psm_0502_inspection_equipment_status', '=', 'stopped')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co request critical nao trong queue 0502.
+            </p>
+            <p>
+                Danh sach nay giup CMT Lead uu tien nhom request co rui ro cao,
+                dung thiet bi, hoac muc do khan cap can xu ly ngay.
+            </p>
+        </field>
+    </record>
+
+    <!-- action queue lead assigned de nhin dung nhom request da giao ownership cho lead -->
+    <record id="action_psm_lead_assigned_queue" model="ir.actions.act_window">
+        <field name="name">0502 Lead Assigned Queue</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="context">{
+            'search_default_active': 1,
+            'search_default_filter_psm_lead_assigned_queue': 1,
+            'search_default_group_psm_lead_notified_user': 1
+        }</field>
+        <field name="domain">[('x_psm_0502_lead_notified_user_id', '!=', False), ('archive', '=', False), ('stage_id.done', '=', False)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co request nao da gan lead trong queue 0502.
+            </p>
+            <p>
+                Danh sach nay giup nhin ro request nao da duoc giao ownership cho lead nao
+                de tong hop va dieu phoi dung nguoi dung viec.
+            </p>
+        </field>
+    </record>
+
+    <!-- action reporting tong hop de CMT Lead va dieu phoi theo doi toan bo request 0502 dang mo -->
+    <record id="action_psm_0502_request_monitoring" model="ir.actions.act_window">
+        <field name="name">0502 Request Monitoring</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="domain">[('x_psm_0502_request_source_id', '!=', False)]</field>
+        <field name="context">{
+            'search_default_filter_psm_0502_open_requests': 1,
+            'search_default_group_psm_department': 1
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co request nao trong monitoring 0502.
+            </p>
+            <p>
+                Man hinh nay dung de theo doi tong hop cac request 0502 o muc request,
+                phuc vu nhin nhanh so request dang mo, overdue, preventive va follow-up needed.
+            </p>
+        </field>
+    </record>
+
+    <!-- action monitoring tien do van hanh de nhin request dang tac o checkpoint nao -->
+    <record id="action_psm_0502_progress_monitoring" model="ir.actions.act_window">
+        <field name="name">0502 Progress Monitoring</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="domain">[('x_psm_0502_request_source_id', '!=', False)]</field>
+        <field name="context">{
+            'search_default_filter_psm_0502_open_requests': 1,
+            'search_default_group_psm_0502_stage': 1
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co request nao trong progress monitoring 0502.
+            </p>
+            <p>
+                Man hinh nay giup nhin nhanh request dang tac o checkpoint nao trong luong
+                nghiep vu 0502 de uu tien giai quyet diem nghen van hanh.
+            </p>
+        </field>
+    </record>
+
+    <!-- action reporting rieng cho overdue de lead uu tien request ton dong -->
+    <record id="action_psm_0502_overdue_monitoring" model="ir.actions.act_window">
+        <field name="name">0502 Overdue Monitoring</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="domain">[('x_psm_0502_request_source_id', '!=', False)]</field>
+        <field name="context">{
+            'search_default_filter_psm_overdue_queue': 1,
+            'search_default_group_psm_department': 1
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co request overdue nao trong monitoring 0502.
+            </p>
+            <p>
+                Man hinh nay tap trung vao cac request 0502 da qua han hoac dang ton dong
+                de CMT Lead uu tien xu ly.
+            </p>
+        </field>
+    </record>
+
+    <!-- action monitoring nhanh vat tu kho va mua ngoai de nhin dung tinh trang cung cap -->
+    <record id="action_psm_0502_supply_monitoring" model="ir.actions.act_window">
+        <field name="name">0502 Supply Monitoring</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="domain">[('x_psm_0502_request_source_id', '!=', False)]</field>
+        <field name="context">{
+            'search_default_filter_psm_0502_open_requests': 1,
+            'search_default_group_psm_supply_branch_status': 1
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co request nao trong supply monitoring 0502.
+            </p>
+            <p>
+                Man hinh nay tap trung theo doi nhanh vat tu noi bo, xuat kho va mua ngoai
+                de nhin ro request dang cho kho hay dang cho mua hang.
+            </p>
+        </field>
+    </record>
+
+    <!-- action reporting rieng cho preventive de lead nhin theo doi lich dinh ky -->
+    <record id="action_psm_0502_preventive_monitoring" model="ir.actions.act_window">
+        <field name="name">0502 Preventive Monitoring</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="domain">[('x_psm_0502_request_source_id', '!=', False)]</field>
+        <field name="context">{
+            'search_default_filter_psm_preventive_request': 1,
+            'search_default_group_psm_team': 1
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co preventive request nao trong monitoring 0502.
+            </p>
+            <p>
+                Man hinh nay giup lead theo doi rieng nhom preventive request trong luong 0502.
+            </p>
+        </field>
+    </record>
+
+    <!-- action monitoring SLA intake de nhin nhanh request nao con pending hoac receive tre -->
+    <record id="action_psm_0502_intake_sla_monitoring" model="ir.actions.act_window">
+        <field name="name">0502 Intake SLA Monitoring</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="domain">[('x_psm_0502_request_source_id', '!=', False)]</field>
+        <field name="context">{
+            'search_default_group_psm_intake_sla_result': 1,
+            'search_default_filter_psm_intake_sla_pending': 1
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co request nao trong intake SLA monitoring 0502.
+            </p>
+            <p>
+                Man hinh nay dung de theo doi checkpoint tiep nhan theo SLA,
+                gom nhom pending, on time va late de CMT de nhin backlog dau vao.
+            </p>
+        </field>
+    </record>
+
+    <!-- action reporting rieng cho nhom follow-up needed sau nghiem thu -->
+    <record id="action_psm_0502_follow_up_monitoring" model="ir.actions.act_window">
+        <field name="name">0502 Follow-up Needed</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,kanban,form,pivot,graph,activity</field>
+        <field name="search_view_id" ref="view_psm_maintenance_request_search"/>
+        <field name="domain">[('x_psm_0502_request_source_id', '!=', False)]</field>
+        <field name="context">{
+            'search_default_filter_psm_follow_up_needed': 1,
+            'search_default_group_psm_department': 1
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co request follow-up needed nao trong monitoring 0502.
+            </p>
+            <p>
+                Man hinh nay giup lead nhin nhanh cac request da nghiem thu nhung can theo doi
+                hoac xu ly bo sung.
+            </p>
+        </field>
+    </record>
+
+    <!-- menu nhanh de CMT Lead vao hang doi tong hop -->
+    <menuitem
+        id="menu_psm_requests_to_plan"
+        name="0502 Requests To Plan"
+        parent="maintenance.menu_m_request"
+        action="action_psm_requests_to_plan"
+        groups="M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="3"
+    />
+
+    <menuitem
+        id="menu_psm_preventive_queue"
+        name="0502 Preventive Queue"
+        parent="maintenance.menu_m_request"
+        action="action_psm_preventive_queue"
+        groups="M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="4"
+    />
+
+    <menuitem
+        id="menu_psm_store_action_needed"
+        name="0502 Store Action Needed"
+        parent="maintenance.menu_m_request"
+        action="action_psm_store_action_needed_queue"
+        groups="M02_P0502.group_psm_0502_store_user,M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_manager"
+        sequence="5"
+    />
+
+    <menuitem
+        id="menu_psm_overdue_queue"
+        name="0502 Overdue Queue"
+        parent="maintenance.menu_m_request"
+        action="action_psm_overdue_queue"
+        groups="M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="6"
+    />
+
+    <menuitem
+        id="menu_psm_ready_to_plan_queue"
+        name="0502 Ready To Plan Queue"
+        parent="maintenance.menu_m_request"
+        action="action_psm_ready_to_plan_queue"
+        groups="M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="7"
+    />
+
+    <menuitem
+        id="menu_psm_critical_queue"
+        name="0502 Critical Queue"
+        parent="maintenance.menu_m_request"
+        action="action_psm_critical_queue"
+        groups="M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="8"
+    />
+
+    <menuitem
+        id="menu_psm_lead_assigned_queue"
+        name="0502 Lead Assigned Queue"
+        parent="maintenance.menu_m_request"
+        action="action_psm_lead_assigned_queue"
+        groups="M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="9"
+    />
+
+    <!-- menu reporting de lead theo doi KPI va tinh trang xu ly o muc request -->
+    <menuitem
+        id="menu_psm_0502_request_monitoring"
+        name="0502 Request Monitoring"
+        parent="maintenance.menu_m_reports"
+        action="action_psm_0502_request_monitoring"
+        groups="M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_store_approver,M02_P0502.group_psm_0502_store_final_approver,M02_P0502.group_psm_0502_manager"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_psm_0502_progress_monitoring"
+        name="0502 Progress Monitoring"
+        parent="maintenance.menu_m_reports"
+        action="action_psm_0502_progress_monitoring"
+        groups="M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="21"
+    />
+
+    <menuitem
+        id="menu_psm_0502_preventive_monitoring"
+        name="0502 Preventive Monitoring"
+        parent="maintenance.menu_m_reports"
+        action="action_psm_0502_preventive_monitoring"
+        groups="M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="22"
+    />
+
+    <menuitem
+        id="menu_psm_0502_supply_monitoring"
+        name="0502 Supply Monitoring"
+        parent="maintenance.menu_m_reports"
+        action="action_psm_0502_supply_monitoring"
+        groups="M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="23"
+    />
+
+    <menuitem
+        id="menu_psm_0502_overdue_monitoring"
+        name="0502 Overdue Monitoring"
+        parent="maintenance.menu_m_reports"
+        action="action_psm_0502_overdue_monitoring"
+        groups="M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="24"
+    />
+
+    <menuitem
+        id="menu_psm_0502_intake_sla_monitoring"
+        name="0502 Intake SLA Monitoring"
+        parent="maintenance.menu_m_reports"
+        action="action_psm_0502_intake_sla_monitoring"
+        groups="M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="25"
+    />
+
+    <menuitem
+        id="menu_psm_0502_follow_up_monitoring"
+        name="0502 Follow-up Needed"
+        parent="maintenance.menu_m_reports"
+        action="action_psm_0502_follow_up_monitoring"
+        groups="M02_P0502.group_psm_0502_store_user,M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_manager"
+        sequence="26"
+    />
+</odoo>

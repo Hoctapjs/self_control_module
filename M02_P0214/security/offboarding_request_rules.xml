@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="rule_0214_approval_request_rst_read" model="ir.rule">
+            <field name="name">0214 approval.request RST read scope</field>
+            <field name="model_id" ref="approvals.model_approval_request"/>
+            <field name="groups" eval="[
+                (6, 0, [
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_S'),
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_M'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_S'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_M'),
+                    ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+                    ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+                ])
+            ]"/>
+            <field name="domain_force">[('category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_0214_approval_request_rst_manage" model="ir.rule">
+            <field name="name">0214 approval.request RST manage scope</field>
+            <field name="model_id" ref="approvals.model_approval_request"/>
+            <field name="groups" eval="[
+                (6, 0, [
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_M'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_M'),
+                    ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+                    ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+                ])
+            ]"/>
+            <field name="domain_force">[('category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_0214_approval_request_direct_manager_manage" model="ir.rule">
+            <field name="name">0214 approval.request direct manager manage scope</field>
+            <field name="model_id" ref="approvals.model_approval_request"/>
+            <field name="groups" eval="[
+                (6, 0, [
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_M'),
+                    ref('M02_P0200.GDH_RST_HR_CNB_M'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_M'),
+                    ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+                    ref('M02_P0200.GDH_OPS_STORE_RGM_M')
+                ])
+            ]"/>
+            <field name="domain_force">[
+                ('category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id),
+                ('x_psm_0214_employee_id.parent_id.user_id', '=', user.id)
+            ]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_0214_approval_approver_rst_read" model="ir.rule">
+            <field name="name">0214 approval.approver RST read scope</field>
+            <field name="model_id" ref="approvals.model_approval_approver"/>
+            <field name="groups" eval="[
+                (6, 0, [
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_S'),
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_M'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_S'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_M'),
+                    ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+                    ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+                ])
+            ]"/>
+            <field name="domain_force">[('request_id.category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+    </data>
+</odoo>

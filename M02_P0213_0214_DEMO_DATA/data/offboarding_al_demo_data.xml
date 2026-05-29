@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="dept_psm_0213_al_demo" model="hr.department">
+            <field name="name">0213 AL Demo Department</field>
+        </record>
+        <record id="dept_psm_0214_al_demo" model="hr.department">
+            <field name="name">0214 AL Demo Department</field>
+        </record>
+
+        <record id="user_psm_al_demo_manager" model="res.users">
+            <field name="name">AL Demo Manager</field>
+            <field name="login">al_demo_manager</field>
+            <field name="password">123</field>
+            <field name="email">al_demo_manager@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('approvals.group_approval_manager'), ref('M02_P0200.GDH_RST_HR_HEAD_M')])]"/>
+        </record>
+        <record id="emp_psm_al_demo_manager" model="hr.employee">
+            <field name="name">AL Demo Manager</field>
+            <field name="user_id" ref="user_psm_al_demo_manager"/>
+            <field name="department_id" ref="dept_psm_0214_al_demo"/>
+            <field name="work_email">al_demo_manager@example.com</field>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+
+        <record id="user_psm_0213_al_positive" model="res.users">
+            <field name="name">0213 AL Positive Employee</field>
+            <field name="login">0213_al_positive</field>
+            <field name="password">123</field>
+            <field name="email">0213_al_positive@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+        <record id="user_psm_0213_al_zero" model="res.users">
+            <field name="name">0213 AL Zero Employee</field>
+            <field name="login">0213_al_zero</field>
+            <field name="password">123</field>
+            <field name="email">0213_al_zero@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+        <record id="user_psm_0213_al_advance" model="res.users">
+            <field name="name">0213 AL Advance Employee</field>
+            <field name="login">0213_al_advance</field>
+            <field name="password">123</field>
+            <field name="email">0213_al_advance@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <record id="emp_psm_0213_al_positive" model="hr.employee">
+            <field name="name">0213 AL Positive Employee</field>
+            <field name="user_id" ref="user_psm_0213_al_positive"/>
+            <field name="parent_id" ref="emp_psm_al_demo_manager"/>
+            <field name="department_id" ref="dept_psm_0213_al_demo"/>
+            <field name="work_email">0213_al_positive@example.com</field>
+            <field name="x_psm_0200_remaining_al_days" eval="12.0"/>
+        </record>
+        <record id="emp_psm_0213_al_zero" model="hr.employee">
+            <field name="name">0213 AL Zero Employee</field>
+            <field name="user_id" ref="user_psm_0213_al_zero"/>
+            <field name="parent_id" ref="emp_psm_al_demo_manager"/>
+            <field name="department_id" ref="dept_psm_0213_al_demo"/>
+            <field name="work_email">0213_al_zero@example.com</field>
+            <field name="x_psm_0200_remaining_al_days" eval="0.0"/>
+        </record>
+        <record id="emp_psm_0213_al_advance" model="hr.employee">
+            <field name="name">0213 AL Advance Employee</field>
+            <field name="user_id" ref="user_psm_0213_al_advance"/>
+            <field name="parent_id" ref="emp_psm_al_demo_manager"/>
+            <field name="department_id" ref="dept_psm_0213_al_demo"/>
+            <field name="work_email">0213_al_advance@example.com</field>
+            <field name="x_psm_0200_remaining_al_days" eval="-7.0"/>
+        </record>
+
+        <record id="user_psm_0214_al_positive" model="res.users">
+            <field name="name">0214 AL Positive Employee</field>
+            <field name="login">0214_al_positive</field>
+            <field name="password">123</field>
+            <field name="email">0214_al_positive@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+        <record id="user_psm_0214_al_zero" model="res.users">
+            <field name="name">0214 AL Zero Employee</field>
+            <field name="login">0214_al_zero</field>
+            <field name="password">123</field>
+            <field name="email">0214_al_zero@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+        <record id="user_psm_0214_al_advance" model="res.users">
+            <field name="name">0214 AL Advance Employee</field>
+            <field name="login">0214_al_advance</field>
+            <field name="password">123</field>
+            <field name="email">0214_al_advance@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <record id="emp_psm_0214_al_positive" model="hr.employee">
+            <field name="name">0214 AL Positive Employee</field>
+            <field name="user_id" ref="user_psm_0214_al_positive"/>
+            <field name="parent_id" ref="emp_psm_al_demo_manager"/>
+            <field name="department_id" ref="dept_psm_0214_al_demo"/>
+            <field name="work_email">0214_al_positive@example.com</field>
+            <field name="x_psm_0200_remaining_al_days" eval="10.0"/>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+        <record id="emp_psm_0214_al_zero" model="hr.employee">
+            <field name="name">0214 AL Zero Employee</field>
+            <field name="user_id" ref="user_psm_0214_al_zero"/>
+            <field name="parent_id" ref="emp_psm_al_demo_manager"/>
+            <field name="department_id" ref="dept_psm_0214_al_demo"/>
+            <field name="work_email">0214_al_zero@example.com</field>
+            <field name="x_psm_0200_remaining_al_days" eval="0.0"/>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+        <record id="emp_psm_0214_al_advance" model="hr.employee">
+            <field name="name">0214 AL Advance Employee</field>
+            <field name="user_id" ref="user_psm_0214_al_advance"/>
+            <field name="parent_id" ref="emp_psm_al_demo_manager"/>
+            <field name="department_id" ref="dept_psm_0214_al_demo"/>
+            <field name="work_email">0214_al_advance@example.com</field>
+            <field name="x_psm_0200_remaining_al_days" eval="-8.0"/>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+
+        <record id="leave_type_psm_0213_demo_al" model="hr.leave.type">
+            <field name="name">0213 Demo Annual Leave</field>
+            <field name="requires_allocation">1</field>
+            <field name="employee_requests">1</field>
+            <field name="allocation_validation_type">no_validation</field>
+            <field name="leave_validation_type">no_validation</field>
+            <field name="request_unit">day</field>
+            <field name="allows_negative">1</field>
+            <field name="max_allowed_negative" eval="30"/>
+        </record>
+        <record id="leave_type_psm_0214_demo_al" model="hr.leave.type">
+            <field name="name">0214 Demo Annual Leave</field>
+            <field name="requires_allocation">1</field>
+            <field name="employee_requests">1</field>
+            <field name="allocation_validation_type">no_validation</field>
+            <field name="leave_validation_type">no_validation</field>
+            <field name="request_unit">day</field>
+            <field name="allows_negative">1</field>
+            <field name="max_allowed_negative" eval="30"/>
+        </record>
+
+        <record id="allocation_psm_0213_al_positive" model="hr.leave.allocation">
+            <field name="name">0213 Demo AL Positive Allocation</field>
+            <field name="holiday_status_id" ref="leave_type_psm_0213_demo_al"/>
+            <field name="employee_id" ref="emp_psm_0213_al_positive"/>
+            <field name="number_of_days" eval="12.0"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-12-31</field>
+        </record>
+        <record id="allocation_psm_0213_al_zero" model="hr.leave.allocation">
+            <field name="name">0213 Demo AL Zero Allocation</field>
+            <field name="holiday_status_id" ref="leave_type_psm_0213_demo_al"/>
+            <field name="employee_id" ref="emp_psm_0213_al_zero"/>
+            <field name="number_of_days" eval="5.0"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-12-31</field>
+        </record>
+        <record id="allocation_psm_0213_al_advance" model="hr.leave.allocation">
+            <field name="name">0213 Demo AL Advance Allocation</field>
+            <field name="holiday_status_id" ref="leave_type_psm_0213_demo_al"/>
+            <field name="employee_id" ref="emp_psm_0213_al_advance"/>
+            <field name="number_of_days" eval="5.0"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-12-31</field>
+        </record>
+
+        <record id="allocation_psm_0214_al_positive" model="hr.leave.allocation">
+            <field name="name">0214 Demo AL Positive Allocation</field>
+            <field name="holiday_status_id" ref="leave_type_psm_0214_demo_al"/>
+            <field name="employee_id" ref="emp_psm_0214_al_positive"/>
+            <field name="number_of_days" eval="10.0"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-12-31</field>
+        </record>
+        <record id="allocation_psm_0214_al_zero" model="hr.leave.allocation">
+            <field name="name">0214 Demo AL Zero Allocation</field>
+            <field name="holiday_status_id" ref="leave_type_psm_0214_demo_al"/>
+            <field name="employee_id" ref="emp_psm_0214_al_zero"/>
+            <field name="number_of_days" eval="6.0"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-12-31</field>
+        </record>
+        <record id="allocation_psm_0214_al_advance" model="hr.leave.allocation">
+            <field name="name">0214 Demo AL Advance Allocation</field>
+            <field name="holiday_status_id" ref="leave_type_psm_0214_demo_al"/>
+            <field name="employee_id" ref="emp_psm_0214_al_advance"/>
+            <field name="number_of_days" eval="4.0"/>
+            <field name="date_from">2026-01-01</field>
+            <field name="date_to">2026-12-31</field>
+        </record>
+
+        <record id="leave_psm_0213_al_zero" model="hr.leave">
+            <field name="name">0213 Demo AL Used To Zero</field>
+            <field name="holiday_status_id" ref="leave_type_psm_0213_demo_al"/>
+            <field name="employee_id" ref="emp_psm_0213_al_zero"/>
+            <field name="request_date_from">2026-03-02</field>
+            <field name="request_date_to">2026-03-06</field>
+        </record>
+        <record id="leave_psm_0213_al_advance" model="hr.leave">
+            <field name="name">0213 Demo AL Advance Taken</field>
+            <field name="holiday_status_id" ref="leave_type_psm_0213_demo_al"/>
+            <field name="employee_id" ref="emp_psm_0213_al_advance"/>
+            <field name="request_date_from">2026-06-01</field>
+            <field name="request_date_to">2026-06-16</field>
+        </record>
+        <record id="leave_psm_0214_al_zero" model="hr.leave">
+            <field name="name">0214 Demo AL Used To Zero</field>
+            <field name="holiday_status_id" ref="leave_type_psm_0214_demo_al"/>
+            <field name="employee_id" ref="emp_psm_0214_al_zero"/>
+            <field name="request_date_from">2026-04-06</field>
+            <field name="request_date_to">2026-04-13</field>
+        </record>
+        <record id="leave_psm_0214_al_advance" model="hr.leave">
+            <field name="name">0214 Demo AL Advance Taken</field>
+            <field name="holiday_status_id" ref="leave_type_psm_0214_demo_al"/>
+            <field name="employee_id" ref="emp_psm_0214_al_advance"/>
+            <field name="request_date_from">2026-07-01</field>
+            <field name="request_date_to">2026-07-17</field>
+        </record>
+
+        <record id="request_psm_0213_al_positive" model="approval.request">
+            <field name="name">0213 Demo Resignation - AL Positive</field>
+            <field name="category_id" ref="M02_P0213.psm_0213_approval_category_resignation"/>
+            <field name="request_owner_id" ref="user_psm_0213_al_positive"/>
+            <field name="employee_id" ref="emp_psm_0213_al_positive"/>
+            <field name="x_psm_0213_employee_id" ref="emp_psm_0213_al_positive"/>
+            <field name="x_psm_0213_resignation_date">2026-08-31</field>
+            <field name="x_psm_0213_resignation_reason">Demo case: positive annual leave balance.</field>
+        </record>
+        <record id="request_psm_0213_al_zero" model="approval.request">
+            <field name="name">0213 Demo Resignation - AL Zero</field>
+            <field name="category_id" ref="M02_P0213.psm_0213_approval_category_resignation"/>
+            <field name="request_owner_id" ref="user_psm_0213_al_zero"/>
+            <field name="employee_id" ref="emp_psm_0213_al_zero"/>
+            <field name="x_psm_0213_employee_id" ref="emp_psm_0213_al_zero"/>
+            <field name="x_psm_0213_resignation_date">2026-08-31</field>
+            <field name="x_psm_0213_resignation_reason">Demo case: annual leave balance is exactly zero.</field>
+        </record>
+        <record id="request_psm_0213_al_advance" model="approval.request">
+            <field name="name">0213 Demo Resignation - Advance AL</field>
+            <field name="category_id" ref="M02_P0213.psm_0213_approval_category_resignation"/>
+            <field name="request_owner_id" ref="user_psm_0213_al_advance"/>
+            <field name="employee_id" ref="emp_psm_0213_al_advance"/>
+            <field name="x_psm_0213_employee_id" ref="emp_psm_0213_al_advance"/>
+            <field name="x_psm_0213_resignation_date">2026-08-31</field>
+            <field name="x_psm_0213_resignation_reason">Demo case: advance annual leave requires deduction settlement.</field>
+            <field name="x_psm_0213_al_deduction_rate" eval="100000.0"/>
+            <field name="x_psm_0213_al_deduction_amount" eval="700000.0"/>
+            <field name="x_psm_0213_al_deduction_note">Demo deduction for 7 advance AL days.</field>
+        </record>
+
+        <record id="request_psm_0214_al_positive" model="approval.request">
+            <field name="name">0214 Demo Resignation - AL Positive</field>
+            <field name="category_id" ref="M02_P0214.approval_category_resignation"/>
+            <field name="request_owner_id" ref="user_psm_0214_al_positive"/>
+            <field name="employee_id" ref="emp_psm_0214_al_positive"/>
+            <field name="x_psm_0214_employee_id" ref="emp_psm_0214_al_positive"/>
+            <field name="x_psm_0214_resignation_date">2026-08-31</field>
+            <field name="x_psm_0214_employee_personal_email">0214_al_positive.personal@example.com</field>
+            <field name="x_psm_0214_resignation_reason">Demo case: positive annual leave balance.</field>
+        </record>
+        <record id="request_psm_0214_al_zero" model="approval.request">
+            <field name="name">0214 Demo Resignation - AL Zero</field>
+            <field name="category_id" ref="M02_P0214.approval_category_resignation"/>
+            <field name="request_owner_id" ref="user_psm_0214_al_zero"/>
+            <field name="employee_id" ref="emp_psm_0214_al_zero"/>
+            <field name="x_psm_0214_employee_id" ref="emp_psm_0214_al_zero"/>
+            <field name="x_psm_0214_resignation_date">2026-08-31</field>
+            <field name="x_psm_0214_employee_personal_email">0214_al_zero.personal@example.com</field>
+            <field name="x_psm_0214_resignation_reason">Demo case: annual leave balance is exactly zero.</field>
+        </record>
+        <record id="request_psm_0214_al_advance" model="approval.request">
+            <field name="name">0214 Demo Resignation - Advance AL</field>
+            <field name="category_id" ref="M02_P0214.approval_category_resignation"/>
+            <field name="request_owner_id" ref="user_psm_0214_al_advance"/>
+            <field name="employee_id" ref="emp_psm_0214_al_advance"/>
+            <field name="x_psm_0214_employee_id" ref="emp_psm_0214_al_advance"/>
+            <field name="x_psm_0214_resignation_date">2026-08-31</field>
+            <field name="x_psm_0214_employee_personal_email">0214_al_advance.personal@example.com</field>
+            <field name="x_psm_0214_resignation_reason">Demo case: advance annual leave requires deduction settlement.</field>
+            <field name="x_psm_0214_al_deduction_rate" eval="100000.0"/>
+            <field name="x_psm_0214_al_deduction_amount" eval="800000.0"/>
+            <field name="x_psm_0214_al_deduction_note">Demo deduction for 8 advance AL days.</field>
+        </record>
+    </data>
+</odoo>

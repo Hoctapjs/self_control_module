@@ -1,0 +1,2696 @@
+{
+  "module_name": "M02_P0215",
+  "module_path": "D:\\odoo-19.0+e.20250918\\addons\\M02_P0215",
+  "manifest": {
+    "name": "M02_P0215_EMPLOYEE_DISCIPLINARY_PROCESS",
+    "summary": "\n        Manage employee disciplinary records, explanations, reviews, and decisions.\n    ",
+    "description": "\n        Employee Disciplinary Process (M02_P0215)\n        =========================================\n        Supports the employee disciplinary workflow from violation recording to\n        explanation, review, disciplinary level determination, decision issuance,\n        employee acknowledgement, and effective-period tracking.\n\n        Key Features:\n        - Master data for violation categories, violation types, and actions.\n        - Store Level and Company Level handling paths.\n        - Portal flow for managers and employees.\n        - Meeting, decision, compensation, and attachment tracking.\n        - Repeat-offense and effective-period tracking.\n    ",
+    "author": "PSM",
+    "category": "Human Resources",
+    "version": "19.0.1.0.21",
+    "depends": [
+      "base",
+      "hr",
+      "mail",
+      "portal",
+      "calendar",
+      "approvals",
+      "survey",
+      "portal_custom",
+      "M02_P0200"
+    ],
+    "data": [
+      "security/ir.model.access.csv",
+      "security/security_rules.xml",
+      "data/approval_category_data.xml",
+      "data/survey_explanation_data.xml",
+      "data/survey_feedback_data.xml",
+      "data/mail_template.xml",
+      "data/email_template_rejection.xml",
+      "views/x_psm_hr_discipline_master_views.xml",
+      "views/x_psm_hr_discipline_record_views.xml",
+      "views/x_psm_hr_discipline_reject_wizard_views.xml",
+      "views/x_psm_hr_discipline_manual_confirm_wizard_views.xml",
+      "views/x_psm_approval_request_views.xml",
+      "views/x_psm_hr_discipline_violation_report_wizard_views.xml",
+      "views/x_psm_portal_templates.xml",
+      "data/hr_discipline_violation_data.xml",
+      "data/hr_discipline_action_data.xml",
+      "data/cron_auto_archive.xml",
+      "data/email_template_discipline_done.xml",
+      "reports/x_psm_discipline_reports.xml"
+    ],
+    "assets": {
+      "web.assets_backend": [
+        "M02_P0215/static/src/scss/internal_discipline_form.scss"
+      ],
+      "web.assets_frontend": [
+        "M02_P0215/static/src/scss/portal_psm_0215.scss",
+        "M02_P0215/static/src/js/portal_psm_0215.js"
+      ]
+    },
+    "installable": true,
+    "application": true,
+    "license": "LGPL-3",
+    "auto_install": false
+  },
+  "counts": {
+    "python": 1,
+    "manifest": 1,
+    "controllers": 2,
+    "convention": 1,
+    "data": 9,
+    "migrations": 5,
+    "models": 9,
+    "notes": 29,
+    "reports": 1,
+    "security": 2,
+    "static": 8,
+    "views": 7,
+    "wizards": 4
+  },
+  "structure": {
+    "controllers": [
+      "controllers/__init__.py",
+      "controllers/portal.py"
+    ],
+    "convention": [
+      "convention/QUY_UOC_DAT_TEN_VA_RULE.md"
+    ],
+    "data": [
+      "data/approval_category_data.xml",
+      "data/cron_auto_archive.xml",
+      "data/email_template_discipline_done.xml",
+      "data/email_template_rejection.xml",
+      "data/hr_discipline_action_data.xml",
+      "data/hr_discipline_violation_data.xml",
+      "data/mail_template.xml",
+      "data/survey_explanation_data.xml",
+      "data/survey_feedback_data.xml"
+    ],
+    "manifest": [
+      "__manifest__.py"
+    ],
+    "migrations": [
+      "migrations/19.0.1.0.1/post-migrate.py",
+      "migrations/19.0.1.0.2/post-migrate.py",
+      "migrations/19.0.1.0.21/post-migrate.py",
+      "migrations/19.0.1.0.21/pre-migrate.py",
+      "migrations/19.0.1.0.4/post-migrate.py"
+    ],
+    "models": [
+      "models/__init__.py",
+      "models/x_psm_approval_request.py",
+      "models/x_psm_calendar_event.py",
+      "models/x_psm_hr_discipline_action.py",
+      "models/x_psm_hr_discipline_explanation.py",
+      "models/x_psm_hr_discipline_record.py",
+      "models/x_psm_hr_discipline_violation.py",
+      "models/x_psm_hr_discipline_violation_category.py",
+      "models/x_psm_survey_user_input.py"
+    ],
+    "notes": [
+      "notes/BLUEPRINT_PORTAL_LIST_PAGE_V3_FIX.md",
+      "notes/BLUEPRINT_PORTAL_UI_REDESIGN_0215.md",
+      "notes/BLUEPRINT_PORTAL_UI_REDESIGN_0215_V2_POLISH.md",
+      "notes/DAILY_REPORT_2026_05_08.md",
+      "notes/HUONG_DAN_THAO_TAC_SU_DUNG_QUY_TRINH_0215.md",
+      "notes/HUONG_DAN_THAO_TAC_SU_DUNG_QUY_TRINH_0215.pdf",
+      "notes/KHAC_BIET_0215_NEW_VS_0215.md",
+      "notes/PHASE_0_AUDIT_REFACTOR_0215_THEO_CONVENTION.md",
+      "notes/PHASE_1_DA_TRIEN_KHAI_REFACTOR_NAMING_0215.md",
+      "notes/PHASE_2_DA_TRIEN_KHAI_PORTAL_GUARD_0215.md",
+      "notes/PHASE_3_DA_TRIEN_KHAI_WORKFLOW_0215.md",
+      "notes/PHASE_4_DA_TRIEN_KHAI_SECURITY_0215.md",
+      "notes/PHASE_5_HOTFIX_LOI_GO_CAI_DAT_0215.md",
+      "notes/PHASE_A_XAC_NHAN_APPROVAL_SURVEY_0215.md",
+      "notes/PHASE_B_DA_TRIEN_KHAI_APPROVAL_0215.md",
+      "notes/PHASE_C_DA_TRIEN_KHAI_SURVEY_TUONG_TRINH_0215.md",
+      "notes/PHASE_D_DA_TRIEN_KHAI_SURVEY_FEEDBACK_0215.md",
+      "notes/PHASE_E_DON_CODE_TRUNG_VA_GIU_TUONG_THICH_0215.md",
+      "notes/PHASE_F_DA_TRIEN_KHAI_SECURITY_0215.md",
+      "notes/PHASE_G_DA_TRIEN_KHAI_MIGRATION_0215.md",
+      "notes/PHASE_H_DA_TRIEN_KHAI_CAU_HINH_APPROVER_0215.md",
+      "notes/PLAN_BAO_CAO_SO_NGUOI_VI_PHAM_0215.md",
+      "notes/PLAN_CAU_HINH_NGUOI_DUYET_APPROVAL_0215.md",
+      "notes/PLAN_DONG_BO_0215_NEW_VAO_0215.md",
+      "notes/PLAN_REFACTOR_MODULE_0215_THEO_CONVENTION.md",
+      "notes/PLAN_TASK_0215_PDF_20260511.md",
+      "notes/PLAN_THAY_THE_CUSTOM_BANG_APPROVAL_SURVEY_0215.md",
+      "notes/QUY_TRINH_XU_LY_KY_LUAT_NHAN_VIEN_0215.md",
+      "notes/daily_report_2026_05_08_ra_soat_lai.md"
+    ],
+    "python": [
+      "__init__.py"
+    ],
+    "reports": [
+      "reports/x_psm_discipline_reports.xml"
+    ],
+    "security": [
+      "security/ir.model.access.csv",
+      "security/security_rules.xml"
+    ],
+    "static": [
+      "static/description/consistency.png",
+      "static/src/js/portal_psm_0215.js",
+      "static/src/scss/internal_discipline_form.scss",
+      "static/src/scss/portal_psm_0215.scss",
+      "static/src/templates/mau_bien_ban_xu_ly_boi_thuong.docx",
+      "static/src/templates/mau_bien_ban_xu_ly_ky_luat.docx",
+      "static/src/templates/mau_quyet_dinh_xu_ly_boi_thuong.docx",
+      "static/src/templates/mau_quyet_dinh_xu_ly_ky_luat.docx"
+    ],
+    "views": [
+      "views/x_psm_approval_request_views.xml",
+      "views/x_psm_hr_discipline_manual_confirm_wizard_views.xml",
+      "views/x_psm_hr_discipline_master_views.xml",
+      "views/x_psm_hr_discipline_record_views.xml",
+      "views/x_psm_hr_discipline_reject_wizard_views.xml",
+      "views/x_psm_hr_discipline_violation_report_wizard_views.xml",
+      "views/x_psm_portal_templates.xml"
+    ],
+    "wizards": [
+      "wizards/__init__.py",
+      "wizards/x_psm_hr_discipline_manual_confirm_wizard.py",
+      "wizards/x_psm_hr_discipline_reject_wizard.py",
+      "wizards/x_psm_hr_discipline_violation_report_wizard.py"
+    ]
+  },
+  "models": [
+    {
+      "file": "models/x_psm_approval_request.py",
+      "python_class": "ApprovalRequest",
+      "model": null,
+      "inherit": "approval.request",
+      "kind": "inherit_only",
+      "description": "Extends approval.request in models/x_psm_approval_request.py.",
+      "field_count": 1,
+      "method_count": 3,
+      "important_fields": [
+        "x_psm_discipline_record_id"
+      ],
+      "actions": [
+        "action_approve",
+        "action_refuse",
+        "action_psm_open_discipline_record"
+      ]
+    },
+    {
+      "file": "models/x_psm_calendar_event.py",
+      "python_class": "CalendarEvent",
+      "model": null,
+      "inherit": "calendar.event",
+      "kind": "inherit_only",
+      "description": "Extends calendar.event in models/x_psm_calendar_event.py.",
+      "field_count": 0,
+      "method_count": 2,
+      "important_fields": [],
+      "actions": []
+    },
+    {
+      "file": "models/x_psm_hr_discipline_action.py",
+      "python_class": "HrDisciplineAction",
+      "model": "x_psm.hr.discipline.action",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "Discipline Action",
+      "field_count": 10,
+      "method_count": 0,
+      "important_fields": [
+        "name",
+        "sequence",
+        "x_psm_level",
+        "x_psm_form_code",
+        "x_psm_has_penalty",
+        "x_psm_requires_finance_check",
+        "x_psm_improvement_period",
+        "x_psm_validity_months",
+        "x_psm_next_action_id",
+        "x_psm_allowed_job_ids"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/x_psm_hr_discipline_explanation.py",
+      "python_class": "HrDisciplineExplanation",
+      "model": "x_psm.hr.discipline.explanation",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "Discipline Explanation Entry",
+      "field_count": 14,
+      "method_count": 0,
+      "important_fields": [
+        "x_psm_record_id",
+        "sequence",
+        "x_psm_incident_date_time",
+        "x_psm_incident_location",
+        "x_psm_witness_names",
+        "x_psm_explanation_content",
+        "x_psm_explanation_reason",
+        "x_psm_explanation_commitment",
+        "x_psm_employee_signature",
+        "state",
+        "x_psm_rejection_reason",
+        "x_psm_submitted_date"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/x_psm_hr_discipline_record.py",
+      "python_class": "HrDisciplineRecord",
+      "model": "x_psm.hr.discipline.record",
+      "inherit": [
+        "portal.mixin",
+        "mail.thread",
+        "mail.activity.mixin"
+      ],
+      "kind": "new_model_with_inherit",
+      "description": "Discipline Record",
+      "field_count": 85,
+      "method_count": 102,
+      "important_fields": [
+        "name",
+        "x_psm_employee_id",
+        "x_psm_employee_name",
+        "x_psm_employee_email",
+        "x_psm_violation_type",
+        "x_psm_violation_category_id",
+        "x_psm_company_rep_id",
+        "x_psm_rep_department_id",
+        "x_psm_rep_job_id",
+        "x_psm_rep_level",
+        "x_psm_employee_domain",
+        "x_psm_emp_department_id"
+      ],
+      "actions": [
+        "action_psm_schedule_meeting",
+        "action_psm_rgm_no_repeat",
+        "action_psm_rgm_repeat",
+        "action_psm_open_explanation_survey_response",
+        "action_psm_open_feedback_survey",
+        "action_psm_open_feedback_survey_response",
+        "action_psm_migrate_legacy_bridge",
+        "action_psm_send_to_employee",
+        "action_psm_confirm",
+        "action_psm_reject_explanation",
+        "action_psm_rgm_store_level",
+        "action_psm_activate_store_discipline"
+      ]
+    },
+    {
+      "file": "models/x_psm_hr_discipline_violation.py",
+      "python_class": "HrDisciplineViolationType",
+      "model": "x_psm.hr.discipline.violation.type",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "Discipline Violation Type",
+      "field_count": 5,
+      "method_count": 0,
+      "important_fields": [
+        "name",
+        "x_psm_category_id",
+        "x_psm_severity",
+        "x_psm_improvement_period",
+        "x_psm_max_repeats"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/x_psm_hr_discipline_violation_category.py",
+      "python_class": "HrDisciplineViolationCategory",
+      "model": "x_psm.hr.discipline.violation.category",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "Discipline Violation Category",
+      "field_count": 2,
+      "method_count": 0,
+      "important_fields": [
+        "name",
+        "x_psm_code"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/x_psm_survey_user_input.py",
+      "python_class": "SurveyUserInput",
+      "model": null,
+      "inherit": "survey.user_input",
+      "kind": "inherit_only",
+      "description": "Extends survey.user_input in models/x_psm_survey_user_input.py.",
+      "field_count": 2,
+      "method_count": 1,
+      "important_fields": [
+        "x_psm_0215_record_id",
+        "x_psm_0215_flow_type"
+      ],
+      "actions": []
+    }
+  ],
+  "views": [
+    {
+      "id": "x_psm_approval_request_view_form_inherit",
+      "model": "approval.request",
+      "name": "x_psm.approval.request.view.form.inherit",
+      "inherit_id": "approvals.approval_request_view_form",
+      "file": "views/x_psm_approval_request_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_manual_confirm_wizard_form",
+      "model": "x_psm.hr.discipline.manual.confirm.wizard",
+      "name": "hr.discipline.manual.confirm.wizard.form",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_manual_confirm_wizard_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_violation_category_tree",
+      "model": "x_psm.hr.discipline.violation.category",
+      "name": "hr.discipline.violation.category.tree",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_violation_category_form",
+      "model": "x_psm.hr.discipline.violation.category",
+      "name": "hr.discipline.violation.category.form",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_violation_type_tree",
+      "model": "x_psm.hr.discipline.violation.type",
+      "name": "hr.discipline.violation.type.tree",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_violation_type_form",
+      "model": "x_psm.hr.discipline.violation.type",
+      "name": "hr.discipline.violation.type.form",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_action_tree",
+      "model": "x_psm.hr.discipline.action",
+      "name": "hr.discipline.action.tree",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_action_form",
+      "model": "x_psm.hr.discipline.action",
+      "name": "hr.discipline.action.form",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_record_tree",
+      "model": "x_psm.hr.discipline.record",
+      "name": "hr.discipline.record.tree",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_record_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_record_form",
+      "model": "x_psm.hr.discipline.record",
+      "name": "hr.discipline.record.form",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_record_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_record_kanban",
+      "model": "x_psm.hr.discipline.record",
+      "name": "hr.discipline.record.kanban",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_record_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_record_search",
+      "model": "x_psm.hr.discipline.record",
+      "name": "hr.discipline.record.search",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_record_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_record_form_internal_ux",
+      "model": "x_psm.hr.discipline.record",
+      "name": "hr.discipline.record.form.internal.ux",
+      "inherit_id": "view_psm_hr_discipline_record_form",
+      "file": "views/x_psm_hr_discipline_record_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_reject_wizard_form",
+      "model": "x_psm.hr.discipline.reject.wizard",
+      "name": "hr.discipline.reject.wizard.form",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_reject_wizard_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_violation_report_wizard_form",
+      "model": "x_psm.hr.discipline.violation.report.wizard",
+      "name": "hr.discipline.violation.report.wizard.form",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_violation_report_wizard_views.xml"
+    }
+  ],
+  "security": [
+    {
+      "file": "security/ir.model.access.csv",
+      "summary": "54 access rules",
+      "access_rules": [
+        {
+          "id": "access_psm_hr_discipline_violation_category_sm",
+          "name": "hr.discipline.violation.category.sm",
+          "model_id": "model_x_psm_hr_discipline_violation_category",
+          "group_id": "M02_P0200.GDH_OPS_STORE_SM_M",
+          "model": "x_psm.hr.discipline.violation.category",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_category_pm",
+          "name": "hr.discipline.violation.category.pm",
+          "model_id": "model_x_psm_hr_discipline_violation_category",
+          "group_id": "M02_P0200.GDH_OPS_STORE_PM_M",
+          "model": "x_psm.hr.discipline.violation.category",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_category_st",
+          "name": "hr.discipline.violation.category.st",
+          "model_id": "model_x_psm_hr_discipline_violation_category",
+          "group_id": "M02_P0200.GDH_OPS_STORE_ST_M",
+          "model": "x_psm.hr.discipline.violation.category",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_category_hrbp",
+          "name": "hr.discipline.violation.category.hrbp",
+          "model_id": "model_x_psm_hr_discipline_violation_category",
+          "group_id": "M02_P0200.GDH_RST_HR_HRBP_S",
+          "model": "x_psm.hr.discipline.violation.category",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_category_oc",
+          "name": "hr.discipline.violation.category.oc",
+          "model_id": "model_x_psm_hr_discipline_violation_category",
+          "group_id": "M02_P0200.GDH_RST_OPS_OC_S",
+          "model": "x_psm.hr.discipline.violation.category",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_category_admin",
+          "name": "hr.discipline.violation.category.admin",
+          "model_id": "model_x_psm_hr_discipline_violation_category",
+          "group_id": "hr.group_hr_manager",
+          "model": "x_psm.hr.discipline.violation.category",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_type_sm",
+          "name": "hr.discipline.violation.type.sm",
+          "model_id": "model_x_psm_hr_discipline_violation_type",
+          "group_id": "M02_P0200.GDH_OPS_STORE_SM_M",
+          "model": "x_psm.hr.discipline.violation.type",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_type_pm",
+          "name": "hr.discipline.violation.type.pm",
+          "model_id": "model_x_psm_hr_discipline_violation_type",
+          "group_id": "M02_P0200.GDH_OPS_STORE_PM_M",
+          "model": "x_psm.hr.discipline.violation.type",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_type_st",
+          "name": "hr.discipline.violation.type.st",
+          "model_id": "model_x_psm_hr_discipline_violation_type",
+          "group_id": "M02_P0200.GDH_OPS_STORE_ST_M",
+          "model": "x_psm.hr.discipline.violation.type",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_type_hrbp",
+          "name": "hr.discipline.violation.type.hrbp",
+          "model_id": "model_x_psm_hr_discipline_violation_type",
+          "group_id": "M02_P0200.GDH_RST_HR_HRBP_S",
+          "model": "x_psm.hr.discipline.violation.type",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_type_oc",
+          "name": "hr.discipline.violation.type.oc",
+          "model_id": "model_x_psm_hr_discipline_violation_type",
+          "group_id": "M02_P0200.GDH_RST_OPS_OC_S",
+          "model": "x_psm.hr.discipline.violation.type",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_type_admin",
+          "name": "hr.discipline.violation.type.admin",
+          "model_id": "model_x_psm_hr_discipline_violation_type",
+          "group_id": "hr.group_hr_manager",
+          "model": "x_psm.hr.discipline.violation.type",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_hr_discipline_action_sm",
+          "name": "hr.discipline.action.sm",
+          "model_id": "model_x_psm_hr_discipline_action",
+          "group_id": "M02_P0200.GDH_OPS_STORE_SM_M",
+          "model": "x_psm.hr.discipline.action",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_action_pm",
+          "name": "hr.discipline.action.pm",
+          "model_id": "model_x_psm_hr_discipline_action",
+          "group_id": "M02_P0200.GDH_OPS_STORE_PM_M",
+          "model": "x_psm.hr.discipline.action",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_action_st",
+          "name": "hr.discipline.action.st",
+          "model_id": "model_x_psm_hr_discipline_action",
+          "group_id": "M02_P0200.GDH_OPS_STORE_ST_M",
+          "model": "x_psm.hr.discipline.action",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_action_hrbp",
+          "name": "hr.discipline.action.hrbp",
+          "model_id": "model_x_psm_hr_discipline_action",
+          "group_id": "M02_P0200.GDH_RST_HR_HRBP_S",
+          "model": "x_psm.hr.discipline.action",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_action_oc",
+          "name": "hr.discipline.action.oc",
+          "model_id": "model_x_psm_hr_discipline_action",
+          "group_id": "M02_P0200.GDH_RST_OPS_OC_S",
+          "model": "x_psm.hr.discipline.action",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_action_admin",
+          "name": "hr.discipline.action.admin",
+          "model_id": "model_x_psm_hr_discipline_action",
+          "group_id": "hr.group_hr_manager",
+          "model": "x_psm.hr.discipline.action",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_hr_discipline_record_sm",
+          "name": "hr.discipline.record.sm",
+          "model_id": "model_x_psm_hr_discipline_record",
+          "group_id": "M02_P0200.GDH_OPS_STORE_SM_M",
+          "model": "x_psm.hr.discipline.record",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_record_pm",
+          "name": "hr.discipline.record.pm",
+          "model_id": "model_x_psm_hr_discipline_record",
+          "group_id": "M02_P0200.GDH_OPS_STORE_PM_M",
+          "model": "x_psm.hr.discipline.record",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_record_st",
+          "name": "hr.discipline.record.st",
+          "model_id": "model_x_psm_hr_discipline_record",
+          "group_id": "M02_P0200.GDH_OPS_STORE_ST_M",
+          "model": "x_psm.hr.discipline.record",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_record_rgm",
+          "name": "hr.discipline.record.rgm",
+          "model_id": "model_x_psm_hr_discipline_record",
+          "group_id": "M02_P0200.GDH_OPS_STORE_RGM_M",
+          "model": "x_psm.hr.discipline.record",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_record_hrbp",
+          "name": "hr.discipline.record.hrbp",
+          "model_id": "model_x_psm_hr_discipline_record",
+          "group_id": "M02_P0200.GDH_RST_HR_HRBP_S",
+          "model": "x_psm.hr.discipline.record",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_record_oc",
+          "name": "hr.discipline.record.oc",
+          "model_id": "model_x_psm_hr_discipline_record",
+          "group_id": "M02_P0200.GDH_RST_OPS_OC_S",
+          "model": "x_psm.hr.discipline.record",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_record_admin",
+          "name": "hr.discipline.record.admin",
+          "model_id": "model_x_psm_hr_discipline_record",
+          "group_id": "hr.group_hr_manager",
+          "model": "x_psm.hr.discipline.record",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_hr_discipline_record_portal",
+          "name": "hr.discipline.record.portal",
+          "model_id": "model_x_psm_hr_discipline_record",
+          "group_id": "base.group_portal",
+          "model": "x_psm.hr.discipline.record",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_explanation_sm",
+          "name": "hr.discipline.explanation.sm",
+          "model_id": "model_x_psm_hr_discipline_explanation",
+          "group_id": "M02_P0200.GDH_OPS_STORE_SM_M",
+          "model": "x_psm.hr.discipline.explanation",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_explanation_pm",
+          "name": "hr.discipline.explanation.pm",
+          "model_id": "model_x_psm_hr_discipline_explanation",
+          "group_id": "M02_P0200.GDH_OPS_STORE_PM_M",
+          "model": "x_psm.hr.discipline.explanation",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_explanation_st",
+          "name": "hr.discipline.explanation.st",
+          "model_id": "model_x_psm_hr_discipline_explanation",
+          "group_id": "M02_P0200.GDH_OPS_STORE_ST_M",
+          "model": "x_psm.hr.discipline.explanation",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_explanation_rgm",
+          "name": "hr.discipline.explanation.rgm",
+          "model_id": "model_x_psm_hr_discipline_explanation",
+          "group_id": "M02_P0200.GDH_OPS_STORE_RGM_M",
+          "model": "x_psm.hr.discipline.explanation",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_explanation_hrbp",
+          "name": "hr.discipline.explanation.hrbp",
+          "model_id": "model_x_psm_hr_discipline_explanation",
+          "group_id": "M02_P0200.GDH_RST_HR_HRBP_S",
+          "model": "x_psm.hr.discipline.explanation",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_explanation_admin",
+          "name": "hr.discipline.explanation.admin",
+          "model_id": "model_x_psm_hr_discipline_explanation",
+          "group_id": "hr.group_hr_manager",
+          "model": "x_psm.hr.discipline.explanation",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_hr_discipline_explanation_portal",
+          "name": "hr.discipline.explanation.portal",
+          "model_id": "model_x_psm_hr_discipline_explanation",
+          "group_id": "base.group_portal",
+          "model": "x_psm.hr.discipline.explanation",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_reject_wizard_sm",
+          "name": "hr.discipline.reject.wizard.sm",
+          "model_id": "model_x_psm_hr_discipline_reject_wizard",
+          "group_id": "M02_P0200.GDH_OPS_STORE_SM_M",
+          "model": "x_psm.hr.discipline.reject.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_reject_wizard_pm",
+          "name": "hr.discipline.reject.wizard.pm",
+          "model_id": "model_x_psm_hr_discipline_reject_wizard",
+          "group_id": "M02_P0200.GDH_OPS_STORE_PM_M",
+          "model": "x_psm.hr.discipline.reject.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_reject_wizard_st",
+          "name": "hr.discipline.reject.wizard.st",
+          "model_id": "model_x_psm_hr_discipline_reject_wizard",
+          "group_id": "M02_P0200.GDH_OPS_STORE_ST_M",
+          "model": "x_psm.hr.discipline.reject.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_reject_wizard_hrbp",
+          "name": "hr.discipline.reject.wizard.hrbp",
+          "model_id": "model_x_psm_hr_discipline_reject_wizard",
+          "group_id": "M02_P0200.GDH_RST_HR_HRBP_S",
+          "model": "x_psm.hr.discipline.reject.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_reject_wizard_oc",
+          "name": "hr.discipline.reject.wizard.oc",
+          "model_id": "model_x_psm_hr_discipline_reject_wizard",
+          "group_id": "M02_P0200.GDH_RST_OPS_OC_S",
+          "model": "x_psm.hr.discipline.reject.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_reject_wizard_admin",
+          "name": "hr.discipline.reject.wizard.admin",
+          "model_id": "model_x_psm_hr_discipline_reject_wizard",
+          "group_id": "hr.group_hr_manager",
+          "model": "x_psm.hr.discipline.reject.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_hr_discipline_manual_confirm_wizard_rgm",
+          "name": "hr.discipline.manual.confirm.wizard.rgm",
+          "model_id": "model_x_psm_hr_discipline_manual_confirm_wizard",
+          "group_id": "M02_P0200.GDH_OPS_STORE_RGM_M",
+          "model": "x_psm.hr.discipline.manual.confirm.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_manual_confirm_wizard_admin",
+          "name": "hr.discipline.manual.confirm.wizard.admin",
+          "model_id": "model_x_psm_hr_discipline_manual_confirm_wizard",
+          "group_id": "hr.group_hr_manager",
+          "model": "x_psm.hr.discipline.manual.confirm.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_hr_employee_oc",
+          "name": "hr.employee.oc.read",
+          "model_id": "hr.model_hr_employee",
+          "group_id": "M02_P0200.GDH_RST_OPS_OC_S",
+          "model": "hr.model_hr_employee",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_department_oc",
+          "name": "hr.department.oc.read",
+          "model_id": "hr.model_hr_department",
+          "group_id": "M02_P0200.GDH_RST_OPS_OC_S",
+          "model": "hr.model_hr_department",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_category_clevel",
+          "name": "hr.discipline.violation.category.clevel",
+          "model_id": "model_x_psm_hr_discipline_violation_category",
+          "group_id": "M02_P0200.GDH_RST_MGMT_MANAGER_M",
+          "model": "x_psm.hr.discipline.violation.category",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_type_clevel",
+          "name": "hr.discipline.violation.type.clevel",
+          "model_id": "model_x_psm_hr_discipline_violation_type",
+          "group_id": "M02_P0200.GDH_RST_MGMT_MANAGER_M",
+          "model": "x_psm.hr.discipline.violation.type",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_action_clevel",
+          "name": "hr.discipline.action.clevel",
+          "model_id": "model_x_psm_hr_discipline_action",
+          "group_id": "M02_P0200.GDH_RST_MGMT_MANAGER_M",
+          "model": "x_psm.hr.discipline.action",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_record_clevel",
+          "name": "hr.discipline.record.clevel",
+          "model_id": "model_x_psm_hr_discipline_record",
+          "group_id": "M02_P0200.GDH_RST_MGMT_MANAGER_M",
+          "model": "x_psm.hr.discipline.record",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_explanation_clevel",
+          "name": "hr.discipline.explanation.clevel",
+          "model_id": "model_x_psm_hr_discipline_explanation",
+          "group_id": "M02_P0200.GDH_RST_MGMT_MANAGER_M",
+          "model": "x_psm.hr.discipline.explanation",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_reject_wizard_clevel",
+          "name": "hr.discipline.reject.wizard.clevel",
+          "model_id": "model_x_psm_hr_discipline_reject_wizard",
+          "group_id": "M02_P0200.GDH_RST_MGMT_MANAGER_M",
+          "model": "x_psm.hr.discipline.reject.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_report_wizard_sm",
+          "name": "hr.discipline.violation.report.wizard.sm",
+          "model_id": "model_x_psm_hr_discipline_violation_report_wizard",
+          "group_id": "M02_P0200.GDH_OPS_STORE_SM_M",
+          "model": "x_psm.hr.discipline.violation.report.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_report_wizard_rgm",
+          "name": "hr.discipline.violation.report.wizard.rgm",
+          "model_id": "model_x_psm_hr_discipline_violation_report_wizard",
+          "group_id": "M02_P0200.GDH_OPS_STORE_RGM_M",
+          "model": "x_psm.hr.discipline.violation.report.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_report_wizard_hrbp",
+          "name": "hr.discipline.violation.report.wizard.hrbp",
+          "model_id": "model_x_psm_hr_discipline_violation_report_wizard",
+          "group_id": "M02_P0200.GDH_RST_HR_HRBP_S",
+          "model": "x_psm.hr.discipline.violation.report.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_report_wizard_oc",
+          "name": "hr.discipline.violation.report.wizard.oc",
+          "model_id": "model_x_psm_hr_discipline_violation_report_wizard",
+          "group_id": "M02_P0200.GDH_RST_OPS_OC_S",
+          "model": "x_psm.hr.discipline.violation.report.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_hr_discipline_violation_report_wizard_admin",
+          "name": "hr.discipline.violation.report.wizard.admin",
+          "model_id": "model_x_psm_hr_discipline_violation_report_wizard",
+          "group_id": "hr.group_hr_manager",
+          "model": "x_psm.hr.discipline.violation.report.wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        }
+      ]
+    },
+    {
+      "file": "security/security_rules.xml",
+      "summary": "11 functions/rules",
+      "record_rules": [
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_hr_discipline_record_portal_own",
+          "name": "PSM Discipline Record Portal Own",
+          "model_ref": {
+            "ref": "model_x_psm_hr_discipline_record"
+          },
+          "domain": "[\n                '|',\n                ('x_psm_employee_id.user_id', '=', user.id),\n                ('x_psm_employee_id.work_email', 'in', [user.login, user.email])\n                ]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_hr_discipline_record_store_manager",
+          "name": "PSM Discipline Record Store Manager Scope",
+          "model_ref": {
+            "ref": "model_x_psm_hr_discipline_record"
+          },
+          "domain": "[\n                '|', '|', '|',\n                ('x_psm_employee_id.user_id', '=', user.id),\n                ('x_psm_company_rep_id.user_id', '=', user.id),\n                ('x_psm_employee_id.parent_id.user_id', '=', user.id),\n                '&',\n                ('x_psm_employee_id.department_id', '!=', False),\n                ('x_psm_employee_id.department_id', '=', user.employee_id.department_id.id)\n                ]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_hr_discipline_record_hrbp",
+          "name": "PSM Discipline Record HRBP",
+          "model_ref": {
+            "ref": "model_x_psm_hr_discipline_record"
+          },
+          "domain": "[(1, '=', 1)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_hr_discipline_record_oc",
+          "name": "PSM Discipline Record OC",
+          "model_ref": {
+            "ref": "model_x_psm_hr_discipline_record"
+          },
+          "domain": "[(1, '=', 1)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_hr_discipline_record_rgm",
+          "name": "PSM Discipline Record RGM Scope",
+          "model_ref": {
+            "ref": "model_x_psm_hr_discipline_record"
+          },
+          "domain": "[\n                '|', '|',\n                ('x_psm_employee_id.parent_id.user_id', '=', user.id),\n                ('x_psm_company_rep_id.user_id', '=', user.id),\n                '&',\n                ('x_psm_employee_id.department_id', '!=', False),\n                ('x_psm_employee_id.department_id', '=', user.employee_id.department_id.id)\n                ]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_hr_discipline_explanation_portal_own",
+          "name": "PSM Discipline Explanation Portal Own",
+          "model_ref": {
+            "ref": "model_x_psm_hr_discipline_explanation"
+          },
+          "domain": "[\n                '|',\n                ('x_psm_record_id.x_psm_employee_id.user_id', '=', user.id),\n                ('x_psm_record_id.x_psm_employee_id.work_email', 'in', [user.login, user.email])\n                ]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_hr_discipline_explanation_store_manager",
+          "name": "PSM Discipline Explanation Store Manager Scope",
+          "model_ref": {
+            "ref": "model_x_psm_hr_discipline_explanation"
+          },
+          "domain": "[\n                '|', '|', '|',\n                ('x_psm_record_id.x_psm_employee_id.user_id', '=', user.id),\n                ('x_psm_record_id.x_psm_company_rep_id.user_id', '=', user.id),\n                ('x_psm_record_id.x_psm_employee_id.parent_id.user_id', '=', user.id),\n                '&',\n                ('x_psm_record_id.x_psm_employee_id.department_id', '!=', False),\n                ('x_psm_record_id.x_psm_employee_id.department_id', '=',\n                user.employee_id.department_id.id)\n                ]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_hr_discipline_explanation_hrbp",
+          "name": "PSM Discipline Explanation HRBP",
+          "model_ref": {
+            "ref": "model_x_psm_hr_discipline_explanation"
+          },
+          "domain": "[(1, '=', 1)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_hr_discipline_explanation_rgm",
+          "name": "PSM Discipline Explanation RGM Scope",
+          "model_ref": {
+            "ref": "model_x_psm_hr_discipline_explanation"
+          },
+          "domain": "[\n                '|', '|',\n                ('x_psm_record_id.x_psm_employee_id.parent_id.user_id', '=', user.id),\n                ('x_psm_record_id.x_psm_company_rep_id.user_id', '=', user.id),\n                '&',\n                ('x_psm_record_id.x_psm_employee_id.department_id', '!=', False),\n                ('x_psm_record_id.x_psm_employee_id.department_id', '=',\n                user.employee_id.department_id.id)\n                ]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_hr_discipline_record_clevel",
+          "name": "PSM Discipline Record C-Level",
+          "model_ref": {
+            "ref": "model_x_psm_hr_discipline_record"
+          },
+          "domain": "[(1, '=', 1)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_hr_discipline_explanation_clevel",
+          "name": "PSM Discipline Explanation C-Level",
+          "model_ref": {
+            "ref": "model_x_psm_hr_discipline_explanation"
+          },
+          "domain": "[(1, '=', 1)]"
+        }
+      ]
+    }
+  ],
+  "controllers": [
+    {
+      "file": "controllers/__init__.py",
+      "summary": "Python source file.",
+      "routes": []
+    },
+    {
+      "file": "controllers/portal.py",
+      "summary": "1 classes; 0 fields",
+      "routes": [
+        {
+          "method": "home",
+          "route": [
+            [
+              "/my",
+              "/my/home"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "website": true
+          }
+        },
+        {
+          "method": "portal_psm_my_disciplines",
+          "route": [
+            [
+              "/my/disciplines",
+              "/my/disciplines/page/<int:page>"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "website": true
+          }
+        },
+        {
+          "method": "portal_psm_discipline_create",
+          "route": [
+            [
+              "/my/discipline/create"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "website": true,
+            "methods": [
+              "GET",
+              "POST"
+            ]
+          }
+        },
+        {
+          "method": "portal_discipline_view",
+          "route": [
+            [
+              "/my/discipline/<int:x_psm_record_id>"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "website": true
+          }
+        },
+        {
+          "method": "portal_discipline_submit_section_ii",
+          "route": [
+            [
+              "/my/discipline/submit_section_ii"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "website": true,
+            "methods": [
+              "POST"
+            ]
+          }
+        },
+        {
+          "method": "portal_discipline_manager_finalize",
+          "route": [
+            [
+              "/my/discipline/manager_finalize"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "website": true,
+            "methods": [
+              "POST"
+            ]
+          }
+        },
+        {
+          "method": "portal_discipline_rgm_action",
+          "route": [
+            [
+              "/my/discipline/rgm_action"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "website": true,
+            "methods": [
+              "POST"
+            ]
+          }
+        },
+        {
+          "method": "portal_discipline_respond",
+          "route": [
+            "/my/discipline/respond"
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "methods": [
+              "POST"
+            ],
+            "website": true
+          }
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "file": "data/approval_category_data.xml",
+      "summary": "XML data file.",
+      "record_count": 2,
+      "function_count": 0
+    },
+    {
+      "file": "data/cron_auto_archive.xml",
+      "summary": "XML data file.",
+      "record_count": 2,
+      "function_count": 0
+    },
+    {
+      "file": "data/email_template_discipline_done.xml",
+      "summary": "3 functions/rules",
+      "record_count": 3,
+      "function_count": 3
+    },
+    {
+      "file": "data/email_template_rejection.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/hr_discipline_action_data.xml",
+      "summary": "XML data file.",
+      "record_count": 7,
+      "function_count": 0
+    },
+    {
+      "file": "data/hr_discipline_violation_data.xml",
+      "summary": "XML data file.",
+      "record_count": 10,
+      "function_count": 0
+    },
+    {
+      "file": "data/mail_template.xml",
+      "summary": "2 functions/rules",
+      "record_count": 1,
+      "function_count": 2
+    },
+    {
+      "file": "data/survey_explanation_data.xml",
+      "summary": "XML data file.",
+      "record_count": 10,
+      "function_count": 0
+    },
+    {
+      "file": "data/survey_feedback_data.xml",
+      "summary": "XML data file.",
+      "record_count": 8,
+      "function_count": 0
+    }
+  ],
+  "relations": [
+    {
+      "from": "models/x_psm_approval_request.py",
+      "to_model": "approval.request",
+      "type": "inherits_model",
+      "model": "approval.request"
+    },
+    {
+      "from": "models/x_psm_approval_request.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "field_relation",
+      "field": "x_psm_discipline_record_id"
+    },
+    {
+      "from": "models/x_psm_calendar_event.py",
+      "to_model": "calendar.event",
+      "type": "inherits_model",
+      "model": "calendar.event"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_action.py",
+      "to_model": "x_psm.hr.discipline.action",
+      "type": "field_relation",
+      "field": "x_psm_next_action_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_action.py",
+      "to_model": "hr.job",
+      "type": "field_relation",
+      "field": "x_psm_allowed_job_ids"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_explanation.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "field_relation",
+      "field": "x_psm_record_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_explanation.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_reviewed_by"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "portal.mixin",
+      "type": "inherits_model",
+      "model": "x_psm.hr.discipline.record"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "mail.thread",
+      "type": "inherits_model",
+      "model": "x_psm.hr.discipline.record"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "mail.activity.mixin",
+      "type": "inherits_model",
+      "model": "x_psm.hr.discipline.record"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "hr.employee",
+      "type": "field_relation",
+      "field": "x_psm_employee_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.violation.category",
+      "type": "field_relation",
+      "field": "x_psm_violation_category_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "hr.employee",
+      "type": "field_relation",
+      "field": "x_psm_company_rep_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "hr.department",
+      "type": "field_relation",
+      "field": "x_psm_rep_department_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "hr.job",
+      "type": "field_relation",
+      "field": "x_psm_rep_job_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "hr.department",
+      "type": "field_relation",
+      "field": "x_psm_emp_department_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "hr.job",
+      "type": "field_relation",
+      "field": "x_psm_emp_job_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "ir.attachment",
+      "type": "field_relation",
+      "field": "x_psm_explanation_image_ids"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "hr.employee",
+      "type": "field_relation",
+      "field": "x_psm_witness_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "hr.department",
+      "type": "field_relation",
+      "field": "x_psm_witness_department_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "hr.job",
+      "type": "field_relation",
+      "field": "x_psm_witness_job_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.explanation",
+      "type": "field_relation",
+      "field": "x_psm_explanation_ids"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.explanation",
+      "type": "field_relation",
+      "field": "x_psm_active_explanation_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.action",
+      "type": "field_relation",
+      "field": "x_psm_action_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "survey.survey",
+      "type": "field_relation",
+      "field": "x_psm_explanation_survey_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "survey.user_input",
+      "type": "field_relation",
+      "field": "x_psm_explanation_survey_user_input_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "survey.survey",
+      "type": "field_relation",
+      "field": "x_psm_feedback_survey_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "survey.user_input",
+      "type": "field_relation",
+      "field": "x_psm_feedback_survey_user_input_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "approval.request",
+      "type": "field_relation",
+      "field": "x_psm_approval_request_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "field_relation",
+      "field": "x_psm_previous_record_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "calendar.event",
+      "type": "field_relation",
+      "field": "x_psm_latest_meeting_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "ir.attachment",
+      "type": "field_relation",
+      "field": "x_psm_meeting_attachment_ids"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "ir.attachment",
+      "type": "field_relation",
+      "field": "x_psm_compensation_minutes_ids"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_record.py",
+      "to_model": "res.currency",
+      "type": "field_relation",
+      "field": "currency_id"
+    },
+    {
+      "from": "models/x_psm_hr_discipline_violation.py",
+      "to_model": "x_psm.hr.discipline.violation.category",
+      "type": "field_relation",
+      "field": "x_psm_category_id"
+    },
+    {
+      "from": "models/x_psm_survey_user_input.py",
+      "to_model": "survey.user_input",
+      "type": "inherits_model",
+      "model": "survey.user_input"
+    },
+    {
+      "from": "models/x_psm_survey_user_input.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "field_relation",
+      "field": "x_psm_0215_record_id"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation_category.py",
+      "to_model": "x_psm.hr.discipline.violation.category",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_SM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation_category.py",
+      "to_model": "x_psm.hr.discipline.violation.category",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_PM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation_category.py",
+      "to_model": "x_psm.hr.discipline.violation.category",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_ST_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation_category.py",
+      "to_model": "x_psm.hr.discipline.violation.category",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_HRBP_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation_category.py",
+      "to_model": "x_psm.hr.discipline.violation.category",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_OPS_OC_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation_category.py",
+      "to_model": "x_psm.hr.discipline.violation.category",
+      "type": "grants_access",
+      "group": "hr.group_hr_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation.py",
+      "to_model": "x_psm.hr.discipline.violation.type",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_SM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation.py",
+      "to_model": "x_psm.hr.discipline.violation.type",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_PM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation.py",
+      "to_model": "x_psm.hr.discipline.violation.type",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_ST_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation.py",
+      "to_model": "x_psm.hr.discipline.violation.type",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_HRBP_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation.py",
+      "to_model": "x_psm.hr.discipline.violation.type",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_OPS_OC_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation.py",
+      "to_model": "x_psm.hr.discipline.violation.type",
+      "type": "grants_access",
+      "group": "hr.group_hr_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_action.py",
+      "to_model": "x_psm.hr.discipline.action",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_SM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_action.py",
+      "to_model": "x_psm.hr.discipline.action",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_PM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_action.py",
+      "to_model": "x_psm.hr.discipline.action",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_ST_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_action.py",
+      "to_model": "x_psm.hr.discipline.action",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_HRBP_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_action.py",
+      "to_model": "x_psm.hr.discipline.action",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_OPS_OC_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_action.py",
+      "to_model": "x_psm.hr.discipline.action",
+      "type": "grants_access",
+      "group": "hr.group_hr_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_SM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_PM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_ST_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_RGM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_HRBP_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_OPS_OC_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "grants_access",
+      "group": "hr.group_hr_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_explanation.py",
+      "to_model": "x_psm.hr.discipline.explanation",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_SM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_explanation.py",
+      "to_model": "x_psm.hr.discipline.explanation",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_PM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_explanation.py",
+      "to_model": "x_psm.hr.discipline.explanation",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_ST_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_explanation.py",
+      "to_model": "x_psm.hr.discipline.explanation",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_RGM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_explanation.py",
+      "to_model": "x_psm.hr.discipline.explanation",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_HRBP_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_explanation.py",
+      "to_model": "x_psm.hr.discipline.explanation",
+      "type": "grants_access",
+      "group": "hr.group_hr_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_explanation.py",
+      "to_model": "x_psm.hr.discipline.explanation",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_reject_wizard.py",
+      "to_model": "x_psm.hr.discipline.reject.wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_SM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_reject_wizard.py",
+      "to_model": "x_psm.hr.discipline.reject.wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_PM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_reject_wizard.py",
+      "to_model": "x_psm.hr.discipline.reject.wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_ST_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_reject_wizard.py",
+      "to_model": "x_psm.hr.discipline.reject.wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_HRBP_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_reject_wizard.py",
+      "to_model": "x_psm.hr.discipline.reject.wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_OPS_OC_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_reject_wizard.py",
+      "to_model": "x_psm.hr.discipline.reject.wizard",
+      "type": "grants_access",
+      "group": "hr.group_hr_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_manual_confirm_wizard.py",
+      "to_model": "x_psm.hr.discipline.manual.confirm.wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_RGM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_manual_confirm_wizard.py",
+      "to_model": "x_psm.hr.discipline.manual.confirm.wizard",
+      "type": "grants_access",
+      "group": "hr.group_hr_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "hr.model_hr_employee",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_OPS_OC_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "hr.model_hr_department",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_OPS_OC_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation_category.py",
+      "to_model": "x_psm.hr.discipline.violation.category",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_MGMT_MANAGER_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_violation.py",
+      "to_model": "x_psm.hr.discipline.violation.type",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_MGMT_MANAGER_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_action.py",
+      "to_model": "x_psm.hr.discipline.action",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_MGMT_MANAGER_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_MGMT_MANAGER_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_hr_discipline_explanation.py",
+      "to_model": "x_psm.hr.discipline.explanation",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_MGMT_MANAGER_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_reject_wizard.py",
+      "to_model": "x_psm.hr.discipline.reject.wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_MGMT_MANAGER_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_violation_report_wizard.py",
+      "to_model": "x_psm.hr.discipline.violation.report.wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_SM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_violation_report_wizard.py",
+      "to_model": "x_psm.hr.discipline.violation.report.wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_OPS_STORE_RGM_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_violation_report_wizard.py",
+      "to_model": "x_psm.hr.discipline.violation.report.wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_HRBP_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_violation_report_wizard.py",
+      "to_model": "x_psm.hr.discipline.violation.report.wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_OPS_OC_S"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/x_psm_hr_discipline_violation_report_wizard.py",
+      "to_model": "x_psm.hr.discipline.violation.report.wizard",
+      "type": "grants_access",
+      "group": "hr.group_hr_manager"
+    },
+    {
+      "from": "views/x_psm_approval_request_views.xml",
+      "to": "models/x_psm_approval_request.py",
+      "to_model": "approval.request",
+      "type": "uses_model",
+      "view_id": "x_psm_approval_request_view_form_inherit"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_manual_confirm_wizard_views.xml",
+      "to": "wizards/x_psm_hr_discipline_manual_confirm_wizard.py",
+      "to_model": "x_psm.hr.discipline.manual.confirm.wizard",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_manual_confirm_wizard_form"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_master_views.xml",
+      "to": "models/x_psm_hr_discipline_violation_category.py",
+      "to_model": "x_psm.hr.discipline.violation.category",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_violation_category_tree"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_master_views.xml",
+      "to": "models/x_psm_hr_discipline_violation_category.py",
+      "to_model": "x_psm.hr.discipline.violation.category",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_violation_category_form"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_master_views.xml",
+      "to": "models/x_psm_hr_discipline_violation.py",
+      "to_model": "x_psm.hr.discipline.violation.type",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_violation_type_tree"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_master_views.xml",
+      "to": "models/x_psm_hr_discipline_violation.py",
+      "to_model": "x_psm.hr.discipline.violation.type",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_violation_type_form"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_master_views.xml",
+      "to": "models/x_psm_hr_discipline_action.py",
+      "to_model": "x_psm.hr.discipline.action",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_action_tree"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_master_views.xml",
+      "to": "models/x_psm_hr_discipline_action.py",
+      "to_model": "x_psm.hr.discipline.action",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_action_form"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_master_views.xml",
+      "to": "models/x_psm_hr_discipline_violation_category.py",
+      "to_model": "x_psm.hr.discipline.violation.category",
+      "type": "opens_model",
+      "x_psm_action_id": "action_psm_hr_discipline_violation_category"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_master_views.xml",
+      "to": "models/x_psm_hr_discipline_violation.py",
+      "to_model": "x_psm.hr.discipline.violation.type",
+      "type": "opens_model",
+      "x_psm_action_id": "action_psm_hr_discipline_violation_type"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_master_views.xml",
+      "to": "models/x_psm_hr_discipline_action.py",
+      "to_model": "x_psm.hr.discipline.action",
+      "type": "opens_model",
+      "x_psm_action_id": "action_psm_hr_discipline_action"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_master_views.xml",
+      "to_action": "action_psm_hr_discipline_violation_category",
+      "type": "menu_action",
+      "menu_id": "menu_psm_hr_discipline_violation_category"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_master_views.xml",
+      "to_action": "action_psm_hr_discipline_violation_type",
+      "type": "menu_action",
+      "menu_id": "menu_psm_hr_discipline_violation_type"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_master_views.xml",
+      "to_action": "action_psm_hr_discipline_action",
+      "type": "menu_action",
+      "menu_id": "menu_psm_hr_discipline_action"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_record_views.xml",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_record_tree"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_record_views.xml",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_record_form"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_record_views.xml",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_record_kanban"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_record_views.xml",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_record_search"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_record_views.xml",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_record_form_internal_ux"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_record_views.xml",
+      "to": "models/x_psm_hr_discipline_record.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "opens_model",
+      "x_psm_action_id": "action_psm_hr_discipline_record_main"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_record_views.xml",
+      "to_action": "action_psm_hr_discipline_record_main",
+      "type": "menu_action",
+      "menu_id": "menu_psm_hr_discipline_record_main"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_reject_wizard_views.xml",
+      "to": "wizards/x_psm_hr_discipline_reject_wizard.py",
+      "to_model": "x_psm.hr.discipline.reject.wizard",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_reject_wizard_form"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_violation_report_wizard_views.xml",
+      "to": "wizards/x_psm_hr_discipline_violation_report_wizard.py",
+      "to_model": "x_psm.hr.discipline.violation.report.wizard",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_discipline_violation_report_wizard_form"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_violation_report_wizard_views.xml",
+      "to": "wizards/x_psm_hr_discipline_violation_report_wizard.py",
+      "to_model": "x_psm.hr.discipline.violation.report.wizard",
+      "type": "opens_model",
+      "x_psm_action_id": "action_psm_hr_discipline_violation_report"
+    },
+    {
+      "from": "views/x_psm_hr_discipline_violation_report_wizard_views.xml",
+      "to_action": "action_psm_hr_discipline_violation_report",
+      "type": "menu_action",
+      "menu_id": "menu_psm_hr_discipline_violation_report"
+    },
+    {
+      "from": "wizards/x_psm_hr_discipline_manual_confirm_wizard.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "field_relation",
+      "field": "x_psm_record_id"
+    },
+    {
+      "from": "wizards/x_psm_hr_discipline_reject_wizard.py",
+      "to_model": "x_psm.hr.discipline.record",
+      "type": "field_relation",
+      "field": "x_psm_record_id"
+    }
+  ],
+  "feature_summary": [
+    "Portal and website controllers for recruitment pages and application flow.",
+    "Dedicated recruitment groups, access rules, and security bridges.",
+    "Seed data for sequences, stages, approval categories, mail templates, cron jobs, and surveys."
+  ],
+  "detail_index": [
+    {
+      "file": "__init__.py",
+      "detail_json": "details/__init__.py.json",
+      "type": "python",
+      "bucket": "python",
+      "summary": "Python source file."
+    },
+    {
+      "file": "__manifest__.py",
+      "detail_json": "details/__manifest__.py.json",
+      "type": "file",
+      "bucket": "manifest",
+      "summary": "# -*- coding: utf-8 -*- { \"name\": \"M02_P0215_EMPLOYEE_DISCIPLINARY_PROCESS\", \"summary\": \"\"\" Manage employee disciplinary records, explanations, reviews, and ..."
+    },
+    {
+      "file": "controllers/__init__.py",
+      "detail_json": "details/controllers____init__.py.json",
+      "type": "python",
+      "bucket": "controllers",
+      "summary": "Python source file."
+    },
+    {
+      "file": "controllers/portal.py",
+      "detail_json": "details/controllers__portal.py.json",
+      "type": "python",
+      "bucket": "controllers",
+      "summary": "1 classes; 0 fields"
+    },
+    {
+      "file": "convention/QUY_UOC_DAT_TEN_VA_RULE.md",
+      "detail_json": "details/convention__QUY_UOC_DAT_TEN_VA_RULE.md.json",
+      "type": "document",
+      "bucket": "convention",
+      "summary": "# Quy Ước Đặt Tên Và Rule Tài liệu này tổng hợp các quy ước cần lưu ý khi phát triển module. ## 1. Quy ước đặt tên ### 1.1. Manifest - Cấu trúc tên module tr..."
+    },
+    {
+      "file": "data/approval_category_data.xml",
+      "detail_json": "details/data__approval_category_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/cron_auto_archive.xml",
+      "detail_json": "details/data__cron_auto_archive.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/email_template_discipline_done.xml",
+      "detail_json": "details/data__email_template_discipline_done.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "3 functions/rules"
+    },
+    {
+      "file": "data/email_template_rejection.xml",
+      "detail_json": "details/data__email_template_rejection.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/hr_discipline_action_data.xml",
+      "detail_json": "details/data__hr_discipline_action_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/hr_discipline_violation_data.xml",
+      "detail_json": "details/data__hr_discipline_violation_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/mail_template.xml",
+      "detail_json": "details/data__mail_template.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "2 functions/rules"
+    },
+    {
+      "file": "data/survey_explanation_data.xml",
+      "detail_json": "details/data__survey_explanation_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/survey_feedback_data.xml",
+      "detail_json": "details/data__survey_feedback_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "migrations/19.0.1.0.1/post-migrate.py",
+      "detail_json": "details/migrations__19.0.1.0.1__post-migrate.py.json",
+      "type": "python",
+      "bucket": "migrations",
+      "summary": "Python source file."
+    },
+    {
+      "file": "migrations/19.0.1.0.2/post-migrate.py",
+      "detail_json": "details/migrations__19.0.1.0.2__post-migrate.py.json",
+      "type": "python",
+      "bucket": "migrations",
+      "summary": "Python source file."
+    },
+    {
+      "file": "migrations/19.0.1.0.21/post-migrate.py",
+      "detail_json": "details/migrations__19.0.1.0.21__post-migrate.py.json",
+      "type": "python",
+      "bucket": "migrations",
+      "summary": "Python source file."
+    },
+    {
+      "file": "migrations/19.0.1.0.21/pre-migrate.py",
+      "detail_json": "details/migrations__19.0.1.0.21__pre-migrate.py.json",
+      "type": "python",
+      "bucket": "migrations",
+      "summary": "Python source file."
+    },
+    {
+      "file": "migrations/19.0.1.0.4/post-migrate.py",
+      "detail_json": "details/migrations__19.0.1.0.4__post-migrate.py.json",
+      "type": "python",
+      "bucket": "migrations",
+      "summary": "Python source file."
+    },
+    {
+      "file": "models/__init__.py",
+      "detail_json": "details/models____init__.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "Python source file."
+    },
+    {
+      "file": "models/x_psm_approval_request.py",
+      "detail_json": "details/models__x_psm_approval_request.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: approval.request; 1 classes; 1 fields; 3 actions"
+    },
+    {
+      "file": "models/x_psm_calendar_event.py",
+      "detail_json": "details/models__x_psm_calendar_event.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: calendar.event; 1 classes; 0 fields"
+    },
+    {
+      "file": "models/x_psm_hr_discipline_action.py",
+      "detail_json": "details/models__x_psm_hr_discipline_action.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm.hr.discipline.action; 1 classes; 10 fields"
+    },
+    {
+      "file": "models/x_psm_hr_discipline_explanation.py",
+      "detail_json": "details/models__x_psm_hr_discipline_explanation.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm.hr.discipline.explanation; 1 classes; 14 fields"
+    },
+    {
+      "file": "models/x_psm_hr_discipline_record.py",
+      "detail_json": "details/models__x_psm_hr_discipline_record.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm.hr.discipline.record; 1 classes; 85 fields; 37 actions"
+    },
+    {
+      "file": "models/x_psm_hr_discipline_violation.py",
+      "detail_json": "details/models__x_psm_hr_discipline_violation.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm.hr.discipline.violation.type; 1 classes; 5 fields"
+    },
+    {
+      "file": "models/x_psm_hr_discipline_violation_category.py",
+      "detail_json": "details/models__x_psm_hr_discipline_violation_category.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm.hr.discipline.violation.category; 1 classes; 2 fields"
+    },
+    {
+      "file": "models/x_psm_survey_user_input.py",
+      "detail_json": "details/models__x_psm_survey_user_input.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: survey.user_input; 1 classes; 2 fields"
+    },
+    {
+      "file": "notes/BLUEPRINT_PORTAL_LIST_PAGE_V3_FIX.md",
+      "detail_json": "details/notes__BLUEPRINT_PORTAL_LIST_PAGE_V3_FIX.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Blueprint V3 — Fix UI/UX cho List Page `/my/disciplines` > **Phạm vi**: Chỉ tập trung sửa **trang danh sách hồ sơ kỷ luật** (`portal_psm_my_disciplines`) d..."
+    },
+    {
+      "file": "notes/BLUEPRINT_PORTAL_UI_REDESIGN_0215.md",
+      "detail_json": "details/notes__BLUEPRINT_PORTAL_UI_REDESIGN_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Technical Blueprint — Portal UI Redesign cho Module M02_P0215 > **Phạm vi**: Cải thiện UI/UX cho khu vực Portal của module `M02_P0215_EMPLOYEE_DISCIPLINARY..."
+    },
+    {
+      "file": "notes/BLUEPRINT_PORTAL_UI_REDESIGN_0215_V2_POLISH.md",
+      "detail_json": "details/notes__BLUEPRINT_PORTAL_UI_REDESIGN_0215_V2_POLISH.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Technical Blueprint V2 — Portal UI Polish & UX Enhancement (M02_P0215) > **Phạm vi**: Nâng cấp giao diện Portal 0215 đã ổn (V1) lên mức **chuyên nghiệp** —..."
+    },
+    {
+      "file": "notes/DAILY_REPORT_2026_05_08.md",
+      "detail_json": "details/notes__DAILY_REPORT_2026_05_08.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Daily report - 08/05/2026 ## 1. Phạm vi rà soát Ngày 08/05/2026 tập trung rà soát các thay đổi phát sinh trong module `M02_P0215_EMPLOYEE_DISCIPLINARY_PROC..."
+    },
+    {
+      "file": "notes/daily_report_2026_05_08_ra_soat_lai.md",
+      "detail_json": "details/notes__daily_report_2026_05_08_ra_soat_lai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Daily report - 08/05/2026 ## 1. Phạm vi rà soát Ngày 08/05/2026 tập trung rà soát lại phần hoàn thiện sau refactor module `M02_P0215_EMPLOYEE_DISCIPLINARY_..."
+    },
+    {
+      "file": "notes/HUONG_DAN_THAO_TAC_SU_DUNG_QUY_TRINH_0215.md",
+      "detail_json": "details/notes__HUONG_DAN_THAO_TAC_SU_DUNG_QUY_TRINH_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Hướng dẫn thao tác sử dụng quy trình xử lý kỷ luật nhân viên 0215 Ngày cập nhật: 2026-05-13 ## 1. Mục đích tài liệu Tài liệu này hướng dẫn thao tác sử dụng..."
+    },
+    {
+      "file": "notes/HUONG_DAN_THAO_TAC_SU_DUNG_QUY_TRINH_0215.pdf",
+      "detail_json": "details/notes__HUONG_DAN_THAO_TAC_SU_DUNG_QUY_TRINH_0215.pdf.json",
+      "type": "file",
+      "bucket": "notes",
+      "summary": ".pdf file"
+    },
+    {
+      "file": "notes/KHAC_BIET_0215_NEW_VS_0215.md",
+      "detail_json": "details/notes__KHAC_BIET_0215_NEW_VS_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# SO SÁNH KHÁC BIỆT: `M02_P0215_new` so với `M02_P0215` > Ngày lập: 2026-05-18 > Nguồn (source): `addons/M02_P0215_new` > Đích (target): `addons/M02_P0215` (..."
+    },
+    {
+      "file": "notes/PHASE_0_AUDIT_REFACTOR_0215_THEO_CONVENTION.md",
+      "detail_json": "details/notes__PHASE_0_AUDIT_REFACTOR_0215_THEO_CONVENTION.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 0 - Audit refactor module 0215 theo convention ## 1. Phạm vi và giả định Phase 0 chỉ audit, khóa baseline và lập danh sách việc cho Phase 1. Chưa ref..."
+    },
+    {
+      "file": "notes/PHASE_1_DA_TRIEN_KHAI_REFACTOR_NAMING_0215.md",
+      "detail_json": "details/notes__PHASE_1_DA_TRIEN_KHAI_REFACTOR_NAMING_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Đã triển khai refactor naming module 0215 ## 1. Phạm vi đã làm Phase 1 đã triển khai theo hướng greenfield vì module `M02_P0215` chưa từng được c..."
+    },
+    {
+      "file": "notes/PHASE_2_DA_TRIEN_KHAI_PORTAL_GUARD_0215.md",
+      "detail_json": "details/notes__PHASE_2_DA_TRIEN_KHAI_PORTAL_GUARD_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Đã triển khai refactor Portal Guard module 0215 Ngày thực hiện: 2026-05-07 ## 1. Tài liệu và source đã dùng Đã bám theo: - `convention/QUY_UOC_DA..."
+    },
+    {
+      "file": "notes/PHASE_3_DA_TRIEN_KHAI_WORKFLOW_0215.md",
+      "detail_json": "details/notes__PHASE_3_DA_TRIEN_KHAI_WORKFLOW_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Đã triển khai chuẩn hóa workflow module 0215 Ngày thực hiện: 2026-05-07 ## 1. Tài liệu và source đã dùng Đã bám theo: - `convention/QUY_UOC_DAT_T..."
+    },
+    {
+      "file": "notes/PHASE_4_DA_TRIEN_KHAI_SECURITY_0215.md",
+      "detail_json": "details/notes__PHASE_4_DA_TRIEN_KHAI_SECURITY_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 4 - Đã triển khai phân quyền tối thiểu module 0215 Ngày thực hiện: 2026-05-07 ## 1. Tài liệu và source đã dùng Đã bám theo: - `convention/QUY_UOC_DAT..."
+    },
+    {
+      "file": "notes/PHASE_5_HOTFIX_LOI_GO_CAI_DAT_0215.md",
+      "detail_json": "details/notes__PHASE_5_HOTFIX_LOI_GO_CAI_DAT_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 5 - Hotfix lỗi gỡ cài đặt module 0215 Ngày thực hiện: 2026-05-07 ## Bối cảnh Khi gỡ cài đặt `M02_P0215`, Odoo lỗi trong quá trình build registry và u..."
+    },
+    {
+      "file": "notes/PHASE_A_XAC_NHAN_APPROVAL_SURVEY_0215.md",
+      "detail_json": "details/notes__PHASE_A_XAC_NHAN_APPROVAL_SURVEY_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase A - Xác nhận module dùng chung Approval và Survey cho module 0215 Ngày thực hiện: 2026-05-07 ## 1. Tài liệu và source đã dùng Đã rà theo workflow mod..."
+    },
+    {
+      "file": "notes/PHASE_B_DA_TRIEN_KHAI_APPROVAL_0215.md",
+      "detail_json": "details/notes__PHASE_B_DA_TRIEN_KHAI_APPROVAL_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase B - Đã triển khai dùng Approvals cho phê duyệt Company Level module 0215 Ngày thực hiện: 2026-05-07 ## 1. Tài liệu và source đã dùng Đã bám theo: - `..."
+    },
+    {
+      "file": "notes/PHASE_C_DA_TRIEN_KHAI_SURVEY_TUONG_TRINH_0215.md",
+      "detail_json": "details/notes__PHASE_C_DA_TRIEN_KHAI_SURVEY_TUONG_TRINH_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase C - Da trien khai survey cho tuong trinh 0215 Ngay cap nhat: 2026-05-07 ## 1. Tai lieu da dung - Convention: `addons/M02_P0215/convention/QUY_UOC_DAT..."
+    },
+    {
+      "file": "notes/PHASE_D_DA_TRIEN_KHAI_SURVEY_FEEDBACK_0215.md",
+      "detail_json": "details/notes__PHASE_D_DA_TRIEN_KHAI_SURVEY_FEEDBACK_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase D - Da trien khai survey cho feedback cai thien ngay 0215 Ngay cap nhat: 2026-05-07 ## 1. Tai lieu da dung - Convention: `addons/M02_P0215/convention..."
+    },
+    {
+      "file": "notes/PHASE_E_DON_CODE_TRUNG_VA_GIU_TUONG_THICH_0215.md",
+      "detail_json": "details/notes__PHASE_E_DON_CODE_TRUNG_VA_GIU_TUONG_THICH_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase E - Don code trung va giu tuong thich du lieu cu 0215 Ngay cap nhat: 2026-05-07 ## 1. Tai lieu da dung - Convention: `addons/M02_P0215/convention/QUY..."
+    },
+    {
+      "file": "notes/PHASE_F_DA_TRIEN_KHAI_SECURITY_0215.md",
+      "detail_json": "details/notes__PHASE_F_DA_TRIEN_KHAI_SECURITY_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase F - Da trien khai security cho 0215 sau refactor approval/survey Ngay cap nhat: 2026-05-07 ## 1. Tai lieu da dung - Convention: `addons/M02_P0215/con..."
+    },
+    {
+      "file": "notes/PHASE_G_DA_TRIEN_KHAI_MIGRATION_0215.md",
+      "detail_json": "details/notes__PHASE_G_DA_TRIEN_KHAI_MIGRATION_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase G - Da trien khai migration bridge cho du lieu cu 0215 Ngay cap nhat: 2026-05-07 ## 1. Tai lieu da dung - Convention: `addons/M02_P0215/convention/QU..."
+    },
+    {
+      "file": "notes/PHASE_H_DA_TRIEN_KHAI_CAU_HINH_APPROVER_0215.md",
+      "detail_json": "details/notes__PHASE_H_DA_TRIEN_KHAI_CAU_HINH_APPROVER_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase H - Đã triển khai cấu hình người duyệt approval 0215 Ngày thực hiện: 2026-05-13 ## 1. Tài liệu và source đã dùng Đã bám theo: - `convention/QUY_UOC_D..."
+    },
+    {
+      "file": "notes/PLAN_BAO_CAO_SO_NGUOI_VI_PHAM_0215.md",
+      "detail_json": "details/notes__PLAN_BAO_CAO_SO_NGUOI_VI_PHAM_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# PLAN TRIỂN KHAI: \"BÁO CÁO SỐ NGƯỜI VI PHẠM\" — MODULE M02_P0215 **Trạng thái:** Chỉ lập plan — KHÔNG sửa code **Ngày lập:** 2026-05-16 **Người lập:** Senior..."
+    },
+    {
+      "file": "notes/PLAN_CAU_HINH_NGUOI_DUYET_APPROVAL_0215.md",
+      "detail_json": "details/notes__PLAN_CAU_HINH_NGUOI_DUYET_APPROVAL_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Plan - Cho HR cấu hình người duyệt trong quy trình approval 0215 Ngày lập: 2026-05-13 Người lập: Claude (giao cho Codex thực hiện) Tham chiếu: - `notes/PHA..."
+    },
+    {
+      "file": "notes/PLAN_DONG_BO_0215_NEW_VAO_0215.md",
+      "detail_json": "details/notes__PLAN_DONG_BO_0215_NEW_VAO_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# PLAN: ĐỒNG BỘ TÍNH NĂNG TỪ `M02_P0215_new` VÀO `M02_P0215` > Ngày lập: 2026-05-18 > Tài liệu nguồn: `KHAC_BIET_0215_NEW_VS_0215.md` (cùng thư mục) > Đối tư..."
+    },
+    {
+      "file": "notes/PLAN_REFACTOR_MODULE_0215_THEO_CONVENTION.md",
+      "detail_json": "details/notes__PLAN_REFACTOR_MODULE_0215_THEO_CONVENTION.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Plan refactor module 0215 theo convention ## 1. Tài liệu và source đã dùng để định hướng - Convention: `addons/M02_P0215/convention/QUY_UOC_DAT_TEN_VA_RULE..."
+    },
+    {
+      "file": "notes/PLAN_TASK_0215_PDF_20260511.md",
+      "detail_json": "details/notes__PLAN_TASK_0215_PDF_20260511.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# KẾ HOẠCH TRIỂN KHAI TASK 0215 (theo file PDF `0215 task.pdf`) ## 0. File cần đọc trước khi bắt tay Codex bắt buộc nắm các file sau: - `addons/M02_P0215/__m..."
+    },
+    {
+      "file": "notes/PLAN_THAY_THE_CUSTOM_BANG_APPROVAL_SURVEY_0215.md",
+      "detail_json": "details/notes__PLAN_THAY_THE_CUSTOM_BANG_APPROVAL_SURVEY_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Plan thay thế phần custom bằng Approval và Survey cho module 0215 Ngày lập: 2026-05-07 ## 1. Tài liệu và source đã dùng Đã rà theo workflow module: - Conve..."
+    },
+    {
+      "file": "notes/QUY_TRINH_XU_LY_KY_LUAT_NHAN_VIEN_0215.md",
+      "detail_json": "details/notes__QUY_TRINH_XU_LY_KY_LUAT_NHAN_VIEN_0215.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Quy trình xử lý kỷ luật nhân viên - 0215 ## Đặc tả dễ hiểu Quy trình xử lý kỷ luật nhân viên bắt đầu khi nhân viên phát sinh lỗi trong quá trình làm việc. ..."
+    },
+    {
+      "file": "reports/x_psm_discipline_reports.xml",
+      "detail_json": "details/reports__x_psm_discipline_reports.xml.json",
+      "type": "xml",
+      "bucket": "reports",
+      "summary": "2 templates"
+    },
+    {
+      "file": "security/ir.model.access.csv",
+      "detail_json": "details/security__ir.model.access.csv.json",
+      "type": "security_csv",
+      "bucket": "security",
+      "summary": "54 access rules"
+    },
+    {
+      "file": "security/security_rules.xml",
+      "detail_json": "details/security__security_rules.xml.json",
+      "type": "xml",
+      "bucket": "security",
+      "summary": "11 functions/rules"
+    },
+    {
+      "file": "static/description/consistency.png",
+      "detail_json": "details/static__description__consistency.png.json",
+      "type": "file",
+      "bucket": "static",
+      "summary": ".png file"
+    },
+    {
+      "file": "static/src/js/portal_psm_0215.js",
+      "detail_json": "details/static__src__js__portal_psm_0215.js.json",
+      "type": "file",
+      "bucket": "static",
+      "summary": ".js file"
+    },
+    {
+      "file": "static/src/scss/internal_discipline_form.scss",
+      "detail_json": "details/static__src__scss__internal_discipline_form.scss.json",
+      "type": "file",
+      "bucket": "static",
+      "summary": ".scss file"
+    },
+    {
+      "file": "static/src/scss/portal_psm_0215.scss",
+      "detail_json": "details/static__src__scss__portal_psm_0215.scss.json",
+      "type": "file",
+      "bucket": "static",
+      "summary": ".scss file"
+    },
+    {
+      "file": "static/src/templates/mau_bien_ban_xu_ly_boi_thuong.docx",
+      "detail_json": "details/static__src__templates__mau_bien_ban_xu_ly_boi_thuong.docx.json",
+      "type": "file",
+      "bucket": "static",
+      "summary": ".docx file"
+    },
+    {
+      "file": "static/src/templates/mau_bien_ban_xu_ly_ky_luat.docx",
+      "detail_json": "details/static__src__templates__mau_bien_ban_xu_ly_ky_luat.docx.json",
+      "type": "file",
+      "bucket": "static",
+      "summary": ".docx file"
+    },
+    {
+      "file": "static/src/templates/mau_quyet_dinh_xu_ly_boi_thuong.docx",
+      "detail_json": "details/static__src__templates__mau_quyet_dinh_xu_ly_boi_thuong.docx.json",
+      "type": "file",
+      "bucket": "static",
+      "summary": ".docx file"
+    },
+    {
+      "file": "static/src/templates/mau_quyet_dinh_xu_ly_ky_luat.docx",
+      "detail_json": "details/static__src__templates__mau_quyet_dinh_xu_ly_ky_luat.docx.json",
+      "type": "file",
+      "bucket": "static",
+      "summary": ".docx file"
+    },
+    {
+      "file": "views/x_psm_approval_request_views.xml",
+      "detail_json": "details/views__x_psm_approval_request_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "1 views"
+    },
+    {
+      "file": "views/x_psm_hr_discipline_manual_confirm_wizard_views.xml",
+      "detail_json": "details/views__x_psm_hr_discipline_manual_confirm_wizard_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "1 views"
+    },
+    {
+      "file": "views/x_psm_hr_discipline_master_views.xml",
+      "detail_json": "details/views__x_psm_hr_discipline_master_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "6 views, 3 actions, 5 menus"
+    },
+    {
+      "file": "views/x_psm_hr_discipline_record_views.xml",
+      "detail_json": "details/views__x_psm_hr_discipline_record_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "5 views, 1 actions, 1 menus"
+    },
+    {
+      "file": "views/x_psm_hr_discipline_reject_wizard_views.xml",
+      "detail_json": "details/views__x_psm_hr_discipline_reject_wizard_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "1 views"
+    },
+    {
+      "file": "views/x_psm_hr_discipline_violation_report_wizard_views.xml",
+      "detail_json": "details/views__x_psm_hr_discipline_violation_report_wizard_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "1 views, 1 actions, 1 menus"
+    },
+    {
+      "file": "views/x_psm_portal_templates.xml",
+      "detail_json": "details/views__x_psm_portal_templates.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "6 templates"
+    },
+    {
+      "file": "wizards/__init__.py",
+      "detail_json": "details/wizards____init__.py.json",
+      "type": "python",
+      "bucket": "wizards",
+      "summary": "Python source file."
+    },
+    {
+      "file": "wizards/x_psm_hr_discipline_manual_confirm_wizard.py",
+      "detail_json": "details/wizards__x_psm_hr_discipline_manual_confirm_wizard.py.json",
+      "type": "python",
+      "bucket": "wizards",
+      "summary": "models: x_psm.hr.discipline.manual.confirm.wizard; 1 classes; 2 fields; 1 actions"
+    },
+    {
+      "file": "wizards/x_psm_hr_discipline_reject_wizard.py",
+      "detail_json": "details/wizards__x_psm_hr_discipline_reject_wizard.py.json",
+      "type": "python",
+      "bucket": "wizards",
+      "summary": "models: x_psm.hr.discipline.reject.wizard; 1 classes; 4 fields; 3 actions"
+    },
+    {
+      "file": "wizards/x_psm_hr_discipline_violation_report_wizard.py",
+      "detail_json": "details/wizards__x_psm_hr_discipline_violation_report_wizard.py.json",
+      "type": "python",
+      "bucket": "wizards",
+      "summary": "models: x_psm.hr.discipline.violation.report.wizard; 1 classes; 6 fields; 1 actions"
+    }
+  ]
+}

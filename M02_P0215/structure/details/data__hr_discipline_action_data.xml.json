@@ -1,0 +1,100 @@
+{
+  "file": "data/hr_discipline_action_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "x_psm_action_store_feedback",
+      "model": "x_psm.hr.discipline.action",
+      "fields": {
+        "name": "Feedback (Phản hồi)",
+        "x_psm_level": "store",
+        "x_psm_form_code": "feedback",
+        "x_psm_improvement_period": "30",
+        "x_psm_validity_months": "1",
+        "sequence": "10"
+      }
+    },
+    {
+      "id": "x_psm_action_store_counseling_1",
+      "model": "x_psm.hr.discipline.action",
+      "fields": {
+        "name": "Counseling Log 1st",
+        "x_psm_level": "store",
+        "x_psm_form_code": "counseling_1",
+        "x_psm_improvement_period": "30",
+        "x_psm_validity_months": "1",
+        "sequence": "20"
+      }
+    },
+    {
+      "id": "x_psm_action_store_counseling_2",
+      "model": "x_psm.hr.discipline.action",
+      "fields": {
+        "name": "Counseling Log 2nd",
+        "x_psm_level": "store",
+        "x_psm_form_code": "counseling_2",
+        "x_psm_improvement_period": "30",
+        "x_psm_validity_months": "1",
+        "sequence": "30"
+      }
+    },
+    {
+      "id": "x_psm_action_company_oral_warning",
+      "model": "x_psm.hr.discipline.action",
+      "fields": {
+        "name": "Khiển trách miệng (Oral warning)",
+        "x_psm_level": "company",
+        "x_psm_form_code": "oral_warning",
+        "x_psm_improvement_period": "30",
+        "x_psm_validity_months": "1",
+        "sequence": "100"
+      }
+    },
+    {
+      "id": "x_psm_action_company_written_warning",
+      "model": "x_psm.hr.discipline.action",
+      "fields": {
+        "name": "Khiển trách bằng văn bản (Written warning)",
+        "x_psm_level": "company",
+        "x_psm_form_code": "written_warning",
+        "x_psm_improvement_period": "90",
+        "x_psm_validity_months": "3",
+        "sequence": "110"
+      }
+    },
+    {
+      "id": "x_psm_action_company_wage_delay",
+      "model": "x_psm.hr.discipline.action",
+      "fields": {
+        "name": "Kéo dài thời hạn nâng lương (Wage Delay)",
+        "x_psm_level": "company",
+        "x_psm_form_code": "wage_delay",
+        "x_psm_improvement_period": "180",
+        "x_psm_validity_months": "6",
+        "sequence": "120"
+      }
+    },
+    {
+      "id": "x_psm_action_company_termination",
+      "model": "x_psm.hr.discipline.action",
+      "fields": {
+        "name": "Sa thải (Termination)",
+        "x_psm_level": "company",
+        "x_psm_form_code": "discipline",
+        "x_psm_improvement_period": "1095",
+        "x_psm_validity_months": "36",
+        "sequence": "130"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "x_psm.hr.discipline.action"
+  ]
+}

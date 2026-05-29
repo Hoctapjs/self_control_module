@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="email_template_psm_explanation_rejected" model="mail.template">
+        <field name="name">Discipline: Explanation Rejected</field>
+        <field name="model_id" ref="model_x_psm_hr_discipline_record"/>
+        <field name="email_from">{{ user.email_formatted }}</field>
+        <field name="email_to">{{ object.x_psm_employee_email }}</field>
+        <field name="partner_to"></field>
+        <field name="use_default_to" eval="False"/>
+        <field name="subject">Please resubmit your explanation - {{ object.name }}</field>
+        <field name="body_html" type="html">
+            <div style="margin:0;padding:24px 0;background-color:#f4f1ea;font-family:'Segoe UI',Arial,sans-serif;color:#2f2a26;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f4f1ea" style="border-collapse:collapse;background-color:#f4f1ea;">
+                    <tr>
+                        <td align="center">
+                            <table border="0" cellpadding="0" cellspacing="0" width="640" bgcolor="#fffdf9" style="width:640px;max-width:640px;background-color:#fffdf9;border:1px solid #eadfce;border-radius:20px;overflow:hidden;">
+                                <tr>
+                                    <td bgcolor="#b5121b" style="padding:28px 32px 22px 32px;background-color:#b5121b;">
+                                        <div style="font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#ffe7a3;font-weight:700;margin-bottom:10px;">0215 Discipline Process</div>
+                                        <h1 style="margin:0;font-size:28px;line-height:1.25;color:#ffffff;font-weight:800;">Explanation needs revision</h1>
+                                        <p style="margin:10px 0 0 0;font-size:14px;line-height:1.6;color:#fff4da;">Your previous explanation was reviewed and needs to be resubmitted.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:30px 32px 8px 32px;">
+                                        <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;">Dear <strong><t t-out="object.x_psm_employee_name"/></strong>,</p>
+                                        <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">Your explanation for case <strong><t t-out="object.name"/></strong> has been rejected. Please review the reason below and submit a complete explanation again.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0 32px 18px 32px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff7e8" style="border-collapse:separate;border-spacing:0;background-color:#fff7e8;border:1px solid #f2d39a;border-radius:16px;">
+                                            <tr>
+                                                <td style="padding:18px 20px;">
+                                                    <div style="font-size:13px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:#8d5a00;margin-bottom:10px;">Revision reason</div>
+                                                    <p style="margin:0;font-size:14px;line-height:1.8;color:#3d3833;"><t t-out="ctx.get('rejection_reason', 'The information is incomplete or inaccurate.')"/></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding:8px 32px 26px 32px;">
+                                        <a t-att-href="object._x_psm_get_explanation_survey_url()" style="background-color:#da291c;color:#ffffff;text-decoration:none;padding:15px 34px;border-radius:999px;font-size:15px;font-weight:700;display:inline-block;">Resubmit explanation</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0 32px 26px 32px;">
+                                        <div style="padding:16px 18px;background-color:#f8f5ef;border-left:4px solid #da291c;border-radius:14px;">
+                                            <p style="margin:0;font-size:13px;line-height:1.7;color:#5a524b;">If the button does not work, copy and open this link:<br/>
+                                                <a t-att-href="object._x_psm_get_explanation_survey_url()" style="color:#b5121b;word-break:break-all;text-decoration:underline;"><t t-out="object._x_psm_get_explanation_survey_url()"/></a>
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0 32px 30px 32px;">
+                                        <p style="margin:0;font-size:15px;line-height:1.8;">Regards,<br/><strong>HR Department</strong><br/>McDonald's Vietnam</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td bgcolor="#f7f2e8" style="padding:16px 32px;background-color:#f7f2e8;border-top:1px solid #eadfce;">
+                                        <p style="margin:0;font-size:12px;line-height:1.6;color:#7b7269;">This is an automated email from the 0215 discipline workflow. Please do not reply unless necessary.</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </field>
+    </record>
+</odoo>

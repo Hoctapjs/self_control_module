@@ -1,0 +1,25 @@
+{
+  "file": "data/approval_category_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "approval_category_resignation",
+      "model": "approval.category",
+      "fields": {
+        "name": "RST Offboarding Request",
+        "description": "Employee resignation and offboarding request for the RST business flow, including manager approval, exit survey, checklist follow-up, social insurance communication, and final account deactivation.",
+        "manager_approval": "required"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "approval.category"
+  ]
+}

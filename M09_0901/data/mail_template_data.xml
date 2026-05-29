@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Email template: Evaluation Request Notification -->
+    <record id="mail_template_paf_evaluation_request" model="mail.template">
+        <field name="name">PAF Evaluation Request</field>
+        <field name="model_id" ref="model_mkt_paf_request"/>
+        <field name="subject">[PAF] Evaluation request for {{ object.name }}</field>
+        <field name="email_from">{{ user.email_formatted }}</field>
+        <field name="email_to">{{ object.creator_id.email or '' }}</field>
+        <field name="body_html" type="html">
+            <div>
+                <p>Dear <t t-out="object.creator_id.name or ''"/>,</p>
+                <p>PAF request <strong><t t-out="object.name"/></strong> has moved to department evaluation.</p>
+                <p><a t-att-href="'/web#id=%s&amp;model=mkt_paf.request&amp;view_type=form' % object.id">Open PAF request</a></p>
+                <p>Regards,<br/><t t-out="user.company_id.name or ''"/></p>
+            </div>
+        </field>
+    </record>
+
+    <!-- Email template: Head Approver Notification -->
+    <record id="mail_template_paf_head_approval" model="mail.template">
+        <field name="name">PAF Head Approval Notification</field>
+        <field name="model_id" ref="model_mkt_paf_request"/>
+        <field name="subject">[PAF] Head approval required for {{ object.name }}</field>
+        <field name="email_from">{{ user.email_formatted }}</field>
+        <field name="email_to">{{ object.creator_id.email or '' }}</field>
+        <field name="body_html" type="html">
+            <div>
+                <p>Dear approver,</p>
+                <p>PAF request <strong><t t-out="object.name"/></strong> is ready for Head approval.</p>
+                <p><a t-att-href="'/web#id=%s&amp;model=mkt_paf.request&amp;view_type=form' % object.id">Open PAF request</a></p>
+                <p>Regards,<br/><t t-out="user.company_id.name or ''"/></p>
+            </div>
+        </field>
+    </record>
+
+    <!-- Email template: C-Level Approval Notification -->
+    <record id="mail_template_paf_clevel_approval" model="mail.template">
+        <field name="name">PAF C-Level Approval Notification</field>
+        <field name="model_id" ref="model_mkt_paf_request"/>
+        <field name="subject">[PAF] C-Level approval required for {{ object.name }}</field>
+        <field name="email_from">{{ user.email_formatted }}</field>
+        <field name="email_to">{{ object.creator_id.email or '' }}</field>
+        <field name="body_html" type="html">
+            <div>
+                <p>Dear approver,</p>
+                <p>PAF request <strong><t t-out="object.name"/></strong> has passed Head approval and is waiting for final C-Level approval.</p>
+                <p><a t-att-href="'/web#id=%s&amp;model=mkt_paf.request&amp;view_type=form' % object.id">Open PAF request</a></p>
+                <p>Regards,<br/><t t-out="user.company_id.name or ''"/></p>
+            </div>
+        </field>
+    </record>
+
+    <!-- Email template: Rejection Notification -->
+    <record id="mail_template_paf_rejection" model="mail.template">
+        <field name="name">PAF Rejection Notification</field>
+        <field name="model_id" ref="model_mkt_paf_request"/>
+        <field name="subject">[PAF] Request {{ object.name }} was rejected</field>
+        <field name="email_from">{{ user.email_formatted }}</field>
+        <field name="email_to">{{ object.creator_id.email or '' }}</field>
+        <field name="body_html" type="html">
+            <div>
+                <p>Dear <t t-out="object.creator_id.name or ''"/>,</p>
+                <p>PAF request <strong><t t-out="object.name"/></strong> was rejected. Please review the chatter for the rejection note.</p>
+                <p><a t-att-href="'/web#id=%s&amp;model=mkt_paf.request&amp;view_type=form' % object.id">Open PAF request</a></p>
+                <p>Regards,<br/><t t-out="user.company_id.name or ''"/></p>
+            </div>
+        </field>
+    </record>
+</odoo>

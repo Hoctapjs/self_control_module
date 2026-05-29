@@ -1,0 +1,1520 @@
+{
+  "file": "models/approval_request_rst_fields.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: approval.request; 1 classes; 71 fields",
+  "classes": [
+    {
+      "python_class": "ResignationRequest",
+      "description": "Extends approval.request in models/approval_request_rst_fields.py.",
+      "model": null,
+      "inherit": "approval.request",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "request_status",
+          "type": "Selection",
+          "string": null,
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "employee_id",
+          "type": "Many2one",
+          "string": "Resigning Employee (Request Owner)",
+          "comodel": "hr.employee",
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_rst_employee_id",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_employee_id",
+          "type": "Many2one",
+          "string": "Resigning Employee",
+          "comodel": "hr.employee",
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": "employee_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "resignation_employee_name",
+          "type": "Char",
+          "string": "Employee Name",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "employee_id.name",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_resignation_employee_name",
+          "type": "Char",
+          "string": "Employee Name",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "resignation_employee_name",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "resignation_manager_name",
+          "type": "Char",
+          "string": "Line Manager",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "employee_id.parent_id.name",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_resignation_manager_name",
+          "type": "Char",
+          "string": "Line Manager",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "resignation_manager_name",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "resignation_department",
+          "type": "Char",
+          "string": "Department",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "employee_id.department_id.name",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_resignation_department",
+          "type": "Char",
+          "string": "Department",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "resignation_department",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "job_id",
+          "type": "Many2one",
+          "string": "Job Position",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "employee_id.job_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_job_id",
+          "type": "Many2one",
+          "string": "Job Position",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "job_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "type_contract",
+          "type": "Char",
+          "string": "Contract Type",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "x_psm_0213_type_contract",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_type_contract",
+          "type": "Char",
+          "string": "Contract Type",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "type_contract",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "resignation_owner_email",
+          "type": "Char",
+          "string": "Requester Email",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "request_owner_id.email",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_resignation_owner_email",
+          "type": "Char",
+          "string": "Requester Email",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "resignation_owner_email",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_employee_personal_email",
+          "type": "Char",
+          "string": "Employee Personal Email",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Personal email of the resigning employee, used for post-departure communications."
+        },
+        {
+          "name": "x_psm_0214_remaining_al_days",
+          "type": "Float",
+          "string": "Remaining Annual Leave Days",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Snapshot of remaining annual leave days at the time the resignation request was approved."
+        },
+        {
+          "name": "x_psm_0214_al_advance_days",
+          "type": "Float",
+          "string": "Advance Annual Leave Days",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_0214_al_advance",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "So ngay phep nam da ung truoc (phan am cua so du phep). Se bi quy doi va tru vao luong quyet toan."
+        },
+        {
+          "name": "x_psm_0214_al_has_advance",
+          "type": "Boolean",
+          "string": "Has Advance Annual Leave",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_0214_al_advance",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_al_deduction_currency_id",
+          "type": "Many2one",
+          "string": "AL Deduction Currency",
+          "comodel": "res.currency",
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_0214_al_deduction_currency",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_al_deduction_rate",
+          "type": "Monetary",
+          "string": "AL Deduction Rate (per day)",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Don gia moi ngay phep am. Finance/HR nhap tay."
+        },
+        {
+          "name": "x_psm_0214_al_deduction_amount",
+          "type": "Monetary",
+          "string": "AL Deduction Amount",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Tong tien tru luong cho phep ung truoc. Goi y = so ngay am x don gia; cho phep sua tay."
+        },
+        {
+          "name": "x_psm_0214_al_deduction_note",
+          "type": "Text",
+          "string": "AL Deduction Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_al_settled",
+          "type": "Boolean",
+          "string": "Advance AL Settled",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": "Danh dau phan phep ung truoc da duoc Finance chot quy doi."
+        },
+        {
+          "name": "x_psm_0214_manager_approval_reminder_count",
+          "type": "Integer",
+          "string": "Manager Approval Reminders Sent",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": 0,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_manager_approval_reminder_sent_at",
+          "type": "Datetime",
+          "string": "Last Manager Reminder Email Sent At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_signed_resignation_file",
+          "type": "Binary",
+          "string": "Signed Resignation Letter (PDF)",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_signed_resignation_filename",
+          "type": "Char",
+          "string": "Signed Resignation Filename",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_signed_resignation_hash",
+          "type": "Char",
+          "string": "Checksum (SHA-256)",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_signed_locked",
+          "type": "Boolean",
+          "string": "Signed Letter Locked",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_can_view_signed_resignation",
+          "type": "Boolean",
+          "string": "Can View Signed Letter",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": "_compute_0214_can_view_signed_resignation",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_salary_settlement_file",
+          "type": "Binary",
+          "string": "Salary Settlement File (PDF)",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_salary_settlement_filename",
+          "type": "Char",
+          "string": "Salary Settlement Filename",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_signed_settlement_file",
+          "type": "Binary",
+          "string": "Signed Settlement Copy",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_signed_settlement_filename",
+          "type": "Char",
+          "string": "Signed Settlement Filename",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_settlement_sent",
+          "type": "Boolean",
+          "string": "Salary Settlement Sent",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_settlement_sent_date",
+          "type": "Datetime",
+          "string": "Salary Settlement Sent Date",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_settlement_reminder_sent_at",
+          "type": "Datetime",
+          "string": "Last Settlement Reminder Sent At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_settlement_signed",
+          "type": "Boolean",
+          "string": "Signed Settlement Submitted",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": "_compute_0214_settlement_signed",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_can_view_salary_settlement",
+          "type": "Boolean",
+          "string": "Can View Salary Settlement",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": "_compute_0214_can_view_salary_settlement",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_finance_check_state",
+          "type": "Selection",
+          "string": "Accounting Check Status",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": "[[\"pending\", \"Pending\"], [\"blocked\", \"Blocked\"], [\"passed\", \"Passed\"], [\"overridden\", \"Overridden\"]]",
+          "default": "pending",
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_finance_pending_items_summary",
+          "type": "Text",
+          "string": "Pending Items Summary",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_finance_override_reason",
+          "type": "Text",
+          "string": "Accounting Override Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_finance_override_user_id",
+          "type": "Many2one",
+          "string": "Accounting Override By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_finance_checked_date",
+          "type": "Datetime",
+          "string": "Accounting Check Date",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "exit_survey_completed",
+          "type": "Boolean",
+          "string": "Survey Completed",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": false,
+          "related": null,
+          "compute": "_compute_rst_exit_survey_completed",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_exit_survey_completed",
+          "type": "Boolean",
+          "string": "Survey Completed",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "exit_survey_completed",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "all_activities_completed",
+          "type": "Boolean",
+          "string": "All Activities Completed",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": false,
+          "related": null,
+          "compute": "_compute_rst_all_activities_completed",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_all_activities_completed",
+          "type": "Boolean",
+          "string": "All Activities Completed",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "all_activities_completed",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "is_plan_launched",
+          "type": "Boolean",
+          "string": "Plan Launched",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_is_plan_launched",
+          "type": "Boolean",
+          "string": "Plan Launched",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": "is_plan_launched",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "exit_survey_user_input_id",
+          "type": "Many2one",
+          "string": "Exit Survey User Input",
+          "comodel": "survey.user_input",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_exit_survey_user_input_id",
+          "type": "Many2one",
+          "string": "Exit Survey User Input",
+          "comodel": "survey.user_input",
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": "exit_survey_user_input_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "resignation_date",
+          "type": "Date",
+          "string": "Expected/Official Resignation Date",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_resignation_date",
+          "type": "Date",
+          "string": "Expected/Official Resignation Date",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": "resignation_date",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "official_resignation_date",
+          "type": "Date",
+          "string": "Official Resignation Date",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_rst_official_resignation_date",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_official_resignation_date",
+          "type": "Date",
+          "string": "Official Resignation Date",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": "official_resignation_date",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "resignation_date_formatted",
+          "type": "Char",
+          "string": "Expected Resignation Date",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": false,
+          "related": null,
+          "compute": "_compute_resignation_date_formatted",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_resignation_date_formatted",
+          "type": "Char",
+          "string": "Expected Resignation Date",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "resignation_date_formatted",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "resignation_type_id",
+          "type": "Many2one",
+          "string": "Resignation Type (Legacy)",
+          "comodel": "x_psm_resignation_type",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_resignation_type_id",
+          "type": "Many2one",
+          "string": "Resignation Type (Legacy)",
+          "comodel": "x_psm_resignation_type",
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": "resignation_type_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "resignation_reason_id",
+          "type": "Many2one",
+          "string": "Resignation Type",
+          "comodel": "hr.departure.reason",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_resignation_reason_id",
+          "type": "Many2one",
+          "string": "Resignation Type",
+          "comodel": "hr.departure.reason",
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": "resignation_reason_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "resignation_reason",
+          "type": "Text",
+          "string": "Resignation Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_resignation_reason",
+          "type": "Text",
+          "string": "Resignation Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": "resignation_reason",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "social_insurance_email_sent",
+          "type": "Boolean",
+          "string": "Social Insurance Email Sent",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": "Marks that the Social-Insurance guidance email has been sent automatically."
+        },
+        {
+          "name": "x_psm_0214_social_insurance_email_sent",
+          "type": "Boolean",
+          "string": "Social Insurance Email Sent",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": "social_insurance_email_sent",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "owner_related_activity_ids",
+          "type": "Many2many",
+          "string": "Related Activities (Res Name)",
+          "comodel": "mail.activity",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": "_compute_owner_related_activity_ids",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_owner_related_activity_ids",
+          "type": "Many2many",
+          "string": "Related Activities (Res Name)",
+          "comodel": "mail.activity",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "owner_related_activity_ids",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "rst_checklist_activity_ids",
+          "type": "Many2many",
+          "string": "Resignation Checklist (RST)",
+          "comodel": "mail.activity",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": "_compute_rst_checklist_activity_ids",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0214_rst_checklist_activity_ids",
+          "type": "Many2many",
+          "string": "Resignation Checklist (RST)",
+          "comodel": "mail.activity",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "rst_checklist_activity_ids",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [
+        {
+          "name": "_get_resignation_category",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_company",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_reminder_overdue_days",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_reminder_extension_days",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_exit_survey_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_adecco_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_social_insurance_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_offboarding_completion_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_employee_reminder_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_department_reminder_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_manager_approval_reminder_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_employee_approved_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_dept_assignment_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_dept_confirm_done_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_salary_settlement_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_reminder_interval_days",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_reminder_max_count",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_request_url",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_portal_offboarding_url",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_portal_activities_url",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_portal_resignation_url",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_al_leave_types",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_remaining_al",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_employee_email_list",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_default_role_user",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_check_0214_group_access",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_exit_survey",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_is_0214_offboarding_request",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_find_rst_employee",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_or_create_rst_survey_user_input",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_is_matching_0214_survey_user_input",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_exit_survey_user_inputs",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_build_rst_notification_action",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_build_rst_activity_domain",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_build_rst_activity_domain_for_requests",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_overdue_activities_by_request",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_group_activities_by_user",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_compute_resignation_date_formatted",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0214_resignation_date"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_rst_official_resignation_date",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "resignation_date"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "Mac dinh = ngay nghi du kien, khong ghi de gia tri HR da sua."
+        },
+        {
+          "name": "_check_0214_official_resignation_date",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Chan duyet neu ngay nghi chinh thuc som hon ngay bat dau hop dong."
+        },
+        {
+          "name": "_push_0214_contract_end_date",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Ghi ngay nghi viec chinh thuc vao contract_date_end cua version hien tai."
+        },
+        {
+          "name": "_write_0214_contract_date_end",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_apply_0214_native_departure",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Ghi nhan nghi viec theo co che native va archive ho so nhan vien."
+        },
+        {
+          "name": "_check_0214_signed_lock_write",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "write",
+          "type": "override",
+          "decorators": [],
+          "summary": "override"
+        },
+        {
+          "name": "_compute_0214_al_advance",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0214_remaining_al_days"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_0214_al_deduction_currency",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "company_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_onchange_0214_al_deduction_amount",
+          "type": "onchange",
+          "decorators": [
+            {
+              "call": "api.onchange",
+              "args": [
+                "x_psm_0214_al_deduction_rate",
+                "x_psm_0214_al_advance_days"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "onchange"
+        },
+        {
+          "name": "_compute_0214_settlement_signed",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0214_signed_settlement_file"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_0214_can_view_signed_resignation",
+          "type": "compute",
+          "decorators": [],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_0214_can_view_salary_settlement",
+          "type": "compute",
+          "decorators": [],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_owner_related_activity_ids",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0214_employee_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_rst_checklist_activity_ids",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0214_employee_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_rst_all_activities_completed",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0214_employee_id",
+                "x_psm_0214_is_plan_launched"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_rst_employee_id",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "request_owner_id",
+                "partner_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        }
+      ],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

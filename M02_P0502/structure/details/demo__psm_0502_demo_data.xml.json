@@ -1,0 +1,754 @@
+{
+  "file": "demo/psm_0502_demo_data.xml",
+  "type": "xml",
+  "bucket": "demo",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "psm_0502_demo_partner_hanoi_store",
+      "model": "res.partner",
+      "fields": {
+        "name": "0502 Demo - Hanoi Store",
+        "company_type": "company",
+        "phone": "0902000001",
+        "email": "hanoi.store.demo@psm.local"
+      }
+    },
+    {
+      "id": "psm_0502_demo_partner_hcm_store",
+      "model": "res.partner",
+      "fields": {
+        "name": "0502 Demo - HCM Store",
+        "company_type": "company",
+        "phone": "0902000002",
+        "email": "hcm.store.demo@psm.local"
+      }
+    },
+    {
+      "id": "psm_0502_demo_partner_danang_store",
+      "model": "res.partner",
+      "fields": {
+        "name": "0502 Demo - Danang Store",
+        "company_type": "company",
+        "phone": "0902000003",
+        "email": "danang.store.demo@psm.local"
+      }
+    },
+    {
+      "id": "psm_0502_demo_vendor_service",
+      "model": "res.partner",
+      "fields": {
+        "name": "0502 Demo - Outside Service Vendor",
+        "company_type": "company",
+        "supplier_rank": "1",
+        "phone": "0902999000",
+        "email": "vendor.demo@psm.local"
+      }
+    },
+    {
+      "id": "psm_0502_demo_department_hanoi_store",
+      "model": "hr.department",
+      "fields": {
+        "name": "0502 Demo - Hanoi Store",
+        "x_psm_0502_partner_id": {
+          "ref": "psm_0502_demo_partner_hanoi_store"
+        },
+        "x_psm_0502_proposal_approver_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_proposal_final_approver_id": {
+          "ref": "base.user_admin"
+        }
+      }
+    },
+    {
+      "id": "psm_0502_demo_department_hcm_store",
+      "model": "hr.department",
+      "fields": {
+        "name": "0502 Demo - HCM Store",
+        "x_psm_0502_partner_id": {
+          "ref": "psm_0502_demo_partner_hcm_store"
+        },
+        "x_psm_0502_proposal_approver_id": {
+          "ref": "base.user_admin"
+        }
+      }
+    },
+    {
+      "id": "psm_0502_demo_department_danang_store",
+      "model": "hr.department",
+      "fields": {
+        "name": "0502 Demo - Danang Store",
+        "x_psm_0502_partner_id": {
+          "ref": "psm_0502_demo_partner_danang_store"
+        },
+        "x_psm_0502_proposal_approver_id": {
+          "ref": "base.user_admin"
+        }
+      }
+    },
+    {
+      "id": "psm_0502_demo_stock_location_maintenance",
+      "model": "stock.location",
+      "fields": {
+        "name": "0502 Demo Maintenance Stock",
+        "usage": "internal",
+        "location_id": {
+          "ref": "stock.stock_location_stock"
+        },
+        "company_id": {
+          "ref": "base.main_company"
+        }
+      }
+    },
+    {
+      "id": "psm_0502_demo_team_cmt",
+      "model": "maintenance.team",
+      "fields": {
+        "name": "0502 Demo CMT Team",
+        "member_ids": {
+          "eval": "[(4, ref('base.user_admin'))]"
+        },
+        "x_psm_0502_lead_user_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_proposal_approver_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_proposal_auto_approve_limit": "500000",
+        "x_psm_0502_material_approver_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_material_auto_approve_limit": "300000",
+        "x_psm_0502_default_vendor_id": {
+          "ref": "psm_0502_demo_vendor_service"
+        },
+        "x_psm_0502_material_picking_type_id": {
+          "ref": "stock.picking_type_internal"
+        },
+        "x_psm_0502_material_source_location_id": {
+          "ref": "stock.stock_location_stock"
+        },
+        "x_psm_0502_material_destination_location_id": {
+          "ref": "psm_0502_demo_stock_location_maintenance"
+        },
+        "x_psm_0502_intake_sla_hours": "4"
+      }
+    },
+    {
+      "id": "psm_0502_demo_category_aircon",
+      "model": "maintenance.equipment.category",
+      "fields": {
+        "name": "0502 Demo - Air Conditioner",
+        "technician_user_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_inspection_checklist_template": "Check power, filter, water drain, fan, and abnormal noise.",
+        "x_psm_0502_inspection_worksheet_template": "Record temperature, pressure, symptom, and risk.",
+        "x_psm_0502_fsm_task_template": "Verify root cause, repair, test under load, and capture final status.",
+        "x_psm_0502_fsm_checklist_template": "Isolate power; inspect drain; clean filter; test cooling.",
+        "x_psm_0502_fsm_material_template": "Drain hose, filter cleaner, electrical tape."
+      }
+    },
+    {
+      "id": "psm_0502_demo_category_printer",
+      "model": "maintenance.equipment.category",
+      "fields": {
+        "name": "0502 Demo - POS Printer",
+        "technician_user_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_inspection_checklist_template": "Check paper sensor, print head, cable, and driver state.",
+        "x_psm_0502_fsm_task_template": "Clean head, replace cable if needed, run print test."
+      }
+    },
+    {
+      "id": "psm_0502_demo_material_drain_hose",
+      "model": "product.product",
+      "fields": {
+        "name": "0502 Demo Drain Hose",
+        "is_storable": {
+          "eval": "True"
+        },
+        "purchase_ok": {
+          "eval": "True"
+        },
+        "standard_price": "120000"
+      }
+    },
+    {
+      "id": "psm_0502_demo_material_print_head",
+      "model": "product.product",
+      "fields": {
+        "name": "0502 Demo POS Print Head",
+        "is_storable": {
+          "eval": "True"
+        },
+        "purchase_ok": {
+          "eval": "True"
+        },
+        "standard_price": "450000"
+      }
+    },
+    {
+      "id": "psm_0502_demo_equipment_aircon_hanoi_front",
+      "model": "maintenance.equipment",
+      "fields": {
+        "name": "0502 Demo - Hanoi Front Aircon",
+        "category_id": {
+          "ref": "psm_0502_demo_category_aircon"
+        },
+        "owner_user_id": {
+          "ref": "base.user_admin"
+        },
+        "maintenance_team_id": {
+          "ref": "psm_0502_demo_team_cmt"
+        },
+        "technician_user_id": {
+          "ref": "base.user_admin"
+        },
+        "serial_no": "0502-HN-AC-001",
+        "model": "Demo AC 1.5HP",
+        "x_psm_0502_department_id": {
+          "ref": "psm_0502_demo_department_hanoi_store"
+        },
+        "x_psm_0502_enable_preventive_schedule": {
+          "eval": "True"
+        },
+        "x_psm_0502_preventive_interval_days": "30",
+        "x_psm_0502_next_preventive_date": {
+          "eval": "DateTime.now().date()"
+        }
+      }
+    },
+    {
+      "id": "psm_0502_demo_equipment_aircon_hcm_kitchen",
+      "model": "maintenance.equipment",
+      "fields": {
+        "name": "0502 Demo - HCM Kitchen Aircon",
+        "category_id": {
+          "ref": "psm_0502_demo_category_aircon"
+        },
+        "owner_user_id": {
+          "ref": "base.user_admin"
+        },
+        "maintenance_team_id": {
+          "ref": "psm_0502_demo_team_cmt"
+        },
+        "technician_user_id": {
+          "ref": "base.user_admin"
+        },
+        "serial_no": "0502-HCM-AC-001",
+        "model": "Demo AC 2.0HP",
+        "x_psm_0502_department_id": {
+          "ref": "psm_0502_demo_department_hcm_store"
+        },
+        "x_psm_0502_enable_preventive_schedule": {
+          "eval": "True"
+        },
+        "x_psm_0502_preventive_interval_days": "45",
+        "x_psm_0502_next_preventive_date": {
+          "eval": "DateTime.now().date()"
+        }
+      }
+    },
+    {
+      "id": "psm_0502_demo_equipment_printer_hanoi",
+      "model": "maintenance.equipment",
+      "fields": {
+        "name": "0502 Demo - Hanoi POS Printer",
+        "category_id": {
+          "ref": "psm_0502_demo_category_printer"
+        },
+        "owner_user_id": {
+          "ref": "base.user_admin"
+        },
+        "maintenance_team_id": {
+          "ref": "psm_0502_demo_team_cmt"
+        },
+        "technician_user_id": {
+          "ref": "base.user_admin"
+        },
+        "serial_no": "0502-HN-PR-001",
+        "x_psm_0502_department_id": {
+          "ref": "psm_0502_demo_department_hanoi_store"
+        }
+      }
+    },
+    {
+      "id": "psm_0502_demo_equipment_aircon_danang",
+      "model": "maintenance.equipment",
+      "fields": {
+        "name": "0502 Demo - Danang Dining Aircon",
+        "category_id": {
+          "ref": "psm_0502_demo_category_aircon"
+        },
+        "owner_user_id": {
+          "ref": "base.user_admin"
+        },
+        "maintenance_team_id": {
+          "ref": "psm_0502_demo_team_cmt"
+        },
+        "technician_user_id": {
+          "ref": "base.user_admin"
+        },
+        "serial_no": "0502-DN-AC-001",
+        "x_psm_0502_department_id": {
+          "ref": "psm_0502_demo_department_danang_store"
+        }
+      }
+    },
+    {
+      "id": "psm_0502_demo_equipment_printer_hcm",
+      "model": "maintenance.equipment",
+      "fields": {
+        "name": "0502 Demo - HCM POS Printer",
+        "category_id": {
+          "ref": "psm_0502_demo_category_printer"
+        },
+        "owner_user_id": {
+          "ref": "base.user_admin"
+        },
+        "maintenance_team_id": {
+          "ref": "psm_0502_demo_team_cmt"
+        },
+        "technician_user_id": {
+          "ref": "base.user_admin"
+        },
+        "serial_no": "0502-HCM-PR-001",
+        "x_psm_0502_department_id": {
+          "ref": "psm_0502_demo_department_hcm_store"
+        }
+      }
+    },
+    {
+      "id": "psm_0502_demo_request_intake",
+      "model": "maintenance.request",
+      "fields": {
+        "name": "0502 Demo - Intake aircon not cooling",
+        "equipment_id": {
+          "ref": "psm_0502_demo_equipment_aircon_hanoi_front"
+        },
+        "maintenance_team_id": {
+          "ref": "psm_0502_demo_team_cmt"
+        },
+        "user_id": {
+          "ref": "base.user_admin"
+        },
+        "owner_user_id": {
+          "ref": "base.user_admin"
+        },
+        "maintenance_type": "corrective",
+        "priority": "2",
+        "request_date": {
+          "eval": "DateTime.now().date()"
+        },
+        "description": "<p>Store reports weak cooling at front counter.</p>",
+        "x_psm_0502_request_source_id": {
+          "ref": "psm_request_source_store_request"
+        },
+        "x_psm_0502_source_system": "manual_request",
+        "x_psm_0502_department_id": {
+          "ref": "psm_0502_demo_department_hanoi_store"
+        },
+        "x_psm_0502_request_type_id": {
+          "ref": "psm_request_type_repair"
+        },
+        "x_psm_0502_intake_problem_detail": "Front counter aircon is running but not cooling.",
+        "x_psm_0502_intake_impact_scope": "degraded",
+        "x_psm_0502_intake_contact_name": "Store Shift Lead",
+        "x_psm_0502_intake_contact_phone": "0902000101"
+      }
+    },
+    {
+      "id": "psm_0502_demo_request_proposed",
+      "model": "maintenance.request",
+      "fields": {
+        "name": "0502 Demo - Proposed drain repair",
+        "equipment_id": {
+          "ref": "psm_0502_demo_equipment_aircon_hcm_kitchen"
+        },
+        "maintenance_team_id": {
+          "ref": "psm_0502_demo_team_cmt"
+        },
+        "user_id": {
+          "ref": "base.user_admin"
+        },
+        "owner_user_id": {
+          "ref": "base.user_admin"
+        },
+        "maintenance_type": "corrective",
+        "priority": "3",
+        "request_date": {
+          "eval": "DateTime.now().date()"
+        },
+        "schedule_date": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_request_source_id": {
+          "ref": "psm_request_source_store_request"
+        },
+        "x_psm_0502_source_system": "manual_request",
+        "x_psm_0502_department_id": {
+          "ref": "psm_0502_demo_department_hcm_store"
+        },
+        "x_psm_0502_request_type_id": {
+          "ref": "psm_request_type_repair"
+        },
+        "x_psm_0502_intake_problem_detail": "Kitchen aircon is leaking water.",
+        "x_psm_0502_intake_impact_scope": "blocked",
+        "x_psm_0502_intake_contact_name": "Kitchen Supervisor",
+        "x_psm_0502_received_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_received_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_inspection_result": "action_needed",
+        "x_psm_0502_inspection_symptom_status": "confirmed",
+        "x_psm_0502_inspection_equipment_status": "degraded",
+        "x_psm_0502_inspection_safety_risk": "medium",
+        "x_psm_0502_inspection_action_urgency": "urgent",
+        "x_psm_0502_inspection_checklist_result": "Drain line clogged.",
+        "x_psm_0502_inspection_worksheet": "Water drain angle needs correction.",
+        "x_psm_0502_inspected_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_inspected_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_plan_note": "Schedule technician for morning slot.",
+        "x_psm_0502_planned_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_planned_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_root_cause_analysis": "Drain hose is clogged and installed with insufficient slope.",
+        "x_psm_0502_technical_solution": "Replace drain hose and test cooling under load.",
+        "x_psm_0502_estimated_cost": "420000",
+        "x_psm_0502_estimated_timeline": "Complete within one morning shift.",
+        "x_psm_0502_treatment_proposal": "Replace drain hose, adjust slope, and test operation.",
+        "x_psm_0502_proposed_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_proposed_at": {
+          "eval": "DateTime.now()"
+        }
+      }
+    },
+    {
+      "id": "psm_0502_demo_request_outside",
+      "model": "maintenance.request",
+      "fields": {
+        "name": "0502 Demo - Outside service printer board",
+        "equipment_id": {
+          "ref": "psm_0502_demo_equipment_printer_hanoi"
+        },
+        "maintenance_team_id": {
+          "ref": "psm_0502_demo_team_cmt"
+        },
+        "user_id": {
+          "ref": "base.user_admin"
+        },
+        "owner_user_id": {
+          "ref": "base.user_admin"
+        },
+        "maintenance_type": "corrective",
+        "priority": "2",
+        "request_date": {
+          "eval": "DateTime.now().date()"
+        },
+        "schedule_date": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_request_source_id": {
+          "ref": "psm_request_source_store_request"
+        },
+        "x_psm_0502_source_system": "manual_request",
+        "x_psm_0502_department_id": {
+          "ref": "psm_0502_demo_department_hanoi_store"
+        },
+        "x_psm_0502_request_type_id": {
+          "ref": "psm_request_type_repair"
+        },
+        "x_psm_0502_intake_problem_detail": "POS printer intermittently loses power.",
+        "x_psm_0502_intake_impact_scope": "degraded",
+        "x_psm_0502_intake_contact_name": "Cashier Lead",
+        "x_psm_0502_received_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_received_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_inspection_result": "action_needed",
+        "x_psm_0502_inspection_symptom_status": "confirmed",
+        "x_psm_0502_inspection_equipment_status": "stopped",
+        "x_psm_0502_inspection_safety_risk": "low",
+        "x_psm_0502_inspection_action_urgency": "normal",
+        "x_psm_0502_inspection_checklist_result": "Power board likely faulty.",
+        "x_psm_0502_inspection_worksheet": "Internal team does not stock replacement board.",
+        "x_psm_0502_inspected_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_inspected_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_planned_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_planned_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_root_cause_analysis": "Printer board requires vendor-level check.",
+        "x_psm_0502_technical_solution": "Send to outside service vendor for diagnosis and repair.",
+        "x_psm_0502_estimated_cost": "1200000",
+        "x_psm_0502_estimated_timeline": "Two working days.",
+        "x_psm_0502_treatment_proposal": "Vendor diagnosis and board replacement if required.",
+        "x_psm_0502_proposed_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_proposed_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_approval_status": "approved",
+        "x_psm_0502_approval_decided_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_approval_decided_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_need_outside_service": {
+          "eval": "True"
+        },
+        "x_psm_0502_service_route": "outside_service",
+        "x_psm_0502_service_route_reason": "specialist_required",
+        "x_psm_0502_service_assessment_note": "Vendor skill is required for board-level repair.",
+        "x_psm_0502_service_assessed_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_service_assessed_at": {
+          "eval": "DateTime.now()"
+        }
+      }
+    },
+    {
+      "id": "psm_0502_demo_request_done",
+      "model": "maintenance.request",
+      "fields": {
+        "name": "0502 Demo - Completed preventive maintenance",
+        "equipment_id": {
+          "ref": "psm_0502_demo_equipment_aircon_danang"
+        },
+        "maintenance_team_id": {
+          "ref": "psm_0502_demo_team_cmt"
+        },
+        "user_id": {
+          "ref": "base.user_admin"
+        },
+        "owner_user_id": {
+          "ref": "base.user_admin"
+        },
+        "maintenance_type": "preventive",
+        "priority": "1",
+        "request_date": {
+          "eval": "DateTime.now().date()"
+        },
+        "schedule_date": {
+          "eval": "DateTime.now()"
+        },
+        "stage_id": {
+          "ref": "stage_psm_0502_done"
+        },
+        "x_psm_0502_request_source_id": {
+          "ref": "psm_request_source_preventive_schedule"
+        },
+        "x_psm_0502_source_system": "preventive_cron",
+        "x_psm_0502_department_id": {
+          "ref": "psm_0502_demo_department_danang_store"
+        },
+        "x_psm_0502_request_type_id": {
+          "ref": "psm_request_type_maintenance"
+        },
+        "x_psm_0502_received_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_received_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_inspection_result": "action_needed",
+        "x_psm_0502_inspection_symptom_status": "confirmed",
+        "x_psm_0502_inspection_equipment_status": "running",
+        "x_psm_0502_inspection_safety_risk": "low",
+        "x_psm_0502_inspection_action_urgency": "normal",
+        "x_psm_0502_inspected_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_inspected_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_planned_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_planned_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_root_cause_analysis": "Scheduled preventive cleaning and check.",
+        "x_psm_0502_technical_solution": "Clean filter and verify cooling.",
+        "x_psm_0502_estimated_cost": "0",
+        "x_psm_0502_estimated_timeline": "Completed in one hour.",
+        "x_psm_0502_treatment_proposal": "Preventive checklist completed.",
+        "x_psm_0502_proposed_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_proposed_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_approval_status": "approved",
+        "x_psm_0502_approval_decided_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_approval_decided_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_need_outside_service": {
+          "eval": "False"
+        },
+        "x_psm_0502_service_route": "internal_handling",
+        "x_psm_0502_service_route_reason": "internal_capable",
+        "x_psm_0502_service_assessed_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_service_assessed_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_has_material_request": {
+          "eval": "False"
+        },
+        "x_psm_0502_material_checked_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_material_checked_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_execution_started_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_execution_started_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_execution_completed_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_execution_completed_at": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_0502_execution_note": "Preventive maintenance completed and tested.",
+        "x_psm_0502_acceptance_result": "accepted",
+        "x_psm_0502_acceptance_contact_name": "Danang Store Lead",
+        "x_psm_0502_acceptance_contact_role": "Store Lead",
+        "x_psm_0502_acceptance_equipment_result": "operating_normally",
+        "x_psm_0502_acceptance_note": "Store accepted the result.",
+        "x_psm_0502_acceptance_reviewed_by_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_0502_acceptance_reviewed_at": {
+          "eval": "DateTime.now()"
+        },
+        "close_date": {
+          "eval": "DateTime.now().date()"
+        }
+      }
+    },
+    {
+      "id": "psm_0502_demo_material_line_drain",
+      "model": "x_psm_request_material_line",
+      "fields": {
+        "x_psm_request_id": {
+          "ref": "psm_0502_demo_request_proposed"
+        },
+        "x_psm_product_id": {
+          "ref": "psm_0502_demo_material_drain_hose"
+        },
+        "x_psm_estimated_qty": "1",
+        "x_psm_estimated_unit_price": "120000",
+        "x_psm_source_type": "warehouse_stock",
+        "x_psm_note": "Replace clogged drain hose."
+      }
+    },
+    {
+      "id": "psm_0502_demo_planning_history",
+      "model": "x_psm_request_planning_history",
+      "fields": {
+        "x_psm_request_id": {
+          "ref": "psm_0502_demo_request_proposed"
+        },
+        "x_psm_revision": "1",
+        "x_psm_change_type": "initial_plan",
+        "x_psm_schedule_date": {
+          "eval": "DateTime.now()"
+        },
+        "x_psm_responsible_user_id": {
+          "ref": "base.user_admin"
+        },
+        "x_psm_plan_note": "Initial demo plan.",
+        "x_psm_change_reason": "Phase 3G demo history."
+      }
+    },
+    {
+      "id": "psm_0502_demo_proposal_history",
+      "model": "x_psm_request_proposal_history",
+      "fields": {
+        "x_psm_request_id": {
+          "ref": "psm_0502_demo_request_proposed"
+        },
+        "x_psm_revision": "1",
+        "x_psm_change_type": "initial_proposal",
+        "x_psm_root_cause_analysis": "Drain hose clogged.",
+        "x_psm_technical_solution": "Replace hose and retest.",
+        "x_psm_estimated_cost": "420000",
+        "x_psm_estimated_timeline": "One morning shift.",
+        "x_psm_change_reason": "Phase 3G demo history."
+      }
+    },
+    {
+      "id": "psm_0502_demo_outside_service_request",
+      "model": "x_psm_outside_service_request",
+      "fields": {
+        "x_psm_request_id": {
+          "ref": "psm_0502_demo_request_outside"
+        },
+        "x_psm_vendor_id": {
+          "ref": "psm_0502_demo_vendor_service"
+        },
+        "x_psm_quotation_received": {
+          "eval": "True"
+        },
+        "x_psm_vendor_quote_amount": "1200000",
+        "x_psm_vendor_lead_time_days": "2",
+        "x_psm_scope_of_work": "Diagnose and repair POS printer power board.",
+        "x_psm_service_type": "repair",
+        "x_psm_state": "quoted"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "hr.department",
+    "maintenance.equipment",
+    "maintenance.equipment.category",
+    "maintenance.request",
+    "maintenance.team",
+    "product.product",
+    "res.partner",
+    "stock.location",
+    "x_psm_outside_service_request",
+    "x_psm_request_material_line",
+    "x_psm_request_planning_history",
+    "x_psm_request_proposal_history"
+  ]
+}

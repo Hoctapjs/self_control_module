@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_report_pif_valuation" model="ir.actions.report">
+            <field name="name">PIF Valuation Report</field>
+            <field name="model">x_psm_pif_object</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">M08_P0801.report_pif_valuation_document</field>
+            <field name="report_file">M08_P0801.report_pif_valuation_document</field>
+            <field name="binding_model_id" ref="model_x_psm_pif_object"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

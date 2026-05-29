@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_psm_0502_outside_service_quotation_request" model="ir.actions.report">
+        <field name="name">0502 Outside Service Quotation Request</field>
+        <field name="model">x_psm_outside_service_request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">M02_P0502.report_psm_0502_outside_service_quotation_request</field>
+        <field name="report_file">M02_P0502.report_psm_0502_outside_service_quotation_request</field>
+        <field name="binding_model_id" ref="model_x_psm_outside_service_request"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'0502 Outside Service - %s' % (object.name)</field>
+    </record>
+
+    <template id="report_psm_0502_outside_service_quotation_request">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>0502 Outside Service Quotation Request</h2>
+                        <table class="table table-sm o_main_table">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Outside Service No.</strong></td>
+                                    <td><span t-field="doc.name"/></td>
+                                    <td><strong>Status</strong></td>
+                                    <td><span t-field="doc.x_psm_state"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Maintenance Request</strong></td>
+                                    <td><span t-field="doc.x_psm_request_id"/></td>
+                                    <td><strong>Equipment</strong></td>
+                                    <td><span t-field="doc.x_psm_equipment_id"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Store Department</strong></td>
+                                    <td><span t-field="doc.x_psm_department_id"/></td>
+                                    <td><strong>Service Type</strong></td>
+                                    <td><span t-field="doc.x_psm_service_type"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Vendor</strong></td>
+                                    <td><span t-field="doc.x_psm_vendor_id"/></td>
+                                    <td><strong>Expected Complete Date</strong></td>
+                                    <td><span t-field="doc.x_psm_expected_complete_date"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Scope of Work</h3>
+                        <p t-if="doc.x_psm_scope_of_work" style="white-space: pre-line;">
+                            <span t-esc="doc.x_psm_scope_of_work"/>
+                        </p>
+                        <p t-if="not doc.x_psm_scope_of_work">No scope of work was recorded.</p>
+
+                        <h3>Vendor Quotation</h3>
+                        <table class="table table-sm o_main_table">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Quotation Received</strong></td>
+                                    <td><span t-field="doc.x_psm_quotation_received"/></td>
+                                    <td><strong>Quote Amount</strong></td>
+                                    <td><span t-field="doc.x_psm_vendor_quote_amount"/></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Currency</strong></td>
+                                    <td><span t-field="doc.x_psm_vendor_quote_currency_id"/></td>
+                                    <td><strong>Lead Time (Days)</strong></td>
+                                    <td><span t-field="doc.x_psm_vendor_lead_time_days"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Approval and Acceptance</h3>
+                        <table class="table table-sm o_main_table">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Purchase Order</strong></td>
+                                    <td><span t-field="doc.x_psm_purchase_order_id"/></td>
+                                    <td><strong>Acceptance Result</strong></td>
+                                    <td><span t-field="doc.x_psm_acceptance_result"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p t-if="doc.x_psm_acceptance_note" style="white-space: pre-line;">
+                            <strong>Acceptance Note:</strong><br/>
+                            <span t-esc="doc.x_psm_acceptance_note"/>
+                        </p>
+
+                        <div class="row mt32">
+                            <div class="col-4 text-center">
+                                <p><strong>Store</strong></p>
+                                <br/><br/>
+                                <p>____________________</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <p><strong>CMT Lead</strong></p>
+                                <br/><br/>
+                                <p>____________________</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <p><strong>Vendor</strong></p>
+                                <br/><br/>
+                                <p>____________________</p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

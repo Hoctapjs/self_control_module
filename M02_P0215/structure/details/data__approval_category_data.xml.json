@@ -1,0 +1,46 @@
+{
+  "file": "data/approval_category_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "approval_category_psm_discipline_company_level",
+      "model": "approval.category",
+      "fields": {
+        "name": "0215 - Phê duyệt kỷ luật cấp công ty",
+        "sequence": "215",
+        "has_date": "optional",
+        "has_period": "no",
+        "has_product": "no",
+        "has_quantity": "no",
+        "has_amount": "optional",
+        "has_reference": "required",
+        "has_partner": "no",
+        "has_payment_method": "no",
+        "has_location": "no",
+        "requirer_document": "optional",
+        "approval_minimum": "1",
+        "approver_sequence": "0"
+      }
+    },
+    {
+      "id": "hr.group_hr_manager",
+      "model": "res.groups",
+      "fields": {
+        "implied_ids": {
+          "eval": "[(4, ref('approvals.group_approval_user'))]"
+        }
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "approval.category",
+    "res.groups"
+  ]
+}

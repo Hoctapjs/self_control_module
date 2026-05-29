@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Transient form view for MktPafRejectWizard -->
+    <record id="mkt_0901_view_paf_reject_wizard_form" model="ir.ui.view">
+        <field name="name">mkt_paf.reject.wizard.form</field>
+        <field name="model">mkt_paf.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Lý do từ chối PAF">
+                <sheet>
+                    <group>
+                        <field name="approval_request_id" invisible="1"/>
+                        <field name="paf_request_id" invisible="1"/>
+                        <field name="reason" placeholder="Nhập lý do từ chối cụ thể tại đây..." required="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_confirm_reject" string="Xác nhận từ chối" type="object" class="btn-danger"/>
+                    <button string="Hủy bỏ" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

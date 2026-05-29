@@ -1,0 +1,689 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="view_psm_0213_resignation_portal_template" name="Form yêu cầu nghỉ việc">
+        <t t-call="portal.portal_layout">
+            <style>
+                .o_psm_0213_portal {
+                    color: var(--foreground, #1f2937);
+                }
+
+                .o_psm_0213_portal .card,
+                .o_psm_0213_portal .alert,
+                .o_psm_0213_portal .form-control,
+                .o_psm_0213_portal .form-select {
+                    border-color: var(--border, #e5e7eb) !important;
+                }
+
+                .o_psm_0213_portal .card {
+                    background: var(--card, #ffffff) !important;
+                    color: var(--card-foreground, var(--foreground, #1f2937)) !important;
+                    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+                }
+
+                .o_psm_0213_portal .text-dark,
+                .o_psm_0213_portal .fw-bold.text-dark,
+                .o_psm_0213_portal .fw-semibold,
+                .o_psm_0213_portal h3,
+                .o_psm_0213_portal h4,
+                .o_psm_0213_portal h5,
+                .o_psm_0213_portal h6,
+                .o_psm_0213_portal label,
+                .o_psm_0213_portal strong {
+                    color: var(--foreground, #1f2937) !important;
+                }
+
+                .o_psm_0213_portal .text-muted,
+                .o_psm_0213_portal small {
+                    color: var(--muted-foreground, #6b7280) !important;
+                }
+
+                .o_psm_0213_portal .form-control,
+                .o_psm_0213_portal .form-select,
+                .o_psm_0213_portal input[type="text"],
+                .o_psm_0213_portal input[type="date"] {
+                    background: var(--card, #ffffff) !important;
+                    color: var(--foreground, #1f2937) !important;
+                }
+
+                .o_psm_0213_portal .bg-light {
+                    background: color-mix(in srgb, var(--card, #ffffff) 88%, var(--muted, #f3f4f6)) !important;
+                    color: var(--foreground, #1f2937) !important;
+                }
+
+                .o_psm_0213_portal .theme-task-card {
+                    overflow: hidden;
+                    background: var(--card, #ffffff) !important;
+                    color: var(--card-foreground, var(--foreground, #1f2937)) !important;
+                    border: 1px solid var(--border, #e5e7eb) !important;
+                }
+
+                .o_psm_0213_portal .theme-task-card .card-body,
+                .o_psm_0213_portal .theme-task-card .d-flex,
+                .o_psm_0213_portal .theme-task-card h6,
+                .o_psm_0213_portal .theme-task-card small,
+                .o_psm_0213_portal .theme-task-card .text-dark,
+                .o_psm_0213_portal .theme-task-card .text-muted {
+                    background: transparent !important;
+                }
+
+                .o_psm_0213_portal .theme-task-card-inactive {
+                    background: color-mix(in srgb, var(--card, #ffffff) 82%, var(--background, #fdfaf5) 18%) !important;
+                    color: var(--muted-foreground, #6b7280) !important;
+                    opacity: 1 !important;
+                }
+
+                .o_psm_0213_portal .theme-task-card-inactive .card-body,
+                .o_psm_0213_portal .theme-task-card-inactive h6,
+                .o_psm_0213_portal .theme-task-card-inactive small,
+                .o_psm_0213_portal .theme-task-card-inactive .text-muted,
+                .o_psm_0213_portal .theme-task-card-inactive .text-dark,
+                .o_psm_0213_portal .theme-task-card-inactive .theme-task-owner {
+                    background: transparent !important;
+                    color: var(--muted-foreground, #6b7280) !important;
+                }
+
+                .o_psm_0213_portal .theme-task-meta {
+                    background: color-mix(in srgb, var(--card, #ffffff) 82%, var(--background, #fdfaf5) 18%) !important;
+                    border: 1px solid var(--border, #e5e7eb);
+                    color: var(--muted-foreground, #6b7280) !important;
+                }
+
+                .o_psm_0213_portal .theme-task-owner {
+                    background: color-mix(in srgb, var(--card, #ffffff) 82%, var(--background, #fdfaf5) 18%) !important;
+                    color: var(--muted-foreground, #6b7280) !important;
+                    border: 1px solid var(--border, #e5e7eb);
+                    font-size: 0.7rem;
+                }
+
+                .o_psm_0213_portal .theme-survey-card {
+                    background: color-mix(in srgb, var(--card, #ffffff) 84%, var(--background, #fdfaf5) 16%) !important;
+                    border: 1px solid color-mix(in srgb, var(--primary, #bd0017) 18%, var(--border, #e5e7eb)) !important;
+                }
+
+                .o_psm_0213_portal .theme-survey-card .card-body,
+                .o_psm_0213_portal .theme-survey-card .text-primary,
+                .o_psm_0213_portal .theme-survey-card .card-title,
+                .o_psm_0213_portal .theme-survey-card .card-text {
+                    background: transparent !important;
+                }
+
+                .o_psm_0213_portal .theme-survey-title {
+                    color: #b11f14 !important;
+                    font-family: "Roboto", Arial, sans-serif !important;
+                    font-weight: 800 !important;
+                }
+
+                .o_psm_0213_portal h3,
+                .o_psm_0213_portal h4,
+                .o_psm_0213_portal h5,
+                .o_psm_0213_portal h6,
+                .o_psm_0213_portal .card-title {
+                    color: #b11f14 !important;
+                    font-family: "Roboto", Arial, sans-serif !important;
+                    font-weight: 700 !important;
+                }
+
+                .o_psm_0213_portal .theme-task-list-title {
+                    color: #b11f14 !important;
+                    font-family: "Roboto", Arial, sans-serif !important;
+                    font-size: 2rem !important;
+                    font-weight: 800 !important;
+                    line-height: 1.2;
+                }
+
+                .o_psm_0213_portal .theme-task-card h6 {
+                    color: #b11f14 !important;
+                    font-family: "Roboto", Arial, sans-serif !important;
+                    font-weight: 700 !important;
+                }
+
+                .o_psm_0213_portal .theme-task-card h6.text-dark,
+                .o_psm_0213_portal .theme-task-card h6.text-muted,
+                .o_psm_0213_portal .theme-task-card .theme-task-owner {
+                    color: #b11f14 !important;
+                    font-family: "Roboto", Arial, sans-serif !important;
+                }
+
+                .o_psm_0213_portal .theme-task-card .theme-task-owner .fa {
+                    color: #b11f14 !important;
+                    font-family: FontAwesome !important;
+                }
+
+                .o_psm_0213_portal .theme-task-card .theme-task-owner {
+                    font-weight: 600 !important;
+                }
+
+                .o_psm_0213_portal .theme-task-card-inactive h6 {
+                    color: #8f1a11 !important;
+                }
+
+                .o_psm_0213_portal .psm-alert--approved {
+                    border-color: #198754 !important;
+                    color: #198754 !important;
+                }
+
+                .o_psm_0213_portal .psm-alert--approved i,
+                .o_psm_0213_portal .psm-alert--approved strong {
+                    color: #198754 !important;
+                }
+
+                .o_psm_0213_portal .theme-commit-panel {
+                    border: 1px solid #f2d7ca;
+                    border-radius: 20px;
+                    background: linear-gradient(180deg, #fff8f4 0%, #ffffff 100%);
+                    box-shadow: 0 14px 36px rgba(128, 54, 22, 0.08);
+                    overflow: hidden;
+                }
+
+                .o_psm_0213_portal .theme-commit-panel-intro {
+                    color: #54423a;
+                }
+
+                .o_psm_0213_portal .theme-commit-item {
+                    border-radius: 16px;
+                    background: #fff;
+                    border: 1px solid #f1e3db;
+                }
+
+                .o_psm_0213_portal .theme-commit-item-text {
+                    line-height: 1.8;
+                    color: #2f241f;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal,
+                html[data-bs-theme='dark'] .o_psm_0213_portal {
+                    color: #f5f5f4;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .card,
+                html[data-theme='dark'] .o_psm_0213_portal .alert,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .card,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .alert {
+                    background: linear-gradient(180deg, #2a2623 0%, #1b1917 100%) !important;
+                    color: #f5f5f4 !important;
+                    border-color: rgba(255, 255, 255, 0.08) !important;
+                    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .text-dark,
+                html[data-theme='dark'] .o_psm_0213_portal .fw-bold.text-dark,
+                html[data-theme='dark'] .o_psm_0213_portal .fw-semibold,
+                html[data-theme='dark'] .o_psm_0213_portal h3,
+                html[data-theme='dark'] .o_psm_0213_portal h4,
+                html[data-theme='dark'] .o_psm_0213_portal h5,
+                html[data-theme='dark'] .o_psm_0213_portal h6,
+                html[data-theme='dark'] .o_psm_0213_portal label,
+                html[data-theme='dark'] .o_psm_0213_portal strong,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .text-dark,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .fw-bold.text-dark,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .fw-semibold,
+                html[data-bs-theme='dark'] .o_psm_0213_portal h3,
+                html[data-bs-theme='dark'] .o_psm_0213_portal h4,
+                html[data-bs-theme='dark'] .o_psm_0213_portal h5,
+                html[data-bs-theme='dark'] .o_psm_0213_portal h6,
+                html[data-bs-theme='dark'] .o_psm_0213_portal label,
+                html[data-bs-theme='dark'] .o_psm_0213_portal strong {
+                    color: #f5f5f4 !important;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .text-muted,
+                html[data-theme='dark'] .o_psm_0213_portal small,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .text-muted,
+                html[data-bs-theme='dark'] .o_psm_0213_portal small {
+                    color: #d6d3d1 !important;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .form-control,
+                html[data-theme='dark'] .o_psm_0213_portal .form-select,
+                html[data-theme='dark'] .o_psm_0213_portal input[type="text"],
+                html[data-theme='dark'] .o_psm_0213_portal input[type="date"],
+                html[data-bs-theme='dark'] .o_psm_0213_portal .form-control,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .form-select,
+                html[data-bs-theme='dark'] .o_psm_0213_portal input[type="text"],
+                html[data-bs-theme='dark'] .o_psm_0213_portal input[type="date"] {
+                    background: #4b4743 !important;
+                    color: #f5f5f4 !important;
+                    border-color: #6b655f !important;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .bg-light,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .bg-light {
+                    background: #3a3632 !important;
+                    color: #f5f5f4 !important;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive,
+                html[data-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive .card-body,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive .card-body {
+                    background: color-mix(in srgb, var(--card, #1f1b18) 88%, var(--background, #151413) 12%) !important;
+                    color: var(--muted-foreground, #d6d3d1) !important;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive h6,
+                html[data-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive .text-muted,
+                html[data-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive small,
+                html[data-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive .badge,
+                html[data-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive .theme-task-owner,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive h6,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive .text-muted,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive small,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive .badge,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-task-card-inactive .theme-task-owner {
+                    color: var(--muted-foreground, #d6d3d1) !important;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .theme-survey-card,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-survey-card {
+                    background: color-mix(in srgb, var(--card, #1f1b18) 90%, var(--background, #151413) 10%) !important;
+                    border-color: color-mix(in srgb, var(--primary, #da291c) 30%, rgba(255, 255, 255, 0.08)) !important;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .theme-survey-card .text-primary,
+                html[data-theme='dark'] .o_psm_0213_portal .theme-survey-title,
+                html[data-theme='dark'] .o_psm_0213_portal .theme-survey-card .card-text,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-survey-card .text-primary,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-survey-title,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-survey-card .card-text {
+                    color: #f5f5f4 !important;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .theme-commit-panel,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-commit-panel {
+                    background: linear-gradient(180deg, #2a2623 0%, #1b1917 100%);
+                    border-color: rgba(255, 255, 255, 0.08);
+                    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .theme-commit-panel-intro,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-commit-panel-intro {
+                    color: #d6d3d1;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .theme-commit-item,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-commit-item {
+                    background: rgba(255, 255, 255, 0.04);
+                    border-color: rgba(255, 255, 255, 0.08);
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .theme-commit-item-text,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-commit-item-text {
+                    color: #f5f5f4;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal h3,
+                html[data-theme='dark'] .o_psm_0213_portal h4,
+                html[data-theme='dark'] .o_psm_0213_portal h5,
+                html[data-theme='dark'] .o_psm_0213_portal h6,
+                html[data-theme='dark'] .o_psm_0213_portal .card-title,
+                html[data-theme='dark'] .o_psm_0213_portal .theme-survey-title,
+                html[data-theme='dark'] .o_psm_0213_portal .theme-task-list-title,
+                html[data-theme='dark'] .o_psm_0213_portal .theme-task-card h6,
+                html[data-bs-theme='dark'] .o_psm_0213_portal h3,
+                html[data-bs-theme='dark'] .o_psm_0213_portal h4,
+                html[data-bs-theme='dark'] .o_psm_0213_portal h5,
+                html[data-bs-theme='dark'] .o_psm_0213_portal h6,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .card-title,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-survey-title,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-task-list-title,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .theme-task-card h6 {
+                    color: #ff5a4f !important;
+                    font-family: "Roboto", Arial, sans-serif !important;
+                }
+
+                html[data-theme='dark'] .o_psm_0213_portal .psm-alert--approved,
+                html[data-theme='dark'] .o_psm_0213_portal .psm-alert--approved i,
+                html[data-theme='dark'] .o_psm_0213_portal .psm-alert--approved strong,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .psm-alert--approved,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .psm-alert--approved i,
+                html[data-bs-theme='dark'] .o_psm_0213_portal .psm-alert--approved strong {
+                    color: #22c55e !important;
+                }
+            </style>
+            <div id="wrap" class="container mt-4 o_psm_0213_portal">
+                <div class="card p-4 shadow-sm">
+                    <!-- <h3 class="mb-4">
+                        <i class="fa fa-sign-out text-danger me-2"/>
+                        Yêu cầu nghỉ việc
+                    </h3> -->
+                    <t t-if="portal_error">
+                        <div class="alert alert-danger psm-alert psm-alert--danger mt-4 mb-4">
+                            <i class="fa fa-warning me-2"/>
+                            <strong>Lỗi:</strong> <t t-esc="portal_error"/>
+                        </div>
+                    </t>
+
+                    <t t-if="not portal_error and (success or (resignation_request and resignation_request.request_status in ['pending', 'approved', 'done']))">
+                        <div class="mb-4">
+                            <div t-if="resignation_request.request_status == 'pending'" class="alert alert-info psm-alert psm-alert--info">
+                                <i class="fa fa-clock-o me-2"/> <strong>Đã gửi yêu cầu:</strong> Đơn của bạn đang chờ quản lý <strong><t t-esc="resignation_request.x_psm_0213_employee_id.parent_id.name"/></strong> phê duyệt.
+                            </div>
+                            <div t-elif="resignation_request.request_status == 'approved'" class="alert alert-success psm-alert psm-alert--success psm-alert--approved">
+                                <i class="fa fa-check-circle me-2"/> <strong>Đã phê duyệt:</strong> Đơn nghỉ việc đã được chấp thuận. Vui lòng hoàn thành các đầu việc bên dưới.
+                            </div>
+                            <div t-elif="resignation_request.request_status == 'done'" class="alert alert-primary psm-alert psm-alert--success">
+                                <i class="fa fa-flag-checkered me-2"/> <strong>Hoàn tất:</strong> Quy trình nghỉ việc của bạn đã hoàn thành. Chúc bạn thành công trên chặng đường mới!
+                            </div>
+                        </div>
+
+                            <!-- Checkbox Checklist for Portal Users -->
+                        <div t-if="survey_url or activities" class="mt-4 mb-4">
+                            <h4 class="text-primary mb-4 theme-task-list-title">
+                                <i class="fa fa-list-check me-2"/>Danh sách công việc của bạn
+                            </h4>
+                            
+                            <!-- Exit Survey Highlight -->
+                            <div t-if="survey_url" class="card border-primary mb-4 shadow-sm bg-light theme-survey-card">
+                                <div class="card-body d-flex justify-content-between align-items-center p-3">
+                                    <div>
+                                        <h5 class="card-title text-primary fw-bold mb-1 theme-survey-title"><i class="fa fa-wpforms me-2"/>Khảo sát Nghỉ việc (Exit Interview)</h5>
+                                        <p class="card-text small text-muted mb-0">Vui lòng hoàn thành khảo sát này trước ngày nghỉ chính thức.</p>
+                                    </div>
+                                    <a t-att-href="survey_url" target="_blank" class="btn btn-primary d-flex align-items-center shadow-sm">
+                                        Làm khảo sát <i class="fa fa-external-link ms-2"/>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3">
+                                <t t-foreach="activities" t-as="activity">
+                                    <div class="col-12">
+                                        <div t-attf-class="card border-0 shadow-sm h-100 theme-task-card #{'theme-task-card-inactive' if not activity.active else ''}" style="border-left: 4px solid #dee2e6 !important;">
+                                            <t t-if="activity.active">
+                                                <t t-set="border_color" t-value="'#0d6efd' if activity.user_id == request.env.user else '#6c757d'"/>
+                                                <div t-attf-style="position: absolute; left: -4px; top: 0; bottom: 0; width: 4px; background-color: #{border_color}; border-radius: 4px 0 0 4px;"/>
+                                            </t>
+                                            
+                                            <div class="card-body p-2 px-3">
+                                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                                    <!-- Title (Left) -->
+                                                    <div class="flex-grow-1">
+                                                        <h6 t-attf-class="fw-bold mb-0 #{'text-muted text-decoration-line-through' if not activity.active else 'text-dark'}">
+                                                            <t t-esc="activity.summary or activity.activity_type_id.name"/>
+                                                        </h6>
+                                                    </div>
+
+                                                    <!-- Deadline & Action (Unified Unit) -->
+                                                    <div class="d-flex align-items-center flex-shrink-0 ms-2" style="min-height: 24px;">
+                                                        <div class="d-flex align-items-center rounded-pill px-2 py-1 theme-task-meta">
+                                                            <!-- Deadline Label -->
+                                                            <small t-if="activity.date_deadline" t-attf-class="fw-normal mb-0 #{'text-danger fw-bold' if activity.state == 'overdue' and activity.active else 'text-dark'}" style="font-size: 0.75rem; white-space: nowrap;">
+                                                                <i class="fa fa-calendar-check-o me-1"/>Hạn: <t t-esc="activity.date_deadline"/>
+                                                            </small>
+
+                                                            <!-- Small Separator if both exist -->
+                                                            <div t-if="activity.date_deadline and (not activity.active or (activity.user_id == request.env.user and activity.active))" class="mx-2" style="width: 1px; height: 10px; background-color: #dee2e6;"/>
+
+                                                            <!-- Action: Done Button -->
+                                                            <t t-if="activity.user_id == request.env.user and activity.active">
+                                                                <form action="/my/resignation/ops/activity/done" method="post" class="m-0 d-inline">
+                                                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                                                    <input type="hidden" name="activity_id" t-att-value="activity.id"/>
+                                                                    <button type="submit" class="btn p-0 text-success fw-bold border-0 d-flex align-items-center" style="font-size: 0.75rem; transition: transform 0.2s;">
+                                                                        <i class="fa fa-check me-1"/>Xác nhận thực hiện
+                                                                    </button>
+                                                                </form>
+                                                            </t>
+
+                                                            <!-- Action: Done Icon -->
+                                                            <t t-if="not activity.active">
+                                                                <div class="text-success d-flex align-items-center">
+                                                                    <i class="fa fa-check-circle" style="font-size: 0.9rem;"/>
+                                                                </div>
+                                                            </t>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Description -->
+                                                <div t-if="activity.note" t-attf-class="small mb-2 #{'text-muted' if not activity.active else 'text-dark'}" style="line-height: 1.5; padding-right: 40px; font-weight: 450;">
+                                                    <t t-out="activity.note"/>
+                                                </div>
+                                                
+                                                <!-- Responsible Badge -->
+                                                <div t-if="activity.user_id != request.env.user" class="d-flex">
+                                                    <span class="badge rounded-pill fw-normal px-2 py-1 theme-task-owner">
+                                                        <i class="fa fa-user-o me-1"/> Phụ trách: <t t-esc="activity.user_id.name"/>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-5">  
+                            <a href="/my" class="btn btn-secondary">
+                                <i class="fa fa-arrow-left me-2"/>Quay lại Portal
+                            </a>
+                        </div>
+                    </t>
+                    <t t-elif="not portal_error">
+                        <t t-if="not employee">
+                            <div class="alert alert-danger psm-alert psm-alert--danger mt-4 mb-4">
+                                <i class="fa fa-warning me-2"/>
+                                <strong>Lỗi:</strong> Không tìm thấy thông tin nhân viên liên kết với tài khoản này. Vui lòng liên hệ bộ phận IT hoặc HR.
+                            </div>
+                        </t>
+
+                        <form t-if="employee" action="/my/resignation/submit" method="post" class="psm-resignation-form">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                        <!-- Biểu ngữ -->
+                        <div class="psm-form-header mb-4">
+                            <!-- <div class="psm-form-header__title">
+                                <i class="fa fa-sign-out me-2"/>
+                                Gửi yêu cầu nghỉ việc
+                            </div> -->
+                            <!-- <div class="psm-form-header__seal">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                            <div class="psm-form-header__tagline">Độc lập - Tự do - Hạnh phúc</div> -->
+                            <div class="psm-form-header__subtitle">Đơn Xin Nghỉ Việc - Khối Cửa Hàng</div>
+                        </div>
+
+                        <nav class="psm-form-progress mb-4" aria-label="Tiến trình đơn xin nghỉ việc">
+                            <a href="#psm-section-1" class="psm-form-progress__dot is-active" aria-current="step">
+                                <span class="psm-form-progress__number">1</span>
+                                <span>Thông tin</span>
+                            </a>
+                            <a href="#psm-section-2" class="psm-form-progress__dot">
+                                <span class="psm-form-progress__number">2</span>
+                                <span>Nghỉ việc</span>
+                            </a>
+                            <a href="#psm-section-3" class="psm-form-progress__dot">
+                                <span class="psm-form-progress__number">3</span>
+                                <span>Xác nhận</span>
+                            </a>
+                        </nav>
+                        
+                        <!-- Thông tin nhân viên -->
+                        <section class="psm-form-section" id="psm-section-1">
+                            <div class="psm-section__head">
+                                <span class="psm-section__index">1</span>
+                                <h5 class="psm-section__title">
+                                    <i class="fa fa-user me-2"/>Thông tin nhân viên
+                                </h5>
+                            </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Họ tên nhân viên</label>
+                                <input type="text" class="form-control psm-form-control" 
+                                    t-att-value="employee.name or partner.name" 
+                                    readonly="1"/>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Ngày sinh</label>
+                                <input type="text" class="form-control psm-form-control" 
+                                    t-att-value="employee.birthday or 'N/A'" 
+                                    readonly="1"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Quốc tịch</label>
+                                <input type="text" class="form-control psm-form-control" 
+                                    t-att-value="employee.country_id.name or 'N/A'" 
+                                    readonly="1"/>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">CCCD</label>
+                                <input type="text" class="form-control psm-form-control" 
+                                    t-att-value="employee.identification_id or 'N/A'" 
+                                    readonly="1"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Phòng ban</label>
+                                <input type="text" class="form-control psm-form-control" 
+                                    t-att-value="employee.department_id.name or 'N/A'" 
+                                    readonly="1"/>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Chức vụ</label>
+                                <input type="text" class="form-control psm-form-control" 
+                                    t-att-value="employee.job_id.name or 'N/A'" 
+                                    readonly="1"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Line Manager</label>
+                                    <input type="text" class="form-control psm-form-control" 
+                                        t-att-value="employee.parent_id.name or 'Chưa có Line Manager'" 
+                                        readonly="1"/>
+                                    <input type="hidden" name="approver_user_id" 
+                                        t-att-value="employee.parent_id.user_id.id"/>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Email công việc</label>
+                                <input type="text" class="form-control psm-form-control" 
+                                    t-att-value="employee.work_email or 'N/A'" 
+                                    readonly="1"/>
+                            </div>
+                        </div>
+                        </section>
+
+                        
+                        <!-- <p class="mt-4 mb-4" style="font-size: 1rem;">
+                            Nay tôi làm đơn này, kính xin quý công ty cho tôi được nghỉ việc.
+                        </p> -->
+
+                        <section class="psm-form-section" id="psm-section-2">
+                            <div class="psm-section__head">
+                                <span class="psm-section__index">2</span>
+                                <h5 class="psm-section__title">
+                                    <i class="fa fa-edit me-2"/>Thông tin nghỉ việc
+                                </h5>
+                            </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Ngày nghỉ dự kiến</label>
+                                <input type="date"
+                                    name="resignation_date"
+                                    class="form-control psm-form-control"
+                                    required="required"/>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Loại nghỉ việc</label>
+                                <select name="resignation_type_id" class="form-select psm-form-control" required="required">
+                                    <option value="">-- Chọn loại nghỉ việc --</option>
+                                    <t t-foreach="resignation_types" t-as="resignation_type">
+                                        <option t-att-value="resignation_type.id">
+                                            <t t-esc="resignation_type.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Mô tả lý do nghỉ việc</label>
+                            <textarea name="resignation_reason"
+                                class="form-control psm-form-control"
+                                rows="4"
+                                placeholder="Vui lòng nhập mô tả chi tiết cho lý do nghỉ việc đã chọn"
+                                required="required"/>
+                        </div>
+                        </section>
+                        
+                        <!-- Lý do nghỉ việc -->
+                        <section class="psm-form-section" id="psm-section-3">
+                            <div class="psm-section__head">
+                                <span class="psm-section__index">3</span>
+                                <h5 class="psm-section__title">
+                                    <i class="fa fa-shield me-2"/>Xác nhận và cam kết
+                                </h5>
+                            </div>
+
+                        <!-- Quy định và cam kết -->
+                        <div class="mt-4 mb-4 theme-commit-panel psm-commitment-panel">
+                            <div class="psm-commitment-panel__title">
+                                <i class="fa fa-exclamation-triangle me-2"/>
+                                <span>Bước xác nhận cuối</span>
+                                <div>Vui lòng đọc kỹ các điều khoản trước khi gửi yêu cầu nghỉ việc</div>
+                            </div>
+                            <div class="p-4 p-md-4">
+                                <p class="mb-4 theme-commit-panel-intro psm-commitment-panel__intro">
+                                    Nội dung dưới đây giữ nguyên ý nghĩa cam kết hiện tại, chỉ được trình bày lại rõ ràng hơn để bạn dễ đọc và xác nhận.
+                                </p>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-start gap-3 p-3 theme-commit-item psm-commitment-item">
+                                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center psm-commitment-item__num">1</div>
+                                        <div class="theme-commit-item-text psm-commitment-item__text"><strong>Tuân thủ quy trình nghỉ việc</strong> của công ty và các trách nhiệm, chế độ thanh toán khi chấm dứt hợp đồng lao động, bao gồm nhưng không giới hạn quy định hoàn trả đồng phục, tài sản, quyết toán lương, nhận sổ/tờ rời BHXH &amp; Quyết định nghỉ việc.</div>
+                                    </div>
+                                    <div class="d-flex align-items-start gap-3 p-3 theme-commit-item psm-commitment-item">
+                                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center psm-commitment-item__num">2</div>
+                                        <div class="theme-commit-item-text psm-commitment-item__text"><strong>Nếu chấm dứt làm việc trước thời hạn cho phép</strong>, công ty có quyền khấu trừ vào bất kỳ khoản thanh toán nào của tôi một khoản tương ứng với số ngày nghỉ trước hạn.</div>
+                                    </div>
+                                    <div class="d-flex align-items-start gap-3 p-3 theme-commit-item psm-commitment-item">
+                                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center psm-commitment-item__num">3</div>
+                                        <div class="theme-commit-item-text psm-commitment-item__text"><strong>Cho phép Công ty lưu trữ Dữ liệu cá nhân</strong> sau khi các bên kết thúc mối quan hệ lao động, hoặc sau khi các bên chấm dứt hợp đồng là năm (5) năm, tùy trường hợp pháp luật yêu cầu một thời gian dài hơn.</div>
+                                    </div>
+                                    <div class="d-flex align-items-start gap-3 p-3 theme-commit-item psm-commitment-item">
+                                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center psm-commitment-item__num">4</div>
+                                        <div class="theme-commit-item-text psm-commitment-item__text"><strong>Cam kết bảo mật thông tin</strong> theo Thỏa thuận Bảo mật thông tin đã ký tại thời điểm ký kết hợp đồng lao động với công ty, cũng như các thông tin mật hoặc thông tin cần bảo mật mà cá nhân có được trong quá trình làm việc tại công ty.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Alert -->
+                        <div class="alert alert-warning psm-alert psm-alert--warning mt-4">
+                            <i class="fa fa-exclamation-triangle me-3"/>
+                            <strong>Lưu ý:</strong> Sau khi gửi yêu cầu, Line Manager của bạn sẽ nhận được thông báo 
+                            và xem xét yêu cầu nghỉ việc. Bạn sẽ được thông báo kết quả qua email.
+                        </div>
+                        </section>
+                        
+                        <!-- Buttons -->
+                        <div class="mt-4 d-flex gap-3 flex-wrap">
+                            <button type="submit" class="psm-btn psm-btn--danger" t-att-disabled="'disabled' if not employee else None">
+                                <i class="fa fa-paper-plane me-2"/>Gửi yêu cầu nghỉ việc
+                            </button>
+                            <a href="/my" class="psm-btn psm-btn--secondary">
+                                <i class="fa fa-arrow-left me-2"/>Quay lại
+                            </a>
+                        </div>
+                    </form>
+                    </t>
+
+                    <button type="button"
+                            class="psm-scroll-top"
+                            aria-label="Lên đầu trang"
+                            title="Lên đầu trang">
+                        <i class="fa fa-arrow-up"/>
+                    </button>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+
+</odoo>

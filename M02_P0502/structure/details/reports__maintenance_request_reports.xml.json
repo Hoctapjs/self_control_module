@@ -1,0 +1,187 @@
+{
+  "file": "reports/maintenance_request_reports.xml",
+  "type": "xml",
+  "bucket": "reports",
+  "summary": "13 templates",
+  "records": [
+    {
+      "id": "action_report_psm_0502_request_document",
+      "model": "ir.actions.report",
+      "fields": {
+        "name": "0502 Request Document",
+        "model": "maintenance.request",
+        "report_type": "qweb-pdf",
+        "report_name": "M02_P0502.report_psm_0502_request_document",
+        "report_file": "M02_P0502.report_psm_0502_request_document",
+        "binding_model_id": {
+          "ref": "maintenance.model_maintenance_request"
+        },
+        "binding_type": "report",
+        "print_report_name": "'0502 Request - %s' % (object.name)"
+      }
+    },
+    {
+      "id": "action_report_psm_0502_inspection_report",
+      "model": "ir.actions.report",
+      "fields": {
+        "name": "0502 Inspection Report",
+        "model": "maintenance.request",
+        "report_type": "qweb-pdf",
+        "report_name": "M02_P0502.report_psm_0502_inspection_report",
+        "report_file": "M02_P0502.report_psm_0502_inspection_report",
+        "binding_model_id": {
+          "ref": "maintenance.model_maintenance_request"
+        },
+        "binding_type": "report",
+        "print_report_name": "'0502 Inspection - %s' % (object.x_psm_0502_inspection_doc_no or object.name)"
+      }
+    },
+    {
+      "id": "action_report_psm_0502_treatment_proposal",
+      "model": "ir.actions.report",
+      "fields": {
+        "name": "0502 Treatment Proposal",
+        "model": "maintenance.request",
+        "report_type": "qweb-pdf",
+        "report_name": "M02_P0502.report_psm_0502_treatment_proposal",
+        "report_file": "M02_P0502.report_psm_0502_treatment_proposal",
+        "binding_model_id": {
+          "ref": "maintenance.model_maintenance_request"
+        },
+        "binding_type": "report",
+        "print_report_name": "'0502 Proposal - %s' % (object.x_psm_0502_proposal_doc_no or object.name)"
+      }
+    },
+    {
+      "id": "action_report_psm_0502_material_issue_request",
+      "model": "ir.actions.report",
+      "fields": {
+        "name": "0502 Material Issue Request",
+        "model": "maintenance.request",
+        "report_type": "qweb-pdf",
+        "report_name": "M02_P0502.report_psm_0502_material_issue_request",
+        "report_file": "M02_P0502.report_psm_0502_material_issue_request",
+        "binding_model_id": {
+          "ref": "maintenance.model_maintenance_request"
+        },
+        "binding_type": "report",
+        "print_report_name": "'0502 Material Issue - %s' % (object.x_psm_0502_material_issue_doc_no or object.name)"
+      }
+    },
+    {
+      "id": "action_report_psm_0502_acceptance_record",
+      "model": "ir.actions.report",
+      "fields": {
+        "name": "0502 Acceptance Record",
+        "model": "maintenance.request",
+        "report_type": "qweb-pdf",
+        "report_name": "M02_P0502.report_psm_0502_acceptance_record",
+        "report_file": "M02_P0502.report_psm_0502_acceptance_record",
+        "binding_model_id": {
+          "ref": "maintenance.model_maintenance_request"
+        },
+        "binding_type": "report",
+        "print_report_name": "'0502 Acceptance - %s' % (object.x_psm_0502_acceptance_doc_no or object.name)"
+      }
+    },
+    {
+      "id": "action_report_psm_0502_document_pack",
+      "model": "ir.actions.report",
+      "fields": {
+        "name": "0502 Document Pack",
+        "model": "x_psm_0502_document_pack_wizard",
+        "report_type": "qweb-pdf",
+        "report_name": "M02_P0502.report_psm_0502_document_pack",
+        "report_file": "M02_P0502.report_psm_0502_document_pack",
+        "print_report_name": "'0502 Document Pack - %s' % (object.x_psm_request_id.name)"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [
+    {
+      "id": "psm_0502_signature_block",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    },
+    {
+      "id": "psm_0502_request_summary",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    },
+    {
+      "id": "psm_0502_intake_section",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    },
+    {
+      "id": "psm_0502_inspection_section",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    },
+    {
+      "id": "psm_0502_proposal_section",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    },
+    {
+      "id": "psm_0502_material_section",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    },
+    {
+      "id": "psm_0502_execution_acceptance_section",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    },
+    {
+      "id": "report_psm_0502_request_document",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    },
+    {
+      "id": "report_psm_0502_inspection_report",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    },
+    {
+      "id": "report_psm_0502_treatment_proposal",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    },
+    {
+      "id": "report_psm_0502_material_issue_request",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    },
+    {
+      "id": "report_psm_0502_acceptance_record",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    },
+    {
+      "id": "report_psm_0502_document_pack",
+      "name": null,
+      "inherit_id": null,
+      "file": "reports/maintenance_request_reports.xml"
+    }
+  ],
+  "functions": [],
+  "referenced_models": [
+    "ir.actions.report"
+  ]
+}

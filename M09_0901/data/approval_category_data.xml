@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Head Review Approval Category -->
+        <record id="mkt_0901_approval_category_paf_head" model="approval.category">
+            <field name="name">0901 - PAF Head Review</field>
+            <field name="approval_minimum">5</field>
+            <field name="approver_sequence" eval="False"/>
+            <field name="has_reference">required</field>
+            <field name="automated_sequence" eval="True"/>
+            <field name="sequence_code">PAF-HEAD</field>
+            <field name="is_mkt_paf" eval="True"/>
+            <field name="mkt_paf_stage">head</field>
+        </record>
+
+        <!-- C-Level Approval Category -->
+        <record id="mkt_0901_approval_category_paf_clevel" model="approval.category">
+            <field name="name">0901 - PAF C-Level</field>
+            <field name="approval_minimum">1</field>
+            <field name="approver_sequence" eval="True"/>
+            <field name="is_mkt_paf" eval="True"/>
+            <field name="mkt_paf_stage">clevel</field>
+        </record>
+    </data>
+</odoo>

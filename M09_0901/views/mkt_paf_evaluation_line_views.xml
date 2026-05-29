@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- PAF Evaluation Line Form View -->
+    <record id="mkt_0901_view_paf_evaluation_line_form" model="ir.ui.view">
+        <field name="name">mkt_paf.evaluation.line.form</field>
+        <field name="model">mkt_paf.evaluation.line</field>
+        <field name="arch" type="xml">
+            <form string="Đánh giá phòng ban">
+                <header>
+                    <button name="action_start_review" string="Bắt đầu đánh giá" type="object" class="oe_highlight" invisible="status != 'pending'"/>
+                    <button name="action_submit_done" string="Hoàn thành đánh giá" type="object" class="oe_highlight" invisible="status != 'in_review'"/>
+                    <button name="action_submit_failed" string="Từ chối (Fail)" type="object" class="btn-danger" invisible="status != 'in_review'"/>
+                    <field name="status" widget="statusbar" statusbar_visible="pending,in_review,done,failed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Thông tin chung">
+                            <field name="paf_request_id" readonly="1"/>
+                            <field name="department_id" readonly="1"/>
+                            <field name="department_code" invisible="1"/>
+                            <field name="sequence" invisible="1"/>
+                        </group>
+                        <group string="Người đánh giá &amp; Thời gian">
+                            <field name="evaluator_id" readonly="1"/>
+                            <field name="submitted_date" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Chi tiết đánh giá phòng ban" name="dept_details">
+                            <!-- S&I Department Fields -->
+                            <group string="Đánh giá S&amp;I" invisible="department_code != 'si'">
+                                <field name="forecast_demand" required="department_code == 'si' and status == 'in_review'" readonly="status in ('done', 'failed')"/>
+                                <field name="confidence_score" required="department_code == 'si' and status == 'in_review'" readonly="status in ('done', 'failed')"/>
+                            </group>
+                            
+                            <!-- OPS Department Fields -->
+                            <group string="Đánh giá OPS" invisible="department_code != 'ops'">
+                                <field name="pilot_capacity_score" required="department_code == 'ops' and status == 'in_review'" readonly="status in ('done', 'failed')"/>
+                                <field name="bottleneck_note" readonly="status in ('done', 'failed')"/>
+                            </group>
+                            
+                            <!-- Finance Department Fields -->
+                            <group string="Đánh giá Tài chính (Finance)" invisible="department_code != 'finance'">
+                                <field name="roi_estimated_percent" required="department_code == 'finance' and status == 'in_review'" readonly="status in ('done', 'failed')"/>
+                                <field name="gross_margin_estimated" required="department_code == 'finance' and status == 'in_review'" readonly="status in ('done', 'failed')"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                            
+                            <!-- SC Department Fields -->
+                            <group string="Đánh giá Cung ứng (SC)" invisible="department_code != 'sc'">
+                                <field name="supply_risk_level" required="department_code == 'sc' and status == 'in_review'" readonly="status in ('done', 'failed')"/>
+                                <field name="lead_time_days" required="department_code == 'sc' and status == 'in_review'" readonly="status in ('done', 'failed')"/>
+                                <field name="food_safety_check_status" readonly="status in ('done', 'failed')"/>
+                            </group>
+                            
+                            <!-- Legal Department Fields -->
+                            <group string="Đánh giá Pháp lý (Legal)" invisible="department_code != 'legal'">
+                                <field name="regulatory_sla_days" required="department_code == 'legal' and status == 'in_review'" readonly="status in ('done', 'failed')"/>
+                                <field name="legal_filing_type" readonly="status in ('done', 'failed')"/>
+                                <field name="legal_50_percent_check" readonly="status in ('done', 'failed')"/>
+                                <field name="requires_government_approval" readonly="status in ('done', 'failed')"/>
+                                <field name="scheme_compliant" readonly="status in ('done', 'failed')"/>
+                            </group>
+                            
+                            <!-- General Comment -->
+                            <group string="Nhận xét chung">
+                                <field name="comment_html" widget="html" options="{'safe': True}" readonly="status in ('done', 'failed')" nolabel="1" placeholder="Nhập ý kiến đánh giá..."/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

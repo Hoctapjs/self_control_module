@@ -1,0 +1,210 @@
+{
+  "file": "views/x_psm_hr_discipline_master_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "6 views, 3 actions, 5 menus",
+  "records": [
+    {
+      "id": "view_psm_hr_discipline_violation_category_tree",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.discipline.violation.category.tree",
+        "model": "x_psm.hr.discipline.violation.category",
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_hr_discipline_violation_category_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.discipline.violation.category.form",
+        "model": "x_psm.hr.discipline.violation.category",
+        "arch": ""
+      }
+    },
+    {
+      "id": "action_psm_hr_discipline_violation_category",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "Violation Categories",
+        "res_model": "x_psm.hr.discipline.violation.category",
+        "view_mode": "list,form"
+      }
+    },
+    {
+      "id": "view_psm_hr_discipline_violation_type_tree",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.discipline.violation.type.tree",
+        "model": "x_psm.hr.discipline.violation.type",
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_hr_discipline_violation_type_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.discipline.violation.type.form",
+        "model": "x_psm.hr.discipline.violation.type",
+        "arch": ""
+      }
+    },
+    {
+      "id": "action_psm_hr_discipline_violation_type",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "Violation Types",
+        "res_model": "x_psm.hr.discipline.violation.type",
+        "view_mode": "list,form"
+      }
+    },
+    {
+      "id": "view_psm_hr_discipline_action_tree",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.discipline.action.tree",
+        "model": "x_psm.hr.discipline.action",
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_hr_discipline_action_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.discipline.action.form",
+        "model": "x_psm.hr.discipline.action",
+        "arch": ""
+      }
+    },
+    {
+      "id": "action_psm_hr_discipline_action",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "Disciplinary Actions",
+        "res_model": "x_psm.hr.discipline.action",
+        "view_mode": "list,form"
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_hr_discipline_violation_category_tree",
+      "model": "x_psm.hr.discipline.violation.category",
+      "name": "hr.discipline.violation.category.tree",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_violation_category_form",
+      "model": "x_psm.hr.discipline.violation.category",
+      "name": "hr.discipline.violation.category.form",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_violation_type_tree",
+      "model": "x_psm.hr.discipline.violation.type",
+      "name": "hr.discipline.violation.type.tree",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_violation_type_form",
+      "model": "x_psm.hr.discipline.violation.type",
+      "name": "hr.discipline.violation.type.form",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_action_tree",
+      "model": "x_psm.hr.discipline.action",
+      "name": "hr.discipline.action.tree",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_action_form",
+      "model": "x_psm.hr.discipline.action",
+      "name": "hr.discipline.action.form",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    }
+  ],
+  "actions": [
+    {
+      "id": "action_psm_hr_discipline_violation_category",
+      "name": "Violation Categories",
+      "res_model": "x_psm.hr.discipline.violation.category",
+      "view_mode": "list,form",
+      "domain": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "action_psm_hr_discipline_violation_type",
+      "name": "Violation Types",
+      "res_model": "x_psm.hr.discipline.violation.type",
+      "view_mode": "list,form",
+      "domain": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "action_psm_hr_discipline_action",
+      "name": "Disciplinary Actions",
+      "res_model": "x_psm.hr.discipline.action",
+      "view_mode": "list,form",
+      "domain": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    }
+  ],
+  "menus": [
+    {
+      "id": "menu_psm_hr_discipline_root",
+      "name": "Discipline",
+      "parent": null,
+      "action": null,
+      "groups": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "menu_psm_hr_discipline_configuration",
+      "name": "Configuration",
+      "parent": "menu_psm_hr_discipline_root",
+      "action": null,
+      "groups": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "menu_psm_hr_discipline_violation_category",
+      "name": "Violation Categories",
+      "parent": "menu_psm_hr_discipline_configuration",
+      "action": "action_psm_hr_discipline_violation_category",
+      "groups": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "menu_psm_hr_discipline_violation_type",
+      "name": "Violation Types",
+      "parent": "menu_psm_hr_discipline_configuration",
+      "action": "action_psm_hr_discipline_violation_type",
+      "groups": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    },
+    {
+      "id": "menu_psm_hr_discipline_action",
+      "name": "Disciplinary Actions",
+      "parent": "menu_psm_hr_discipline_configuration",
+      "action": "action_psm_hr_discipline_action",
+      "groups": null,
+      "file": "views/x_psm_hr_discipline_master_views.xml"
+    }
+  ],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.actions.act_window",
+    "ir.ui.view",
+    "x_psm.hr.discipline.action",
+    "x_psm.hr.discipline.violation.category",
+    "x_psm.hr.discipline.violation.type"
+  ]
+}

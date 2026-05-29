@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Cleanup XML IDs from earlier demo versions that used the old pif.object model. -->
+        <delete model="ir.model.data" search="[('module', '=', 'M08_P0801_demo'), ('name', 'in', ['demo_pif_001', 'demo_pif_002', 'demo_pif_003', 'demo_pif_004']), ('model', '=', 'pif.object')]"/>
+
+        <!-- ============================================================ -->
+        <!-- PIF-DEMO-001: Spicy McDouble                                 -->
+        <!-- State: rsg_create — RSG vừa nhận, chưa điền SSBI/RFM/POS   -->
+        <!-- Dùng để xem: Phase 1/2/3, PIF Sizing SLA, platforms, giá   -->
+        <!-- ============================================================ -->
+        <record id="demo_pif_001" model="x_psm_pif_object">
+            <field name="name">PIF-DEMO-001</field>
+            <field name="state">rsg_create</field>
+            <field name="x_psm_pif_request_type">menu</field>
+            <field name="x_psm_pif_bom_id" ref="demo_bom_spicy_mcdouble"/>
+            <field name="x_psm_request_owner_id" ref="demo_user_menu"/>
+            <field name="x_psm_program">Core Menu 2026</field>
+            <field name="x_psm_initiator_dept" ref="dept_menu"/>
+            <field name="x_psm_new_code_seq">1</field>
+            <field name="x_psm_pmix_code">SPMC</field>
+            <field name="x_psm_product_name_en">Spicy McDouble</field>
+            <field name="x_psm_product_name_vi">Burger bo cay Spicy McDouble</field>
+            <field name="x_psm_product_form">alacarte</field>
+            <field name="x_psm_menu_type">Core Menu</field>
+            <field name="x_psm_cat_lv1">Food</field>
+            <field name="x_psm_cat_lv2">Burger</field>
+            <field name="x_psm_cat_lv3">Beef</field>
+            <field name="x_psm_cat_lv4">Spicy</field>
+            <field name="x_psm_cat_lv5">A la carte</field>
+            <field name="x_psm_cat_lv6">Core</field>
+            <field name="x_psm_cat_lv7">National</field>
+            <field name="x_psm_target_effective_date">2026-04-01</field>
+            <field name="x_psm_pif_size">large</field>
+            <field name="x_psm_submit_date">2026-03-09</field>
+            <field name="x_psm_platform_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_dt'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="x_psm_price_instore">69000</field>
+            <field name="x_psm_price_delivery">75000</field>
+            <field name="x_psm_price_tsn">79000</field>
+            <field name="x_psm_price_other">0</field>
+            <field name="x_psm_insert_ketchup_chili">yes</field>
+            <field name="x_psm_component_line_ids" eval="[
+                (0, 0, {
+                    'x_psm_component_type': 'parent',
+                    'x_psm_recipe_text': 'FG-SPMC-01|Spicy McDouble',
+                    'x_psm_qty': 1.0,
+                    'x_psm_price_vnm': 69000,
+                    'x_psm_price_delivery': 75000,
+                    'x_psm_price_tsn': 79000,
+                }),
+                (0, 0, {
+                    'x_psm_component_type': 'drink',
+                    'x_psm_recipe_text': 'Default Coke',
+                    'x_psm_qty': 1.0,
+                    'x_psm_is_default': True,
+                    'x_psm_default_size': 'M',
+                    'x_psm_allow_upsize': True,
+                    'x_psm_allow_upgrade': True,
+                    'x_psm_choice_group': 'Soft Drink',
+                }),
+            ]"/>
+            <!-- SSBI: chưa đẩy (state rsg_create) -->
+            <field name="x_psm_ssbi_status">not_sent</field>
+            <field name="x_psm_process_tracking_ids" eval="[
+                (0, 0, {
+                    'x_psm_step_code': '1_rsg',
+                    'x_psm_process_name': 'RSG creates PIF',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '2_it_config',
+                    'x_psm_process_name': 'IT config',
+                    'x_psm_department_ref': 'IT',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '3_master',
+                    'x_psm_process_name': 'RSG setup',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '4_lab',
+                    'x_psm_process_name': 'RSG lab test',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '5_pilot',
+                    'x_psm_process_name': 'Pilot/Mass',
+                    'x_psm_department_ref': 'IT',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '6_val',
+                    'x_psm_process_name': 'PIF Valuation',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '7_finish',
+                    'x_psm_process_name': 'Process Completed - Handover to Sourcing',
+                    'x_psm_department_ref': 'System',
+                    'x_psm_status': 'pending',
+                }),
+            ]"/>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- PIF-DEMO-002: BBQ Chicken Burger                             -->
+        <!-- State: lab_test — Đang thử nghiệm, Request Type: Marketing  -->
+        <!-- Dùng để xem: Marketing Images (B2A), Display Check (B10),   -->
+        <!--              Master Setup đã tick, Lab History có 1 lần Fail -->
+        <!--              Lab sign-off (Initiator + RSG) chưa đủ         -->
+        <!-- ============================================================ -->
+        <record id="demo_pif_002" model="x_psm_pif_object">
+            <field name="name">PIF-DEMO-002</field>
+            <field name="state">lab_test</field>
+            <field name="x_psm_pif_request_type">marketing</field>
+            <field name="x_psm_pif_bom_id" ref="demo_bom_bbq_chicken"/>
+            <field name="x_psm_request_owner_id" ref="demo_user_mkt"/>
+            <field name="x_psm_program">LTO Q3 2026</field>
+            <field name="x_psm_initiator_dept" ref="dept_mkt"/>
+            <field name="x_psm_new_code_seq">1</field>
+            <field name="x_psm_menu_item_code">FG-BBQC-01</field>
+            <field name="x_psm_pmix_code">BBQC</field>
+            <field name="x_psm_product_name_en">BBQ Chicken Burger</field>
+            <field name="x_psm_product_name_vi">Burger ga sot BBQ</field>
+            <field name="x_psm_product_form">alacarte</field>
+            <field name="x_psm_menu_type">LTO</field>
+            <field name="x_psm_cat_lv1">Food</field>
+            <field name="x_psm_cat_lv2">Burger</field>
+            <field name="x_psm_cat_lv3">Chicken</field>
+            <field name="x_psm_cat_lv4">BBQ</field>
+            <field name="x_psm_cat_lv5">A la carte</field>
+            <field name="x_psm_cat_lv6">Promotion</field>
+            <field name="x_psm_cat_lv7">National</field>
+            <field name="x_psm_target_effective_date">2026-07-01</field>
+            <field name="x_psm_pif_size">medium</field>
+            <field name="x_psm_submit_date">2026-06-15</field>
+            <field name="x_psm_platform_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_dt'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="x_psm_price_instore">79000</field>
+            <field name="x_psm_price_delivery">85000</field>
+            <field name="x_psm_price_tsn">89000</field>
+            <field name="x_psm_price_other">0</field>
+            <field name="x_psm_insert_ketchup_chili">no</field>
+            <field name="x_psm_component_line_ids" eval="[
+                (0, 0, {
+                    'x_psm_component_type': 'parent',
+                    'x_psm_recipe_text': 'FG-BBQC-01|BBQ Chicken Burger',
+                    'x_psm_qty': 1.0,
+                    'x_psm_price_vnm': 79000,
+                    'x_psm_price_delivery': 85000,
+                    'x_psm_price_tsn': 89000,
+                }),
+                (0, 0, {
+                    'x_psm_component_type': 'side_dish',
+                    'x_psm_recipe_text': 'Default Fries',
+                    'x_psm_qty': 1.0,
+                    'x_psm_price_vnm': 10000,
+                    'x_psm_price_delivery': 12000,
+                    'x_psm_price_tsn': 15000,
+                    'x_psm_is_default': True,
+                    'x_psm_default_size': 'M',
+                    'x_psm_allow_upsize': True,
+                    'x_psm_choice_group': 'Fries',
+                }),
+            ]"/>
+            <!-- Marketing Images (B2A) — hiển thị vì Request Type = Marketing -->
+            <field name="x_psm_img_pos_filename">bbq_chicken_burger_pos_vn.jpg</field>
+            <field name="x_psm_img_sok_filename">bbq_chicken_burger_sok_vn.jpg</field>
+            <field name="x_psm_img_dmb_filename">bbq_chicken_burger_dmb_vn.jpg</field>
+            <field name="x_psm_img_mop_filename">bbq_chicken_burger_mop_vn.jpg</field>
+            <!-- Master Setup đã tick đủ 4 (B9) -->
+            <field name="x_psm_setup_code_price_store">True</field>
+            <field name="x_psm_setup_udp">True</field>
+            <field name="x_psm_setup_recipe_ssbi">True</field>
+            <field name="x_psm_setup_rawitem">True</field>
+            <!-- Display Check (B10) -->
+            <field name="x_psm_display_check_ids" eval="[
+                (0, 0, {
+                    'x_psm_department': 'marketing',
+                    'x_psm_checked_by': ref('M08_P0801_demo.demo_user_mkt'),
+                    'x_psm_check_date': '2026-03-11 15:00:00',
+                    'x_psm_status': 'pass',
+                    'x_psm_note': 'POS/SOK/DMB/MOP display reviewed for campaign launch.',
+                }),
+                (0, 0, {
+                    'x_psm_department': 'menu',
+                    'x_psm_checked_by': ref('M08_P0801_demo.demo_user_menu'),
+                    'x_psm_check_date': '2026-03-11 16:00:00',
+                    'x_psm_status': 'pass',
+                    'x_psm_note': 'Menu naming and price display are aligned.',
+                }),
+            ]"/>
+            <!-- Lab sign-off: Initiator đã ký, RSG chưa ký (để demo luồng đang chờ) -->
+            <field name="x_psm_lab_initiator_signoff">True</field>
+            <field name="x_psm_lab_initiator_user" ref="demo_user_mkt"/>
+            <field name="x_psm_lab_initiator_date">2026-03-13 09:00:00</field>
+            <field name="x_psm_lab_rsg_signoff">False</field>
+            <!-- SSBI: chưa đẩy (chưa qua pilot) -->
+            <field name="x_psm_ssbi_status">not_sent</field>
+            <!-- SSBI / RFM / POS HTML (đã điền để qua bước RSG Created → IT Config) -->
+            <field name="x_psm_file_ssbi_html">&lt;h3&gt;Thông tin SSBI — BBQ Chicken Burger&lt;/h3&gt;
+&lt;p&gt;&lt;b&gt;Mã sản phẩm:&lt;/b&gt; FG-BBQC-01&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Danh mục:&lt;/b&gt; Burger — Gà&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Menu slot:&lt;/b&gt; Core Menu — Quý 3/2026&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Dự báo doanh số:&lt;/b&gt; 500 phần/ngày/cửa hàng&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Thị trường mục tiêu:&lt;/b&gt; Khách hàng 18–35 tuổi yêu thích hương vị BBQ đậm đà&lt;/p&gt;</field>
+            <field name="x_psm_file_rfm_html">&lt;h3&gt;Thông tin RFM — BBQ Chicken Burger&lt;/h3&gt;
+&lt;p&gt;&lt;b&gt;Mã RFM:&lt;/b&gt; RFM-BBQC-2026-01&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Nhiệt độ chiên:&lt;/b&gt; 175°C — 3 phút 30 giây&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Khối lượng phục vụ:&lt;/b&gt; 185g (± 5g)&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Thứ tự lắp ráp:&lt;/b&gt; Crown Bun → BBQ Sauce → Cheese → Chicken → Lettuce → Heel Bun&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Shelf life:&lt;/b&gt; 10 phút sau khi lắp ráp&lt;/p&gt;</field>
+            <field name="x_psm_file_pos_html">&lt;h3&gt;Cấu hình POS — BBQ Chicken Burger&lt;/h3&gt;
+&lt;p&gt;&lt;b&gt;Tên hiển thị POS:&lt;/b&gt; BBQ CHICKEN BURGER&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Tên viết tắt (KDS):&lt;/b&gt; BBQ CHKN BRG&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Giá bán lẻ:&lt;/b&gt; 79.000 VNĐ&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Nhóm menu:&lt;/b&gt; Burgers &amp;amp; Sandwiches&lt;/p&gt;</field>
+            <field name="x_psm_process_tracking_ids" eval="[
+                (0, 0, {
+                    'x_psm_step_code': '1_rsg',
+                    'x_psm_process_name': 'RSG creates PIF',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'done',
+                    'x_psm_user_id': ref('M08_P0801_demo.demo_user_rsg'),
+                    'x_psm_execution_date': '2026-03-05 09:15:00',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '2_it_config',
+                    'x_psm_process_name': 'IT config',
+                    'x_psm_department_ref': 'IT',
+                    'x_psm_status': 'done',
+                    'x_psm_user_id': ref('M08_P0801_demo.demo_user_it'),
+                    'x_psm_execution_date': '2026-03-07 14:30:00',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '3_master',
+                    'x_psm_process_name': 'RSG setup',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'done',
+                    'x_psm_user_id': ref('M08_P0801_demo.demo_user_rsg'),
+                    'x_psm_execution_date': '2026-03-10 10:00:00',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '4_lab',
+                    'x_psm_process_name': 'RSG lab test',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '5_pilot',
+                    'x_psm_process_name': 'Pilot/Mass',
+                    'x_psm_department_ref': 'IT',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '6_val',
+                    'x_psm_process_name': 'PIF Valuation',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '7_finish',
+                    'x_psm_process_name': 'Process Completed - Handover to Sourcing',
+                    'x_psm_department_ref': 'System',
+                    'x_psm_status': 'pending',
+                }),
+            ]"/>
+            <!-- Lab History: 1 lần Fail (vòng IT điều chỉnh lại RFM) -->
+            <field name="x_psm_lab_history_ids" eval="[
+                (0, 0, {
+                    'x_psm_result': 'fail',
+                    'x_psm_note': 'Màu sắc lớp vỏ gà chưa đạt chuẩn vàng đều (quá nhạt ở vùng giữa). Nguyên nhân: nhiệt độ dầu chiên dao động do cài đặt RFM chưa chính xác. Yêu cầu IT điều chỉnh lại thông số nhiệt độ trong hệ thống RFM.',
+                    'x_psm_tester_id': ref('M08_P0801_demo.demo_user_rsg'),
+                    'x_psm_test_date': '2026-03-12 11:00:00',
+                }),
+            ]"/>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- PIF-DEMO-003: McChicken Crispy                               -->
+        <!-- State: completed — Đã hoàn tất, đã sinh WRIN, đã đẩy SSBI  -->
+        <!-- Dùng để xem: 2 sign-off đủ, 7 bước Done, SSBI queued,      -->
+        <!--              Print Valuation Report PDF hoàn chỉnh           -->
+        <!-- ============================================================ -->
+        <record id="demo_pif_003" model="x_psm_pif_object">
+            <field name="name">PIF-DEMO-003</field>
+            <field name="state">completed</field>
+            <field name="x_psm_pif_request_type">menu</field>
+            <field name="x_psm_pif_bom_id" ref="demo_bom_mccrispy"/>
+            <field name="x_psm_request_owner_id" ref="demo_user_menu"/>
+            <field name="x_psm_program">Value Menu 2025</field>
+            <field name="x_psm_initiator_dept" ref="dept_menu"/>
+            <field name="x_psm_new_code_seq">0</field>
+            <field name="x_psm_menu_item_code">FG-2025-0042</field>
+            <field name="x_psm_pmix_code">MCCP</field>
+            <field name="x_psm_product_name_en">McChicken Crispy</field>
+            <field name="x_psm_product_name_vi">Burger ga gion McChicken</field>
+            <field name="x_psm_product_form">alacarte</field>
+            <field name="x_psm_menu_type">Value Menu</field>
+            <field name="x_psm_cat_lv1">Food</field>
+            <field name="x_psm_cat_lv2">Burger</field>
+            <field name="x_psm_cat_lv3">Chicken</field>
+            <field name="x_psm_cat_lv4">Crispy</field>
+            <field name="x_psm_cat_lv5">A la carte</field>
+            <field name="x_psm_cat_lv6">Value</field>
+            <field name="x_psm_cat_lv7">National</field>
+            <field name="x_psm_target_effective_date">2025-11-01</field>
+            <field name="x_psm_pif_size">small</field>
+            <field name="x_psm_submit_date">2025-10-20</field>
+            <field name="x_psm_platform_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="x_psm_price_instore">59000</field>
+            <field name="x_psm_price_delivery">65000</field>
+            <field name="x_psm_price_tsn">69000</field>
+            <field name="x_psm_price_other">0</field>
+            <field name="x_psm_insert_ketchup_chili">yes</field>
+            <field name="x_psm_component_line_ids" eval="[
+                (0, 0, {
+                    'x_psm_component_type': 'parent',
+                    'x_psm_recipe_text': 'FG-2025-0042|McChicken Crispy',
+                    'x_psm_qty': 1.0,
+                    'x_psm_price_vnm': 59000,
+                    'x_psm_price_delivery': 65000,
+                    'x_psm_price_tsn': 69000,
+                }),
+                (0, 0, {
+                    'x_psm_component_type': 'drink',
+                    'x_psm_recipe_text': 'Default Coke',
+                    'x_psm_qty': 1.0,
+                    'x_psm_is_default': True,
+                    'x_psm_default_size': 'M',
+                    'x_psm_allow_upsize': True,
+                    'x_psm_allow_upgrade': True,
+                    'x_psm_choice_group': 'Soft Drink',
+                }),
+            ]"/>
+            <!-- Master Setup đủ 4 -->
+            <field name="x_psm_setup_code_price_store">True</field>
+            <field name="x_psm_setup_udp">True</field>
+            <field name="x_psm_setup_recipe_ssbi">True</field>
+            <field name="x_psm_setup_rawitem">True</field>
+            <!-- Display Check -->
+            <field name="x_psm_display_check_ids" eval="[
+                (0, 0, {
+                    'x_psm_department': 'menu',
+                    'x_psm_checked_by': ref('M08_P0801_demo.demo_user_menu'),
+                    'x_psm_check_date': '2025-10-13 14:00:00',
+                    'x_psm_status': 'pass',
+                    'x_psm_note': 'Display check completed before lab test.',
+                }),
+            ]"/>
+            <!-- Lab sign-off: đủ cả 2 -->
+            <field name="x_psm_lab_initiator_signoff">True</field>
+            <field name="x_psm_lab_initiator_user" ref="demo_user_menu"/>
+            <field name="x_psm_lab_initiator_date">2025-10-15 09:30:00</field>
+            <field name="x_psm_lab_rsg_signoff">True</field>
+            <field name="x_psm_lab_rsg_user" ref="demo_user_rsg"/>
+            <field name="x_psm_lab_rsg_date">2025-10-15 10:00:00</field>
+            <!-- SSBI Integration: đã đẩy sau pilot (Phase 6) -->
+            <field name="x_psm_ssbi_status">queued</field>
+            <field name="x_psm_ssbi_pushed_date">2025-10-25 09:05:00</field>
+            <field name="x_psm_ssbi_payload_json">{
+  "pif_id": "PIF-DEMO-003",
+  "state": "completed",
+  "request_type": "menu",
+  "program": "Value Menu 2025",
+  "menu_item_code": "FG-2025-0042",
+  "pmix_code": "MCCP",
+  "product_name_en": "McChicken Crispy",
+  "product_name_vi": "Burger ga gion McChicken",
+  "product_form": "alacarte",
+  "menu_type": "Value Menu",
+  "target_effective_date": "2025-11-01",
+  "effective_date_calc": "2025-10-27",
+  "pricing": {
+    "currency": "VND",
+    "instore": 59000,
+    "delivery": 65000,
+    "tsn": 69000,
+    "other": 0
+  },
+  "platforms": [
+    {"code": "FC", "name": "Front Counter"},
+    {"code": "SOK", "name": "Self Ordering Kiosk"},
+    {"code": "DIGITAL", "name": "Digital"}
+  ],
+  "components": [
+    {
+      "type": "parent",
+      "product_code": null,
+      "product_name": null,
+      "recipe": "FG-2025-0042|McChicken Crispy",
+      "qty": 1.0,
+      "price_vnm": 59000,
+      "price_delivery": 65000,
+      "price_tsn": 69000,
+      "is_default": false,
+      "default_size": null,
+      "allow_upsize": false,
+      "allow_upgrade": false,
+      "choice_group": null
+    },
+    {
+      "type": "drink",
+      "product_code": null,
+      "product_name": null,
+      "recipe": "Default Coke",
+      "qty": 1.0,
+      "price_vnm": 0,
+      "price_delivery": 0,
+      "price_tsn": 0,
+      "is_default": true,
+      "default_size": "M",
+      "allow_upsize": true,
+      "allow_upgrade": true,
+      "choice_group": "Soft Drink"
+    }
+  ]
+}</field>
+            <!-- SSBI / RFM / POS HTML -->
+            <field name="x_psm_file_ssbi_html">&lt;h3&gt;Thông tin SSBI — McChicken Crispy&lt;/h3&gt;
+&lt;p&gt;&lt;b&gt;WRIN:&lt;/b&gt; FG-2025-0042&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Danh mục:&lt;/b&gt; Burger — Gà Giòn&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Menu slot:&lt;/b&gt; Value Menu — Quý 4/2025&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Doanh số thực tế pilot:&lt;/b&gt; 420 phần/ngày (vượt 12% dự báo)&lt;/p&gt;</field>
+            <field name="x_psm_file_rfm_html">&lt;h3&gt;Thông tin RFM — McChicken Crispy&lt;/h3&gt;
+&lt;p&gt;&lt;b&gt;Mã RFM:&lt;/b&gt; RFM-MCCP-2025-03&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Nhiệt độ chiên:&lt;/b&gt; 175°C — 3 phút&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Khối lượng phục vụ:&lt;/b&gt; 160g (± 5g)&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Shelf life:&lt;/b&gt; 10 phút sau khi lắp ráp&lt;/p&gt;</field>
+            <field name="x_psm_file_pos_html">&lt;h3&gt;Cấu hình POS — McChicken Crispy&lt;/h3&gt;
+&lt;p&gt;&lt;b&gt;Tên hiển thị POS:&lt;/b&gt; MCCHICKEN CRISPY&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Giá bán lẻ:&lt;/b&gt; 59.000 VNĐ&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Nhóm menu:&lt;/b&gt; Value Menu&lt;/p&gt;</field>
+            <!-- Process Tracking: 7 bước đều Done -->
+            <field name="x_psm_process_tracking_ids" eval="[
+                (0, 0, {
+                    'x_psm_step_code': '1_rsg',
+                    'x_psm_process_name': 'RSG creates PIF',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'done',
+                    'x_psm_user_id': ref('M08_P0801_demo.demo_user_rsg'),
+                    'x_psm_execution_date': '2025-10-05 09:00:00',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '2_it_config',
+                    'x_psm_process_name': 'IT config',
+                    'x_psm_department_ref': 'IT',
+                    'x_psm_status': 'done',
+                    'x_psm_user_id': ref('M08_P0801_demo.demo_user_it'),
+                    'x_psm_execution_date': '2025-10-08 14:00:00',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '3_master',
+                    'x_psm_process_name': 'RSG setup',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'done',
+                    'x_psm_user_id': ref('M08_P0801_demo.demo_user_rsg'),
+                    'x_psm_execution_date': '2025-10-12 11:30:00',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '4_lab',
+                    'x_psm_process_name': 'RSG lab test',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'done',
+                    'x_psm_user_id': ref('M08_P0801_demo.demo_user_rsg'),
+                    'x_psm_execution_date': '2025-10-15 10:00:00',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '5_pilot',
+                    'x_psm_process_name': 'Pilot/Mass',
+                    'x_psm_department_ref': 'IT',
+                    'x_psm_status': 'done',
+                    'x_psm_user_id': ref('M08_P0801_demo.demo_user_it'),
+                    'x_psm_execution_date': '2025-10-25 09:00:00',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '6_val',
+                    'x_psm_process_name': 'PIF Valuation',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'done',
+                    'x_psm_user_id': ref('M08_P0801_demo.demo_user_rsg'),
+                    'x_psm_execution_date': '2025-11-01 16:00:00',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '7_finish',
+                    'x_psm_process_name': 'Process Completed - Handover to Sourcing',
+                    'x_psm_department_ref': 'System',
+                    'x_psm_status': 'done',
+                    'x_psm_user_id': ref('M08_P0801_demo.demo_user_rsg'),
+                    'x_psm_execution_date': '2025-11-01 16:01:00',
+                }),
+            ]"/>
+            <!-- Lab History: 1 lần Pass -->
+            <field name="x_psm_lab_history_ids" eval="[
+                (0, 0, {
+                    'x_psm_result': 'pass',
+                    'x_psm_note': 'Sản phẩm đạt tất cả tiêu chuẩn: màu sắc vàng đều, độ giòn đạt, hương vị đúng chuẩn. Approved cho bước Pilot.',
+                    'x_psm_tester_id': ref('M08_P0801_demo.demo_user_rsg'),
+                    'x_psm_test_date': '2025-10-15 10:00:00',
+                }),
+            ]"/>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- PIF-DEMO-004: Spicy Strips Digital Combo                     -->
+        <!-- State: it_config — Fast-track Digital (Phase 4.1)           -->
+        <!-- Dùng để xem: auto-approve, state it_config, size Ad-hoc,   -->
+        <!--              bước 1 đã Done (RSG tự động), bước 2 đang chờ  -->
+        <!-- ============================================================ -->
+        <record id="demo_pif_004" model="x_psm_pif_object">
+            <field name="name">PIF-DEMO-004</field>
+            <field name="state">it_config</field>
+            <field name="x_psm_pif_request_type">digital</field>
+            <field name="x_psm_pif_bom_id" ref="demo_bom_spicy_mcdouble"/>
+            <field name="x_psm_request_owner_id" ref="demo_user_menu"/>
+            <field name="x_psm_program">Digital Promo Q2 2026</field>
+            <field name="x_psm_initiator_dept" ref="dept_menu"/>
+            <field name="x_psm_new_code_seq">1</field>
+            <field name="x_psm_pmix_code">Di501</field>
+            <field name="x_psm_product_name_en">Spicy Strips Digital Combo</field>
+            <field name="x_psm_product_name_vi">Combo ga cay Digital</field>
+            <field name="x_psm_product_form">combo</field>
+            <field name="x_psm_menu_type">Digital Only</field>
+            <field name="x_psm_cat_lv1">Food</field>
+            <field name="x_psm_cat_lv2">Combo</field>
+            <field name="x_psm_cat_lv3">Chicken</field>
+            <field name="x_psm_cat_lv4">Spicy</field>
+            <field name="x_psm_cat_lv5">Combo</field>
+            <field name="x_psm_cat_lv6">Digital</field>
+            <field name="x_psm_cat_lv7">National</field>
+            <field name="x_psm_target_effective_date">2026-06-01</field>
+            <!-- Ad-hoc: tự gán khi fast-track Digital -->
+            <field name="x_psm_pif_size">adhoc</field>
+            <field name="x_psm_submit_date">2026-05-20</field>
+            <field name="x_psm_platform_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="x_psm_price_instore">89000</field>
+            <field name="x_psm_price_delivery">95000</field>
+            <field name="x_psm_price_tsn">99000</field>
+            <field name="x_psm_price_other">0</field>
+            <field name="x_psm_insert_ketchup_chili">no</field>
+            <field name="x_psm_component_line_ids" eval="[
+                (0, 0, {
+                    'x_psm_component_type': 'parent',
+                    'x_psm_recipe_text': 'FG-SPMC-01|Spicy Strips',
+                    'x_psm_qty': 1.0,
+                    'x_psm_price_vnm': 89000,
+                    'x_psm_price_delivery': 95000,
+                    'x_psm_price_tsn': 99000,
+                }),
+                (0, 0, {
+                    'x_psm_component_type': 'drink',
+                    'x_psm_recipe_text': 'Default Coke M',
+                    'x_psm_qty': 1.0,
+                    'x_psm_is_default': True,
+                    'x_psm_default_size': 'M',
+                    'x_psm_allow_upsize': False,
+                    'x_psm_allow_upgrade': False,
+                    'x_psm_choice_group': 'Soft Drink',
+                }),
+            ]"/>
+            <!-- SSBI: chưa đẩy -->
+            <field name="x_psm_ssbi_status">not_sent</field>
+            <!-- Bước 1 đã Done (fast-track tự điền), bước 2 đang chờ IT -->
+            <field name="x_psm_process_tracking_ids" eval="[
+                (0, 0, {
+                    'x_psm_step_code': '1_rsg',
+                    'x_psm_process_name': 'RSG creates PIF',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'done',
+                    'x_psm_user_id': ref('M08_P0801_demo.demo_user_menu'),
+                    'x_psm_execution_date': '2026-05-20 10:00:00',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '2_it_config',
+                    'x_psm_process_name': 'IT config',
+                    'x_psm_department_ref': 'IT',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '3_master',
+                    'x_psm_process_name': 'RSG setup',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '4_lab',
+                    'x_psm_process_name': 'RSG lab test',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '5_pilot',
+                    'x_psm_process_name': 'Pilot/Mass',
+                    'x_psm_department_ref': 'IT',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '6_val',
+                    'x_psm_process_name': 'PIF Valuation',
+                    'x_psm_department_ref': 'RSG',
+                    'x_psm_status': 'pending',
+                }),
+                (0, 0, {
+                    'x_psm_step_code': '7_finish',
+                    'x_psm_process_name': 'Process Completed - Handover to Sourcing',
+                    'x_psm_department_ref': 'System',
+                    'x_psm_status': 'pending',
+                }),
+            ]"/>
+        </record>
+
+    </data>
+</odoo>

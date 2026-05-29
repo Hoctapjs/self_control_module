@@ -1,0 +1,148 @@
+{
+  "file": "data/survey_feedback_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "survey_psm_feedback",
+      "model": "survey.survey",
+      "fields": {
+        "title": "0215 - Feedback cai thien ngay",
+        "user_id": {
+          "ref": "base.user_admin"
+        },
+        "access_mode": "public",
+        "users_login_required": {
+          "eval": "True"
+        },
+        "users_can_go_back": {
+          "eval": "True"
+        },
+        "questions_layout": "page_per_section",
+        "lang_ids": {
+          "eval": "False"
+        },
+        "description": "",
+        "description_done": ""
+      }
+    },
+    {
+      "id": "survey_psm_feedback_page_main",
+      "model": "survey.question",
+      "fields": {
+        "title": "Noi dung feedback",
+        "survey_id": {
+          "ref": "survey_psm_feedback"
+        },
+        "sequence": "1",
+        "question_type": {
+          "eval": "False"
+        },
+        "is_page": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_feedback_question_issue",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_feedback"
+        },
+        "sequence": "2",
+        "title": "Van de can cai thien",
+        "question_type": "text_box",
+        "constr_mandatory": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_feedback_question_cause",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_feedback"
+        },
+        "sequence": "3",
+        "title": "Nguyen nhan",
+        "question_type": "text_box",
+        "constr_mandatory": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_feedback_question_guidance",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_feedback"
+        },
+        "sequence": "4",
+        "title": "Huong dan da trao doi",
+        "question_type": "text_box",
+        "constr_mandatory": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_feedback_question_employee_commitment",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_feedback"
+        },
+        "sequence": "5",
+        "title": "Cam ket cua nhan vien",
+        "question_type": "text_box",
+        "constr_mandatory": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_feedback_question_follow_up_period",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_feedback"
+        },
+        "sequence": "6",
+        "title": "Thoi gian theo doi",
+        "question_type": "char_box",
+        "question_placeholder": "Vi du: 30 ngay",
+        "constr_mandatory": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_feedback_question_follow_up_result",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_feedback"
+        },
+        "sequence": "7",
+        "title": "Ket qua sau theo doi (neu da co)",
+        "question_type": "text_box",
+        "constr_mandatory": {
+          "eval": "False"
+        }
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "survey.question",
+    "survey.survey"
+  ]
+}

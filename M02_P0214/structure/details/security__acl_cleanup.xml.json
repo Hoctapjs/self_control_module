@@ -1,0 +1,13 @@
+{
+  "file": "security/acl_cleanup.xml",
+  "type": "xml",
+  "bucket": "security",
+  "summary": "XML data file.",
+  "records": [],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": []
+}

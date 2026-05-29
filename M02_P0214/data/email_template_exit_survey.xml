@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="email_template_exit_survey" model="mail.template">
+            <field name="name">RST - Khảo sát nghỉ việc - Exit Interview</field>
+            <field name="model_id" ref="approvals.model_approval_request"/>
+            <field name="subject">Khảo sát nghỉ việc - Exit Interview Survey</field>
+            <field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+            <field name="email_to">{{ object.request_owner_id.partner_id.email }}</field>
+            <field name="body_html" type="html">
+                <div style="margin:0;padding:24px 0;background-color:#f4f1ea;font-family:'Segoe UI',Arial,sans-serif;color:#2f2a26;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f4f1ea" style="border-collapse:collapse;background-color:#f4f1ea;">
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="640" bgcolor="#fffdf9" style="width:640px;max-width:640px;background-color:#fffdf9;border:1px solid #eadfce;border-radius:20px;overflow:hidden;">
+                                    <tr>
+                                        <td bgcolor="#b5121b" style="padding:0;background-color:#b5121b;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#b5121b" style="background-color:#b5121b;">
+                                                <tr>
+                                                    <td style="padding:28px 32px 22px 32px;">
+                                                        <div style="font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#ffe7a3;font-weight:700;margin-bottom:10px;">RST Exit Interview</div>
+                                                        <h1 style="margin:0;font-size:28px;line-height:1.25;color:#ffffff;font-weight:800;">Khảo sát nghỉ việc</h1>
+                                                        <p style="margin:10px 0 0 0;font-size:14px;line-height:1.6;color:#fff4da;">Cảm ơn bạn đã đồng hành cùng chúng tôi. Chỉ mất vài phút để chia sẻ trải nghiệm làm việc và đóng góp cho những cải thiện tốt hơn trong tương lai.</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:30px 32px 8px 32px;">
+                                            <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;">Kính gửi <strong><t t-out="object.request_owner_id.name"/></strong>,</p>
+                                            <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">Cảm ơn bạn đã làm việc cùng <strong>McDonald's Việt Nam</strong>. Phản hồi của bạn là nguồn thông tin quan trọng để chúng tôi cải thiện môi trường làm việc, quy trình và trải nghiệm nhân viên.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 18px 32px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff7e8" style="border-collapse:separate;border-spacing:0;background-color:#fff7e8;border:1px solid #f2d39a;border-radius:16px;">
+                                                <tr>
+                                                    <td style="padding:18px 20px;">
+                                                        <div style="font-size:13px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:#8d5a00;margin-bottom:10px;">Lưu ý</div>
+                                                        <ul style="margin:0;padding-left:18px;color:#3d3833;font-size:14px;line-height:1.8;">
+                                                            <li>Khảo sát chỉ mất vài phút để hoàn thành.</li>
+                                                            <li>Phản hồi của bạn được sử dụng cho mục đích cải tiến nội bộ.</li>
+                                                            <li>Vui lòng bấm vào đường link bên dưới để bắt đầu.</li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="padding:8px 32px 26px 32px;">
+                                            <a t-att-href="ctx.get('survey_url')" style="background-color:#da291c;color:#ffffff;text-decoration:none;padding:15px 34px;border-radius:999px;font-size:15px;font-weight:700;display:inline-block;">
+                                                Bắt đầu khảo sát
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 26px 32px;">
+                                            <div style="padding:16px 18px;background-color:#f8f5ef;border-left:4px solid #da291c;border-radius:14px;">
+                                                <div style="font-size:13px;line-height:1.7;color:#5a524b;">
+                                                    Nếu nút không hoạt động, bạn có thể sao chép và mở liên kết sau:<br/>
+                                                    <a t-att-href="ctx.get('survey_url')" style="color:#b5121b;word-break:break-all;text-decoration:underline;"><t t-esc="ctx.get('survey_url')"/></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 30px 32px;">
+                                            <p style="margin:0;font-size:15px;line-height:1.8;">Trân trọng,<br/><strong>Phòng Nhân sự</strong><br/>McDonald's Việt Nam</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f7f2e8" style="padding:16px 32px;background-color:#f7f2e8;border-top:1px solid #eadfce;">
+                                            <p style="margin:0;font-size:12px;line-height:1.6;color:#7b7269;">Email này được gửi tự động từ quy trình offboarding RST. Vui lòng không trả lời nếu không cần thiết.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </field>
+            <field name="lang">{{ object.request_owner_id.lang }}</field>
+            <field name="auto_delete">True</field>
+        </record>
+    </data>
+</odoo>

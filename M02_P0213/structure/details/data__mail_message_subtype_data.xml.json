@@ -1,0 +1,30 @@
+{
+  "file": "data/mail_message_subtype_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "mail_mt_0213_notification",
+      "model": "mail.message.subtype",
+      "fields": {
+        "name": "Thông báo hệ thống 0213",
+        "description": "",
+        "default": {
+          "eval": "False"
+        },
+        "internal": {
+          "eval": "True"
+        }
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "mail.message.subtype"
+  ]
+}

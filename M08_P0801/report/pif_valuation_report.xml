@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_pif_valuation_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>PIF Valuation Report</h2>
+                        <h3 t-esc="doc.name"/>
+
+                        <table class="table table-sm o_main_table">
+                            <tbody>
+                                <tr>
+                                    <th>Program</th>
+                                    <td t-esc="doc.x_psm_program"/>
+                                    <th>Request Type</th>
+                                    <td t-esc="doc.x_psm_pif_request_type"/>
+                                </tr>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <td t-esc="doc.x_psm_menu_item_code"/>
+                                    <th>PMIX</th>
+                                    <td t-esc="doc.x_psm_pmix_code"/>
+                                </tr>
+                                <tr>
+                                    <th>Product Name EN</th>
+                                    <td t-esc="doc.x_psm_product_name_en"/>
+                                    <th>Product Name VI</th>
+                                    <td t-esc="doc.x_psm_product_name_vi"/>
+                                </tr>
+                                <tr>
+                                    <th>Target Effective</th>
+                                    <td t-esc="doc.x_psm_target_effective_date"/>
+                                    <th>Calculated Effective</th>
+                                    <td t-esc="doc.x_psm_effective_date_calc"/>
+                                </tr>
+                                <tr>
+                                    <th>WRIN</th>
+                                    <td t-esc="doc.x_psm_pif_bom_id.product_tmpl_id.x_psm_0801_wrin_code"/>
+                                    <th>Status</th>
+                                    <td t-esc="doc.state"/>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Pricing</h4>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Currency</th>
+                                    <th>In-store/VNM</th>
+                                    <th>Delivery</th>
+                                    <th>TSN</th>
+                                    <th>Other</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td t-esc="doc.x_psm_currency_id.name"/>
+                                    <td t-esc="doc.x_psm_price_instore"/>
+                                    <td t-esc="doc.x_psm_price_delivery"/>
+                                    <td t-esc="doc.x_psm_price_tsn"/>
+                                    <td t-esc="doc.x_psm_price_other"/>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Platforms</h4>
+                        <p t-esc="', '.join(doc.x_psm_platform_ids.mapped('name'))"/>
+
+                        <h4>Components</h4>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Item</th>
+                                    <th>Recipe</th>
+                                    <th>Qty</th>
+                                    <th>VNM</th>
+                                    <th>Delivery</th>
+                                    <th>TSN</th>
+                                    <th>Default</th>
+                                    <th>Choice Group</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc.x_psm_component_line_ids" t-as="line">
+                                    <td t-esc="line.x_psm_component_type"/>
+                                    <td t-esc="line.x_psm_product_id.display_name"/>
+                                    <td t-esc="line.x_psm_recipe_text"/>
+                                    <td t-esc="line.x_psm_qty"/>
+                                    <td t-esc="line.x_psm_price_vnm"/>
+                                    <td t-esc="line.x_psm_price_delivery"/>
+                                    <td t-esc="line.x_psm_price_tsn"/>
+                                    <td t-esc="line.x_psm_is_default"/>
+                                    <td t-esc="line.x_psm_choice_group"/>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Process Tracking</h4>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Step</th>
+                                    <th>Status</th>
+                                    <th>Department</th>
+                                    <th>User</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc.x_psm_process_tracking_ids" t-as="step">
+                                    <td t-esc="step.x_psm_process_name"/>
+                                    <td t-esc="step.x_psm_status"/>
+                                    <td t-esc="step.x_psm_department_ref"/>
+                                    <td t-esc="step.x_psm_user_id.name"/>
+                                    <td t-esc="step.x_psm_execution_date"/>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Lab History</h4>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Tester</th>
+                                    <th>Result</th>
+                                    <th>Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc.x_psm_lab_history_ids" t-as="lab">
+                                    <td t-esc="lab.x_psm_test_date"/>
+                                    <td t-esc="lab.x_psm_tester_id.name"/>
+                                    <td t-esc="lab.x_psm_result"/>
+                                    <td t-esc="lab.x_psm_note"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

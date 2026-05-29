@@ -1,0 +1,157 @@
+{
+  "file": "security/offboarding_request_rules.xml",
+  "type": "xml",
+  "bucket": "security",
+  "summary": "4 functions/rules",
+  "records": [
+    {
+      "id": "rule_0214_approval_request_rst_read",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0214 approval.request RST read scope",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_HR_ADMIN_S'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_S'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": "[('category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id)]",
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_0214_approval_request_rst_manage",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0214 approval.request RST manage scope",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": "[('category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id)]",
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_0214_approval_request_direct_manager_manage",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0214 approval.request direct manager manage scope",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_CNB_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_OPS_STORE_RGM_M')                 ])             ]"
+        },
+        "domain_force": "[\n                ('category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id),\n                ('x_psm_0214_employee_id.parent_id.user_id', '=', user.id)\n            ]",
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_0214_approval_approver_rst_read",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0214 approval.approver RST read scope",
+        "model_id": {
+          "ref": "approvals.model_approval_approver"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_HR_ADMIN_S'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_S'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": "[('request_id.category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id)]",
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [
+    {
+      "kind": "record_rule",
+      "id": "rule_0214_approval_request_rst_read",
+      "name": "0214 approval.request RST read scope",
+      "model_ref": {
+        "ref": "approvals.model_approval_request"
+      },
+      "domain": "[('category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_0214_approval_request_rst_manage",
+      "name": "0214 approval.request RST manage scope",
+      "model_ref": {
+        "ref": "approvals.model_approval_request"
+      },
+      "domain": "[('category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_0214_approval_request_direct_manager_manage",
+      "name": "0214 approval.request direct manager manage scope",
+      "model_ref": {
+        "ref": "approvals.model_approval_request"
+      },
+      "domain": "[\n                ('category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id),\n                ('x_psm_0214_employee_id.parent_id.user_id', '=', user.id)\n            ]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_0214_approval_approver_rst_read",
+      "name": "0214 approval.approver RST read scope",
+      "model_ref": {
+        "ref": "approvals.model_approval_approver"
+      },
+      "domain": "[('request_id.category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id)]"
+    }
+  ],
+  "referenced_models": [
+    "ir.rule"
+  ]
+}

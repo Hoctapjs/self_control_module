@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="email_template_offboarding_reminder" model="mail.template">
+            <field name="name">RST - Nhắc nhở hoàn thành thủ tục nghỉ việc</field>
+            <field name="model_id" ref="approvals.model_approval_request"/>
+            <field name="subject">[RST Offboarding] Bạn còn thủ tục nghỉ việc chưa hoàn thành</field>
+            <field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+            <field name="email_to">{{ object.request_owner_id.partner_id.email }}</field>
+            <field name="body_html" type="html">
+                <div style="margin:0;padding:24px 0;background-color:#f4f1ea;font-family:'Segoe UI',Arial,sans-serif;color:#2f2a26;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f4f1ea" style="border-collapse:collapse;background-color:#f4f1ea;">
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="640" bgcolor="#fffdf9" style="width:640px;max-width:640px;background-color:#fffdf9;border:1px solid #eadfce;border-radius:20px;overflow:hidden;">
+                                    <tr>
+                                        <td bgcolor="#b5121b" style="padding:0;background-color:#b5121b;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#b5121b" style="background-color:#b5121b;">
+                                                <tr>
+                                                    <td style="padding:28px 32px 22px 32px;">
+                                                        <div style="font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#ffe7a3;font-weight:700;margin-bottom:10px;">RST Reminder</div>
+                                                        <h1 style="margin:0;font-size:28px;line-height:1.25;color:#ffffff;font-weight:800;">Nhắc nhở hoàn thành thủ tục nghỉ việc</h1>
+                                                        <p style="margin:10px 0 0 0;font-size:14px;line-height:1.6;color:#fff4da;">Hệ thống ghi nhận bạn vẫn còn một số hạng mục chưa hoàn thành trong quy trình nghỉ việc.</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:30px 32px 12px 32px;">
+                                            <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;">Kính gửi <strong><t t-out="object.request_owner_id.name"/></strong>,</p>
+                                            <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">Hệ thống ghi nhận bạn vẫn còn các thủ tục hoặc hoạt động bàn giao chưa hoàn thành trong quy trình nghỉ việc hiện tại.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 18px 32px;">
+                                            <div style="padding:18px 20px;background-color:#fff7e8;border:1px solid #f2d39a;border-radius:16px;">
+                                                <div style="font-size:13px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:#8d5a00;margin-bottom:10px;">Việc cần làm</div>
+                                                <p style="margin:0;font-size:14px;line-height:1.8;color:#3d3833;">Vui lòng kiểm tra lại các đầu việc offboarding trên hệ thống và hoàn tất sớm nhất có thể để quy trình nghỉ việc được xử lý trọn vẹn.</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 18px 32px;">
+                                            <div style="padding:18px 20px;background-color:#fff3f1;border-left:4px solid #da291c;border-radius:14px;">
+                                                <p style="margin:0;font-size:14px;line-height:1.7;color:#3d3833;">
+                                                    <strong style="color:#b5121b;">Lưu ý:</strong> Việc hoàn thành đầy đủ các hạng mục offboarding sẽ giúp quy trình nghỉ việc được kết thúc đúng hạn và hạn chế phát sinh chậm trễ.
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 30px 32px;">
+                                            <p style="margin:0;font-size:15px;line-height:1.8;">Trân trọng,<br/><strong>Phòng Nhân sự</strong><br/>McDonald's Việt Nam</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f7f2e8" style="padding:16px 32px;background-color:#f7f2e8;border-top:1px solid #eadfce;">
+                                            <p style="margin:0;font-size:12px;line-height:1.6;color:#7b7269;">Email này được gửi tự động từ quy trình offboarding RST. Vui lòng không trả lời nếu không cần thiết.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </field>
+            <field name="lang">{{ object.request_owner_id.lang }}</field>
+            <field name="auto_delete">True</field>
+        </record>
+    </data>
+</odoo>

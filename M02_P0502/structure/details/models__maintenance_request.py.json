@@ -1,0 +1,3573 @@
+{
+  "file": "models/maintenance_request.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: maintenance.request; 1 classes; 153 fields; 35 actions",
+  "classes": [
+    {
+      "python_class": "MaintenanceRequest",
+      "description": "Extends maintenance.request in models/maintenance_request.py.",
+      "model": null,
+      "inherit": "maintenance.request",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_0502_request_source_id",
+          "type": "Many2one",
+          "string": "Request Source",
+          "comodel": "x_psm_request_source",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "_default_x_psm_0502_request_source_id",
+          "tracking": true,
+          "help": "Entry point of the 0502 flow for this maintenance request."
+        },
+        {
+          "name": "x_psm_0502_request_source_code",
+          "type": "Char",
+          "string": "Request Source Code",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": "x_psm_0502_request_source_id.code",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0502_source_system",
+          "type": "Selection",
+          "string": "Source System",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "manual_request",
+              "Manual Request"
+            ],
+            [
+              "preventive_cron",
+              "Preventive Cron"
+            ],
+            [
+              "helpdesk_ticket",
+              "Helpdesk Ticket"
+            ],
+            [
+              "imported_request",
+              "Imported Request"
+            ],
+            [
+              "other",
+              "Other"
+            ]
+          ],
+          "default": "manual_request",
+          "tracking": true,
+          "help": "Technical or upstream system origin of the maintenance request."
+        },
+        {
+          "name": "x_psm_0502_request_origin_group",
+          "type": "Selection",
+          "string": "Request Origin Group",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_request_origin_group",
+          "selection": [
+            [
+              "store_need",
+              "Store Need"
+            ],
+            [
+              "preventive_need",
+              "Preventive Need"
+            ],
+            [
+              "system_need",
+              "System Need"
+            ]
+          ],
+          "default": null,
+          "tracking": null,
+          "help": "Business-friendly grouping of the actual origin of the maintenance need at phase 3 step 1."
+        },
+        {
+          "name": "x_psm_0502_source_reference",
+          "type": "Char",
+          "string": "Source Reference",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Reference number or upstream document code from the source system."
+        },
+        {
+          "name": "x_psm_0502_source_note",
+          "type": "Text",
+          "string": "Source Mapping Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Additional note explaining the upstream source mapping or origin context."
+        },
+        {
+          "name": "x_psm_0502_intake_minimum_ready",
+          "type": "Boolean",
+          "string": "Intake Minimum Ready",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_intake_minimum_ready_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Indicates whether the request already has the minimum source-side data expected at phase 3 step 1."
+        },
+        {
+          "name": "x_psm_0502_intake_minimum_gap_reason",
+          "type": "Char",
+          "string": "Intake Minimum Gap Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_intake_minimum_ready_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Missing minimum data labels that still prevent the request from being considered complete at phase 3 step 1."
+        },
+        {
+          "name": "x_psm_0502_intake_template_guide",
+          "type": "Text",
+          "string": "Intake Template Guide",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_0502_intake_template_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Guidance template that explains which initial questions should be captured for this request type at phase 3 step 2."
+        },
+        {
+          "name": "x_psm_0502_intake_example_note",
+          "type": "Text",
+          "string": "Intake Example Note",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_0502_intake_template_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Example intake note inherited from the request type to help the user capture the initial information consistently."
+        },
+        {
+          "name": "x_psm_0502_proposal_template_guide",
+          "type": "Text",
+          "string": "Proposal Template Guide",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_0502_proposal_template_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Guidance template inherited from the request type to help the user structure the treatment proposal consistently."
+        },
+        {
+          "name": "x_psm_0502_intake_detail_ready",
+          "type": "Boolean",
+          "string": "Intake Detail Ready",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_intake_detail_ready_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Indicates whether the request already has the richer intake information expected at phase 3 step 2."
+        },
+        {
+          "name": "x_psm_0502_intake_detail_gap_reason",
+          "type": "Char",
+          "string": "Intake Detail Gap Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_intake_detail_ready_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Missing labels that still block the request from being considered intake-complete at phase 3 step 2."
+        },
+        {
+          "name": "x_psm_0502_intake_problem_detail",
+          "type": "Text",
+          "string": "Intake Problem Detail",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Detailed initial problem description captured at the intake stage."
+        },
+        {
+          "name": "x_psm_0502_intake_impact_scope",
+          "type": "Selection",
+          "string": "Intake Impact Scope",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "limited",
+              "Limited Impact"
+            ],
+            [
+              "degraded",
+              "Degraded Operation"
+            ],
+            [
+              "blocked",
+              "Operation Blocked"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Initial business impact scope captured at the intake stage."
+        },
+        {
+          "name": "x_psm_0502_intake_contact_name",
+          "type": "Char",
+          "string": "Intake Contact Name",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Primary contact person captured during the initial intake."
+        },
+        {
+          "name": "x_psm_0502_intake_contact_phone",
+          "type": "Char",
+          "string": "Intake Contact Phone",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Primary contact phone captured during the initial intake."
+        },
+        {
+          "name": "x_psm_0502_inspection_doc_no",
+          "type": "Char",
+          "string": "Inspection Document No.",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Sequence number of the 0502 initial inspection document."
+        },
+        {
+          "name": "x_psm_0502_proposal_doc_no",
+          "type": "Char",
+          "string": "Proposal Document No.",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Sequence number of the 0502 treatment proposal document."
+        },
+        {
+          "name": "x_psm_0502_material_issue_doc_no",
+          "type": "Char",
+          "string": "Material Issue Document No.",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Sequence number of the 0502 material issue request document."
+        },
+        {
+          "name": "x_psm_0502_acceptance_doc_no",
+          "type": "Char",
+          "string": "Acceptance Document No.",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Sequence number of the 0502 acceptance record document."
+        },
+        {
+          "name": "x_psm_0502_department_id",
+          "type": "Many2one",
+          "string": "Store Department",
+          "comodel": "hr.department",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "_default_x_psm_0502_department_id",
+          "tracking": true,
+          "help": "Store department that raised the 0502 maintenance request."
+        },
+        {
+          "name": "x_psm_0502_request_type_id",
+          "type": "Many2one",
+          "string": "Request Type",
+          "comodel": "x_psm_request_type",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Business type of the 0502 maintenance request."
+        },
+        {
+          "name": "x_psm_0502_received_by_id",
+          "type": "Many2one",
+          "string": "Received By (CMT)",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "CMT user who acknowledged the maintenance request into the intake flow."
+        },
+        {
+          "name": "x_psm_0502_received_at",
+          "type": "Datetime",
+          "string": "Received At (CMT)",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the CMT intake acknowledged the maintenance request."
+        },
+        {
+          "name": "x_psm_0502_intake_owner_user_id",
+          "type": "Many2one",
+          "string": "Intake Owner",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_intake_owner_user_id",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "User currently considered the owner of the 0502 intake checkpoint."
+        },
+        {
+          "name": "x_psm_0502_intake_sla_deadline_at",
+          "type": "Datetime",
+          "string": "Intake SLA Deadline",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_intake_sla_deadline_at",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Deadline for the CMT intake checkpoint derived from the maintenance team SLA configuration."
+        },
+        {
+          "name": "x_psm_0502_intake_sla_result",
+          "type": "Selection",
+          "string": "Intake SLA Result",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_intake_sla_result",
+          "selection": [
+            [
+              "pending",
+              "Pending"
+            ],
+            [
+              "on_time",
+              "On Time"
+            ],
+            [
+              "late",
+              "Late"
+            ]
+          ],
+          "default": null,
+          "tracking": null,
+          "help": "Stored SLA result once the intake checkpoint has been reached."
+        },
+        {
+          "name": "x_psm_0502_intake_age_hours",
+          "type": "Float",
+          "string": "Intake Age (Hours)",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_0502_intake_age_hours",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Elapsed hours from request entry into the system until CMT receives it, or until now if still pending."
+        },
+        {
+          "name": "x_psm_0502_progress_checkpoint",
+          "type": "Selection",
+          "string": "Progress Checkpoint",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_monitoring_status_fields",
+          "selection": [
+            [
+              "intake",
+              "Intake"
+            ],
+            [
+              "inspection",
+              "Inspection"
+            ],
+            [
+              "planning",
+              "Planning"
+            ],
+            [
+              "proposal",
+              "Proposal"
+            ],
+            [
+              "approval",
+              "Approval"
+            ],
+            [
+              "service_assessment",
+              "Service Assessment"
+            ],
+            [
+              "material_assessment",
+              "Material Assessment"
+            ],
+            [
+              "material_approval",
+              "Material Approval"
+            ],
+            [
+              "stock_issue",
+              "Stock Issue"
+            ],
+            [
+              "purchase",
+              "Purchase"
+            ],
+            [
+              "execution",
+              "Execution"
+            ],
+            [
+              "acceptance",
+              "Acceptance"
+            ],
+            [
+              "closed",
+              "Closed"
+            ]
+          ],
+          "default": null,
+          "tracking": null,
+          "help": "Operational progress checkpoint used by phase 3 monitoring to show where the request is currently bottlenecked."
+        },
+        {
+          "name": "x_psm_0502_supply_branch_status",
+          "type": "Selection",
+          "string": "Supply Branch Status",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_monitoring_status_fields",
+          "selection": [
+            [
+              "no_material_flow",
+              "No Material Flow"
+            ],
+            [
+              "material_assessment",
+              "Material Assessment"
+            ],
+            [
+              "no_material_needed",
+              "No Material Needed"
+            ],
+            [
+              "waiting_stock_check",
+              "Waiting Stock Check"
+            ],
+            [
+              "awaiting_material_approval",
+              "Awaiting Material Approval"
+            ],
+            [
+              "pending_stock_issue",
+              "Pending Stock Issue"
+            ],
+            [
+              "stock_issued",
+              "Stock Issued"
+            ],
+            [
+              "purchase_required",
+              "Purchase Required"
+            ],
+            [
+              "purchase_in_progress",
+              "Purchase In Progress"
+            ],
+            [
+              "purchase_confirmed",
+              "Purchase Confirmed"
+            ],
+            [
+              "outside_service",
+              "Outside Service"
+            ]
+          ],
+          "default": null,
+          "tracking": null,
+          "help": "Operational status of the internal material, stock issue, and outside purchase branch for phase 3 monitoring."
+        },
+        {
+          "name": "x_psm_0502_inspection_result",
+          "type": "Selection",
+          "string": "Initial Inspection Result",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "no_action_needed",
+              "No Action Needed"
+            ],
+            [
+              "action_needed",
+              "Action Needed"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Initial on-site inspection conclusion for the 0502 flow."
+        },
+        {
+          "name": "x_psm_0502_inspection_note",
+          "type": "Text",
+          "string": "Initial Inspection Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Initial inspection findings captured by CMT."
+        },
+        {
+          "name": "x_psm_0502_inspection_checklist_template",
+          "type": "Text",
+          "string": "Inspection Checklist Template",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_0502_inspection_template_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Checklist template inherited from the equipment category for phase 3 step 4."
+        },
+        {
+          "name": "x_psm_0502_inspection_worksheet_template",
+          "type": "Text",
+          "string": "Inspection Worksheet Template",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_0502_inspection_template_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Worksheet template inherited from the equipment category for phase 3 step 4."
+        },
+        {
+          "name": "x_psm_0502_inspection_checklist_result",
+          "type": "Text",
+          "string": "Inspection Checklist Result",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Actual checklist result recorded by CMT during the initial inspection."
+        },
+        {
+          "name": "x_psm_0502_inspection_worksheet",
+          "type": "Text",
+          "string": "Inspection Worksheet",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Structured worksheet note recorded by CMT during the initial inspection."
+        },
+        {
+          "name": "x_psm_0502_inspection_symptom_status",
+          "type": "Selection",
+          "string": "Symptom Status",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "confirmed",
+              "Confirmed"
+            ],
+            [
+              "not_confirmed",
+              "Not Confirmed"
+            ],
+            [
+              "cannot_verify",
+              "Cannot Verify Yet"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Structured result describing whether the reported symptom was confirmed on site."
+        },
+        {
+          "name": "x_psm_0502_inspection_equipment_status",
+          "type": "Selection",
+          "string": "Equipment Status",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "running",
+              "Running"
+            ],
+            [
+              "degraded",
+              "Running with Issue"
+            ],
+            [
+              "stopped",
+              "Stopped"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Operational status of the equipment at the time of the initial inspection."
+        },
+        {
+          "name": "x_psm_0502_inspection_safety_risk",
+          "type": "Selection",
+          "string": "Safety Risk Level",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "none",
+              "No Safety Risk"
+            ],
+            [
+              "low",
+              "Low"
+            ],
+            [
+              "medium",
+              "Medium"
+            ],
+            [
+              "high",
+              "High"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Safety risk level assessed during the initial inspection."
+        },
+        {
+          "name": "x_psm_0502_inspection_action_urgency",
+          "type": "Selection",
+          "string": "Action Urgency",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "normal",
+              "Normal"
+            ],
+            [
+              "urgent",
+              "Urgent"
+            ],
+            [
+              "immediate",
+              "Immediate"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Urgency level for the follow-up action after the initial inspection."
+        },
+        {
+          "name": "x_psm_0502_inspected_by_id",
+          "type": "Many2one",
+          "string": "Inspected By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who performed the initial inspection."
+        },
+        {
+          "name": "x_psm_0502_inspected_at",
+          "type": "Datetime",
+          "string": "Inspected At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the initial inspection was recorded."
+        },
+        {
+          "name": "x_psm_0502_lead_notified_user_id",
+          "type": "Many2one",
+          "string": "Lead Notified User",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User considered as the CMT Lead for the phase 1 notification."
+        },
+        {
+          "name": "x_psm_0502_lead_notification_rule",
+          "type": "Selection",
+          "string": "Lead Notify Rule",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "team_lead",
+              "Team Lead"
+            ],
+            [
+              "team_member_fallback",
+              "Team Member Fallback"
+            ],
+            [
+              "technician_fallback",
+              "Technician Fallback"
+            ],
+            [
+              "current_user_fallback",
+              "Current User Fallback"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Resolution rule used to determine who received the 0502 preventive lead notification."
+        },
+        {
+          "name": "x_psm_0502_lead_notified_at",
+          "type": "Datetime",
+          "string": "Lead Notified At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the preventive request was surfaced to the CMT Lead."
+        },
+        {
+          "name": "x_psm_0502_lead_acknowledgment_status",
+          "type": "Selection",
+          "string": "Lead Acknowledgment Status",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "pending",
+              "Pending"
+            ],
+            [
+              "acknowledged",
+              "Acknowledged"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Shows whether the notified lead has acknowledged the preventive assignment."
+        },
+        {
+          "name": "x_psm_0502_lead_acknowledged_by_id",
+          "type": "Many2one",
+          "string": "Lead Acknowledged By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Lead user who acknowledged the preventive assignment."
+        },
+        {
+          "name": "x_psm_0502_lead_acknowledged_at",
+          "type": "Datetime",
+          "string": "Lead Acknowledged At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the notified lead acknowledged the preventive assignment."
+        },
+        {
+          "name": "x_psm_0502_plan_note",
+          "type": "Text",
+          "string": "Planning Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Simple planning note for phase 1 before introducing a full planning flow."
+        },
+        {
+          "name": "x_psm_0502_plan_change_reason",
+          "type": "Text",
+          "string": "Planning Change Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Reason entered when a planned schedule or responsible user is changed in phase 3."
+        },
+        {
+          "name": "x_psm_0502_ready_to_plan",
+          "type": "Boolean",
+          "string": "Ready To Plan",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_planning_ready_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Technical indicator showing whether the request is ready for the planning step."
+        },
+        {
+          "name": "x_psm_0502_planning_block_reason",
+          "type": "Char",
+          "string": "Planning Block Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_planning_ready_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Summary of missing business prerequisites before the request can be planned."
+        },
+        {
+          "name": "x_psm_0502_planned_by_id",
+          "type": "Many2one",
+          "string": "Planned By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who confirmed the request had been planned in phase 1."
+        },
+        {
+          "name": "x_psm_0502_planned_at",
+          "type": "Datetime",
+          "string": "Planned At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the request was marked as planned in phase 1."
+        },
+        {
+          "name": "x_psm_0502_planning_history_ids",
+          "type": "One2many",
+          "string": "Planning History",
+          "comodel": "x_psm_request_planning_history",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Planning history lines captured for the request when the schedule is planned or revised in phase 3."
+        },
+        {
+          "name": "x_psm_0502_planning_revision_count",
+          "type": "Integer",
+          "string": "Planning Revision Count",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Number of planning history revisions recorded for this request."
+        },
+        {
+          "name": "x_psm_0502_last_planning_changed_by_id",
+          "type": "Many2one",
+          "string": "Last Planning Changed By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Latest user who changed the planning revision of this request."
+        },
+        {
+          "name": "x_psm_0502_last_planning_changed_at",
+          "type": "Datetime",
+          "string": "Last Planning Changed At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Latest date and time when the planning revision of this request changed."
+        },
+        {
+          "name": "x_psm_0502_fsm_task_id",
+          "type": "Many2one",
+          "string": "FSM Task",
+          "comodel": "project.task",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Field Service task created from this maintenance request in phase 1."
+        },
+        {
+          "name": "x_psm_0502_treatment_proposal",
+          "type": "Text",
+          "string": "Treatment Proposal",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Initial treatment proposal captured in phase 1 before a formal quotation flow is introduced."
+        },
+        {
+          "name": "x_psm_0502_proposal_document",
+          "type": "Text",
+          "string": "Proposal Document",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Proposal document artifact generated from the structured proposal fields in phase 3."
+        },
+        {
+          "name": "x_psm_0502_root_cause_analysis",
+          "type": "Text",
+          "string": "Root Cause Analysis",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Structured root cause analysis captured for the treatment proposal in phase 2."
+        },
+        {
+          "name": "x_psm_0502_technical_solution",
+          "type": "Text",
+          "string": "Technical Solution",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Structured technical handling proposal captured in phase 2."
+        },
+        {
+          "name": "x_psm_0502_estimated_cost",
+          "type": "Monetary",
+          "string": "Estimated Cost",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Estimated handling cost proposed by CMT in phase 1."
+        },
+        {
+          "name": "x_psm_0502_currency_id",
+          "type": "Many2one",
+          "string": "Currency",
+          "comodel": "res.currency",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "company_id.currency_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0502_estimated_timeline",
+          "type": "Char",
+          "string": "Estimated Timeline",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Estimated handling timeline captured in phase 1."
+        },
+        {
+          "name": "x_psm_0502_cost_note",
+          "type": "Text",
+          "string": "Cost Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Structured note explaining the cost assumptions or breakdown in phase 2."
+        },
+        {
+          "name": "x_psm_0502_timeline_note",
+          "type": "Text",
+          "string": "Timeline Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Structured note explaining the proposed handling timeline in phase 2."
+        },
+        {
+          "name": "x_psm_0502_proposal_change_reason",
+          "type": "Text",
+          "string": "Proposal Change Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Reason entered when a proposed treatment proposal is revised in phase 3."
+        },
+        {
+          "name": "x_psm_0502_proposed_by_id",
+          "type": "Many2one",
+          "string": "Proposed By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who confirmed the treatment proposal in phase 1."
+        },
+        {
+          "name": "x_psm_0502_proposed_at",
+          "type": "Datetime",
+          "string": "Proposed At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the treatment proposal was recorded in phase 1."
+        },
+        {
+          "name": "x_psm_0502_proposal_history_ids",
+          "type": "One2many",
+          "string": "Proposal History",
+          "comodel": "x_psm_request_proposal_history",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Proposal history lines captured when the request is first proposed or later revised in phase 3."
+        },
+        {
+          "name": "x_psm_0502_proposal_revision_count",
+          "type": "Integer",
+          "string": "Proposal Revision Count",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Number of proposal history revisions recorded for this request."
+        },
+        {
+          "name": "x_psm_0502_last_proposal_changed_by_id",
+          "type": "Many2one",
+          "string": "Last Proposal Changed By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Latest user who changed the proposal revision of this request."
+        },
+        {
+          "name": "x_psm_0502_last_proposal_changed_at",
+          "type": "Datetime",
+          "string": "Last Proposal Changed At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Latest date and time when the proposal revision of this request changed."
+        },
+        {
+          "name": "x_psm_0502_proposal_revision_compare",
+          "type": "Text",
+          "string": "Proposal Revision Compare",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_0502_proposal_revision_compare",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Quick comparison summary between the latest proposal revision and the previous one."
+        },
+        {
+          "name": "x_psm_0502_approval_status",
+          "type": "Selection",
+          "string": "Approval Status",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "pending",
+              "Pending Approval"
+            ],
+            [
+              "approved",
+              "Approved"
+            ],
+            [
+              "rejected",
+              "Rejected"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Simple approval decision for timeline and estimated cost in phase 1."
+        },
+        {
+          "name": "x_psm_0502_approval_required",
+          "type": "Boolean",
+          "string": "Approval Required",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Indicates whether the treatment proposal requires manual approval after applying the phase 2 cost rule."
+        },
+        {
+          "name": "x_psm_0502_approval_user_id",
+          "type": "Many2one",
+          "string": "Proposal Approver",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Resolved approver for the treatment proposal in phase 2."
+        },
+        {
+          "name": "x_psm_0502_approval_rule",
+          "type": "Selection",
+          "string": "Approval Rule",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "store_approver",
+              "Store Approver"
+            ],
+            [
+              "store_final_approver",
+              "Store Final Approver"
+            ],
+            [
+              "team_approver",
+              "Team Approver"
+            ],
+            [
+              "team_lead_fallback",
+              "Team Lead Fallback"
+            ],
+            [
+              "team_member_fallback",
+              "Team Member Fallback"
+            ],
+            [
+              "technician_fallback",
+              "Technician Fallback"
+            ],
+            [
+              "current_user_fallback",
+              "Current User Fallback"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Resolver rule used to determine who approves the treatment proposal in phase 2."
+        },
+        {
+          "name": "x_psm_0502_approval_cost_rule",
+          "type": "Selection",
+          "string": "Approval Cost Rule",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "manual_review_required",
+              "Manual Review Required"
+            ],
+            [
+              "auto_approved_under_limit",
+              "Auto Approved Under Limit"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Cost rule applied when the treatment proposal enters the approval step in phase 2."
+        },
+        {
+          "name": "x_psm_0502_approval_decided_by_id",
+          "type": "Many2one",
+          "string": "Approval Decided By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who made the phase 1 approval decision."
+        },
+        {
+          "name": "x_psm_0502_approval_decided_at",
+          "type": "Datetime",
+          "string": "Approval Decided At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the phase 1 approval decision was recorded."
+        },
+        {
+          "name": "x_psm_0502_approval_note",
+          "type": "Text",
+          "string": "Approval Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Simple note captured for the approval or rejection decision in phase 1."
+        },
+        {
+          "name": "x_psm_0502_approval_flow_type",
+          "type": "Selection",
+          "string": "Approval Flow Type",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "single_level",
+              "Single-Level Approval"
+            ],
+            [
+              "two_level",
+              "Two-Level Approval"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Indicates whether the proposal follows a single-level or two-level approval flow in phase 3 step 12."
+        },
+        {
+          "name": "x_psm_0502_approval_level_count",
+          "type": "Integer",
+          "string": "Approval Level Count",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Total number of approval levels resolved for this proposal."
+        },
+        {
+          "name": "x_psm_0502_approval_current_level",
+          "type": "Integer",
+          "string": "Current Approval Level",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Current active approval level for the proposal while it is pending."
+        },
+        {
+          "name": "x_psm_0502_approval_initial_user_id",
+          "type": "Many2one",
+          "string": "Initial Proposal Approver",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "First-level approver resolved when the proposal is first submitted for approval."
+        },
+        {
+          "name": "x_psm_0502_approval_final_user_id",
+          "type": "Many2one",
+          "string": "Final Proposal Approver",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Second-level final approver when the store side requires two-level approval for the proposal."
+        },
+        {
+          "name": "x_psm_0502_approval_first_decided_by_id",
+          "type": "Many2one",
+          "string": "First Approval Decided By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who completed the first approval level before the request moved to the final approver."
+        },
+        {
+          "name": "x_psm_0502_approval_first_decided_at",
+          "type": "Datetime",
+          "string": "First Approval Decided At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the first approval level was completed."
+        },
+        {
+          "name": "x_psm_0502_need_outside_service",
+          "type": "Boolean",
+          "string": "Need Outside Service",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Indicates whether the request should branch to outside service instead of internal handling."
+        },
+        {
+          "name": "x_psm_0502_service_route",
+          "type": "Selection",
+          "string": "Service Route",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "internal_handling",
+              "Internal Handling"
+            ],
+            [
+              "outside_service",
+              "Outside Service"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Structured routing decision used in phase 2 to clarify whether the request stays internal or goes to outside service."
+        },
+        {
+          "name": "x_psm_0502_service_route_reason",
+          "type": "Selection",
+          "string": "Service Route Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "internal_capable",
+              "Internal Team Capable"
+            ],
+            [
+              "specialist_required",
+              "Specialist Required"
+            ],
+            [
+              "capacity_shortage",
+              "Internal Capacity Shortage"
+            ],
+            [
+              "vendor_warranty",
+              "Vendor / Warranty Handling"
+            ],
+            [
+              "safety_compliance",
+              "Safety / Compliance Requirement"
+            ],
+            [
+              "other",
+              "Other"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Structured reason explaining why the request is routed internally or to outside service."
+        },
+        {
+          "name": "x_psm_0502_service_assessment_note",
+          "type": "Text",
+          "string": "Service Assessment Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Assessment note explaining whether the request can be handled internally or requires outside service."
+        },
+        {
+          "name": "x_psm_0502_service_assessed_by_id",
+          "type": "Many2one",
+          "string": "Service Assessed By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who assessed whether outside service is needed in phase 1."
+        },
+        {
+          "name": "x_psm_0502_service_assessed_at",
+          "type": "Datetime",
+          "string": "Service Assessed At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the internal/outside service route was assessed in phase 1."
+        },
+        {
+          "name": "x_psm_0502_outside_service_request_ids",
+          "type": "One2many",
+          "string": "Outside Service Requests",
+          "comodel": "x_psm_outside_service_request",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Outside service requests created when the 0502 maintenance flow is routed to a vendor."
+        },
+        {
+          "name": "x_psm_0502_outside_service_request_id",
+          "type": "Many2one",
+          "string": "Outside Service Request",
+          "comodel": "x_psm_outside_service_request",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_outside_service_summary",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Latest outside service request linked to this 0502 maintenance request."
+        },
+        {
+          "name": "x_psm_0502_outside_service_request_count",
+          "type": "Integer",
+          "string": "Outside Service Count",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_outside_service_summary",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Number of outside service requests linked to this 0502 maintenance request."
+        },
+        {
+          "name": "x_psm_0502_outside_service_state",
+          "type": "Selection",
+          "string": "Outside Service State",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_0502_outside_service_request_id.x_psm_state",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Current state of the latest outside service request."
+        },
+        {
+          "name": "x_psm_0502_has_material_request",
+          "type": "Boolean",
+          "string": "Has Material Request",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Indicates whether the approved internal handling requires material to be issued from stock."
+        },
+        {
+          "name": "x_psm_0502_material_line_ids",
+          "type": "One2many",
+          "string": "Material Detail Lines",
+          "comodel": "x_psm_request_material_line",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Structured material detail lines captured during the phase 2 material assessment step."
+        },
+        {
+          "name": "x_psm_0502_material_line_count",
+          "type": "Integer",
+          "string": "Material Line Count",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_material_line_count",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Number of structured material detail lines linked to the request."
+        },
+        {
+          "name": "x_psm_0502_material_assessment_note",
+          "type": "Text",
+          "string": "Material Assessment Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Assessment note explaining whether material is required before repair can continue."
+        },
+        {
+          "name": "x_psm_0502_material_checked_by_id",
+          "type": "Many2one",
+          "string": "Material Checked By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who assessed whether material is required in phase 1."
+        },
+        {
+          "name": "x_psm_0502_material_checked_at",
+          "type": "Datetime",
+          "string": "Material Checked At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the material requirement was assessed in phase 1."
+        },
+        {
+          "name": "x_psm_0502_stock_picking_id",
+          "type": "Many2one",
+          "string": "Stock Picking",
+          "comodel": "stock.picking",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Internal stock picking created from this maintenance request in phase 1."
+        },
+        {
+          "name": "x_psm_0502_stock_picking_state",
+          "type": "Selection",
+          "string": "Stock Picking State",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "x_psm_0502_stock_picking_id.state",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Current state of the linked stock picking."
+        },
+        {
+          "name": "x_psm_0502_stock_availability",
+          "type": "Char",
+          "string": "Current Stock Availability",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "x_psm_0502_stock_picking_id.products_availability",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Current availability message computed live from the linked stock picking."
+        },
+        {
+          "name": "x_psm_0502_stock_availability_state",
+          "type": "Selection",
+          "string": "Current Stock Availability State",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "x_psm_0502_stock_picking_id.products_availability_state",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Current technical availability state computed live from the linked stock picking."
+        },
+        {
+          "name": "x_psm_0502_stock_check_availability",
+          "type": "Char",
+          "string": "Checked Stock Availability",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Availability message captured at the moment the user checked stock availability."
+        },
+        {
+          "name": "x_psm_0502_stock_check_availability_state",
+          "type": "Char",
+          "string": "Checked Stock Availability State",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Technical availability state captured at the moment the user checked stock availability."
+        },
+        {
+          "name": "x_psm_0502_stock_check_result",
+          "type": "Selection",
+          "string": "Stock Check Result",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "available",
+              "Stock Available"
+            ],
+            [
+              "not_available",
+              "Stock Not Available"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Snapshot decision captured from the linked stock picking when stock availability was checked."
+        },
+        {
+          "name": "x_psm_0502_stock_checked_by_id",
+          "type": "Many2one",
+          "string": "Stock Checked By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who checked stock availability in phase 1 step 16."
+        },
+        {
+          "name": "x_psm_0502_stock_checked_at",
+          "type": "Datetime",
+          "string": "Stock Checked At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when stock availability was checked in phase 1 step 16."
+        },
+        {
+          "name": "x_psm_0502_material_approval_required",
+          "type": "Boolean",
+          "string": "Material Approval Required",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Indicates whether the internal material issue request requires manual approval after applying the phase 2 material rule."
+        },
+        {
+          "name": "x_psm_0502_material_approval_user_id",
+          "type": "Many2one",
+          "string": "Material Approver",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Resolved internal approver responsible for the 0502 material issue request."
+        },
+        {
+          "name": "x_psm_0502_material_approval_rule",
+          "type": "Selection",
+          "string": "Material Approval Rule",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "team_material_approver",
+              "Team Material Approver"
+            ],
+            [
+              "team_lead_fallback",
+              "Team Lead Fallback"
+            ],
+            [
+              "team_member_fallback",
+              "Team Member Fallback"
+            ],
+            [
+              "technician_fallback",
+              "Technician Fallback"
+            ],
+            [
+              "current_user_fallback",
+              "Current User Fallback"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Resolution rule used to choose the approver for the 0502 internal material issue request."
+        },
+        {
+          "name": "x_psm_0502_material_approval_value",
+          "type": "Monetary",
+          "string": "Estimated Material Value",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Estimated material value snapshot captured when the internal material issue request was submitted for approval."
+        },
+        {
+          "name": "x_psm_0502_material_approval_value_rule",
+          "type": "Selection",
+          "string": "Material Approval Value Rule",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "auto_approved_under_limit",
+              "Auto Approved Under Limit"
+            ],
+            [
+              "manual_review_required",
+              "Manual Review Required"
+            ],
+            [
+              "manual_review_required_source_type",
+              "Manual Review Required By Source Type"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Decision rule applied to the material issue request based on the estimated material value and source type mix."
+        },
+        {
+          "name": "x_psm_0502_material_approval_status",
+          "type": "Selection",
+          "string": "Material Approval Status",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "pending",
+              "Pending Approval"
+            ],
+            [
+              "approved",
+              "Approved"
+            ],
+            [
+              "rejected",
+              "Rejected"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Stores the internal approval decision before stock issue in phase 1 step 17 and phase 2 step 17."
+        },
+        {
+          "name": "x_psm_0502_material_approval_decided_by_id",
+          "type": "Many2one",
+          "string": "Material Approval Decided By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who approved or rejected the material issue request in phase 1 step 17."
+        },
+        {
+          "name": "x_psm_0502_material_approval_decided_at",
+          "type": "Datetime",
+          "string": "Material Approval Decided At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the material approval decision was made in phase 1 step 17."
+        },
+        {
+          "name": "x_psm_0502_material_approval_note",
+          "type": "Text",
+          "string": "Material Approval Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Approval note explaining why the material issue request was approved or rejected."
+        },
+        {
+          "name": "x_psm_0502_stock_issued_by_id",
+          "type": "Many2one",
+          "string": "Stock Issued By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who confirmed the actual stock issue in phase 1 step 18."
+        },
+        {
+          "name": "x_psm_0502_stock_issued_at",
+          "type": "Datetime",
+          "string": "Stock Issued At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the linked stock picking was considered issued in phase 1 step 18."
+        },
+        {
+          "name": "x_psm_0502_stock_issue_status",
+          "type": "Selection",
+          "string": "Stock Issue Status",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "no_picking",
+              "No Stock Picking"
+            ],
+            [
+              "pending_issue",
+              "Pending Stock Issue"
+            ],
+            [
+              "issued",
+              "Stock Issued"
+            ],
+            [
+              "cancelled",
+              "Stock Flow Cancelled"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Business status of the internal stock issue branch, synchronized from the linked stock picking in phase 2 step 18."
+        },
+        {
+          "name": "x_psm_0502_stock_issue_synced_at",
+          "type": "Datetime",
+          "string": "Stock Issue Synced At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the internal stock issue business status was last synchronized from the linked stock picking."
+        },
+        {
+          "name": "x_psm_0502_fsm_stage_id",
+          "type": "Many2one",
+          "string": "FSM Stage",
+          "comodel": "project.task.type",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_0502_fsm_task_id.stage_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Current stage of the linked FSM task used as the main execution object in phase 1 step 20."
+        },
+        {
+          "name": "x_psm_0502_fsm_is_closed",
+          "type": "Boolean",
+          "string": "FSM Task Closed",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_0502_fsm_task_id.is_closed",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Indicates whether the linked FSM task has reached a closed state."
+        },
+        {
+          "name": "x_psm_0502_execution_started_by_id",
+          "type": "Many2one",
+          "string": "Execution Started By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who confirmed that technical execution started in phase 1 step 20."
+        },
+        {
+          "name": "x_psm_0502_execution_started_at",
+          "type": "Datetime",
+          "string": "Execution Started At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when execution was marked as started in phase 1 step 20."
+        },
+        {
+          "name": "x_psm_0502_execution_completed_by_id",
+          "type": "Many2one",
+          "string": "Execution Completed By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who confirmed that technical execution was completed in phase 1 step 20."
+        },
+        {
+          "name": "x_psm_0502_execution_completed_at",
+          "type": "Datetime",
+          "string": "Execution Completed At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when execution was marked as completed in phase 1 step 20."
+        },
+        {
+          "name": "x_psm_0502_execution_note",
+          "type": "Text",
+          "string": "Execution Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Summary note of the repair execution in phase 1 step 20. Detailed technical work remains on the FSM task."
+        },
+        {
+          "name": "x_psm_0502_acceptance_result",
+          "type": "Selection",
+          "string": "Acceptance Result",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "accepted",
+              "Accepted"
+            ],
+            [
+              "follow_up_needed",
+              "Follow-up Needed"
+            ],
+            [
+              "rework_required",
+              "Rework Required"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Structured post-maintenance acceptance result captured in phase 2 step 21."
+        },
+        {
+          "name": "x_psm_0502_acceptance_contact_name",
+          "type": "Char",
+          "string": "Store Acceptance Contact",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Name of the store-side or requester-side representative who reviewed the maintenance result."
+        },
+        {
+          "name": "x_psm_0502_acceptance_contact_role",
+          "type": "Char",
+          "string": "Store Acceptance Role",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Role or title of the store-side representative who reviewed the maintenance result."
+        },
+        {
+          "name": "x_psm_0502_acceptance_equipment_result",
+          "type": "Selection",
+          "string": "Post-Maintenance Equipment Result",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "operating_normally",
+              "Operating Normally"
+            ],
+            [
+              "operating_with_monitoring",
+              "Operating with Monitoring"
+            ],
+            [
+              "not_operating",
+              "Not Operating"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Observed equipment condition at the time of post-maintenance acceptance."
+        },
+        {
+          "name": "x_psm_0502_acceptance_note",
+          "type": "Text",
+          "string": "Acceptance Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Structured conclusion and evaluation note after maintenance completion in phase 2 step 21."
+        },
+        {
+          "name": "x_psm_0502_acceptance_follow_up_note",
+          "type": "Text",
+          "string": "Acceptance Follow-up Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Required follow-up or rework note when post-maintenance acceptance is not fully accepted."
+        },
+        {
+          "name": "x_psm_0502_acceptance_reviewed_by_id",
+          "type": "Many2one",
+          "string": "Acceptance Reviewed By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who recorded the post-maintenance acceptance decision in phase 1 step 21."
+        },
+        {
+          "name": "x_psm_0502_acceptance_reviewed_at",
+          "type": "Datetime",
+          "string": "Acceptance Reviewed At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when the post-maintenance acceptance was recorded in phase 1 step 21."
+        },
+        {
+          "name": "x_psm_0502_rework_round_count",
+          "type": "Integer",
+          "string": "Rework Round Count",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": 0,
+          "tracking": true,
+          "help": "Number of times this request has been reopened after acceptance required follow-up or rework."
+        },
+        {
+          "name": "x_psm_0502_rework_history_ids",
+          "type": "One2many",
+          "string": "Rework History",
+          "comodel": "x_psm_request_rework_history",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "History lines created each time this request is reopened for rework."
+        },
+        {
+          "name": "x_psm_0502_last_rework_at",
+          "type": "Datetime",
+          "string": "Last Rework At",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Date and time when this request was last reopened for rework."
+        },
+        {
+          "name": "x_psm_0502_last_rework_by_id",
+          "type": "Many2one",
+          "string": "Last Rework By",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "User who last reopened this request for rework."
+        },
+        {
+          "name": "x_psm_0502_purchase_order_ids",
+          "type": "One2many",
+          "string": "Purchase Orders",
+          "comodel": "purchase.order",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Outside purchase orders linked to this maintenance request in phase 1 step 19."
+        },
+        {
+          "name": "x_psm_0502_purchase_order_count",
+          "type": "Integer",
+          "string": "Purchase Order Count",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_purchase_summary",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Number of outside purchase orders linked to this maintenance request."
+        },
+        {
+          "name": "x_psm_0502_purchase_order_id",
+          "type": "Many2one",
+          "string": "Purchase Order",
+          "comodel": "purchase.order",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_purchase_summary",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Latest linked outside purchase order for this maintenance request."
+        },
+        {
+          "name": "x_psm_0502_purchase_order_state",
+          "type": "Selection",
+          "string": "Purchase Order State",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_purchase_summary",
+          "selection": [
+            [
+              "draft",
+              "RFQ"
+            ],
+            [
+              "sent",
+              "RFQ Sent"
+            ],
+            [
+              "to approve",
+              "To Approve"
+            ],
+            [
+              "purchase",
+              "Purchase Order"
+            ],
+            [
+              "done",
+              "Locked"
+            ],
+            [
+              "cancel",
+              "Cancelled"
+            ]
+          ],
+          "default": null,
+          "tracking": null,
+          "help": "State of the latest outside purchase order linked to this maintenance request."
+        }
+      ],
+      "methods": [
+        {
+          "name": "_default_x_psm_0502_request_source_id",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_default_x_psm_0502_department_id",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_missing_request_input_labels",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_request_origin_group",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_intake_minimum_gap_labels",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_request_type_intake_template_text",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_request_type_proposal_template_text",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_intake_detail_gap_labels",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_compute_x_psm_0502_request_origin_group",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0502_source_system"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_0502_intake_minimum_ready_fields",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "name",
+                "x_psm_0502_request_source_id",
+                "x_psm_0502_source_system",
+                "x_psm_0502_source_reference"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_0502_intake_template_fields",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0502_request_type_id",
+                "x_psm_0502_request_type_id.x_psm_0502_intake_question_template"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_0502_proposal_template_fields",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0502_request_type_id",
+                "x_psm_0502_request_type_id.x_psm_0502_proposal_template"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_0502_intake_detail_ready_fields",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0502_request_origin_group",
+                "x_psm_0502_intake_problem_detail",
+                "x_psm_0502_intake_impact_scope",
+                "x_psm_0502_intake_contact_name"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_0502_intake_owner_user_id",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0502_received_by_id",
+                "maintenance_team_id",
+                "maintenance_team_id.x_psm_0502_lead_user_id",
+                "maintenance_team_id.member_ids",
+                "user_id",
+                "create_uid"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_0502_intake_sla_deadline_at",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "create_date",
+                "maintenance_team_id",
+                "maintenance_team_id.x_psm_0502_intake_sla_hours"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_0502_intake_sla_result",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0502_received_at",
+                "x_psm_0502_intake_sla_deadline_at"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_0502_intake_age_hours",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "create_date",
+                "x_psm_0502_received_at"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_psm_get_progress_checkpoint",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_supply_branch_status",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_0502_stage_records",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_is_0502_request",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_user_has_any_group",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_ensure_proposal_approval_group",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_ensure_material_approval_group",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_0502_stage_xmlid_from_progress",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_0502_stage_from_progress",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_validate_0502_stage_write",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_sync_0502_stage_from_progress",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_assign_missing_document_numbers",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_open_document_pack_wizard",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_psm_print_0502_report",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_print_request_document",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_print_inspection_report",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_print_treatment_proposal",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_print_material_issue_request",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_print_acceptance_record",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_compute_x_psm_0502_monitoring_status_fields",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "stage_id",
+                "stage_id.done",
+                "x_psm_0502_received_at",
+                "x_psm_0502_inspection_result",
+                "x_psm_0502_inspected_at",
+                "x_psm_0502_ready_to_plan",
+                "x_psm_0502_planned_at",
+                "x_psm_0502_proposed_at",
+                "x_psm_0502_approval_status",
+                "x_psm_0502_service_route",
+                "x_psm_0502_service_assessed_at",
+                "x_psm_0502_need_outside_service",
+                "x_psm_0502_has_material_request",
+                "x_psm_0502_material_checked_at",
+                "x_psm_0502_stock_picking_id",
+                "x_psm_0502_stock_check_result",
+                "x_psm_0502_material_approval_status",
+                "x_psm_0502_stock_issue_status",
+                "x_psm_0502_purchase_order_id",
+                "x_psm_0502_purchase_order_state",
+                "x_psm_0502_fsm_task_id",
+                "x_psm_0502_execution_started_at",
+                "x_psm_0502_execution_completed_at",
+                "x_psm_0502_acceptance_reviewed_at"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_0502_inspection_template_fields",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "equipment_id",
+                "equipment_id.category_id",
+                "equipment_id.category_id.x_psm_0502_inspection_checklist_template",
+                "equipment_id.category_id.x_psm_0502_inspection_worksheet_template"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_psm_validate_request_input_data",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_validate_request_intake_detail_data",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_intake_owner_user",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_auto_receive_request_if_needed",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "create",
+          "type": "override",
+          "decorators": [
+            "api.model_create_multi"
+          ],
+          "summary": "override"
+        },
+        {
+          "name": "write",
+          "type": "override",
+          "decorators": [],
+          "summary": "override"
+        },
+        {
+          "name": "action_psm_receive_request",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_mark_inspected",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_psm_get_lead_notification_resolution",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_proposal_approval_resolution",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_proposal_approval_flow_resolution",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_material_approval_resolution",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_stock_issue_sync_values",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_notify_lead",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "cron_psm_create_intake_sla_warning_activities",
+          "type": "method",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "action_psm_acknowledge_lead_assignment",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_psm_get_planning_block_reasons",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_compute_x_psm_0502_planning_ready_fields",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "maintenance_type",
+                "x_psm_0502_request_source_code",
+                "x_psm_0502_department_id",
+                "x_psm_0502_request_type_id",
+                "x_psm_0502_request_source_id",
+                "x_psm_0502_received_at",
+                "x_psm_0502_inspected_at",
+                "x_psm_0502_inspection_result",
+                "x_psm_0502_lead_notified_at"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_0502_material_line_count",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0502_material_line_ids",
+                "x_psm_0502_material_line_ids.x_psm_request_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_psm_validate_planning_inputs",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_create_planning_history_line",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_build_proposal_document",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_build_proposal_revision_compare",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_compute_x_psm_0502_proposal_revision_compare",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0502_proposal_history_ids",
+                "x_psm_0502_proposal_history_ids.x_psm_revision",
+                "x_psm_0502_proposal_history_ids.x_psm_root_cause_analysis",
+                "x_psm_0502_proposal_history_ids.x_psm_technical_solution",
+                "x_psm_0502_proposal_history_ids.x_psm_estimated_cost",
+                "x_psm_0502_proposal_history_ids.x_psm_estimated_timeline",
+                "x_psm_0502_proposal_history_ids.x_psm_cost_note",
+                "x_psm_0502_proposal_history_ids.x_psm_timeline_note"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_psm_create_proposal_history_line",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_validate_material_assessment_inputs",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_material_stock_flow_resolution",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_stock_check_snapshot_values",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_build_fsm_task_description",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_get_fsm_task_package_values",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_build_treatment_proposal_summary",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_mark_planned",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_create_fsm_task",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_open_fsm_task",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_mark_proposed",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_submit_for_approval",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_approve_proposal",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_reject_proposal",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_mark_service_assessed",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_psm_create_outside_service_request_if_needed",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_open_outside_service_request",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_mark_material_checked",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_create_stock_picking",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_check_stock_availability",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_submit_material_approval",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_approve_material_request",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_reject_material_request",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_validate_stock_picking",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_mark_stock_issued",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_psm_get_purchase_order_resolution",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_create_purchase_order",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_recheck_stock_after_purchase",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_open_purchase_order",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_mark_execution_started",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_psm_get_execution_summary_from_fsm_task",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_mark_execution_completed",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_mark_acceptance_reviewed",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_reopen_for_rework",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_open_stock_picking",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_compute_x_psm_0502_outside_service_summary",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0502_outside_service_request_ids",
+                "x_psm_0502_outside_service_request_ids.create_date",
+                "x_psm_0502_outside_service_request_ids.x_psm_state"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_0502_purchase_summary",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0502_purchase_order_ids",
+                "x_psm_0502_purchase_order_ids.state",
+                "x_psm_0502_purchase_order_ids.create_date"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        }
+      ],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

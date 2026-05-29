@@ -1,0 +1,109 @@
+{
+  "file": "views/project_task_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "3 views, 1 actions, 1 menus",
+  "records": [
+    {
+      "id": "view_psm_project_task_search",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.project.task.search",
+        "model": "project.task",
+        "inherit_id": {
+          "ref": "project.view_task_search_form"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_project_task_list",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.project.task.list",
+        "model": "project.task",
+        "inherit_id": {
+          "ref": "project.view_task_tree2"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_project_task_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.project.task.form",
+        "model": "project.task",
+        "inherit_id": {
+          "ref": "industry_fsm.view_task_form2_inherit"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "action_psm_0502_execution_monitoring",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Execution Monitoring",
+        "res_model": "project.task",
+        "view_mode": "list,kanban,form,calendar,pivot,graph,activity",
+        "domain": "[('x_psm_0502_request_id', '!=', False)]",
+        "search_view_id": {
+          "ref": "view_psm_project_task_search"
+        },
+        "context": "{\n            'fsm_mode': True,\n            'search_default_filter_psm_0502_execution_open': 1,\n            'search_default_group_psm_task_department': 1\n        }",
+        "help": ""
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_project_task_search",
+      "model": "project.task",
+      "name": "psm.project.task.search",
+      "inherit_id": "project.view_task_search_form",
+      "file": "views/project_task_views.xml"
+    },
+    {
+      "id": "view_psm_project_task_list",
+      "model": "project.task",
+      "name": "psm.project.task.list",
+      "inherit_id": "project.view_task_tree2",
+      "file": "views/project_task_views.xml"
+    },
+    {
+      "id": "view_psm_project_task_form",
+      "model": "project.task",
+      "name": "psm.project.task.form",
+      "inherit_id": "industry_fsm.view_task_form2_inherit",
+      "file": "views/project_task_views.xml"
+    }
+  ],
+  "actions": [
+    {
+      "id": "action_psm_0502_execution_monitoring",
+      "name": "0502 Execution Monitoring",
+      "res_model": "project.task",
+      "view_mode": "list,kanban,form,calendar,pivot,graph,activity",
+      "domain": "[('x_psm_0502_request_id', '!=', False)]",
+      "file": "views/project_task_views.xml"
+    }
+  ],
+  "menus": [
+    {
+      "id": "menu_psm_0502_execution_monitoring",
+      "name": "0502 Execution Monitoring",
+      "parent": "maintenance.menu_m_reports",
+      "action": "action_psm_0502_execution_monitoring",
+      "groups": "M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/project_task_views.xml"
+    }
+  ],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.actions.act_window",
+    "ir.ui.view",
+    "project.task"
+  ]
+}

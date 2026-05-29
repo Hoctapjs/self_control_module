@@ -1,0 +1,6 @@
+{
+  "file": "notes/PHASE_5_HOTFIX_LOI_GO_CAI_DAT_0215.md",
+  "type": "document",
+  "bucket": "notes",
+  "summary": "# Phase 5 - Hotfix lỗi gỡ cài đặt module 0215 Ngày thực hiện: 2026-05-07 ## Bối cảnh Khi gỡ cài đặt `M02_P0215`, Odoo lỗi trong quá trình build registry và u..."
+}

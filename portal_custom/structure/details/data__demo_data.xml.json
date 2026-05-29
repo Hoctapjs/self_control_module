@@ -1,0 +1,125 @@
+{
+  "file": "data/demo_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "blog_internal_news",
+      "model": "blog.blog",
+      "fields": {
+        "name": "Bảng tin nội bộ",
+        "subtitle": "Cập nhật tin tức mới nhất từ công ty"
+      }
+    },
+    {
+      "id": "blog_post_1",
+      "model": "blog.post",
+      "fields": {
+        "name": "🎉 Chúc mừng sinh nhật tháng 1!",
+        "subtitle": "Gửi lời chúc tốt đẹp nhất đến các thành viên có sinh nhật trong tháng này",
+        "blog_id": {
+          "ref": "blog_internal_news"
+        },
+        "is_published": "True",
+        "content": ""
+      }
+    },
+    {
+      "id": "blog_post_2",
+      "model": "blog.post",
+      "fields": {
+        "name": "🥳 Year End Party 2025 - Đăng ký tham gia ngay!",
+        "subtitle": "Tiệc tất niên hoành tráng nhất năm sắp diễn ra",
+        "blog_id": {
+          "ref": "blog_internal_news"
+        },
+        "is_published": "True",
+        "content": ""
+      }
+    },
+    {
+      "id": "blog_post_3",
+      "model": "blog.post",
+      "fields": {
+        "name": "📢 Cập nhật chính sách làm việc từ xa năm 2026",
+        "subtitle": "Những thay đổi quan trọng về Work From Home policy",
+        "blog_id": {
+          "ref": "blog_internal_news"
+        },
+        "is_published": "True",
+        "content": ""
+      }
+    },
+    {
+      "id": "comment_1_1",
+      "model": "mail.message",
+      "fields": {
+        "model": "blog.post",
+        "res_id": {
+          "ref": "blog_post_1"
+        },
+        "message_type": "comment",
+        "body": ""
+      }
+    },
+    {
+      "id": "comment_1_2",
+      "model": "mail.message",
+      "fields": {
+        "model": "blog.post",
+        "res_id": {
+          "ref": "blog_post_1"
+        },
+        "message_type": "comment",
+        "body": ""
+      }
+    },
+    {
+      "id": "comment_2_1",
+      "model": "mail.message",
+      "fields": {
+        "model": "blog.post",
+        "res_id": {
+          "ref": "blog_post_2"
+        },
+        "message_type": "comment",
+        "body": ""
+      }
+    },
+    {
+      "id": "comment_2_2",
+      "model": "mail.message",
+      "fields": {
+        "model": "blog.post",
+        "res_id": {
+          "ref": "blog_post_2"
+        },
+        "message_type": "comment",
+        "body": ""
+      }
+    },
+    {
+      "id": "comment_2_3",
+      "model": "mail.message",
+      "fields": {
+        "model": "blog.post",
+        "res_id": {
+          "ref": "blog_post_2"
+        },
+        "message_type": "comment",
+        "body": ""
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "blog.blog",
+    "blog.post",
+    "mail.message"
+  ]
+}

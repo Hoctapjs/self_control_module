@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_psm_approval_request_resignation_form" model="ir.ui.view">
+        <field name="name">approval.request.resignation.form</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref="approvals.approval_request_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_withdraw']" position="attributes">
+                <attribute name="invisible">request_status == 'new' or user_status in ['waiting', 'pending', 'cancel'] or not user_status or (category_id == %(M02_P0214.approval_category_resignation)d and request_status in ['approved', 'refused'])</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="invisible">request_status in ['new', 'cancel'] or request_owner_id != uid or (category_id == %(M02_P0214.approval_category_resignation)d and request_status in ['approved', 'refused'])</attribute>
+            </xpath>
+            <xpath expr="//header/widget[@name='attach_document'][last()]" position="after">
+                <button name="action_send_social_insurance" string="Send Social Insurance Information"
+                    type="object" class="oe_highlight o_psm_0214_backend_action"
+                    groups="M02_P0200.GDH_RST_HR_ADMIN_S,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                    invisible="request_status != 'approved' or category_id != %(M02_P0214.approval_category_resignation)d or not x_psm_0214_all_activities_completed or not x_psm_0214_exit_survey_completed or x_psm_0214_social_insurance_email_sent" />
+
+                <button name="action_push_to_accounting" string="Lock &amp; Push to Accounting"
+                    type="object" class="oe_highlight o_psm_0214_backend_action"
+                    groups="M02_P0200.GDH_RST_HR_ADMIN_S,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                    invisible="request_status != 'approved' or category_id != %(M02_P0214.approval_category_resignation)d or not x_psm_0214_all_activities_completed or not x_psm_0214_exit_survey_completed or not x_psm_0214_social_insurance_email_sent or x_psm_0214_finance_check_state in ['passed', 'overridden']" />
+
+                <button name="action_open_finance_override_wizard" string="Override Accounting"
+                    type="object" class="btn-warning o_psm_0214_backend_action"
+                    groups="M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                    invisible="request_status != 'approved' or category_id != %(M02_P0214.approval_category_resignation)d or x_psm_0214_finance_check_state != 'blocked'" />
+
+                <button name="action_done" string="Complete Resignation" type="object"
+                    class="btn-success o_psm_0214_backend_action"
+                    groups="M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                    invisible="request_status != 'approved' or category_id != %(M02_P0214.approval_category_resignation)d or not x_psm_0214_all_activities_completed or not x_psm_0214_exit_survey_completed or not x_psm_0214_social_insurance_email_sent or x_psm_0214_finance_check_state not in ['passed', 'overridden']"
+                    confirm="Confirm completion of the resignation process? The employee account will be deactivated." />
+            </xpath>
+            <xpath expr="//field[@name='request_status']" position="attributes">
+                <attribute name="statusbar_visible">new,pending,approved,done</attribute>
+            </xpath>
+            <xpath expr="//field[@name='has_access_to_request']" position="after">
+                <field name="x_psm_0214_employee_id" invisible="1" />
+                <field name="x_psm_0214_social_insurance_email_sent" invisible="1" />
+                <field name="x_psm_0214_signed_locked" invisible="1" />
+                <field name="x_psm_0214_can_view_signed_resignation" invisible="1" />
+                <field name="x_psm_0214_can_view_salary_settlement" invisible="1" />
+                <field name="x_psm_0214_finance_check_state" invisible="1" />
+                <field name="x_psm_0214_al_has_advance" invisible="1" />
+                <field name="x_psm_0214_al_settled" invisible="1" />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_my_activities" type="object" class="oe_stat_button o_psm_0214_backend_action"
+                    icon="fa-tasks"
+                    groups="M02_P0200.GDH_RST_HR_ADMIN_S,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HRBP_S,M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                    invisible="category_id != %(M02_P0214.approval_category_resignation)d">
+                    <span class="o_stat_text">My Activities</span>
+                </button>
+            </xpath>
+            <xpath expr="//notebook/page[1]" position="before">
+                <page name="resignation_info" string="Resignation Information"
+                    invisible="category_id != %(M02_P0214.approval_category_resignation)d">
+                    <div class="o_psm_0214_backend_view">
+                        <group>
+                            <group string="Employee Information">
+                                <field name="x_psm_0214_resignation_employee_name" />
+                                <field name="x_psm_0214_resignation_manager_name" />
+                                <field name="x_psm_0214_resignation_department" />
+                                <field name="x_psm_0214_employee_id" invisible="1" />
+                                <field name="x_psm_0214_job_id" />
+                                <field name="x_psm_0214_type_contract" />
+                                <label for="x_psm_0214_exit_survey_completed" />
+                                <div class="o_row">
+                                    <field name="x_psm_0214_exit_survey_completed" widget="boolean_toggle"
+                                        readonly="1" />
+                                    <button name="action_view_survey_results" string="View Results"
+                                        type="object" class="btn btn-link py-0 o_psm_0214_backend_action"
+                                        groups="M02_P0200.GDH_RST_HR_ADMIN_S,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HRBP_S,M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                                        invisible="not x_psm_0214_exit_survey_completed" />
+                                </div>
+                                <field name="x_psm_0214_all_activities_completed" widget="boolean_toggle" />
+                                <field name="x_psm_0214_is_plan_launched" widget="boolean_toggle" readonly="1" />
+                                <field name="x_psm_0214_social_insurance_email_sent" widget="boolean_toggle"
+                                    readonly="1" />
+                                <field name="x_psm_0214_resignation_owner_email" widget="email" />
+                                <field name="x_psm_0214_employee_personal_email" widget="email"
+                                    readonly="x_psm_0214_signed_locked" />
+                                <field name="x_psm_0200_remaining_al_days" readonly="1" />
+                            </group>
+                            <group string="Request Details">
+                                <field name="x_psm_0214_resignation_date"
+                                    readonly="x_psm_0214_signed_locked" />
+                                <field name="x_psm_0214_official_resignation_date"
+                                       readonly="request_status == 'done' or x_psm_0214_signed_locked" />
+                                <field name="x_psm_0214_resignation_reason_id" string="Resignation Type"
+                                    options="{'no_create': True}"
+                                    readonly="x_psm_0214_signed_locked" />
+                                <field name="x_psm_0214_resignation_reason" widget="text"
+                                    readonly="x_psm_0214_signed_locked" />
+                            </group>
+                            <group string="Signed Resignation"
+                                invisible="not x_psm_0214_can_view_signed_resignation">
+                                <field name="x_psm_0214_signed_resignation_file"
+                                    filename="x_psm_0214_signed_resignation_filename"
+                                    widget="binary"
+                                    readonly="x_psm_0214_signed_locked" />
+                                <field name="x_psm_0214_signed_resignation_filename" invisible="1" />
+                                <field name="x_psm_0214_signed_locked" widget="boolean_toggle"
+                                    readonly="1" />
+                                <field name="x_psm_0214_signed_resignation_hash" readonly="1"
+                                    invisible="not x_psm_0214_signed_locked" />
+                            </group>
+                            <group string="Salary Settlement"
+                                invisible="not x_psm_0214_can_view_salary_settlement">
+                                <field name="x_psm_0214_salary_settlement_file"
+                                    filename="x_psm_0214_salary_settlement_filename"
+                                    widget="binary" />
+                                <field name="x_psm_0214_salary_settlement_filename" invisible="1" />
+                                <field name="x_psm_0214_settlement_sent" widget="boolean_toggle"
+                                    readonly="1" />
+                                <field name="x_psm_0214_settlement_sent_date" readonly="1"
+                                    invisible="not x_psm_0214_settlement_sent" />
+                                <field name="x_psm_0214_settlement_reminder_sent_at" readonly="1"
+                                    invisible="not x_psm_0214_settlement_reminder_sent_at" />
+                                <field name="x_psm_0214_signed_settlement_file"
+                                    filename="x_psm_0214_signed_settlement_filename"
+                                    widget="binary"
+                                    readonly="1" />
+                                <field name="x_psm_0214_signed_settlement_filename" invisible="1" />
+                                <field name="x_psm_0214_settlement_signed" widget="boolean_toggle"
+                                    readonly="1" />
+                            </group>
+                            <group string="Finance Check">
+                                <field name="x_psm_0214_finance_check_state" widget="badge"
+                                    decoration-muted="x_psm_0214_finance_check_state == 'pending'"
+                                    decoration-danger="x_psm_0214_finance_check_state == 'blocked'"
+                                    decoration-success="x_psm_0214_finance_check_state == 'passed'"
+                                    decoration-warning="x_psm_0214_finance_check_state == 'overridden'"
+                                    readonly="1" />
+                                <field name="x_psm_0214_finance_checked_date" readonly="1"
+                                    invisible="not x_psm_0214_finance_checked_date" />
+                                <field name="x_psm_0214_finance_pending_items_summary" readonly="1"
+                                    widget="text"
+                                    invisible="not x_psm_0214_finance_pending_items_summary" />
+                                <field name="x_psm_0214_finance_override_user_id" readonly="1"
+                                    widget="many2one_avatar_user"
+                                    invisible="not x_psm_0214_finance_override_user_id" />
+                                <field name="x_psm_0214_finance_override_reason" readonly="1"
+                                    widget="text"
+                                    invisible="not x_psm_0214_finance_override_reason" />
+                            </group>
+                            <group string="Advance Annual Leave Deduction"
+                                invisible="not x_psm_0214_al_has_advance"
+                                groups="M02_P0200.GDH_RST_HR_ADMIN_S,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M">
+                                <field name="x_psm_0214_al_advance_days" readonly="1" />
+                                <field name="x_psm_0214_al_deduction_currency_id" invisible="1" />
+                                <field name="x_psm_0214_al_deduction_rate" />
+                                <field name="x_psm_0214_al_deduction_amount" />
+                                <field name="x_psm_0214_al_deduction_note" />
+                                <field name="x_psm_0214_al_settled" widget="boolean_toggle" readonly="1" />
+                                <button name="action_settle_advance_al" type="object"
+                                    string="Ch&#7889;t kh&#7845;u tr&#7915; ph&#233;p"
+                                    class="btn-primary o_psm_0214_backend_action"
+                                    invisible="x_psm_0214_al_settled"
+                                    groups="M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M" />
+                            </group>
+                        </group>
+                    </div>
+                </page>
+                <page name="offboarding_activities" string="Offboarding Process"
+                    invisible="category_id != %(M02_P0214.approval_category_resignation)d">
+                    <div class="o_psm_0214_backend_view">
+                        <field name="x_psm_0214_rst_checklist_activity_ids" readonly="1" nolabel="1"
+                            context="{'active_test': False}"
+                            domain="['|', ('active', '=', True), ('active', '=', False)]">
+                            <list create="0" delete="0" edit="0"
+                                decoration-muted="active == False"
+                                default_order="date_deadline asc">
+                                <field name="active" column_invisible="True" />
+                                <field name="activity_type_id" />
+                                <field name="summary" />
+                                <field name="date_deadline" widget="remaining_days" />
+                                <field name="user_id" widget="many2one_avatar_user" />
+                                <field name="x_psm_0214_reminder_count" />
+                                <field name="x_psm_0214_rst_display_state" widget="badge"
+                                    decoration-success="x_psm_0214_rst_display_state == 'done'"
+                                    decoration-warning="x_psm_0214_rst_display_state == 'pending'"
+                                    decoration-danger="x_psm_0214_rst_display_state == 'overdue'"
+                                    string="Status" />
+                            </list>
+                        </field>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_psm_approval_request_resignation_tree" model="ir.ui.view">
+        <field name="name">approval.request.resignation.tree</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref="approvals.approval_request_view_tree" />
+        <field name="arch" type="xml">
+            <field name="date_confirmed" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </field>
+            <field name="date_confirmed" position="after">
+                <field name="x_psm_0214_resignation_date" optional="show" widget="date" />
+                <field name="x_psm_0214_official_resignation_date" optional="hide" widget="date" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_psm_resignation_type_tree" model="ir.ui.view">
+        <field name="name">resignation.type.tree</field>
+        <field name="model">x_psm_resignation_type</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="active" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_psm_resignation_type" model="ir.actions.act_window">
+        <field name="name">Resignation Type</field>
+        <field name="res_model">x_psm_resignation_type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_psm_resignation_type_config"
+        name="Resignation Type"
+        parent="approvals.approvals_menu_config"
+        action="action_psm_resignation_type"
+        groups="M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+        sequence="20" />
+</odoo>

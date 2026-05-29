@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- PAF Request Tree/List View -->
+    <record id="mkt_0901_view_paf_request_tree" model="ir.ui.view">
+        <field name="name">mkt_paf.request.list</field>
+        <field name="model">mkt_paf.request</field>
+        <field name="arch" type="xml">
+            <list string="PAF Requests" sample="1">
+                <field name="name"/>
+                <field name="template_id"/>
+                <field name="creator_id"/>
+                <field name="promotion_type" widget="badge"
+                       decoration-info="promotion_type == 'discount_direct'"
+                       decoration-success="promotion_type == 'gift_attached'"
+                       decoration-warning="promotion_type == 'lucky_draw'"/>
+                <field name="planned_start_date"/>
+                <field name="planned_end_date"/>
+                <field name="total_promotion_value" sum="Tổng giá trị khuyến mãi"/>
+                <field name="forecast_revenue" sum="Tổng doanh thu dự kiến"/>
+                <field name="total_raw_cost" sum="Tổng chi phí NVL"/>
+                <field name="roi_percent" widget="percentage"/>
+                <field name="state" widget="badge" 
+                       decoration-info="state in ('draft', 'dept_evaluation')" 
+                       decoration-warning="state in ('head_approval', 'clevel_approval')" 
+                       decoration-success="state in ('approved', 'pif_running', 'done')" 
+                       decoration-danger="state == 'rejected'" 
+                       decoration-muted="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- PAF Request Form View -->
+    <record id="mkt_0901_view_paf_request_form" model="ir.ui.view">
+        <field name="name">mkt_paf.request.form</field>
+        <field name="model">mkt_paf.request</field>
+        <field name="arch" type="xml">
+            <form string="PAF Request">
+                <header>
+                    <button name="action_submit_to_evaluation" string="Gửi đánh giá" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_collect_evaluations" string="Gửi phê duyệt (Heads)" type="object" class="oe_highlight" invisible="state != 'dept_evaluation'"/>
+                    <button name="action_open_pspd_wizard" string="Phân bổ PSPD" type="object" invisible="state == 'draft'"/>
+                    <button name="action_open_valuation" string="Mở Valuation" type="object" class="oe_highlight" invisible="state != 'pif_running'"/>
+                    <button name="action_close" string="Đóng phiếu" type="object" class="oe_highlight" invisible="state != 'valuation'"/>
+                    <button name="action_cancel" string="Hủy phiếu" type="object" invisible="state in ('done', 'cancelled')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,dept_evaluation,head_approval,clevel_approval,approved,pif_running,valuation,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_banners" type="object" class="oe_stat_button" icon="fa-image">
+                            <field name="banner_approved_count" widget="statinfo" string="Banner OK"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="info_left" string="Thông tin cơ bản">
+                            <field name="template_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                            <field name="creator_id"/>
+                            <field name="creator_department_id"/>
+                            <field name="creator_job_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group name="info_right" string="Kế hoạch &amp; ROI">
+                            <field name="planned_start_date" required="state != 'draft'" readonly="state != 'draft'"/>
+                            <field name="planned_end_date" required="state != 'draft'" readonly="state != 'draft'"/>
+                            <field name="allow_extended_duration" readonly="state != 'draft'"/>
+                            <field name="forecast_revenue" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="state != 'draft'"/>
+                            <field name="total_raw_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="roi_percent" widget="percentage"/>
+                            <field name="evaluation_progress" widget="progressbar" invisible="state == 'draft'"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Nội dung PAF" name="content">
+                            <group>
+                                <field name="product_ids" widget="many2many_tags" options="{'no_create': True}" readonly="state != 'draft'"/>
+                                <field name="bom_ids" widget="many2many_tags" options="{'no_create': True}" readonly="state != 'draft'"/>
+                                <field name="loyalty_program_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                                <field name="target_store_ids" widget="many2many_tags" options="{'no_create': True}" readonly="state != 'draft'"/>
+                            </group>
+                            <group string="Chi tiết đề xuất">
+                                <field name="description_html" widget="html" options="{'safe': True}" readonly="state != 'draft'" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Pháp lý KM" name="promotion_legal">
+                            <group>
+                                <group string="Thông tin pháp lý khuyến mãi">
+                                    <field name="promotion_type" readonly="state != 'draft'"/>
+                                    <field name="promotion_legal_form" readonly="state != 'draft' or promotion_type == 'lucky_draw'"/>
+                                    <field name="regulatory_authority"/>
+                                    <field name="regulatory_filing_code" required="state != 'draft' and promotion_type == 'lucky_draw'"/>
+                                </group>
+                                <group string="Giá trị khai báo">
+                                    <field name="total_promotion_value" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="state != 'draft'"/>
+                                    <field name="currency_id" invisible="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Cơ cấu giải thưởng" name="reward_structure">
+                            <group>
+                                <group string="Quà tặng" invisible="promotion_type == 'discount_direct'">
+                                    <field name="gift_quantity" readonly="state != 'draft'"/>
+                                    <field name="gift_unit_value" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="state != 'draft'"/>
+                                    <field name="gift_total_value" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="allow_holiday_100" readonly="state != 'draft'"/>
+                                </group>
+                                <group string="Giảm giá" invisible="promotion_type == 'gift_attached'">
+                                    <field name="discount_percent" readonly="state != 'draft'"/>
+                                    <field name="discount_total_estimate" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="state != 'draft'"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Thể lệ tham gia" name="participation_rules">
+                            <group>
+                                <group>
+                                    <field name="eligible_channel_ids" widget="many2many_tags" options="{'no_create': True}" readonly="state != 'draft'"/>
+                                    <field name="max_uses_per_customer" readonly="state != 'draft'"/>
+                                </group>
+                                <group string="Khung giờ">
+                                    <field name="time_window_start" readonly="state != 'draft'"/>
+                                    <field name="time_window_end" readonly="state != 'draft'"/>
+                                </group>
+                            </group>
+                            <group string="Điều kiện đặc biệt">
+                                <field name="customer_eligibility_html" widget="html" options="{'safe': True}" readonly="state != 'draft'" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Cam kết ATTP" name="food_safety">
+                            <group>
+                                <group>
+                                    <field name="food_safety_declaration_state" widget="badge"/>
+                                    <field name="food_safety_responsible_dept_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                                </group>
+                                <group string="Tóm tắt sản phẩm">
+                                    <field name="food_safety_summary" nolabel="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Hình ảnh / Banner" name="banners">
+                            <group>
+                                <field name="require_banner_before_submit" readonly="state != 'draft'"/>
+                                <field name="banner_completeness" widget="progressbar"/>
+                            </group>
+                            <field name="banner_ids" mode="kanban,list,form" readonly="state != 'draft'">
+                                <kanban>
+                                    <field name="image"/>
+                                    <field name="name"/>
+                                    <field name="purpose"/>
+                                    <field name="status"/>
+                                    <templates>
+                                        <t t-name="card">
+                                            <div class="oe_kanban_global_click">
+                                                <div class="o_kanban_image">
+                                                    <field name="image" widget="image"/>
+                                                </div>
+                                                <div class="oe_kanban_details">
+                                                    <strong><field name="name"/></strong>
+                                                    <div><field name="purpose"/></div>
+                                                    <div><field name="status" widget="badge"/></div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="image" widget="image" options="{'size': [60, 60]}"/>
+                                    <field name="name"/>
+                                    <field name="purpose"/>
+                                    <field name="language"/>
+                                    <field name="target_dimensions"/>
+                                    <field name="file_size_kb"/>
+                                    <field name="status" widget="badge"
+                                           decoration-success="status == 'brand_approved'"
+                                           decoration-danger="status == 'rejected'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Đánh giá các phòng ban" name="evaluations" invisible="state == 'draft'">
+                            <field name="evaluation_line_ids" readonly="state != 'dept_evaluation'">
+                                <list create="0" delete="0">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="department_id"/>
+                                    <field name="department_code"/>
+                                    <field name="evaluator_id"/>
+                                    <field name="status" widget="badge" 
+                                           decoration-warning="status == 'in_review'" 
+                                           decoration-success="status == 'done'" 
+                                           decoration-danger="status == 'failed'"/>
+                                    <field name="submitted_date"/>
+                                    <field name="regulatory_sla_days"/>
+                                    <field name="legal_50_percent_check" optional="hide"/>
+                                    <field name="food_safety_check_status" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Liên kết phê duyệt &amp; PIF" name="links" invisible="state == 'draft'">
+                            <group>
+                                <field name="head_approval_request_id"/>
+                                <field name="clevel_approval_request_id"/>
+                                <field name="pif_object_id"/>
+                            </group>
+                            <group string="SLA &amp; Hiệu lực">
+                                <field name="regulatory_sla_days"/>
+                                <field name="paf_effective_start_date"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- PAF Request Search View -->
+    <record id="mkt_0901_view_paf_request_search" model="ir.ui.view">
+        <field name="name">mkt_paf.request.search</field>
+        <field name="model">mkt_paf.request</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm PAF Requests">
+                <field name="name"/>
+                <field name="template_id"/>
+                <field name="creator_id"/>
+                <field name="promotion_type"/>
+                <filter string="Nháp" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Đang đánh giá" name="dept_evaluation" domain="[('state', '=', 'dept_evaluation')]"/>
+                <filter string="Chờ phê duyệt" name="approval" domain="[('state', 'in', ['head_approval', 'clevel_approval'])]"/>
+                <filter string="Đã phê duyệt/Hoạt động" name="active" domain="[('state', 'in', ['approved', 'pif_running', 'valuation'])]"/>
+                <filter string="Bị từ chối" name="rejected" domain="[('state', '=', 'rejected')]"/>
+                <filter string="Chờ Legal đăng ký" name="pending_legal_registration" domain="[('promotion_legal_form', '=', 'registration'), ('regulatory_filing_code', '=', False)]"/>
+                <separator/>
+                <filter string="Trạng thái" name="group_by_state" context="{'group_by': 'state'}"/>
+                <filter string="Hình thức khuyến mãi" name="group_by_promotion_type" context="{'group_by': 'promotion_type'}"/>
+                <filter string="Template" name="group_by_template" context="{'group_by': 'template_id'}"/>
+                <filter string="Người tạo" name="group_by_creator" context="{'group_by': 'creator_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- PAF Request Window Action -->
+    <record id="mkt_0901_action_paf_request" model="ir.actions.act_window">
+        <field name="name">PAF Requests</field>
+        <field name="res_model">mkt_paf.request</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="mkt_0901_view_paf_request_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo yêu cầu PAF mới
+            </p>
+            <p>
+                Số hóa toàn bộ quy trình đề xuất, đánh giá, phê duyệt một Sản phẩm mới hoặc Chiến dịch khuyến mãi mới.
+            </p>
+        </field>
+    </record>
+</odoo>

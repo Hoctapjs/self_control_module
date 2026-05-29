@@ -1,0 +1,283 @@
+{
+  "file": "data/test_security_users.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "dept_psm_0214_security_test",
+      "model": "hr.department",
+      "fields": {
+        "name": "0214 Security Test Department"
+      }
+    },
+    {
+      "id": "user_psm_0214_regular",
+      "model": "res.users",
+      "fields": {
+        "name": "0214 Regular User",
+        "login": "0214_regular",
+        "password": "123",
+        "email": "0214_regular@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [ref('base.group_user')])]"
+        }
+      }
+    },
+    {
+      "id": "user_psm_0214_hr_admin_staff",
+      "model": "res.users",
+      "fields": {
+        "name": "0214 HR Admin Staff",
+        "login": "0214_hr_admin_s",
+        "password": "123",
+        "email": "0214_hr_admin_s@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [                 ref('base.group_user'),                 ref('approvals.group_approval_user'),                 ref('M02_P0200.GDH_RST_HR_ADMIN_S')             ])]"
+        }
+      }
+    },
+    {
+      "id": "user_psm_0214_hr_admin_manager",
+      "model": "res.users",
+      "fields": {
+        "name": "0214 HR Admin Manager",
+        "login": "0214_hr_admin_m",
+        "password": "123",
+        "email": "0214_hr_admin_m@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [                 ref('base.group_user'),                 ref('approvals.group_approval_manager'),                 ref('M02_P0200.GDH_RST_HR_ADMIN_M')             ])]"
+        }
+      }
+    },
+    {
+      "id": "user_psm_0214_hr_hrbp_staff",
+      "model": "res.users",
+      "fields": {
+        "name": "0214 HR HRBP Staff",
+        "login": "0214_hr_hrbp_s",
+        "password": "123",
+        "email": "0214_hr_hrbp_s@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [                 ref('base.group_user'),                 ref('approvals.group_approval_user'),                 ref('M02_P0200.GDH_RST_HR_HRBP_S')             ])]"
+        }
+      }
+    },
+    {
+      "id": "user_psm_0214_hr_hrbp_manager",
+      "model": "res.users",
+      "fields": {
+        "name": "0214 HR HRBP Manager",
+        "login": "0214_hr_hrbp_m",
+        "password": "123",
+        "email": "0214_hr_hrbp_m@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [                 ref('base.group_user'),                 ref('approvals.group_approval_manager'),                 ref('M02_P0200.GDH_RST_HR_HRBP_M')             ])]"
+        }
+      }
+    },
+    {
+      "id": "user_psm_0214_hr_head",
+      "model": "res.users",
+      "fields": {
+        "name": "0214 HR Head",
+        "login": "0214_hr_head",
+        "password": "123",
+        "email": "0214_hr_head@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [                 ref('base.group_user'),                 ref('hr.group_hr_manager'),                 ref('approvals.group_approval_manager'),                 ref('M02_P0200.GDH_RST_HR_HEAD_M')             ])]"
+        }
+      }
+    },
+    {
+      "id": "user_psm_0214_system_manager",
+      "model": "res.users",
+      "fields": {
+        "name": "0214 System Manager",
+        "login": "0214_system_manager",
+        "password": "123",
+        "email": "0214_system_manager@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [                 ref('base.group_user'),                 ref('hr.group_hr_manager'),                 ref('approvals.group_approval_manager'),                 ref('M02_P0200.GDH_RST_SYSTEM_ST_M')             ])]"
+        }
+      }
+    },
+    {
+      "id": "user_psm_0214_store_manager",
+      "model": "res.users",
+      "fields": {
+        "name": "0214 Store Manager",
+        "login": "0214_store_manager",
+        "password": "123",
+        "email": "0214_store_manager@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [                 ref('base.group_user'),                 ref('approvals.group_approval_user'),                 ref('M02_P0200.GDH_OPS_STORE_RGM_M')             ])]"
+        }
+      }
+    },
+    {
+      "id": "user_psm_0214_portal",
+      "model": "res.users",
+      "fields": {
+        "name": "0214 Portal User",
+        "login": "0214_portal",
+        "password": "123",
+        "email": "0214_portal@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [ref('base.group_portal')])]"
+        }
+      }
+    },
+    {
+      "id": "emp_psm_0214_store_manager",
+      "model": "hr.employee",
+      "fields": {
+        "name": "0214 Store Manager",
+        "user_id": {
+          "ref": "user_psm_0214_store_manager"
+        },
+        "department_id": {
+          "ref": "dept_psm_0214_security_test"
+        },
+        "work_email": "0214_store_manager@example.com",
+        "x_psm_0214_is_rst_employee": "True"
+      }
+    },
+    {
+      "id": "emp_psm_0214_regular",
+      "model": "hr.employee",
+      "fields": {
+        "name": "0214 Regular Employee",
+        "user_id": {
+          "ref": "user_psm_0214_regular"
+        },
+        "department_id": {
+          "ref": "dept_psm_0214_security_test"
+        },
+        "parent_id": {
+          "ref": "emp_psm_0214_store_manager"
+        },
+        "work_email": "0214_regular@example.com",
+        "x_psm_0214_is_rst_employee": "True"
+      }
+    },
+    {
+      "id": "emp_psm_0214_portal",
+      "model": "hr.employee",
+      "fields": {
+        "name": "0214 Portal Employee",
+        "user_id": {
+          "ref": "user_psm_0214_portal"
+        },
+        "department_id": {
+          "ref": "dept_psm_0214_security_test"
+        },
+        "parent_id": {
+          "ref": "emp_psm_0214_store_manager"
+        },
+        "work_email": "0214_portal@example.com",
+        "x_psm_0214_is_rst_employee": "True"
+      }
+    },
+    {
+      "id": "emp_psm_0214_hr_admin_staff",
+      "model": "hr.employee",
+      "fields": {
+        "name": "0214 HR Admin Staff",
+        "user_id": {
+          "ref": "user_psm_0214_hr_admin_staff"
+        },
+        "department_id": {
+          "ref": "dept_psm_0214_security_test"
+        },
+        "work_email": "0214_hr_admin_s@example.com",
+        "x_psm_0214_is_rst_employee": "True"
+      }
+    },
+    {
+      "id": "emp_psm_0214_hr_admin_manager",
+      "model": "hr.employee",
+      "fields": {
+        "name": "0214 HR Admin Manager",
+        "user_id": {
+          "ref": "user_psm_0214_hr_admin_manager"
+        },
+        "department_id": {
+          "ref": "dept_psm_0214_security_test"
+        },
+        "work_email": "0214_hr_admin_m@example.com",
+        "x_psm_0214_is_rst_employee": "True"
+      }
+    },
+    {
+      "id": "emp_psm_0214_hr_hrbp_staff",
+      "model": "hr.employee",
+      "fields": {
+        "name": "0214 HR HRBP Staff",
+        "user_id": {
+          "ref": "user_psm_0214_hr_hrbp_staff"
+        },
+        "department_id": {
+          "ref": "dept_psm_0214_security_test"
+        },
+        "work_email": "0214_hr_hrbp_s@example.com",
+        "x_psm_0214_is_rst_employee": "True"
+      }
+    },
+    {
+      "id": "emp_psm_0214_hr_hrbp_manager",
+      "model": "hr.employee",
+      "fields": {
+        "name": "0214 HR HRBP Manager",
+        "user_id": {
+          "ref": "user_psm_0214_hr_hrbp_manager"
+        },
+        "department_id": {
+          "ref": "dept_psm_0214_security_test"
+        },
+        "work_email": "0214_hr_hrbp_m@example.com",
+        "x_psm_0214_is_rst_employee": "True"
+      }
+    },
+    {
+      "id": "emp_psm_0214_hr_head",
+      "model": "hr.employee",
+      "fields": {
+        "name": "0214 HR Head",
+        "user_id": {
+          "ref": "user_psm_0214_hr_head"
+        },
+        "department_id": {
+          "ref": "dept_psm_0214_security_test"
+        },
+        "work_email": "0214_hr_head@example.com",
+        "x_psm_0214_is_rst_employee": "True"
+      }
+    },
+    {
+      "id": "emp_psm_0214_system_manager",
+      "model": "hr.employee",
+      "fields": {
+        "name": "0214 System Manager",
+        "user_id": {
+          "ref": "user_psm_0214_system_manager"
+        },
+        "department_id": {
+          "ref": "dept_psm_0214_security_test"
+        },
+        "work_email": "0214_system_manager@example.com",
+        "x_psm_0214_is_rst_employee": "True"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "hr.department",
+    "hr.employee",
+    "res.users"
+  ]
+}

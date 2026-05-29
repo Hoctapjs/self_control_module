@@ -1,0 +1,66 @@
+{
+  "file": "models/hr_department.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: hr.department; 1 classes; 3 fields",
+  "classes": [
+    {
+      "python_class": "HrDepartment",
+      "description": "Extends hr.department in models/hr_department.py.",
+      "model": null,
+      "inherit": "hr.department",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_0502_partner_id",
+          "type": "Many2one",
+          "string": "0502 FSM Customer",
+          "comodel": "res.partner",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Customer/partner automatically mapped to FSM tasks created from 0502 maintenance requests."
+        },
+        {
+          "name": "x_psm_0502_proposal_approver_id",
+          "type": "Many2one",
+          "string": "0502 Store Proposal Approver",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Preferred store-side user to approve the 0502 treatment proposal for requests raised by this department."
+        },
+        {
+          "name": "x_psm_0502_proposal_final_approver_id",
+          "type": "Many2one",
+          "string": "0502 Store Final Approver",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Optional final store-side approver for the 0502 proposal when the business requires a second approval level."
+        }
+      ],
+      "methods": [],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

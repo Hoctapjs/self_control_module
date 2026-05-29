@@ -1,0 +1,389 @@
+{
+  "file": "models/maintenance_equipment.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: maintenance.equipment.category, maintenance.equipment; 2 classes; 15 fields",
+  "classes": [
+    {
+      "python_class": "MaintenanceEquipmentCategory",
+      "description": "Extends maintenance.equipment.category in models/maintenance_equipment.py.",
+      "model": null,
+      "inherit": "maintenance.equipment.category",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_0502_inspection_checklist_template",
+          "type": "Text",
+          "string": "0502 Inspection Checklist Template",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Standard 0502 initial inspection checklist template for this equipment category."
+        },
+        {
+          "name": "x_psm_0502_inspection_worksheet_template",
+          "type": "Text",
+          "string": "0502 Inspection Worksheet Template",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Standard 0502 initial inspection worksheet template for this equipment category."
+        },
+        {
+          "name": "x_psm_0502_fsm_task_template",
+          "type": "Text",
+          "string": "0502 FSM Task Template",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Standard task instruction template used when a 0502 FSM task is created for this equipment category."
+        },
+        {
+          "name": "x_psm_0502_fsm_checklist_template",
+          "type": "Text",
+          "string": "0502 FSM Checklist Template",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Standard execution checklist template used when a 0502 FSM task is created for this equipment category."
+        },
+        {
+          "name": "x_psm_0502_fsm_material_template",
+          "type": "Text",
+          "string": "0502 FSM Material Template",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Standard material preparation template used when a 0502 FSM task is created for this equipment category."
+        }
+      ],
+      "methods": [],
+      "kind": "inherit_only"
+    },
+    {
+      "python_class": "MaintenanceEquipment",
+      "description": "Extends maintenance.equipment in models/maintenance_equipment.py.",
+      "model": null,
+      "inherit": "maintenance.equipment",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_0502_department_id",
+          "type": "Many2one",
+          "string": "Store Department",
+          "comodel": "hr.department",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Store department that owns this equipment in the 0502 flow."
+        },
+        {
+          "name": "x_psm_0502_enable_preventive_schedule",
+          "type": "Boolean",
+          "string": "Enable Preventive Schedule",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Enable automatic preventive maintenance request generation."
+        },
+        {
+          "name": "x_psm_0502_preventive_interval_days",
+          "type": "Integer",
+          "string": "Preventive Interval Days",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": 30,
+          "tracking": null,
+          "help": "Number of days between preventive maintenance requests."
+        },
+        {
+          "name": "x_psm_0502_next_preventive_date",
+          "type": "Date",
+          "string": "Next Preventive Date",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Next date when the system should generate a preventive maintenance request."
+        },
+        {
+          "name": "x_psm_0502_last_preventive_request_id",
+          "type": "Many2one",
+          "string": "Last Preventive Request",
+          "comodel": "maintenance.request",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Latest preventive maintenance request generated by the 0502 scheduler."
+        },
+        {
+          "name": "x_psm_0502_has_open_preventive_request",
+          "type": "Boolean",
+          "string": "Has Open Preventive Request",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_preventive_status",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Technical flag showing whether this equipment already has an open preventive request."
+        },
+        {
+          "name": "x_psm_0502_preventive_status",
+          "type": "Selection",
+          "string": "Preventive Status",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_preventive_status",
+          "selection": [
+            [
+              "not_enabled",
+              "Not Enabled"
+            ],
+            [
+              "no_next_date",
+              "Missing Next Date"
+            ],
+            [
+              "scheduled",
+              "Scheduled"
+            ],
+            [
+              "due",
+              "Due to Generate"
+            ],
+            [
+              "open_request",
+              "Open Preventive Request"
+            ]
+          ],
+          "default": null,
+          "tracking": null,
+          "help": "Current preventive generation status used by the 0502 scheduler."
+        },
+        {
+          "name": "x_psm_0502_preventive_delay_days",
+          "type": "Integer",
+          "string": "Preventive Delay Days",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_preventive_monitoring_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Number of calendar days the preventive schedule is late or pending beyond the expected due point."
+        },
+        {
+          "name": "x_psm_0502_preventive_pending_cycle_count",
+          "type": "Integer",
+          "string": "Preventive Pending Cycles",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_preventive_monitoring_fields",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Estimated number of preventive cycles currently pending for this equipment."
+        },
+        {
+          "name": "x_psm_0502_preventive_exception_status",
+          "type": "Selection",
+          "string": "Preventive Exception Status",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_0502_preventive_monitoring_fields",
+          "selection": [
+            [
+              "normal",
+              "Normal"
+            ],
+            [
+              "missing_next_date",
+              "Missing Next Date"
+            ],
+            [
+              "due_now",
+              "Due Now"
+            ],
+            [
+              "multi_cycle_overdue",
+              "Multi-cycle Overdue"
+            ],
+            [
+              "open_request_stalled",
+              "Open Request Stalled"
+            ]
+          ],
+          "default": null,
+          "tracking": null,
+          "help": "Monitoring-oriented preventive exception status for phase 3 step 5."
+        }
+      ],
+      "methods": [
+        {
+          "name": "_check_psm_0502_preventive_interval_days",
+          "type": "constraint",
+          "decorators": [
+            {
+              "call": "api.constrains",
+              "args": [
+                "x_psm_0502_preventive_interval_days"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "constraint"
+        },
+        {
+          "name": "_compute_x_psm_0502_preventive_status",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0502_enable_preventive_schedule",
+                "x_psm_0502_next_preventive_date",
+                "x_psm_0502_last_preventive_request_id",
+                "x_psm_0502_last_preventive_request_id.stage_id",
+                "x_psm_0502_last_preventive_request_id.archive",
+                "x_psm_0502_last_preventive_request_id.maintenance_type",
+                "x_psm_0502_last_preventive_request_id.x_psm_0502_request_source_code"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_0502_preventive_monitoring_fields",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0502_enable_preventive_schedule",
+                "x_psm_0502_next_preventive_date",
+                "x_psm_0502_preventive_interval_days",
+                "x_psm_0502_last_preventive_request_id",
+                "x_psm_0502_last_preventive_request_id.request_date",
+                "x_psm_0502_last_preventive_request_id.stage_id",
+                "x_psm_0502_last_preventive_request_id.archive",
+                "x_psm_0502_last_preventive_request_id.maintenance_type",
+                "x_psm_0502_last_preventive_request_id.x_psm_0502_request_source_code"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_psm_find_open_preventive_request",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_can_generate_preventive_request",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_prepare_preventive_request_vals",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_psm_compute_next_preventive_date",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "cron_psm_generate_preventive_requests",
+          "type": "method",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "method"
+        }
+      ],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

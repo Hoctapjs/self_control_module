@@ -1,0 +1,176 @@
+{
+  "file": "data/survey_explanation_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "survey_psm_explanation",
+      "model": "survey.survey",
+      "fields": {
+        "title": "0215 - Tường trình nhân viên",
+        "user_id": {
+          "ref": "base.user_admin"
+        },
+        "access_mode": "public",
+        "users_login_required": {
+          "eval": "True"
+        },
+        "users_can_go_back": {
+          "eval": "True"
+        },
+        "questions_layout": "page_per_section",
+        "lang_ids": {
+          "eval": "False"
+        },
+        "description": "",
+        "description_done": ""
+      }
+    },
+    {
+      "id": "survey_psm_explanation_page_main",
+      "model": "survey.question",
+      "fields": {
+        "title": "Thông tin tường trình",
+        "survey_id": {
+          "ref": "survey_psm_explanation"
+        },
+        "sequence": "1",
+        "question_type": {
+          "eval": "False"
+        },
+        "is_page": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_explanation_question_incident_datetime",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_explanation"
+        },
+        "sequence": "2",
+        "title": "Thời gian xảy ra sự việc",
+        "question_type": "datetime",
+        "constr_mandatory": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_explanation_question_incident_location",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_explanation"
+        },
+        "sequence": "3",
+        "title": "Địa điểm xảy ra sự việc",
+        "question_type": "char_box",
+        "question_placeholder": "Ví dụ: Khu bếp, quầy thu ngân...",
+        "constr_mandatory": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_explanation_question_witness_names",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_explanation"
+        },
+        "sequence": "4",
+        "title": "Người chứng kiến",
+        "question_type": "char_box",
+        "question_placeholder": "Nhập tên người chứng kiến nếu có",
+        "constr_mandatory": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_explanation_question_content",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_explanation"
+        },
+        "sequence": "5",
+        "title": "Nội dung tường trình",
+        "question_type": "text_box",
+        "constr_mandatory": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_explanation_question_reason",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_explanation"
+        },
+        "sequence": "6",
+        "title": "Nguyên nhân",
+        "question_type": "text_box",
+        "constr_mandatory": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_explanation_question_commitment",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_explanation"
+        },
+        "sequence": "7",
+        "title": "Cam kết cải thiện",
+        "question_type": "text_box",
+        "constr_mandatory": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_explanation_question_confirmation",
+      "model": "survey.question",
+      "fields": {
+        "survey_id": {
+          "ref": "survey_psm_explanation"
+        },
+        "sequence": "8",
+        "title": "Xác nhận",
+        "question_type": "simple_choice",
+        "constr_mandatory": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "survey_psm_explanation_question_confirmation_answer_yes",
+      "model": "survey.question.answer",
+      "fields": {
+        "question_id": {
+          "ref": "survey_psm_explanation_question_confirmation"
+        },
+        "sequence": "1",
+        "value": "Tôi xác nhận nội dung tường trình là đúng và đầy đủ."
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "survey.question",
+    "survey.question.answer",
+    "survey.survey"
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "file": "security/security.xml",
+  "type": "xml",
+  "bucket": "security",
+  "summary": "6 functions/rules",
+  "records": [
+    {
+      "id": "rule_psm_0214_survey_user_input_portal_own",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0214 portal chi xem survey.user_input cua chinh minh",
+        "model_id": {
+          "ref": "survey.model_survey_user_input"
+        },
+        "groups": {
+          "eval": "[(4, ref('base.group_portal'))]"
+        },
+        "domain_force": "['|', ('partner_id', '=', user.partner_id.id), ('email', '=', user.email)]",
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "True"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0214_survey_internal_read",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0214 internal chi doc survey exit interview",
+        "model_id": {
+          "ref": "survey.model_survey_survey"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_HR_ADMIN_S'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_S'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": {
+          "eval": "[('id', '=', ref('M02_P0214.survey_exit_interview'))]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0214_survey_question_internal_read",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0214 internal chi doc cau hoi survey exit interview",
+        "model_id": {
+          "ref": "survey.model_survey_question"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_HR_ADMIN_S'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_S'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": {
+          "eval": "[('survey_id', '=', ref('M02_P0214.survey_exit_interview'))]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0214_survey_question_answer_internal_read",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0214 internal chi doc dap an survey exit interview",
+        "model_id": {
+          "ref": "survey.model_survey_question_answer"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_HR_ADMIN_S'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_S'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": {
+          "eval": "[('question_id.survey_id', '=', ref('M02_P0214.survey_exit_interview'))]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0214_survey_user_input_internal_read",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0214 internal chi doc ket qua survey exit interview",
+        "model_id": {
+          "ref": "survey.model_survey_user_input"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_HR_ADMIN_S'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_S'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": {
+          "eval": "[('survey_id', '=', ref('M02_P0214.survey_exit_interview')), ('state', '=', 'done')]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0214_survey_user_input_line_internal_read",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0214 internal chi doc dong cau tra loi survey exit interview",
+        "model_id": {
+          "ref": "survey.model_survey_user_input_line"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_HR_ADMIN_S'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_S'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": {
+          "eval": "[('user_input_id.survey_id', '=', ref('M02_P0214.survey_exit_interview')), ('user_input_id.state', '=', 'done')]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0214_survey_user_input_portal_own",
+      "name": "0214 portal chi xem survey.user_input cua chinh minh",
+      "model_ref": {
+        "ref": "survey.model_survey_user_input"
+      },
+      "domain": "['|', ('partner_id', '=', user.partner_id.id), ('email', '=', user.email)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0214_survey_internal_read",
+      "name": "0214 internal chi doc survey exit interview",
+      "model_ref": {
+        "ref": "survey.model_survey_survey"
+      },
+      "domain": {
+        "eval": "[('id', '=', ref('M02_P0214.survey_exit_interview'))]"
+      }
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0214_survey_question_internal_read",
+      "name": "0214 internal chi doc cau hoi survey exit interview",
+      "model_ref": {
+        "ref": "survey.model_survey_question"
+      },
+      "domain": {
+        "eval": "[('survey_id', '=', ref('M02_P0214.survey_exit_interview'))]"
+      }
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0214_survey_question_answer_internal_read",
+      "name": "0214 internal chi doc dap an survey exit interview",
+      "model_ref": {
+        "ref": "survey.model_survey_question_answer"
+      },
+      "domain": {
+        "eval": "[('question_id.survey_id', '=', ref('M02_P0214.survey_exit_interview'))]"
+      }
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0214_survey_user_input_internal_read",
+      "name": "0214 internal chi doc ket qua survey exit interview",
+      "model_ref": {
+        "ref": "survey.model_survey_user_input"
+      },
+      "domain": {
+        "eval": "[('survey_id', '=', ref('M02_P0214.survey_exit_interview')), ('state', '=', 'done')]"
+      }
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0214_survey_user_input_line_internal_read",
+      "name": "0214 internal chi doc dong cau tra loi survey exit interview",
+      "model_ref": {
+        "ref": "survey.model_survey_user_input_line"
+      },
+      "domain": {
+        "eval": "[('user_input_id.survey_id', '=', ref('M02_P0214.survey_exit_interview')), ('user_input_id.state', '=', 'done')]"
+      }
+    }
+  ],
+  "referenced_models": [
+    "ir.rule"
+  ]
+}

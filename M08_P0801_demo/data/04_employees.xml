@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ===== RSG ===== -->
+        <record id="demo_emp_rsg" model="hr.employee">
+            <field name="name">Nguyễn Minh Tuấn</field>
+            <field name="user_id" ref="demo_user_rsg"/>
+            <field name="department_id" ref="dept_rsg"/>
+            <field name="job_id" ref="job_rsg_analyst"/>
+        </record>
+        <record id="demo_emp_rsg_head" model="hr.employee">
+            <field name="name">Võ Xuân Hùng</field>
+            <field name="user_id" ref="demo_user_rsg_head"/>
+            <field name="department_id" ref="dept_rsg"/>
+            <field name="job_id" ref="job_rsg_head"/>
+        </record>
+
+        <!-- ===== IT ===== -->
+        <record id="demo_emp_it" model="hr.employee">
+            <field name="name">Trần Quốc Bảo</field>
+            <field name="user_id" ref="demo_user_it"/>
+            <field name="department_id" ref="dept_it"/>
+            <field name="job_id" ref="job_it_engineer"/>
+        </record>
+        <record id="demo_emp_it_head" model="hr.employee">
+            <field name="name">Bùi Thành Nam</field>
+            <field name="user_id" ref="demo_user_it_head"/>
+            <field name="department_id" ref="dept_it"/>
+            <field name="job_id" ref="job_it_head"/>
+        </record>
+
+        <!-- ===== MENU ===== -->
+        <record id="demo_emp_menu" model="hr.employee">
+            <field name="name">Lê Thị Thu</field>
+            <field name="user_id" ref="demo_user_menu"/>
+            <field name="department_id" ref="dept_menu"/>
+            <field name="job_id" ref="job_menu_dev"/>
+        </record>
+        <record id="demo_emp_menu_head" model="hr.employee">
+            <field name="name">Trần Văn Khoa</field>
+            <field name="user_id" ref="demo_user_menu_head"/>
+            <field name="department_id" ref="dept_menu"/>
+            <field name="job_id" ref="job_menu_head"/>
+        </record>
+
+        <!-- ===== DIGITAL ===== -->
+        <record id="demo_emp_digital" model="hr.employee">
+            <field name="name">Vũ Thị Lan</field>
+            <field name="user_id" ref="demo_user_digital"/>
+            <field name="department_id" ref="dept_digital"/>
+            <field name="job_id" ref="job_digital_specialist"/>
+        </record>
+        <record id="demo_emp_digital_head" model="hr.employee">
+            <field name="name">Hoàng Minh Đức</field>
+            <field name="user_id" ref="demo_user_digital_head"/>
+            <field name="department_id" ref="dept_digital"/>
+            <field name="job_id" ref="job_digital_head"/>
+        </record>
+
+        <!-- ===== MKT ===== -->
+        <record id="demo_emp_mkt" model="hr.employee">
+            <field name="name">Phạm Hồng Nhung</field>
+            <field name="user_id" ref="demo_user_mkt"/>
+            <field name="department_id" ref="dept_mkt"/>
+            <field name="job_id" ref="job_mkt_specialist"/>
+        </record>
+        <record id="demo_emp_mkt_head" model="hr.employee">
+            <field name="name">Nguyễn Thị Hoa</field>
+            <field name="user_id" ref="demo_user_mkt_head"/>
+            <field name="department_id" ref="dept_mkt"/>
+            <field name="job_id" ref="job_mkt_head"/>
+        </record>
+
+        <!-- ===== S&I ===== -->
+        <record id="demo_emp_si" model="hr.employee">
+            <field name="name">Đặng Quỳnh Anh</field>
+            <field name="user_id" ref="demo_user_si"/>
+            <field name="department_id" ref="dept_si"/>
+            <field name="job_id" ref="job_si_analyst"/>
+        </record>
+        <record id="demo_emp_si_head" model="hr.employee">
+            <field name="name">Lê Quang Vinh</field>
+            <field name="user_id" ref="demo_user_si_head"/>
+            <field name="department_id" ref="dept_si"/>
+            <field name="job_id" ref="job_si_head"/>
+        </record>
+
+        <!-- ===== SC ===== -->
+        <record id="demo_emp_sc" model="hr.employee">
+            <field name="name">Nguyễn Thái Sơn</field>
+            <field name="user_id" ref="demo_user_sc"/>
+            <field name="department_id" ref="dept_sc"/>
+            <field name="job_id" ref="job_sc_coordinator"/>
+        </record>
+        <record id="demo_emp_sc_head" model="hr.employee">
+            <field name="name">Đinh Thị Mai</field>
+            <field name="user_id" ref="demo_user_sc_head"/>
+            <field name="department_id" ref="dept_sc"/>
+            <field name="job_id" ref="job_sc_head"/>
+        </record>
+
+    </data>
+
+    <!-- Gán trưởng phòng cho tất cả 7 phòng ban — chạy mỗi lần upgrade -->
+    <data>
+        <record id="dept_rsg" model="hr.department">
+            <field name="manager_id" ref="demo_emp_rsg_head"/>
+        </record>
+        <record id="dept_it" model="hr.department">
+            <field name="manager_id" ref="demo_emp_it_head"/>
+        </record>
+        <record id="dept_menu" model="hr.department">
+            <field name="manager_id" ref="demo_emp_menu_head"/>
+        </record>
+        <record id="dept_digital" model="hr.department">
+            <field name="manager_id" ref="demo_emp_digital_head"/>
+        </record>
+        <record id="dept_mkt" model="hr.department">
+            <field name="manager_id" ref="demo_emp_mkt_head"/>
+        </record>
+        <record id="dept_si" model="hr.department">
+            <field name="manager_id" ref="demo_emp_si_head"/>
+        </record>
+        <record id="dept_sc" model="hr.department">
+            <field name="manager_id" ref="demo_emp_sc_head"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,6 @@
+{
+  "file": "tests/QUICK_START.md",
+  "type": "document",
+  "bucket": "tests",
+  "summary": "# ⚡ QUICK START — Test trong 30 giây ## 1️⃣ Copy command dưới đây ```powershell docker exec odoo-190e20250918-web-1 python3 /opt/odoo/setup/odoo -d admin6 -c..."
+}

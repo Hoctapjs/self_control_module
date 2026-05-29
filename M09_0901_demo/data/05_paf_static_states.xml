@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============================================================ -->
+        <!-- PAF-DEMO-DRAFT: state=draft                                    -->
+        <!-- MKT vua tao PAF tu template, chua dien xong ngay, chua submit -->
+        <!-- ============================================================ -->
+        <record id="demo_paf_draft" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-DRAFT</field>
+            <field name="template_id" ref="demo_paf_template_lto"/>
+            <field name="state">draft</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p><b>BBQ Chicken Burger LTO Mùa Hè 2026</b> — ra mắt giới hạn 8 tuần.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_tmpl_bbq_chicken_burger'),
+            ])]"/>
+            <field name="bom_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_bom_bbq_chicken'),
+            ])]"/>
+            <field name="forecast_revenue">200000000</field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- PAF-DEMO-EVAL: state=dept_evaluation                           -->
+        <!-- Da submit, 5 phong ban dang danh gia (3 done, 1 in_review, 1 pending) -->
+        <!-- ============================================================ -->
+        <record id="demo_paf_eval" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-EVAL</field>
+            <field name="template_id" ref="demo_paf_template_lto"/>
+            <field name="state">dept_evaluation</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p><b>Spicy Wings Combo LTO Q3 2026</b> — Combo ga cay 6 mieng + nuoc ngot.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_tmpl_bbq_chicken_burger'),
+            ])]"/>
+            <field name="bom_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_bom_bbq_chicken'),
+            ])]"/>
+            <field name="planned_start_date">2026-08-01</field>
+            <field name="planned_end_date">2026-09-30</field>
+            <field name="forecast_revenue">350000000</field>
+            <field name="promotion_type">gift_attached</field>
+            <field name="gift_quantity">2500</field>
+            <field name="gift_unit_value">20000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="max_uses_per_customer">2</field>
+            <field name="evaluation_line_ids" eval="[
+                (0, 0, {
+                    'department_id': ref('M08_P0801_demo.dept_si'),
+                    'sequence': 10,
+                    'status': 'done',
+                    'evaluator_id': ref('M08_P0801_demo.demo_user_si'),
+                    'forecast_demand': 1200.0,
+                    'confidence_score': 0.82,
+                    'comment_html': '&lt;p&gt;Du bao 1.200 phan/ngay/cua hang. Do tin cay cao do co data lich su tu BBQ Chicken Burger truoc do.&lt;/p&gt;',
+                    'submitted_date': '2026-06-12 10:00:00',
+                }),
+                (0, 0, {
+                    'department_id': ref('M09_0901_demo.dept_ops'),
+                    'sequence': 20,
+                    'status': 'done',
+                    'evaluator_id': ref('M09_0901_demo.demo_user_ops'),
+                    'pilot_capacity_score': 'medium',
+                    'bottleneck_note': 'Khu vuc chien gioi han cong suat trong gio cao diem 11:00-13:00.',
+                    'comment_html': '&lt;p&gt;Nang luc van hanh trung binh. De xuat gioi han 8 cua hang pilot.&lt;/p&gt;',
+                    'submitted_date': '2026-06-13 14:00:00',
+                }),
+                (0, 0, {
+                    'department_id': ref('M09_0901_demo.dept_finance'),
+                    'sequence': 30,
+                    'status': 'done',
+                    'evaluator_id': ref('M09_0901_demo.demo_user_finance'),
+                    'roi_estimated_percent': 28.5,
+                    'gross_margin_estimated': 95000000,
+                    'comment_html': '&lt;p&gt;ROI uoc tinh 28.5%, loi nhuan gop 95M VND. Khuyen nghi thong qua.&lt;/p&gt;',
+                    'submitted_date': '2026-06-14 09:30:00',
+                }),
+                (0, 0, {
+                    'department_id': ref('M08_P0801_demo.dept_sc'),
+                    'sequence': 40,
+                    'status': 'in_review',
+                    'evaluator_id': ref('M08_P0801_demo.demo_user_sc'),
+                }),
+                (0, 0, {
+                    'department_id': ref('M09_0901_demo.dept_legal'),
+                    'sequence': 50,
+                    'status': 'pending',
+                }),
+            ]"/>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- PAF-DEMO-HEAD: state=head_approval                             -->
+        <!-- Tat ca eval done, dang cho Heads duyet                         -->
+        <!-- ============================================================ -->
+        <record id="demo_paf_head" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-HEAD</field>
+            <field name="template_id" ref="demo_paf_template_core"/>
+            <field name="state">head_approval</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p><b>Spicy McDouble — Core Menu Refresh</b>.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_tmpl_spicy_mcdouble'),
+            ])]"/>
+            <field name="bom_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_bom_spicy_mcdouble'),
+            ])]"/>
+            <field name="planned_start_date">2026-07-15</field>
+            <field name="planned_end_date">2026-12-31</field>
+            <field name="forecast_revenue">450000000</field>
+            <field name="promotion_type">discount_direct</field>
+            <field name="discount_percent">20</field>
+            <field name="discount_total_estimate">90000000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_dt'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="allow_extended_duration" eval="True"/>
+            <field name="evaluation_line_ids" eval="[
+                (0, 0, {
+                    'department_id': ref('M08_P0801_demo.dept_si'),
+                    'sequence': 10,
+                    'status': 'done',
+                    'evaluator_id': ref('M08_P0801_demo.demo_user_si'),
+                    'forecast_demand': 1500.0,
+                    'confidence_score': 0.88,
+                }),
+                (0, 0, {
+                    'department_id': ref('M09_0901_demo.dept_finance'),
+                    'sequence': 20,
+                    'status': 'done',
+                    'evaluator_id': ref('M09_0901_demo.demo_user_finance'),
+                    'roi_estimated_percent': 34.0,
+                    'gross_margin_estimated': 150000000,
+                }),
+                (0, 0, {
+                    'department_id': ref('M08_P0801_demo.dept_sc'),
+                    'sequence': 30,
+                    'status': 'done',
+                    'evaluator_id': ref('M08_P0801_demo.demo_user_sc'),
+                    'supply_risk_level': 'low',
+                    'lead_time_days': 7,
+                }),
+            ]"/>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- PAF-DEMO-CLEVEL: state=clevel_approval                         -->
+        <!-- Heads da duyet, dang cho C-Level                               -->
+        <!-- ============================================================ -->
+        <record id="demo_paf_clevel" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-CLEVEL</field>
+            <field name="template_id" ref="demo_paf_template_lto"/>
+            <field name="state">clevel_approval</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p><b>McChicken Crispy LTO Q4 2026</b> - chuong trinh tai phat hanh.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_tmpl_mccrispy'),
+            ])]"/>
+            <field name="bom_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_bom_mccrispy'),
+            ])]"/>
+            <field name="planned_start_date">2026-10-01</field>
+            <field name="planned_end_date">2026-12-15</field>
+            <field name="forecast_revenue">280000000</field>
+            <field name="promotion_type">gift_attached</field>
+            <field name="gift_quantity">2100</field>
+            <field name="gift_unit_value">20000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok')])]"/>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- PAF-DEMO-APPROVED: state=approved                              -->
+        <!-- C-Level vua duyet, chua trigger PIF                            -->
+        <!-- ============================================================ -->
+        <record id="demo_paf_approved" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-APPROVED</field>
+            <field name="template_id" ref="demo_paf_template_core"/>
+            <field name="state">approved</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p>PAF vua duyet xong, dang cho RSG khoi tao PIF.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_tmpl_spicy_mcdouble'),
+            ])]"/>
+            <field name="planned_start_date">2026-08-15</field>
+            <field name="planned_end_date">2026-11-30</field>
+            <field name="forecast_revenue">320000000</field>
+            <field name="promotion_type">discount_direct</field>
+            <field name="discount_percent">20</field>
+            <field name="discount_total_estimate">64000000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_dt'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="allow_extended_duration" eval="True"/>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- PAF-DEMO-PIF: state=pif_running                                -->
+        <!-- PIF dang chay, link den demo_pif_003 (McChicken Crispy)        -->
+        <!-- ============================================================ -->
+        <record id="demo_paf_pif" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-PIF</field>
+            <field name="template_id" ref="demo_paf_template_lto"/>
+            <field name="state">pif_running</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p>PAF da duyet xong, PIF McChicken Crispy dang chay tai M08 (link sang demo_pif_003).</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_tmpl_mccrispy'),
+            ])]"/>
+            <field name="planned_start_date">2025-11-01</field>
+            <field name="planned_end_date">2026-02-28</field>
+            <field name="forecast_revenue">500000000</field>
+            <field name="promotion_type">gift_attached</field>
+            <field name="gift_quantity">5000</field>
+            <field name="gift_unit_value">15000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="allow_extended_duration" eval="True"/>
+            <field name="pif_object_id" ref="M08_P0801_demo.demo_pif_003"/>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- PAF-DEMO-VAL: state=valuation                                  -->
+        <!-- PIF xong, dang lam Valuation report (draft)                    -->
+        <!-- ============================================================ -->
+        <record id="demo_paf_val" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-VAL</field>
+            <field name="template_id" ref="demo_paf_template_core"/>
+            <field name="state">valuation</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p>PIF da xong, S&amp;I dang viet bao cao Valuation.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_tmpl_bbq_chicken_burger'),
+            ])]"/>
+            <field name="planned_start_date">2025-08-01</field>
+            <field name="planned_end_date">2025-10-31</field>
+            <field name="forecast_revenue">220000000</field>
+            <field name="promotion_type">discount_direct</field>
+            <field name="discount_percent">20</field>
+            <field name="discount_total_estimate">44000000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="allow_extended_duration" eval="True"/>
+        </record>
+
+        <record id="demo_paf_val_report" model="mkt_paf.valuation.report">
+            <field name="paf_request_id" ref="demo_paf_val"/>
+            <field name="report_date">2025-11-05</field>
+            <field name="status">draft</field>
+            <field name="actual_revenue">240000000</field>
+            <field name="actual_cost">170000000</field>
+            <field name="summary_html"><![CDATA[<p><b>Tom tat so bo:</b> Doanh thu thuc te vuot du bao 9%, chi phi giam 5%. Dang cho S&amp;I hoan thien phan tich chi tiet.</p>]]></field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- PAF-DEMO-DONE: state=done                                      -->
+        <!-- Bao cao da publish, PAF dong phieu                             -->
+        <!-- ============================================================ -->
+        <record id="demo_paf_done" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-DONE</field>
+            <field name="template_id" ref="demo_paf_template_lto"/>
+            <field name="state">done</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p>PAF hoan tat — chuong trinh ket thuc thanh cong, bao cao da publish.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_tmpl_mccrispy'),
+            ])]"/>
+            <field name="planned_start_date">2025-06-01</field>
+            <field name="planned_end_date">2025-08-31</field>
+            <field name="forecast_revenue">300000000</field>
+            <field name="promotion_type">gift_attached</field>
+            <field name="gift_quantity">3000</field>
+            <field name="gift_unit_value">20000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok')])]"/>
+            <field name="allow_extended_duration" eval="True"/>
+        </record>
+
+        <record id="demo_paf_done_report" model="mkt_paf.valuation.report">
+            <field name="paf_request_id" ref="demo_paf_done"/>
+            <field name="report_date">2025-09-15</field>
+            <field name="status">published</field>
+            <field name="actual_revenue">340000000</field>
+            <field name="actual_cost">220000000</field>
+            <field name="summary_html"><![CDATA[<p><b>Ket qua chien dich:</b></p>
+<ul>
+<li>Doanh thu thuc te: 340M VND (vuot du bao 13%)</li>
+<li>Loi nhuan gop: 120M VND</li>
+<li>ROI thuc te: 54.5%</li>
+<li>Khuyen nghi: tai phat hanh trong Q2 2026 voi cong suat lon hon</li>
+</ul>]]></field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- PAF-DEMO-REJ: state=rejected                                   -->
+        <!-- Bi tu choi tai vong dept_evaluation (Legal khong duyet)        -->
+        <!-- ============================================================ -->
+        <record id="demo_paf_rej" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-REJ</field>
+            <field name="template_id" ref="demo_paf_template_lto"/>
+            <field name="state">rejected</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p>Combo loyalty co thanh phan vi pham quy dinh quang cao tre em - bi Legal tu choi.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_tmpl_bbq_chicken_burger'),
+            ])]"/>
+            <field name="planned_start_date">2026-09-01</field>
+            <field name="planned_end_date">2026-10-31</field>
+            <field name="forecast_revenue">180000000</field>
+            <field name="promotion_type">gift_attached</field>
+            <field name="gift_quantity">1500</field>
+            <field name="gift_unit_value">20000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc')])]"/>
+            <field name="evaluation_line_ids" eval="[
+                (0, 0, {
+                    'department_id': ref('M09_0901_demo.dept_legal'),
+                    'sequence': 50,
+                    'status': 'failed',
+                    'evaluator_id': ref('M09_0901_demo.demo_user_legal'),
+                    'comment_html': '&lt;p&gt;Hinh anh nhan vat hoat hinh trong campaign chua duoc kiem duyet boi Cuc Quang cao. Khong the cap phep trong khung thoi gian de xuat. De nghi MKT chuyen sang concept khac.&lt;/p&gt;',
+                    'submitted_date': '2026-07-25 16:00:00',
+                    'regulatory_sla_days': 45,
+                }),
+            ]"/>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- PAF-DEMO-CANCEL: state=cancelled                               -->
+        <!-- MKT tu huy do thi truong thay doi                              -->
+        <!-- ============================================================ -->
+        <record id="demo_paf_cancel" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-CANCEL</field>
+            <field name="template_id" ref="demo_paf_template_core"/>
+            <field name="state">cancelled</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p>Huy do doi thu vua tung san pham tuong tu - MKT chuyen huong, phat trien sau.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_tmpl_spicy_mcdouble'),
+            ])]"/>
+            <field name="planned_start_date">2026-08-01</field>
+            <field name="planned_end_date">2026-09-30</field>
+            <field name="forecast_revenue">150000000</field>
+            <field name="promotion_type">discount_direct</field>
+            <field name="discount_percent">20</field>
+            <field name="discount_total_estimate">30000000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok')])]"/>
+        </record>
+
+        <record id="demo_paf_discount" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-DISCOUNT</field>
+            <field name="template_id" ref="demo_paf_template_core"/>
+            <field name="state">draft</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p>Case demo giảm 20% combo, dùng để kiểm tra discount_total_estimate.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [ref('M08_P0801_demo.demo_tmpl_spicy_mcdouble')])]"/>
+            <field name="planned_start_date">2026-07-01</field>
+            <field name="planned_end_date">2026-08-15</field>
+            <field name="forecast_revenue">300000000</field>
+            <field name="promotion_type">discount_direct</field>
+            <field name="discount_percent">20</field>
+            <field name="discount_total_estimate">60000000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_dt'), ref('M08_P0801.pif_platform_digital')])]"/>
+        </record>
+
+        <record id="demo_paf_gift" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-GIFT</field>
+            <field name="template_id" ref="demo_paf_template_lto"/>
+            <field name="state">draft</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p>Case demo tặng quà, tổng giá trị quà nằm trong ngưỡng 50% forecast revenue.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [ref('M08_P0801_demo.demo_tmpl_bbq_chicken_burger')])]"/>
+            <field name="planned_start_date">2026-07-01</field>
+            <field name="planned_end_date">2026-08-31</field>
+            <field name="forecast_revenue">250000000</field>
+            <field name="promotion_type">gift_attached</field>
+            <field name="gift_quantity">3000</field>
+            <field name="gift_unit_value">15000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="max_uses_per_customer">2</field>
+        </record>
+
+        <record id="demo_paf_lucky" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-LUCKY</field>
+            <field name="template_id" ref="demo_paf_template_lucky_draw"/>
+            <field name="state">draft</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p>Case demo bốc thăm xe SH, cần Legal đăng ký và mã văn bản trước khi submit.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [ref('M08_P0801_demo.demo_tmpl_spicy_mcdouble')])]"/>
+            <field name="planned_start_date">2026-09-01</field>
+            <field name="planned_end_date">2026-10-15</field>
+            <field name="forecast_revenue">800000000</field>
+            <field name="promotion_type">lucky_draw</field>
+            <field name="promotion_legal_form">registration</field>
+            <field name="gift_quantity">1</field>
+            <field name="gift_unit_value">90000000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="max_uses_per_customer">1</field>
+        </record>
+
+        <record id="demo_paf_over_90" model="mkt_paf.request">
+            <field name="name">PAF-DEMO-OVER-90</field>
+            <field name="template_id" ref="demo_paf_template_holiday"/>
+            <field name="state">draft</field>
+            <field name="creator_id" ref="M08_P0801_demo.demo_user_mkt"/>
+            <field name="description_html"><![CDATA[<p>Case minh họa chương trình dài hơn 90 ngày. Record demo bật cờ ngoại lệ để load data; khi tạo mới không bật cờ thì constraint sẽ chặn.</p>]]></field>
+            <field name="product_ids" eval="[(6, 0, [ref('M08_P0801_demo.demo_tmpl_bbq_chicken_burger')])]"/>
+            <field name="planned_start_date">2026-01-01</field>
+            <field name="planned_end_date">2026-04-15</field>
+            <field name="forecast_revenue">500000000</field>
+            <field name="promotion_type">gift_attached</field>
+            <field name="gift_quantity">1000</field>
+            <field name="gift_unit_value">20000</field>
+            <field name="eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok')])]"/>
+            <field name="allow_extended_duration" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

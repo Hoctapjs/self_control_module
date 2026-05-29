@@ -1,0 +1,120 @@
+{
+  "file": "data/offboarding_plan_rst.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "offboarding_activity_plan_rst",
+      "model": "mail.activity.plan",
+      "fields": {
+        "name": "RST Resignation Process",
+        "res_model": "hr.employee",
+        "active": {
+          "eval": "True"
+        },
+        "company_id": {
+          "ref": "base.main_company"
+        }
+      }
+    },
+    {
+      "id": "rst_template_employee_checklist",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan_rst"
+        },
+        "sequence": "10",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Thực hiện checklist nghỉ việc",
+        "note": "Thực hiện các công việc bàn giao theo quy trình.",
+        "responsible_type": "employee"
+      }
+    },
+    {
+      "id": "rst_template_handover",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan_rst"
+        },
+        "sequence": "20",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Bàn giao công việc, tài liệu, giấy tờ",
+        "note": "Bàn giao toàn bộ tài liệu và công việc cho người kế nhiệm hoặc quản lý.",
+        "responsible_type": "employee"
+      }
+    },
+    {
+      "id": "rst_template_it_checklist",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan_rst"
+        },
+        "sequence": "30",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "IT: Thu hồi thiết bị & Vô hiệu hóa tài khoản",
+        "note": "<ul>\n            <li>Deactivate email</li>\n            <li>Tài khoản nội bộ</li>\n            <li>Thiết bị máy móc liên quan</li>\n        </ul>",
+        "responsible_type": "other",
+        "responsible_id": {
+          "ref": "user_rst_it"
+        }
+      }
+    },
+    {
+      "id": "rst_template_admin_checklist",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan_rst"
+        },
+        "sequence": "40",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Admin: Thu hồi tài sản văn phòng",
+        "note": "<ul>\n            <li>Office keyboard</li>\n            <li>Biometric Staff ID Deletion</li>\n            <li>Desk / cabinet keys</li>\n            <li>Mobile phone &amp; accessories</li>\n        </ul>",
+        "responsible_type": "other",
+        "responsible_id": {
+          "ref": "user_rst_admin"
+        }
+      }
+    },
+    {
+      "id": "rst_template_hr_checklist",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan_rst"
+        },
+        "sequence": "50",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "HR: Thu hồi thẻ BHYT & Giấy tờ",
+        "note": "<ul>\n            <li>PVI Health Insurance Card (included dependents)</li>\n            <li>Thu hồi các giấy tờ, hồ sơ nhân sự liên quan</li>\n            <li>Xác nhận bảng quyết toán bàn giao cuối cùng</li>\n        </ul>",
+        "responsible_type": "other",
+        "responsible_id": {
+          "ref": "user_rst_hr"
+        }
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "mail.activity.plan",
+    "mail.activity.plan.template"
+  ]
+}

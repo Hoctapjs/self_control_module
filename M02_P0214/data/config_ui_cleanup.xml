@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <delete model="ir.ui.view"
+                search="[('name', '=', 'res.config.settings.psm.0214.offboarding.form')]"/>
+        <delete model="ir.actions.act_window"
+                search="[('name', 'ilike', 'Offboarding RST Settings')]"/>
+    </data>
+</odoo>

@@ -1,0 +1,126 @@
+{
+  "file": "data/maintenance_stage_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "stage_psm_0502_intake",
+      "model": "maintenance.stage",
+      "fields": {
+        "name": "0502 Intake",
+        "sequence": "5",
+        "fold": "False",
+        "done": "False"
+      }
+    },
+    {
+      "id": "stage_psm_0502_inspected",
+      "model": "maintenance.stage",
+      "fields": {
+        "name": "0502 Inspected",
+        "sequence": "10",
+        "fold": "False",
+        "done": "False"
+      }
+    },
+    {
+      "id": "stage_psm_0502_planned",
+      "model": "maintenance.stage",
+      "fields": {
+        "name": "0502 Planned",
+        "sequence": "15",
+        "fold": "False",
+        "done": "False"
+      }
+    },
+    {
+      "id": "stage_psm_0502_proposed",
+      "model": "maintenance.stage",
+      "fields": {
+        "name": "0502 Proposed",
+        "sequence": "20",
+        "fold": "False",
+        "done": "False"
+      }
+    },
+    {
+      "id": "stage_psm_0502_approved",
+      "model": "maintenance.stage",
+      "fields": {
+        "name": "0502 Approved",
+        "sequence": "25",
+        "fold": "False",
+        "done": "False"
+      }
+    },
+    {
+      "id": "stage_psm_0502_service_assessed",
+      "model": "maintenance.stage",
+      "fields": {
+        "name": "0502 Service Assessed",
+        "sequence": "30",
+        "fold": "False",
+        "done": "False"
+      }
+    },
+    {
+      "id": "stage_psm_0502_material_ready",
+      "model": "maintenance.stage",
+      "fields": {
+        "name": "0502 Material Ready",
+        "sequence": "35",
+        "fold": "False",
+        "done": "False"
+      }
+    },
+    {
+      "id": "stage_psm_0502_in_execution",
+      "model": "maintenance.stage",
+      "fields": {
+        "name": "0502 In Execution",
+        "sequence": "40",
+        "fold": "False",
+        "done": "False"
+      }
+    },
+    {
+      "id": "stage_psm_0502_acceptance_review",
+      "model": "maintenance.stage",
+      "fields": {
+        "name": "0502 Acceptance Review",
+        "sequence": "45",
+        "fold": "False",
+        "done": "False"
+      }
+    },
+    {
+      "id": "stage_psm_0502_done",
+      "model": "maintenance.stage",
+      "fields": {
+        "name": "0502 Done",
+        "sequence": "50",
+        "fold": "True",
+        "done": "True"
+      }
+    },
+    {
+      "id": "stage_psm_0502_cancelled",
+      "model": "maintenance.stage",
+      "fields": {
+        "name": "0502 Cancelled",
+        "sequence": "55",
+        "fold": "True",
+        "done": "True"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "maintenance.stage"
+  ]
+}

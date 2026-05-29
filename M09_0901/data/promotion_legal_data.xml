@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="ir_config_parameter_promotion_duration_limit_days" model="ir.config_parameter">
+        <field name="key">m09_0901.promotion_duration_limit_days</field>
+        <field name="value">90</field>
+    </record>
+    <record id="ir_config_parameter_lucky_draw_min_sla_days" model="ir.config_parameter">
+        <field name="key">m09_0901.lucky_draw_min_sla_days</field>
+        <field name="value">30</field>
+    </record>
+    <record id="ir_config_parameter_gift_value_ratio_limit" model="ir.config_parameter">
+        <field name="key">m09_0901.gift_value_ratio_limit</field>
+        <field name="value">0.5</field>
+    </record>
+</odoo>

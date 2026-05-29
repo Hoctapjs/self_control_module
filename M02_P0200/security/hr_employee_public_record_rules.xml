@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Record Rules: hr.employee.public | Từ: P0205 -->
+
+    <!-- [P0205] HR Manager: all depts read-only -->
+    <record id="rule_hr_employee_public_all_hr_manager_0205" model="ir.rule">
+        <field name="name">HR Employee Public: All Depts for Manager (0205)</field>
+        <field name="model_id" ref="hr.model_hr_employee_public"/>
+        <field name="groups" eval="[(6, 0, [ref('GDH_RST_HR_RECRUITMENT_M')])]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+</odoo>

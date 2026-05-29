@@ -1,0 +1,37 @@
+{
+  "file": "views/config_menu_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "1 menus",
+  "records": [
+    {
+      "id": "action_psm_0213_offboarding_settings_server",
+      "model": "ir.actions.server",
+      "fields": {
+        "name": "OPS Offboarding Configuration",
+        "model_id": {
+          "ref": "base.model_res_company"
+        },
+        "state": "code",
+        "code": "action = {\n    \"type\": \"ir.actions.act_window\",\n    \"name\": \"OPS Offboarding Configuration\",\n    \"res_model\": \"res.company\",\n    \"res_id\": env.company.id,\n    \"view_mode\": \"form\",\n    \"views\": [(env.ref(\"M02_P0213.view_psm_0213_company_offboarding_config_form\").id, \"form\")],\n    \"target\": \"current\",\n}"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [
+    {
+      "id": "menu_psm_0213_offboarding_settings",
+      "name": "Offboarding OPS",
+      "parent": "approvals.approvals_menu_config",
+      "action": "action_psm_0213_offboarding_settings_server",
+      "groups": "approvals.group_approval_manager,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M",
+      "file": "views/config_menu_views.xml"
+    }
+  ],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.actions.server"
+  ]
+}

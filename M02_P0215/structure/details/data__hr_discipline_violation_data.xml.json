@@ -1,0 +1,132 @@
+{
+  "file": "data/hr_discipline_violation_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "x_psm_violation_category_1",
+      "model": "x_psm.hr.discipline.violation.category",
+      "fields": {
+        "name": "Vi phạm quy định, quy chế hoặc nội quy lao động của Công ty (bao gồm Quy tắc đạo đức trong kinh doanh – Standards of Business Conduct)",
+        "x_psm_code": "CAT1"
+      }
+    },
+    {
+      "id": "x_psm_violation_category_2",
+      "model": "x_psm.hr.discipline.violation.category",
+      "fields": {
+        "name": "Quấy rối, Phân biệt đối xử, Bắt nạt hoặc Hành vi trả đũa tại nơi làm việc",
+        "x_psm_code": "CAT2"
+      }
+    },
+    {
+      "id": "x_psm_violation_category_3",
+      "model": "x_psm.hr.discipline.violation.category",
+      "fields": {
+        "name": "Hành vi bạo lực tại nơi làm việc",
+        "x_psm_code": "CAT3"
+      }
+    },
+    {
+      "id": "x_psm_violation_type_cat1_1",
+      "model": "x_psm.hr.discipline.violation.type",
+      "fields": {
+        "name": "Đi làm muộn / Về sớm không xin phép",
+        "x_psm_category_id": {
+          "ref": "x_psm_violation_category_1"
+        },
+        "x_psm_severity": "minor",
+        "x_psm_improvement_period": "30",
+        "x_psm_max_repeats": "3"
+      }
+    },
+    {
+      "id": "x_psm_violation_type_cat1_2",
+      "model": "x_psm.hr.discipline.violation.type",
+      "fields": {
+        "name": "Ăn uống trong giờ làm việc (không đúng nơi quy định)",
+        "x_psm_category_id": {
+          "ref": "x_psm_violation_category_1"
+        },
+        "x_psm_severity": "minor",
+        "x_psm_improvement_period": "30",
+        "x_psm_max_repeats": "3"
+      }
+    },
+    {
+      "id": "x_psm_violation_type_cat1_3",
+      "model": "x_psm.hr.discipline.violation.type",
+      "fields": {
+        "name": "Không mặc đúng đồng phục",
+        "x_psm_category_id": {
+          "ref": "x_psm_violation_category_1"
+        },
+        "x_psm_severity": "minor",
+        "x_psm_improvement_period": "30",
+        "x_psm_max_repeats": "3"
+      }
+    },
+    {
+      "id": "x_psm_violation_type_cat2_1",
+      "model": "x_psm.hr.discipline.violation.type",
+      "fields": {
+        "name": "Quấy rối bằng lời nói",
+        "x_psm_category_id": {
+          "ref": "x_psm_violation_category_2"
+        },
+        "x_psm_severity": "major",
+        "x_psm_improvement_period": "180",
+        "x_psm_max_repeats": "1"
+      }
+    },
+    {
+      "id": "x_psm_violation_type_cat2_2",
+      "model": "x_psm.hr.discipline.violation.type",
+      "fields": {
+        "name": "Phân biệt đối xử với đồng nghiệp/khách hàng",
+        "x_psm_category_id": {
+          "ref": "x_psm_violation_category_2"
+        },
+        "x_psm_severity": "major",
+        "x_psm_improvement_period": "180",
+        "x_psm_max_repeats": "1"
+      }
+    },
+    {
+      "id": "x_psm_violation_type_cat3_1",
+      "model": "x_psm.hr.discipline.violation.type",
+      "fields": {
+        "name": "Đánh nhau / Xô xát",
+        "x_psm_category_id": {
+          "ref": "x_psm_violation_category_3"
+        },
+        "x_psm_severity": "major",
+        "x_psm_improvement_period": "365",
+        "x_psm_max_repeats": "0"
+      }
+    },
+    {
+      "id": "x_psm_violation_type_cat3_2",
+      "model": "x_psm.hr.discipline.violation.type",
+      "fields": {
+        "name": "Đe dọa vũ lực",
+        "x_psm_category_id": {
+          "ref": "x_psm_violation_category_3"
+        },
+        "x_psm_severity": "major",
+        "x_psm_improvement_period": "365",
+        "x_psm_max_repeats": "0"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "x_psm.hr.discipline.violation.category",
+    "x_psm.hr.discipline.violation.type"
+  ]
+}

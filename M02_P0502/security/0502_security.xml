@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- nhom phan quyen rieng cho quy trinh 0502 -->
+    <record id="group_psm_0502_store_user" model="res.groups">
+        <field name="name">0502 Store User</field>
+        <field name="sequence">20</field>
+        <field name="privilege_id" ref="maintenance.res_groups_privilege_maintenance"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Store user can create and follow 0502 maintenance requests for their own department.</field>
+    </record>
+
+    <record id="group_psm_0502_store_approver" model="res.groups">
+        <field name="name">0502 Store Approver</field>
+        <field name="sequence">30</field>
+        <field name="privilege_id" ref="maintenance.res_groups_privilege_maintenance"/>
+        <field name="implied_ids" eval="[(4, ref('group_psm_0502_store_user'))]"/>
+        <field name="comment">Store approver can approve first-level 0502 proposal decisions.</field>
+    </record>
+
+    <record id="group_psm_0502_store_final_approver" model="res.groups">
+        <field name="name">0502 Store Final Approver</field>
+        <field name="sequence">40</field>
+        <field name="privilege_id" ref="maintenance.res_groups_privilege_maintenance"/>
+        <field name="implied_ids" eval="[(4, ref('group_psm_0502_store_approver'))]"/>
+        <field name="comment">Store final approver can approve final-level 0502 proposal decisions.</field>
+    </record>
+
+    <record id="group_psm_0502_cmt_user" model="res.groups">
+        <field name="name">0502 CMT User</field>
+        <field name="sequence">50</field>
+        <field name="privilege_id" ref="maintenance.res_groups_privilege_maintenance"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">CMT technician can receive, inspect, propose and execute 0502 maintenance work.</field>
+    </record>
+
+    <record id="group_psm_0502_cmt_lead" model="res.groups">
+        <field name="name">0502 CMT Lead</field>
+        <field name="sequence">60</field>
+        <field name="privilege_id" ref="maintenance.res_groups_privilege_maintenance"/>
+        <field name="implied_ids" eval="[(4, ref('group_psm_0502_cmt_user'))]"/>
+        <field name="comment">CMT Lead can plan, dispatch FSM work and approve material issue requests for 0502.</field>
+    </record>
+
+    <record id="group_psm_0502_manager" model="res.groups">
+        <field name="name">0502 Manager</field>
+        <field name="sequence">70</field>
+        <field name="privilege_id" ref="maintenance.res_groups_privilege_maintenance"/>
+        <field name="implied_ids" eval="[(4, ref('group_psm_0502_cmt_lead')), (4, ref('group_psm_0502_store_final_approver')), (4, ref('maintenance.group_equipment_manager'))]"/>
+        <field name="comment">0502 manager has full maintenance process access.</field>
+    </record>
+
+    <data noupdate="0">
+        <!-- Store chi nhin request cua department gan voi employee cua user -->
+        <!-- dung employee_ids.department_id.ids de user khong co employee/department se khong thay request nao -->
+        <record id="rule_psm_0502_request_store_department" model="ir.rule">
+            <field name="name">0502 Store user own department requests</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="domain_force">[('x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_store_user'))]"/>
+        </record>
+
+        <!-- CMT user thay request trong team minh tham gia -->
+        <record id="rule_psm_0502_request_cmt_team_member" model="ir.rule">
+            <field name="name">0502 CMT user team requests</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="domain_force">[('maintenance_team_id.member_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_cmt_user'))]"/>
+        </record>
+
+        <!-- CMT Lead thay request cua team do minh phu trach -->
+        <record id="rule_psm_0502_request_cmt_lead" model="ir.rule">
+            <field name="name">0502 CMT lead requests</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="domain_force">[('maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_cmt_lead'))]"/>
+        </record>
+
+        <!-- Manager thay toan bo request 0502 -->
+        <record id="rule_psm_0502_request_manager_all" model="ir.rule">
+            <field name="name">0502 manager all requests</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_manager'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_material_line_store_department" model="ir.rule">
+            <field name="name">0502 material lines store department</field>
+            <field name="model_id" ref="model_x_psm_request_material_line"/>
+            <field name="domain_force">[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_store_user'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_material_line_cmt_team" model="ir.rule">
+            <field name="name">0502 material lines CMT team</field>
+            <field name="model_id" ref="model_x_psm_request_material_line"/>
+            <field name="domain_force">[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_cmt_user'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_material_line_cmt_lead" model="ir.rule">
+            <field name="name">0502 material lines CMT lead</field>
+            <field name="model_id" ref="model_x_psm_request_material_line"/>
+            <field name="domain_force">[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_cmt_lead'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_material_line_manager_all" model="ir.rule">
+            <field name="name">0502 material lines manager all</field>
+            <field name="model_id" ref="model_x_psm_request_material_line"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_manager'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_planning_history_store_department" model="ir.rule">
+            <field name="name">0502 planning history store department</field>
+            <field name="model_id" ref="model_x_psm_request_planning_history"/>
+            <field name="domain_force">[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_store_user'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_planning_history_cmt_team" model="ir.rule">
+            <field name="name">0502 planning history CMT team</field>
+            <field name="model_id" ref="model_x_psm_request_planning_history"/>
+            <field name="domain_force">[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_cmt_user'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_planning_history_cmt_lead" model="ir.rule">
+            <field name="name">0502 planning history CMT lead</field>
+            <field name="model_id" ref="model_x_psm_request_planning_history"/>
+            <field name="domain_force">[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_cmt_lead'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_planning_history_manager_all" model="ir.rule">
+            <field name="name">0502 planning history manager all</field>
+            <field name="model_id" ref="model_x_psm_request_planning_history"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_manager'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_proposal_history_store_department" model="ir.rule">
+            <field name="name">0502 proposal history store department</field>
+            <field name="model_id" ref="model_x_psm_request_proposal_history"/>
+            <field name="domain_force">[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_store_user'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_proposal_history_cmt_team" model="ir.rule">
+            <field name="name">0502 proposal history CMT team</field>
+            <field name="model_id" ref="model_x_psm_request_proposal_history"/>
+            <field name="domain_force">[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_cmt_user'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_proposal_history_cmt_lead" model="ir.rule">
+            <field name="name">0502 proposal history CMT lead</field>
+            <field name="model_id" ref="model_x_psm_request_proposal_history"/>
+            <field name="domain_force">[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_cmt_lead'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_proposal_history_manager_all" model="ir.rule">
+            <field name="name">0502 proposal history manager all</field>
+            <field name="model_id" ref="model_x_psm_request_proposal_history"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_manager'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_rework_history_store_department" model="ir.rule">
+            <field name="name">0502 rework history store department</field>
+            <field name="model_id" ref="model_x_psm_request_rework_history"/>
+            <field name="domain_force">[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_store_user'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_rework_history_cmt_team" model="ir.rule">
+            <field name="name">0502 rework history CMT team</field>
+            <field name="model_id" ref="model_x_psm_request_rework_history"/>
+            <field name="domain_force">[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_cmt_user'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_rework_history_cmt_lead" model="ir.rule">
+            <field name="name">0502 rework history CMT lead</field>
+            <field name="model_id" ref="model_x_psm_request_rework_history"/>
+            <field name="domain_force">[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_cmt_lead'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_rework_history_manager_all" model="ir.rule">
+            <field name="name">0502 rework history manager all</field>
+            <field name="model_id" ref="model_x_psm_request_rework_history"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_manager'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_outside_service_store_department" model="ir.rule">
+            <field name="name">0502 outside service store department</field>
+            <field name="model_id" ref="model_x_psm_outside_service_request"/>
+            <field name="domain_force">[('x_psm_department_id', 'in', user.employee_ids.department_id.ids)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_store_user'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_outside_service_cmt_team" model="ir.rule">
+            <field name="name">0502 outside service CMT team</field>
+            <field name="model_id" ref="model_x_psm_outside_service_request"/>
+            <field name="domain_force">[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_cmt_user'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_outside_service_cmt_lead" model="ir.rule">
+            <field name="name">0502 outside service CMT lead</field>
+            <field name="model_id" ref="model_x_psm_outside_service_request"/>
+            <field name="domain_force">[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_cmt_lead'))]"/>
+        </record>
+
+        <record id="rule_psm_0502_aux_manager_all" model="ir.rule">
+            <field name="name">0502 manager all outside service</field>
+            <field name="model_id" ref="model_x_psm_outside_service_request"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_psm_0502_manager'))]"/>
+        </record>
+    </data>
+</odoo>

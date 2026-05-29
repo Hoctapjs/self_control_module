@@ -1,0 +1,6 @@
+{
+  "file": "tests/README.md",
+  "type": "document",
+  "bucket": "tests",
+  "summary": "# 🧪 M02_P0213 — EMAIL TEMPLATE TESTS **Kiểm tra Phase 1-4 fixes cho email template (Offboarding OPS)** --- ## 📁 File Structure ``` tests/ ├── __init__.py # I..."
+}

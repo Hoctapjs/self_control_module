@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mkt_0901_kanban_paf_request" model="ir.ui.view">
+        <field name="name">mkt.paf.request.kanban</field>
+        <field name="model">mkt_paf.request</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column" default_group_by="state">
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_card">
+                            <field name="name"/>
+                            <field name="state" widget="statusbar"/>
+                            <div class="o_kanban_details">
+                                <field name="planned_start_date"/>
+                                <field name="planned_end_date"/>
+                                <field name="forecast_revenue" widget="monetary" options="{'currency_field':'currency_id'}"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+                <field name="name"/>
+                <field name="state"/>
+                <field name="planned_start_date"/>
+                <field name="planned_end_date"/>
+                <field name="forecast_revenue"/>
+            </kanban>
+        </field>
+    </record>
+</odoo>

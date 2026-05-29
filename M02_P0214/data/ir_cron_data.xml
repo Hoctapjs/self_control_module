@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_psm_offboarding_reminder_rst" model="ir.cron">
+            <field name="name">Offboarding (RST): Remind Pending Activities</field>
+            <field name="model_id" ref="approvals.model_approval_request"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_offboarding_reminders()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+        <record id="ir_cron_psm_manager_approval_reminder_rst" model="ir.cron">
+            <field name="name">Offboarding (RST): Remind Manager Approval</field>
+            <field name="model_id" ref="approvals.model_approval_request"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_manager_approval_reminders()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+        <record id="ir_cron_psm_settlement_upload_reminder_rst" model="ir.cron">
+            <field name="name">Offboarding (RST): Remind Salary Settlement Upload</field>
+            <field name="model_id" ref="approvals.model_approval_request"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_settlement_upload_reminders()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+    </data>
+</odoo>

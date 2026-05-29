@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Record Rules: hr.appraisal + hr.appraisal.goal | Từ: P0218 -->
+
+    <!-- [P0218] RGM: read own department appraisals -->
+    <record id="rule_hr_appraisal_read_own_department_rgm" model="ir.rule">
+        <field name="name">Appraisal: Read only own department (Store RGM)</field>
+        <field name="model_id" ref="hr_appraisal.model_hr_appraisal"/>
+        <field name="domain_force">[('employee_id.department_id.manager_id.user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="groups" eval="[(4, ref('GDH_OPS_STORE_RGM_M'))]"/>
+    </record>
+
+    <!-- [P0218] Internal User: see goals where they are manager -->
+    <record id="rule_hr_appraisal_goal_rgm_is_manager" model="ir.rule">
+        <field name="name">Appraisal Goal: RGM see only goals where they are manager</field>
+        <field name="model_id" ref="hr_appraisal.model_hr_appraisal_goal"/>
+        <field name="domain_force">[('manager_ids.user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+</odoo>

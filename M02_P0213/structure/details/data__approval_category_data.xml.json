@@ -1,0 +1,28 @@
+{
+  "file": "data/approval_category_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "psm_0213_approval_category_resignation",
+      "model": "approval.category",
+      "fields": {
+        "name": "OPS Resignation Request",
+        "description": "Employee resignation request for the OPS business flow, including manager approval, exit survey, offboarding task follow-up, Adecco notification, and social insurance handling where applicable.",
+        "manager_approval": "required",
+        "x_psm_0213_is_offboarding": {
+          "eval": "True"
+        }
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "approval.category"
+  ]
+}

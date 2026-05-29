@@ -1,0 +1,20 @@
+{
+  "file": "models/mail_message_subtype.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: mail.message.subtype; 1 classes; 0 fields",
+  "classes": [
+    {
+      "python_class": "MailMessageSubtype",
+      "description": "Extends mail.message.subtype in models/mail_message_subtype.py.",
+      "model": null,
+      "inherit": "mail.message.subtype",
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

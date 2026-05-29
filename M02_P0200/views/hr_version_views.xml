@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_version_list_view_inherit_contract_kind_mcd" model="ir.ui.view">
+        <field name="name">hr.version.list.view.inherit.contract.kind.mcd</field>
+        <field name="model">hr.version</field>
+        <field name="inherit_id" ref="hr.hr_version_list_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='contract_type_id']" position="after">
+                <field name="contract_kind_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_version_search_view_inherit_contract_kind_mcd" model="ir.ui.view">
+        <field name="name">hr.version.search.view.inherit.contract.kind.mcd</field>
+        <field name="model">hr.version</field>
+        <field name="inherit_id" ref="hr.hr_version_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='group_by_department']" position="after">
+                <filter string="Contract Kind" name="group_by_contract_kind" context="{'group_by': 'contract_kind_id'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

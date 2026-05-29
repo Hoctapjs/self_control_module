@@ -1,0 +1,66 @@
+{
+  "file": "wizards/x_psm_hr_discipline_manual_confirm_wizard.py",
+  "type": "python",
+  "bucket": "wizards",
+  "summary": "models: x_psm.hr.discipline.manual.confirm.wizard; 1 classes; 2 fields; 1 actions",
+  "classes": [
+    {
+      "python_class": "HrDisciplineManualConfirmWizard",
+      "description": "Discipline Manual Confirmation Wizard",
+      "model": "x_psm.hr.discipline.manual.confirm.wizard",
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_record_id",
+          "type": "Many2one",
+          "string": null,
+          "comodel": "x_psm.hr.discipline.record",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_start_date",
+          "type": "Date",
+          "string": "Effective Start Date",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [
+        {
+          "name": "default_get",
+          "type": "override",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "override"
+        },
+        {
+          "name": "action_psm_confirm",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        }
+      ],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

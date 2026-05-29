@@ -1,0 +1,230 @@
+{
+  "file": "models/request_material_line.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: x_psm_request_material_line; 1 classes; 10 fields",
+  "classes": [
+    {
+      "python_class": "X0502RequestMaterialLine",
+      "description": "0502 Request Material Line",
+      "model": "x_psm_request_material_line",
+      "inherit": null,
+      "order": "x_psm_sequence, id",
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_sequence",
+          "type": "Integer",
+          "string": "Sequence",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": 10,
+          "tracking": null,
+          "help": "Sequence used to order the structured material assessment lines."
+        },
+        {
+          "name": "x_psm_request_id",
+          "type": "Many2one",
+          "string": "Maintenance Request",
+          "comodel": "maintenance.request",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "0502 maintenance request that this structured material line belongs to."
+        },
+        {
+          "name": "x_psm_product_id",
+          "type": "Many2one",
+          "string": "Material",
+          "comodel": "product.product",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Material or spare part identified during the material assessment step."
+        },
+        {
+          "name": "x_psm_estimated_qty",
+          "type": "Float",
+          "string": "Estimated Quantity",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": 1.0,
+          "tracking": null,
+          "help": "Estimated quantity required for the material assessment step."
+        },
+        {
+          "name": "x_psm_uom_id",
+          "type": "Many2one",
+          "string": "UoM",
+          "comodel": "uom.uom",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_product_id.uom_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Default unit of measure taken from the selected material."
+        },
+        {
+          "name": "x_psm_currency_id",
+          "type": "Many2one",
+          "string": "Currency",
+          "comodel": "res.currency",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_request_id.x_psm_0502_currency_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Currency used to estimate the material line value."
+        },
+        {
+          "name": "x_psm_estimated_unit_price",
+          "type": "Monetary",
+          "string": "Estimated Unit Price",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Estimated unit price used by the 0502 material approval rule."
+        },
+        {
+          "name": "x_psm_estimated_subtotal",
+          "type": "Monetary",
+          "string": "Estimated Subtotal",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_estimated_subtotal",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Estimated material subtotal calculated from unit price and quantity."
+        },
+        {
+          "name": "x_psm_source_type",
+          "type": "Selection",
+          "string": "Expected Source",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "warehouse_stock",
+              "Warehouse Stock"
+            ],
+            [
+              "store_spare",
+              "Store Spare"
+            ],
+            [
+              "technician_stock",
+              "Technician Stock"
+            ],
+            [
+              "purchase",
+              "External Purchase"
+            ],
+            [
+              "other",
+              "Other"
+            ]
+          ],
+          "default": null,
+          "tracking": null,
+          "help": "Expected source from which the material is intended to be supplied."
+        },
+        {
+          "name": "x_psm_note",
+          "type": "Char",
+          "string": "Line Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Short note describing the usage or special context of the material line."
+        }
+      ],
+      "methods": [
+        {
+          "name": "_compute_x_psm_estimated_subtotal",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_estimated_unit_price",
+                "x_psm_estimated_qty"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_onchange_x_psm_product_id_set_estimated_unit_price",
+          "type": "onchange",
+          "decorators": [
+            {
+              "call": "api.onchange",
+              "args": [
+                "x_psm_product_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "onchange"
+        },
+        {
+          "name": "create",
+          "type": "override",
+          "decorators": [
+            "api.model_create_multi"
+          ],
+          "summary": "override"
+        }
+      ],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

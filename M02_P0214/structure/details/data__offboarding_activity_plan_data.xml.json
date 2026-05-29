@@ -1,0 +1,207 @@
+{
+  "file": "data/offboarding_activity_plan_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "offboarding_activity_plan",
+      "model": "mail.activity.plan",
+      "fields": {
+        "name": "RST Resignation Process (22 Steps)",
+        "res_model": "hr.employee",
+        "active": {
+          "eval": "True"
+        },
+        "company_id": {
+          "ref": "base.main_company"
+        }
+      }
+    },
+    {
+      "id": "plan_step_8_exit_interview",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan"
+        },
+        "sequence": "8",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Step 8: Conduct Exit Interview",
+        "note": "Employee completes the exit interview using the template.",
+        "responsible_type": "employee"
+      }
+    },
+    {
+      "id": "plan_step_9_handover_work",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan"
+        },
+        "sequence": "9",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Step 9: Hand over work and documents",
+        "note": "Hand over work, documents and related papers.",
+        "responsible_type": "employee"
+      }
+    },
+    {
+      "id": "plan_step_10_evaluate",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan"
+        },
+        "sequence": "10",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Step 10: Evaluate the handover",
+        "note": "Direct manager evaluates handover quality.",
+        "responsible_type": "manager"
+      }
+    },
+    {
+      "id": "plan_step_11_confirm_recovery",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan"
+        },
+        "sequence": "11",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Step 11: Confirm full recovery completion",
+        "note": "Confirm all handover checklist items have been recovered.",
+        "responsible_type": "manager"
+      }
+    },
+    {
+      "id": "plan_step_12_check_payments",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan"
+        },
+        "sequence": "12",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Step 12: Check outstanding payments",
+        "note": "System/Accounting reviews outstanding payments:\n- Unsettled advances\n- Unpaid business-trip expenses\n- Company loans/borrowings\nNotify the employee if any items remain.",
+        "responsible_type": "manager"
+      }
+    },
+    {
+      "id": "plan_step_13_it_confirm",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan"
+        },
+        "sequence": "13",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Step 13: IT confirms checklist completion",
+        "note": "IT confirms:\n- Email deactivated\n- Internal accounts deactivated\n- Equipment/devices recovered",
+        "responsible_type": "manager"
+      }
+    },
+    {
+      "id": "plan_step_14_admin_confirm",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan"
+        },
+        "sequence": "14",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Step 14: Admin confirms handover checklist",
+        "note": "Admin confirms recovery:\n- Office keyboard\n- Biometric Staff ID Deletion\n- Desk / cabinet keys\n- Mobile phone & accessories\n- ...",
+        "responsible_type": "manager"
+      }
+    },
+    {
+      "id": "plan_step_15_hr_pvi",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan"
+        },
+        "sequence": "15",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Step 15: HR confirms PVI card",
+        "note": "HR confirms PVI Health Insurance Card handover (including dependents).",
+        "responsible_type": "manager"
+      }
+    },
+    {
+      "id": "plan_step_17_sign_settlement",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan"
+        },
+        "sequence": "17",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Step 17: Sign salary settlement",
+        "note": "Sign the final salary settlement record.",
+        "responsible_type": "manager"
+      }
+    },
+    {
+      "id": "plan_step_19_pay_period",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan"
+        },
+        "sequence": "19",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Step 19: Pay according to payroll cycle",
+        "note": "Execute payment per the payroll cycle.",
+        "responsible_type": "manager"
+      }
+    },
+    {
+      "id": "plan_step_20_final_handover",
+      "model": "mail.activity.plan.template",
+      "fields": {
+        "plan_id": {
+          "ref": "offboarding_activity_plan"
+        },
+        "sequence": "20",
+        "activity_type_id": {
+          "ref": "mail.mail_activity_data_todo"
+        },
+        "summary": "Step 20: Hand over Resignation Decision & Documents",
+        "note": "Employee receives the resignation decision, final pay and related documents.",
+        "responsible_type": "manager"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "mail.activity.plan",
+    "mail.activity.plan.template"
+  ]
+}

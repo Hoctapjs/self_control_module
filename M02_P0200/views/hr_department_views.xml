@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Mở rộng form view hr.department: thêm khối + POS + nút Generate + Store Info tab -->
+    <record id="view_hr_department_form_inherit_block" model="ir.ui.view">
+        <field name="name">hr.department.form.inherit.block</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Header button -->
+            <xpath expr="//form/sheet" position="before">
+                <header>
+                    <button name="action_generate_positions"
+                            type="object"
+                            string="Generate Positions"
+                            class="btn-primary"
+                            invisible="not block_id"/>
+                </header>
+            </xpath>
+
+            <!-- Insert after parent_id: khối, POS, user, state, region -->
+            <field name="parent_id" position="after">
+                <field name="block_id"/>
+                <field name="block_code" invisible="1"/>
+                <field name="pos_config_id"
+                       invisible="not block_id or block_code != 'OPS'"/>
+                <field name="user_id"/>
+                <field name="x_psm_state_id"/>
+                <field name="x_psm_region"/>
+                <field name="x_psm_0200_salary_region_id"/>
+            </field>
+
+            <!-- Append notebook (with store info tab) INSIDE sheet, after existing groups -->
+            <xpath expr="//form/sheet" position="inside">
+                <notebook>
+                    <page string="Thông Tin Cửa Hàng" name="store_info">
+                        <group string="Mã Định Danh" col="2">
+                            <group>
+                                <field name="x_psm_store_number" string="Mã Store (Odoo)"/>
+                                <field name="x_psm_store_code"   string="Mã Hệ Thống Cũ"/>
+                                <field name="x_psm_gbl_store_id" string="Mã Cửa Hàng GBL"/>
+                                <field name="x_psm_store_name"   string="Tên Cửa Hàng"/>
+                                <field name="x_psm_active"       string="Đang Hoạt Động" widget="boolean_toggle"/>
+                            </group>
+                            <group>
+                                <field name="x_psm_country"     string="Quốc Gia"/>
+                                <field name="x_psm_province"    string="Tỉnh Thành"/>
+                                <field name="x_psm_store_email" string="Email Cửa Hàng" widget="email"/>
+                            </group>
+                        </group>
+
+                        <group string="Giờ Cao Điểm" col="2">
+                            <group string="Buổi Sáng">
+                                <field name="x_psm_break_first_peak_from" string="Từ (giờ)" widget="float_time"/>
+                                <field name="x_psm_break_first_peak_to"   string="Đến (giờ)" widget="float_time"/>
+                            </group>
+                            <group string="Buổi Trưa">
+                                <field name="x_psm_lunch_peak_from" string="Từ (giờ)" widget="float_time"/>
+                                <field name="x_psm_lunch_peak_to"   string="Đến (giờ)" widget="float_time"/>
+                            </group>
+                            <group string="Buổi Tối">
+                                <field name="x_psm_dinner_peak_from" string="Từ (giờ)" widget="float_time"/>
+                                <field name="x_psm_dinner_peak_to"   string="Đến (giờ)" widget="float_time"/>
+                            </group>
+                        </group>
+
+                        <group string="Mã Hệ Thống Legacy" col="2">
+                            <group>
+                                <field name="x_psm_sap_code"    string="Mã SAP Cũ"/>
+                                <field name="x_psm_cadena_code" string="Mã Cadena Cũ"/>
+                                <field name="x_psm_cadena_name" string="Tên Cadena Cũ"/>
+                                <field name="x_psm_oc_group_id" string="Nhóm Tư Vấn (OCGroup)"/>
+                            </group>
+                        </group>
+
+                        <group string="Thông Tin Xuất Hóa Đơn" col="2">
+                            <group>
+                                <field name="x_psm_store_name_iv"    string="Tên Cửa Hàng (IV)"/>
+                                <field name="x_psm_address_iv"       string="Địa Chỉ Xuất IV"/>
+                            </group>
+                            <group>
+                                <field name="x_psm_invoice_code"      string="Mã Hóa Đơn"/>
+                                <field name="x_psm_invoice_code_temp" string="Mã Hóa Đơn Nháp"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- Mở rộng list view: thêm các cột store -->
+    <record id="view_hr_department_list_inherit_store" model="ir.ui.view">
+        <field name="name">hr.department.list.inherit.store</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="x_psm_store_number" optional="show"/>
+                <field name="x_psm_store_code"   optional="show"/>
+                <field name="x_psm_gbl_store_id" optional="show"/>
+                <field name="block_id"            optional="show"/>
+                <field name="x_psm_province"      optional="show"/>
+                <field name="x_psm_active"        optional="show"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

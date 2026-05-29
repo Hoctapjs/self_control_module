@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Goc tai lieu Odoo, khong cap nhat lai khi upgrade de bao toan sequence customer da chinh -->
+<odoo noupdate="1">
+    <!-- Sequence rieng cho yeu cau dich vu ngoai 0502 -->
+    <record id="seq_psm_0502_outside_service_request" model="ir.sequence">
+        <field name="name">0502 Outside Service Request</field>
+        <field name="code">psm.0502.outside.service.request</field>
+        <field name="prefix">0502/OS/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- noupdate="1": tạo 1 lần, không ghi đè mật khẩu khi upgrade -->
+    <data noupdate="1">
+
+        <!-- ===== RSG ===== -->
+        <record id="demo_user_rsg" model="res.users">
+            <field name="name">Nguyễn Minh Tuấn (RSG)</field>
+            <field name="login">demo.rsg@mcvn.local</field>
+            <field name="email">demo.rsg@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+        <record id="demo_user_rsg_head" model="res.users">
+            <field name="name">Võ Xuân Hùng (RSG Head)</field>
+            <field name="login">demo.rsg.head@mcvn.local</field>
+            <field name="email">demo.rsg.head@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+
+        <!-- ===== IT ===== -->
+        <record id="demo_user_it" model="res.users">
+            <field name="name">Trần Quốc Bảo (IT)</field>
+            <field name="login">demo.it@mcvn.local</field>
+            <field name="email">demo.it@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+        <record id="demo_user_it_head" model="res.users">
+            <field name="name">Bùi Thành Nam (IT Head)</field>
+            <field name="login">demo.it.head@mcvn.local</field>
+            <field name="email">demo.it.head@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+
+        <!-- ===== MENU ===== -->
+        <record id="demo_user_menu" model="res.users">
+            <field name="name">Lê Thị Thu (Menu)</field>
+            <field name="login">demo.menu@mcvn.local</field>
+            <field name="email">demo.menu@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+        <record id="demo_user_menu_head" model="res.users">
+            <field name="name">Trần Văn Khoa (Menu Head)</field>
+            <field name="login">demo.menu.head@mcvn.local</field>
+            <field name="email">demo.menu.head@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+
+        <!-- ===== DIGITAL ===== -->
+        <record id="demo_user_digital" model="res.users">
+            <field name="name">Vũ Thị Lan (Digital)</field>
+            <field name="login">demo.digital@mcvn.local</field>
+            <field name="email">demo.digital@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+        <record id="demo_user_digital_head" model="res.users">
+            <field name="name">Hoàng Minh Đức (Digital Head)</field>
+            <field name="login">demo.digital.head@mcvn.local</field>
+            <field name="email">demo.digital.head@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+
+        <!-- ===== MKT ===== -->
+        <record id="demo_user_mkt" model="res.users">
+            <field name="name">Phạm Hồng Nhung (MKT)</field>
+            <field name="login">demo.mkt@mcvn.local</field>
+            <field name="email">demo.mkt@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+        <record id="demo_user_mkt_head" model="res.users">
+            <field name="name">Nguyễn Thị Hoa (MKT Head)</field>
+            <field name="login">demo.mkt.head@mcvn.local</field>
+            <field name="email">demo.mkt.head@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+
+        <!-- ===== S&I ===== -->
+        <record id="demo_user_si" model="res.users">
+            <field name="name">Đặng Quỳnh Anh (S&amp;I)</field>
+            <field name="login">demo.si@mcvn.local</field>
+            <field name="email">demo.si@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+        <record id="demo_user_si_head" model="res.users">
+            <field name="name">Lê Quang Vinh (S&amp;I Head)</field>
+            <field name="login">demo.si.head@mcvn.local</field>
+            <field name="email">demo.si.head@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+
+        <!-- ===== SC ===== -->
+        <record id="demo_user_sc" model="res.users">
+            <field name="name">Nguyễn Thái Sơn (SC)</field>
+            <field name="login">demo.sc@mcvn.local</field>
+            <field name="email">demo.sc@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+        <record id="demo_user_sc_head" model="res.users">
+            <field name="name">Đinh Thị Mai (SC Head)</field>
+            <field name="login">demo.sc.head@mcvn.local</field>
+            <field name="email">demo.sc.head@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+
+    </data>
+</odoo>

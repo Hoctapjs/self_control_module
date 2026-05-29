@@ -1,0 +1,180 @@
+{
+  "file": "models/request_planning_history.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: x_psm_request_planning_history; 1 classes; 10 fields",
+  "classes": [
+    {
+      "python_class": "X0502RequestPlanningHistory",
+      "description": "0502 Request Planning History",
+      "model": "x_psm_request_planning_history",
+      "inherit": null,
+      "order": "x_psm_revision desc, id desc",
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_request_id",
+          "type": "Many2one",
+          "string": "Maintenance Request",
+          "comodel": "maintenance.request",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "0502 maintenance request that this planning history line belongs to."
+        },
+        {
+          "name": "x_psm_revision",
+          "type": "Integer",
+          "string": "Revision",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": 1,
+          "tracking": null,
+          "help": "Planning revision number used to track each planning confirmation or change."
+        },
+        {
+          "name": "x_psm_change_type",
+          "type": "Selection",
+          "string": "Change Type",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "initial_plan",
+              "Initial Plan"
+            ],
+            [
+              "replan",
+              "Replan"
+            ]
+          ],
+          "default": null,
+          "tracking": null,
+          "help": "Indicates whether this line records the first plan or a later planning revision."
+        },
+        {
+          "name": "x_psm_schedule_date",
+          "type": "Datetime",
+          "string": "Scheduled Date",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Scheduled start captured at the time of this planning revision."
+        },
+        {
+          "name": "x_psm_schedule_end",
+          "type": "Datetime",
+          "string": "Scheduled End",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Scheduled end captured at the time of this planning revision."
+        },
+        {
+          "name": "x_psm_responsible_user_id",
+          "type": "Many2one",
+          "string": "Responsible",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Responsible user assigned on this planning revision."
+        },
+        {
+          "name": "x_psm_plan_note",
+          "type": "Text",
+          "string": "Planning Note Snapshot",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Planning note snapshot captured on this planning revision."
+        },
+        {
+          "name": "x_psm_change_reason",
+          "type": "Text",
+          "string": "Change Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Reason recorded for the planning revision or re-planning decision."
+        },
+        {
+          "name": "x_psm_changed_by_id",
+          "type": "Many2one",
+          "string": "Changed By",
+          "comodel": "res.users",
+          "required": true,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "lambda",
+          "tracking": null,
+          "help": "User who created this planning history entry."
+        },
+        {
+          "name": "x_psm_changed_at",
+          "type": "Datetime",
+          "string": "Changed At",
+          "comodel": null,
+          "required": true,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "fields.Datetime.now",
+          "tracking": null,
+          "help": "Date and time when this planning history entry was recorded."
+        }
+      ],
+      "methods": [],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

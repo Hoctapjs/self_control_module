@@ -1,0 +1,127 @@
+{
+  "file": "tests/test_email_template_fixes.py",
+  "type": "python",
+  "bucket": "tests",
+  "summary": "2 classes; 0 fields",
+  "classes": [
+    {
+      "python_class": "TestEmailTemplateFixes",
+      "description": "Test Phase 1-4 fixes cho email template module 0213\n\nLỗi cần fix:\n1. Header gradient biến mất ở Outlook + Chatter (màu nền)\n2. Placeholder {{ }} không render trong body (QWeb)\n3. Border-left shorthand bị lọc ở chatter (sanitizer)",
+      "model": null,
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "setUpClass",
+          "type": "method",
+          "decorators": [
+            "classmethod"
+          ],
+          "summary": "Chuẩn bị test data"
+        },
+        {
+          "name": "_render_template_body",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Helper: Render email template body HTML\n\nArgs:\n    template_ref (str): Template XML ID (e.g., 'M02_P0213.psm_0213_email_template_...')\n\nReturns:\n    str: Rendered HTML body"
+        },
+        {
+          "name": "test_phase1_dept_reminder_header_gradient_and_color",
+          "type": "method",
+          "decorators": [],
+          "summary": "Phase 1: dept_offboarding_reminder header phải có background-color + background-image\n\nLỗi: Header dùng `background:linear-gradient(...)` không có fallback color\n→ Outlook không support gradient → nền mất → chữ trắng vô hình\n\nFix: Đổi thành `background-color:#b5121b;background-image:linear-gradient(...)`\n→ Outlook dùng fallback color (#b5121b), Gmail dùng gradient"
+        },
+        {
+          "name": "test_phase1_offboarding_reminder_header_color",
+          "type": "method",
+          "decorators": [],
+          "summary": "Phase 1: offboarding_reminder header cũng phải có màu"
+        },
+        {
+          "name": "test_phase1_exit_survey_header_and_button_color",
+          "type": "method",
+          "decorators": [],
+          "summary": "Phase 1: exit_survey header + button ngoài phải có màu"
+        },
+        {
+          "name": "test_phase1_adecco_notification_header_color",
+          "type": "method",
+          "decorators": [],
+          "summary": "Phase 1: adecco_notification header phải có màu"
+        },
+        {
+          "name": "test_phase2_dept_reminder_employee_name_placeholder_render",
+          "type": "method",
+          "decorators": [],
+          "summary": "Phase 2: dept_offboarding_reminder tên nhân viên phải render\n\nLỗi: Body dùng `{{ object.x_psm_0213_employee_id.name }}` (inline_template syntax)\n→ QWeb engine KHÔNG xử lý {{ }} → in ra literal text\n\nFix: Thay thành `<t t-out=\"object.x_psm_0213_employee_id.name\"/>`\n→ QWeb engine render → tên hiển thị đúng"
+        },
+        {
+          "name": "test_phase2_offboarding_reminder_request_owner_name_render",
+          "type": "method",
+          "decorators": [],
+          "summary": "Phase 2: offboarding_reminder request owner tên phải render"
+        },
+        {
+          "name": "test_phase2_exit_survey_placeholder_not_literal",
+          "type": "method",
+          "decorators": [],
+          "summary": "Phase 2: exit_survey KHÔNG được có literal {{ }} trong body"
+        },
+        {
+          "name": "test_phase3_dept_reminder_border_left_sub_property",
+          "type": "method",
+          "decorators": [],
+          "summary": "Phase 3: dept_offboarding_reminder border-left phải dùng sub-property\n\nLỗi: Dùng shorthand `border-left:4px solid #da291c`\n→ Odoo sanitizer (chatter) lọc shorthand → viền mất\n\nFix: Thay thành sub-property\n→ border-left-width:4px + border-left-style:solid + border-left-color:#da291c\n→ Sống sót sanitizer (whitelist có sub-property)"
+        },
+        {
+          "name": "test_phase3_all_templates_border_left_sub_property",
+          "type": "method",
+          "decorators": [],
+          "summary": "Phase 3: Tất cả 4 template phải dùng border-left sub-property"
+        },
+        {
+          "name": "test_phase3_dept_reminder_has_lang_field",
+          "type": "method",
+          "decorators": [],
+          "summary": "Phase 3: dept_offboarding_reminder PHẢI có lang field\n\nLỗi: Dept template thiếu lang field → không render lang đúng\n\nFix: Thêm `<field name=\"lang\">{{ object.request_owner_id.lang }}</field>`\n→ Đồng bộ với offboarding_reminder"
+        },
+        {
+          "name": "test_phase3_dept_reminder_auto_delete_true",
+          "type": "method",
+          "decorators": [],
+          "summary": "Phase 3: dept_offboarding_reminder PHẢI có auto_delete=True\n\nLỗi: Dept template thiếu auto_delete → email không tự xóa\n\nFix: Thêm `<field name=\"auto_delete\">True</field>`\n→ Đồng bộ với offboarding_reminder"
+        }
+      ],
+      "kind": "python_class"
+    },
+    {
+      "python_class": "TestEmailTemplateSending",
+      "description": "Test gửi email (mock SMTP) — kiểm tra email được tạo đúng",
+      "model": null,
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "setUpClass",
+          "type": "method",
+          "decorators": [
+            "classmethod"
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "test_send_dept_reminder_email",
+          "type": "method",
+          "decorators": [],
+          "summary": "Test gửi dept_offboarding_reminder email (mock)"
+        }
+      ],
+      "kind": "python_class"
+    }
+  ],
+  "routes": []
+}

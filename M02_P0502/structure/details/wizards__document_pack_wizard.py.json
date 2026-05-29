@@ -1,0 +1,118 @@
+{
+  "file": "wizards/document_pack_wizard.py",
+  "type": "python",
+  "bucket": "wizards",
+  "summary": "models: x_psm_0502_document_pack_wizard; 1 classes; 6 fields; 1 actions",
+  "classes": [
+    {
+      "python_class": "X0502DocumentPackWizard",
+      "description": "0502 Document Pack Wizard",
+      "model": "x_psm_0502_document_pack_wizard",
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_request_id",
+          "type": "Many2one",
+          "string": "Maintenance Request",
+          "comodel": "maintenance.request",
+          "required": true,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "0502 maintenance request used to generate the selected document pack."
+        },
+        {
+          "name": "x_psm_include_request_document",
+          "type": "Boolean",
+          "string": "Request Document",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": true,
+          "tracking": null,
+          "help": "Include the full 0502 request document in the pack."
+        },
+        {
+          "name": "x_psm_include_inspection_report",
+          "type": "Boolean",
+          "string": "Inspection Report",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": true,
+          "tracking": null,
+          "help": "Include the initial inspection report in the pack."
+        },
+        {
+          "name": "x_psm_include_treatment_proposal",
+          "type": "Boolean",
+          "string": "Treatment Proposal",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": true,
+          "tracking": null,
+          "help": "Include the treatment proposal document in the pack."
+        },
+        {
+          "name": "x_psm_include_material_issue_request",
+          "type": "Boolean",
+          "string": "Material Issue Request",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": true,
+          "tracking": null,
+          "help": "Include the material issue request in the pack."
+        },
+        {
+          "name": "x_psm_include_acceptance_record",
+          "type": "Boolean",
+          "string": "Acceptance Record",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": true,
+          "tracking": null,
+          "help": "Include the acceptance record in the pack."
+        }
+      ],
+      "methods": [
+        {
+          "name": "action_psm_print_document_pack",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        }
+      ],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

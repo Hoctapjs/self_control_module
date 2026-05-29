@@ -1,0 +1,36 @@
+{
+  "file": "models/hr_department.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: hr.department; 1 classes; 1 fields",
+  "classes": [
+    {
+      "python_class": "HrDepartment",
+      "description": "Extends hr.department in models/hr_department.py.",
+      "model": null,
+      "inherit": "hr.department",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_0213_it_user_id",
+          "type": "Many2one",
+          "string": "IT Phụ Trách Offboarding (0213)",
+          "comodel": "res.users",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Người dùng IT phụ trách các task offboarding 0213 của cửa hàng/phòng ban này. Nếu bỏ trống, hệ thống dùng IT mặc định cấp công ty (res.company.x_psm_0213_default_it_user_id)."
+        }
+      ],
+      "methods": [],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

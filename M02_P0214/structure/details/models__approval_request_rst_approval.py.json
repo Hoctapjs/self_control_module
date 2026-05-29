@@ -1,0 +1,57 @@
+{
+  "file": "models/approval_request_rst_approval.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: approval.request; 1 classes; 0 fields; 3 actions",
+  "classes": [
+    {
+      "python_class": "ResignationRequest",
+      "description": "Extends approval.request in models/approval_request_rst_approval.py.",
+      "model": null,
+      "inherit": "approval.request",
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "action_confirm",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_done",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_approve",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_get_0214_manager_approver_user",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_send_0214_manager_approval_reminder",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_send_0214_employee_approved_notification",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        }
+      ],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

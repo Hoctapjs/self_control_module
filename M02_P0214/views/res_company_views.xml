@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_psm_0214_company_offboarding_config_form" model="ir.ui.view">
+            <field name="name">res.company.psm.0214.offboarding.config.form</field>
+            <field name="model">res.company</field>
+            <field name="arch" type="xml">
+                <form string="RST Offboarding Configuration" class="o_psm_0214_backend_view">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>RST Offboarding Configuration</h1>
+                            <div class="text-muted">
+                                Configure the 0214 offboarding business flow within Approvals.
+                            </div>
+                        </div>
+                        <group>
+                            <group string="Context">
+                                <field name="name" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Email Templates" col="2">
+                            <group>
+                                <field name="x_psm_0214_exit_survey_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0214_adecco_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0214_social_insurance_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0214_offboarding_completion_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0214_employee_reminder_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0214_department_reminder_template_id" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="x_psm_0214_manager_approval_reminder_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0214_employee_approved_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0214_dept_assignment_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0214_salary_settlement_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0214_adecco_notification_email" placeholder="hr.vendor@example.com"/>
+                            </group>
+                        </group>
+                        <group string="Default Users by Role" col="4">
+                            <group>
+                                <field name="x_psm_0214_default_it_user_id" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="x_psm_0214_default_admin_user_id" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="x_psm_0214_default_hr_user_id" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="x_psm_0214_default_finance_user_id" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                        <group string="Annual Leave (AL) Configuration">
+                            <field name="x_psm_0214_al_leave_type_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============================================================ -->
+        <!-- NGUYÊN LIỆU THÔ (Raw Materials) — x_psm_0801_pif_product_type = 'raw'  -->
+        <!-- ============================================================ -->
+
+        <record id="demo_tmpl_beef_patty" model="product.template">
+            <field name="name">Thịt Bò Burger 113g</field>
+            <field name="default_code">RM-BEEF-4OZ</field>
+            <field name="type">consu</field>
+            <field name="x_psm_0801_pif_product_type">raw</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="description_picking">Beef Patty 4oz — bảo quản đông lạnh -18°C</field>
+        </record>
+
+        <record id="demo_tmpl_sesame_bun" model="product.template">
+            <field name="name">Bánh Mì Vừng Burger</field>
+            <field name="default_code">RM-BUN-SES</field>
+            <field name="type">consu</field>
+            <field name="x_psm_0801_pif_product_type">raw</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="demo_tmpl_cheddar_cheese" model="product.template">
+            <field name="name">Phô Mai Cheddar Slice</field>
+            <field name="default_code">RM-CHSE-CHD</field>
+            <field name="type">consu</field>
+            <field name="x_psm_0801_pif_product_type">raw</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="demo_tmpl_lettuce" model="product.template">
+            <field name="name">Rau Xà Lách Cắt Sẵn</field>
+            <field name="default_code">RM-VEG-LET</field>
+            <field name="type">consu</field>
+            <field name="x_psm_0801_pif_product_type">raw</field>
+            <field name="uom_id" ref="uom.product_uom_gram"/>
+        </record>
+
+        <record id="demo_tmpl_special_sauce" model="product.template">
+            <field name="name">Sốt Đặc Biệt Big Mac</field>
+            <field name="default_code">RM-SAUCE-SP</field>
+            <field name="type">consu</field>
+            <field name="x_psm_0801_pif_product_type">raw</field>
+            <field name="uom_id" ref="uom.product_uom_gram"/>
+        </record>
+
+        <record id="demo_tmpl_onion_dehydrated" model="product.template">
+            <field name="name">Hành Tây Sấy Khô</field>
+            <field name="default_code">RM-ONION-DH</field>
+            <field name="type">consu</field>
+            <field name="x_psm_0801_pif_product_type">raw</field>
+            <field name="uom_id" ref="uom.product_uom_gram"/>
+        </record>
+
+        <record id="demo_tmpl_pickle" model="product.template">
+            <field name="name">Dưa Chuột Ngâm Slice</field>
+            <field name="default_code">RM-PICKL-SL</field>
+            <field name="type">consu</field>
+            <field name="x_psm_0801_pif_product_type">raw</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="demo_tmpl_chicken_fillet" model="product.template">
+            <field name="name">Ức Gà Fillet Tẩm Bột</field>
+            <field name="default_code">RM-CHICK-FIL</field>
+            <field name="type">consu</field>
+            <field name="x_psm_0801_pif_product_type">raw</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="description_picking">Chicken Fillet — bảo quản đông lạnh -18°C</field>
+        </record>
+
+        <record id="demo_tmpl_bbq_sauce" model="product.template">
+            <field name="name">Sốt BBQ Smoky</field>
+            <field name="default_code">RM-SAUCE-BBQ</field>
+            <field name="type">consu</field>
+            <field name="x_psm_0801_pif_product_type">raw</field>
+            <field name="uom_id" ref="uom.product_uom_gram"/>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- THÀNH PHẨM (Finished Products) — x_psm_0801_pif_status = 'completed'   -->
+        <!-- Đây là các sản phẩm đã được phê duyệt công thức,            -->
+        <!-- sẵn sàng để tạo PIF cấu hình hệ thống.                      -->
+        <!-- ============================================================ -->
+
+        <!-- Thành phẩm 1: Dành cho PIF-DEMO-001 (state: rsg_create) -->
+        <record id="demo_tmpl_spicy_mcdouble" model="product.template">
+            <field name="name">Spicy McDouble</field>
+            <field name="default_code">FG-SPMC-01</field>
+            <field name="type">consu</field>
+            <field name="x_psm_0801_pif_product_type">finished</field>
+            <field name="x_psm_0801_pif_status">completed</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <!-- Thành phẩm 2: Dành cho PIF-DEMO-002 (state: lab_test) -->
+        <record id="demo_tmpl_bbq_chicken_burger" model="product.template">
+            <field name="name">BBQ Chicken Burger</field>
+            <field name="default_code">FG-BBQC-01</field>
+            <field name="type">consu</field>
+            <field name="x_psm_0801_pif_product_type">finished</field>
+            <field name="x_psm_0801_pif_status">completed</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <!-- Thành phẩm 3: Dành cho PIF-DEMO-003 (state: completed, đã có WRIN) -->
+        <record id="demo_tmpl_mccrispy" model="product.template">
+            <field name="name">McChicken Crispy</field>
+            <field name="default_code">FG-2025-0042</field>
+            <field name="x_psm_0801_wrin_code">FG-2025-0042</field>
+            <field name="type">consu</field>
+            <field name="x_psm_0801_pif_product_type">finished</field>
+            <field name="x_psm_0801_pif_status">completed</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+    </data>
+</odoo>

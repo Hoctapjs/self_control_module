@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="psm_0213_email_template_offboarding_completion" model="mail.template">
+            <field name="name">OPS - Cảm ơn bạn đã đồng hành</field>
+            <field name="model_id" ref="approvals.model_approval_request"/>
+            <field name="subject">Cảm ơn bạn đã đồng hành cùng McDonald's Việt Nam</field>
+            <field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+            <field name="email_to">{{ object.request_owner_id.partner_id.email or object.request_owner_id.email }}</field>
+            <field name="body_html" type="html">
+                <div style="margin:0;padding:24px 0;background-color:#f4f1ea;font-family:'Segoe UI',Arial,sans-serif;color:#2f2a26;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f4f1ea" style="border-collapse:collapse;background-color:#f4f1ea;">
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="640" bgcolor="#fffdf9" style="width:640px;max-width:640px;background-color:#fffdf9;border:1px solid #eadfce;border-radius:20px;overflow:hidden;">
+                                    <tr>
+                                        <td bgcolor="#b5121b" style="padding:0;background-color:#b5121b;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#b5121b" style="background-color:#b5121b;">
+                                                <tr>
+                                                    <td style="padding:28px 32px 22px 32px;">
+                                                        <div style="font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#ffe7a3;font-weight:700;margin-bottom:10px;">OPS Offboarding</div>
+                                                        <h1 style="margin:0;font-size:28px;line-height:1.25;color:#ffffff;font-weight:800;">Cảm ơn bạn đã đồng hành</h1>
+                                                        <p style="margin:10px 0 0 0;font-size:14px;line-height:1.6;color:#fff4da;">Quy trình nghỉ việc của bạn đã được hoàn tất. Chúng tôi xin gửi lời cảm ơn chân thành vì những đóng góp của bạn trong suốt thời gian qua.</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:30px 32px 12px 32px;">
+                                            <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;">Kính gửi <strong><t t-out="object.request_owner_id.name"/></strong>,</p>
+                                            <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">McDonald's Việt Nam chân thành cảm ơn bạn đã đồng hành và đóng góp trong thời gian làm việc tại công ty. Chúng tôi ghi nhận những nỗ lực của bạn và trân trọng chúc bạn nhiều sức khỏe, thành công trên chặng đường sắp tới.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 18px 32px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff7e8" style="border-collapse:separate;border-spacing:0;background-color:#fff7e8;border:1px solid #f2d39a;border-radius:16px;">
+                                                <tr>
+                                                    <td style="padding:18px 20px;">
+                                                        <div style="font-size:13px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:#8d5a00;margin-bottom:14px;">Thông tin quy trình</div>
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                            <tr>
+                                                                <td style="padding:0 0 10px 0;font-size:14px;color:#6b625a;width:38%;">Yêu cầu</td>
+                                                                <td style="padding:0 0 10px 0;font-size:14px;color:#221f1c;font-weight:700;"><t t-out="object.name"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding:0 0 10px 0;font-size:14px;color:#6b625a;">Ngày nghỉ dự kiến/chính thức</td>
+                                                                <td style="padding:0 0 10px 0;font-size:14px;color:#221f1c;font-weight:600;"><t t-out="object.x_psm_0213_official_resignation_date or object.x_psm_0213_resignation_date or 'N/A'"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding:0;font-size:14px;color:#6b625a;">Trạng thái</td>
+                                                                <td style="padding:0;font-size:14px;color:#221f1c;font-weight:600;">Hoàn tất</td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 18px 32px;">
+                                            <div style="padding:18px 20px;background-color:#f8f5ef;border-left:4px solid #da291c;border-radius:14px;">
+                                                <p style="margin:0;font-size:14px;line-height:1.7;color:#3d3833;">Nếu bạn cần đối chiếu thêm thông tin liên quan đến hồ sơ nghỉ việc hoặc các thủ tục sau nghỉ việc, vui lòng liên hệ Phòng Nhân sự để được hỗ trợ.</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 30px 32px;">
+                                            <p style="margin:0;font-size:15px;line-height:1.8;">Trân trọng,<br/><strong>Phòng Nhân sự</strong><br/>McDonald's Việt Nam</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f7f2e8" style="padding:16px 32px;background-color:#f7f2e8;border-top:1px solid #eadfce;">
+                                            <p style="margin:0;font-size:12px;line-height:1.6;color:#7b7269;">Email này được gửi tự động từ quy trình offboarding OPS khi hồ sơ nghỉ việc đã hoàn tất. Vui lòng không trả lời nếu không cần thiết.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </field>
+            <field name="lang">{{ object.request_owner_id.lang }}</field>
+            <field name="auto_delete">True</field>
+        </record>
+    </data>
+</odoo>

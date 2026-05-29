@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="email_template_dept_offboarding_assignment" model="mail.template">
+            <field name="name">RST - Giao việc Offboarding cho bộ phận</field>
+            <field name="model_id" ref="approvals.model_approval_request"/>
+            <field name="subject">[RST] Bạn có công việc offboarding cho nhân viên {{ object.employee_id.name }}</field>
+            <field name="email_from">{{ (user.email or user.company_id.email) }}</field>
+            <field name="body_html" type="html">
+                <div style="margin:0;padding:24px 0;background-color:#f5f2ea;font-family:'Segoe UI',Arial,sans-serif;color:#2f2a26;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f5f2ea" style="border-collapse:collapse;background-color:#f5f2ea;">
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="640" bgcolor="#fffdf9" style="width:640px;max-width:640px;background-color:#fffdf9;border:1px solid #eadfce;border-radius:16px;overflow:hidden;">
+                                    <tr>
+                                        <td bgcolor="#9f1f2e" style="padding:26px 32px;background-color:#9f1f2e;">
+                                            <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#ffe6a8;font-weight:700;margin-bottom:8px;">
+                                                <t t-if="ctx.get('missing_pic')">RST Configuration Alert</t>
+                                                <t t-elif="ctx.get('is_reminder')">RST Reminder</t>
+                                                <t t-else="">RST Assignment</t>
+                                            </div>
+                                            <h1 style="margin:0;font-size:26px;line-height:1.25;color:#ffffff;font-weight:800;">
+                                                <t t-if="ctx.get('missing_pic')">Chưa cấu hình người phụ trách</t>
+                                                <t t-elif="ctx.get('is_reminder')">Nhắc việc offboarding</t>
+                                                <t t-else="">Công việc offboarding mới</t>
+                                            </h1>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:28px 32px 14px 32px;">
+                                            <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;">Chào bạn,</p>
+                                            <t t-if="ctx.get('missing_pic')">
+                                                <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">Hệ thống không tìm thấy người phụ trách cho đầu việc <strong><t t-out="ctx.get('missing_role')"/></strong> trong quy trình nghỉ việc của nhân viên <strong><t t-out="object.employee_id.name"/></strong>.</p>
+                                            </t>
+                                            <t t-else="">
+                                                <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">Bạn có một đầu việc trong quy trình nghỉ việc của nhân viên <strong><t t-out="object.employee_id.name"/></strong> (Mã NV: <t t-out="object.employee_id.barcode or 'N/A'"/>).</p>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 18px 32px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff7e8" style="border-collapse:separate;border-spacing:0;background-color:#fff7e8;border:1px solid #f2d39a;border-radius:14px;">
+                                                <tr>
+                                                    <td style="padding:18px 20px;">
+                                                        <div style="font-size:13px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:#8d5a00;margin-bottom:12px;">Thông tin công việc</div>
+                                                        <p style="margin:0 0 8px 0;font-size:14px;line-height:1.7;color:#3d3833;"><strong>Đầu việc:</strong> <t t-out="ctx.get('activity_summary') or 'N/A'"/></p>
+                                                        <p t-if="ctx.get('activity_deadline')" style="margin:0;font-size:14px;line-height:1.7;color:#3d3833;"><strong>Hạn xử lý:</strong> <t t-out="ctx.get('activity_deadline')"/></p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="padding:4px 32px 30px 32px;">
+                                            <a t-att-href="ctx.get('portal_url') or object._get_0214_portal_activities_url()" style="display:inline-block;background-color:#9f1f2e;color:#ffffff;text-decoration:none;border-radius:999px;padding:13px 22px;font-size:14px;font-weight:800;">Mở Hoạt động cần làm</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f7f2e8" style="padding:16px 32px;background-color:#f7f2e8;border-top:1px solid #eadfce;">
+                                            <p style="margin:0;font-size:12px;line-height:1.6;color:#7b7269;">Email này được gửi tự động từ quy trình offboarding RST.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,59 @@
+{
+  "file": "models/approval_request_rst_survey.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: approval.request; 1 classes; 0 fields; 4 actions",
+  "classes": [
+    {
+      "python_class": "ResignationRequest",
+      "description": "Extends approval.request in models/approval_request_rst_survey.py.",
+      "model": null,
+      "inherit": "approval.request",
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "action_send_adecco_notification",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_send_social_insurance",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_compute_rst_exit_survey_completed",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "request_owner_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "action_view_survey_results",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_send_exit_survey",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        }
+      ],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

@@ -1,0 +1,482 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/M02_P0213/static/src/fonts/Roboto-Regular.woff2") format("woff2");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("/M02_P0213/static/src/fonts/Roboto-Medium.woff2") format("woff2");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("/M02_P0213/static/src/fonts/Roboto-Medium.woff2") format("woff2");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("/M02_P0213/static/src/fonts/Roboto-Bold.woff2") format("woff2");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("/M02_P0213/static/src/fonts/Roboto-Bold.woff2") format("woff2");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.o_psm_0214_portal {
+    font-family: "Roboto", Arial, sans-serif;
+
+    --psm-0214-yellow: #FFC72C;
+    --psm-0214-red: #DA291C;
+    --psm-0214-red-dark: #B11F14;
+    --psm-0214-green: #198754;
+    --psm-0214-text: #3F3F3F;
+    --psm-0214-text-strong: #111111;
+    --psm-0214-text-muted: #6B6B6B;
+    --psm-0214-surface: #FFFFFF;
+    --psm-0214-surface-muted: #FAFAFA;
+    --psm-0214-border: #E5E5E5;
+    --psm-0214-radius-md: 0.5rem;
+    --psm-0214-radius-lg: 0.75rem;
+    --psm-0214-radius-pill: 999px;
+    --psm-0214-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --psm-0214-shadow-md: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.o_psm_0214_portal .card {
+    border-color: var(--psm-0214-border) !important;
+    border-radius: var(--psm-0214-radius-md);
+}
+
+.o_psm_0214_portal h3,
+.o_psm_0214_portal h4,
+.o_psm_0214_portal h5,
+.o_psm_0214_portal h6,
+.o_psm_0214_portal .card-title {
+    color: var(--psm-0214-red-dark) !important;
+    font-family: "Roboto", Arial, sans-serif !important;
+}
+
+.o_psm_0214_portal h5,
+.o_psm_0214_portal .card-title {
+    font-weight: 700 !important;
+}
+
+.o_psm_0214_portal .fa {
+    font-family: FontAwesome !important;
+}
+
+.o_psm_0214_portal .psm-form-header {
+    background: #C40018;
+    border-radius: var(--psm-0214-radius-lg) var(--psm-0214-radius-lg) 0 0;
+    color: var(--psm-0214-yellow);
+    padding: 1.5rem 1rem;
+    text-align: center;
+}
+
+.o_psm_0214_portal .psm-form-header__subtitle {
+    color: var(--psm-0214-yellow);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.o_psm_0214_portal .psm-form-progress {
+    background: #FFFFFF;
+    border: 1px solid var(--psm-0214-border);
+    border-radius: var(--psm-0214-radius-pill);
+    box-shadow: var(--psm-0214-shadow-sm);
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    position: sticky;
+    top: 1rem;
+    z-index: 10;
+}
+
+.o_psm_0214_portal .psm-form-progress__dot {
+    align-items: center;
+    border-radius: var(--psm-0214-radius-pill);
+    color: var(--psm-0214-text-muted);
+    display: inline-flex;
+    flex: 1 1 0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    gap: 0.5rem;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0.5rem 0.75rem;
+    text-decoration: none;
+}
+
+.o_psm_0214_portal .psm-form-progress__dot:hover,
+.o_psm_0214_portal .psm-form-progress__dot:focus,
+.o_psm_0214_portal .psm-form-progress__dot.is-active {
+    background: var(--psm-0214-yellow);
+    color: var(--psm-0214-text-strong);
+    outline: none;
+}
+
+.o_psm_0214_portal .psm-form-progress__number {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 50%;
+    display: inline-flex;
+    flex: 0 0 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    height: 1.5rem;
+    justify-content: center;
+    width: 1.5rem;
+}
+
+.o_psm_0214_portal .psm-form-section {
+    background: var(--psm-0214-surface);
+    border: 1px solid var(--psm-0214-border);
+    border-radius: var(--psm-0214-radius-md);
+    box-shadow: var(--psm-0214-shadow-sm);
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    scroll-margin-top: 5.5rem;
+}
+
+.o_psm_0214_portal .psm-section__head {
+    align-items: center;
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.o_psm_0214_portal .psm-section__index {
+    align-items: center;
+    background: var(--psm-0214-yellow);
+    border-radius: 50%;
+    color: var(--psm-0214-text-strong);
+    display: inline-flex;
+    flex: 0 0 2.25rem;
+    font-weight: 800;
+    height: 2.25rem;
+    justify-content: center;
+    width: 2.25rem;
+}
+
+.o_psm_0214_portal .psm-section__title {
+    border-left: 4px solid var(--psm-0214-red);
+    color: var(--psm-0214-red-dark) !important;
+    font-size: 1.25rem;
+    font-weight: 800 !important;
+    line-height: 1.3;
+    margin: 0;
+    padding-left: 0.75rem;
+}
+
+.o_psm_0214_portal .psm-section__title i {
+    color: var(--psm-0214-red-dark) !important;
+}
+
+.o_psm_0214_portal .form-label {
+    color: var(--psm-0214-text-strong) !important;
+    font-size: 0.875rem;
+    font-weight: 700 !important;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.o_psm_0214_portal .form-control.psm-form-control,
+.o_psm_0214_portal .form-select.psm-form-control {
+    background: var(--psm-0214-surface-muted) !important;
+    border: 1px solid var(--psm-0214-border) !important;
+    border-radius: 0.375rem;
+    color: var(--psm-0214-text) !important;
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+}
+
+.o_psm_0214_portal textarea.form-control.psm-form-control {
+    min-height: 120px;
+}
+
+.o_psm_0214_portal .form-control.psm-form-control:focus,
+.o_psm_0214_portal .form-select.psm-form-control:focus {
+    border-color: var(--psm-0214-yellow) !important;
+    box-shadow: 0 0 0 3px rgba(255, 199, 44, 0.35);
+    outline: none;
+}
+
+.o_psm_0214_portal .form-control.psm-form-control:read-only,
+.o_psm_0214_portal .form-control.psm-form-control[readonly] {
+    background: #F2F2F2 !important;
+    color: var(--psm-0214-text-muted) !important;
+    cursor: not-allowed;
+}
+
+.o_psm_0214_portal .theme-task-list-title {
+    color: var(--psm-0214-red-dark) !important;
+    font-size: 2.25rem !important;
+    font-weight: 800 !important;
+    line-height: 1.2;
+}
+
+.o_psm_0214_portal .theme-survey-title,
+.o_psm_0214_portal .theme-task-card h6,
+.o_psm_0214_portal .theme-task-card .theme-task-owner {
+    color: var(--psm-0214-red-dark) !important;
+    font-family: "Roboto", Arial, sans-serif !important;
+    font-weight: 800 !important;
+}
+
+.o_psm_0214_portal .theme-task-card .theme-task-owner .fa {
+    color: var(--psm-0214-red-dark) !important;
+    font-family: FontAwesome !important;
+}
+
+.o_psm_0214_portal .theme-task-card {
+    background: var(--psm-0214-surface) !important;
+    color: var(--psm-0214-text) !important;
+    border: 1px solid var(--psm-0214-border) !important;
+    overflow: hidden;
+}
+
+.o_psm_0214_portal .theme-task-card-inactive {
+    background: color-mix(in srgb, var(--psm-0214-surface) 82%, var(--psm-0214-surface-muted) 18%) !important;
+    color: var(--psm-0214-text-muted) !important;
+    opacity: 1;
+}
+
+.o_psm_0214_portal .theme-task-card .card-body,
+.o_psm_0214_portal .theme-task-card .d-flex,
+.o_psm_0214_portal .theme-survey-card .card-body,
+.o_psm_0214_portal .theme-survey-card .card-title,
+.o_psm_0214_portal .theme-survey-card .card-text {
+    background: transparent !important;
+}
+
+.o_psm_0214_portal .theme-task-meta,
+.o_psm_0214_portal .theme-task-owner {
+    background: color-mix(in srgb, var(--psm-0214-surface) 82%, var(--psm-0214-surface-muted) 18%) !important;
+    border: 1px solid var(--psm-0214-border);
+    color: var(--psm-0214-text-muted) !important;
+}
+
+.o_psm_0214_portal .theme-task-owner {
+    font-size: 0.7rem;
+}
+
+.o_psm_0214_portal .theme-survey-card {
+    background: color-mix(in srgb, var(--psm-0214-surface) 84%, var(--psm-0214-surface-muted) 16%) !important;
+    border: 1px solid color-mix(in srgb, var(--psm-0214-red) 18%, var(--psm-0214-border)) !important;
+}
+
+.o_psm_0214_portal .psm-alert {
+    align-items: flex-start;
+    border-left: 4px solid;
+    border-radius: var(--psm-0214-radius-md);
+    display: flex;
+    gap: 0.75rem;
+    line-height: 1.5;
+    padding: 1rem 1.25rem;
+}
+
+.o_psm_0214_portal .psm-alert--info,
+.o_psm_0214_portal .psm-alert--warning {
+    background: #FFF4D0 !important;
+    border-color: var(--psm-0214-yellow) !important;
+    color: var(--psm-0214-text-strong) !important;
+}
+
+.o_psm_0214_portal .psm-alert--success {
+    background: #FAFAFA !important;
+    border-color: var(--psm-0214-yellow) !important;
+    color: var(--psm-0214-text-strong) !important;
+}
+
+.o_psm_0214_portal .psm-alert--approved {
+    border-color: var(--psm-0214-green) !important;
+    color: var(--psm-0214-green) !important;
+}
+
+.o_psm_0214_portal .psm-alert--approved i,
+.o_psm_0214_portal .psm-alert--approved strong {
+    color: var(--psm-0214-green) !important;
+}
+
+.o_psm_0214_portal .psm-alert--danger {
+    background: #FCEAE7 !important;
+    border-color: var(--psm-0214-red) !important;
+    color: var(--psm-0214-red-dark) !important;
+}
+
+.o_psm_0214_portal .theme-commit-panel {
+    border: 1px solid #F2D7CA;
+    border-radius: var(--psm-0214-radius-md);
+    background: linear-gradient(180deg, #FFF8F4 0%, #FFFFFF 100%);
+    box-shadow: var(--psm-0214-shadow-sm);
+    overflow: hidden;
+}
+
+.o_psm_0214_portal .theme-commit-panel-intro {
+    color: #54423A;
+}
+
+.o_psm_0214_portal .theme-commit-item {
+    background: #FFFFFF;
+    border: 1px solid #F1E3DB;
+    border-radius: var(--psm-0214-radius-md);
+}
+
+.o_psm_0214_portal .theme-commit-item-text {
+    color: #2F241F;
+    line-height: 1.8;
+}
+
+.o_psm_0214_portal .theme-status-alert {
+    background: linear-gradient(180deg, rgba(255, 199, 44, 0.18) 0%, rgba(255, 199, 44, 0.08) 100%) !important;
+    border-color: rgba(255, 199, 44, 0.45) !important;
+    color: var(--psm-0214-text-strong) !important;
+}
+
+.o_psm_0214_portal .psm-scroll-top {
+    align-items: center;
+    background: var(--psm-0214-red);
+    border: 1px solid var(--psm-0214-red-dark);
+    border-radius: 50%;
+    bottom: 1.5rem;
+    box-shadow: var(--psm-0214-shadow-md);
+    color: var(--psm-0214-yellow);
+    display: flex;
+    font-size: 1.25rem;
+    height: 3rem;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    right: 1.5rem;
+    transform: translateY(8px);
+    transition: opacity 180ms ease, transform 180ms ease, background-color 180ms ease;
+    width: 3rem;
+    z-index: 1040;
+}
+
+.o_psm_0214_portal .psm-scroll-top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.o_psm_0214_portal .psm-scroll-top:hover {
+    background: var(--psm-0214-red-dark);
+    color: var(--psm-0214-yellow);
+    transform: translateY(-2px);
+}
+
+html[data-theme='dark'] .o_psm_0214_portal,
+html[data-bs-theme='dark'] .o_psm_0214_portal {
+    --psm-0214-text: #F5F5F4;
+    --psm-0214-text-strong: #FFFFFF;
+    --psm-0214-text-muted: #D6D3D1;
+    --psm-0214-surface: #1B1917;
+    --psm-0214-surface-muted: #2A2623;
+    --psm-0214-border: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='dark'] .o_psm_0214_portal .card,
+html[data-bs-theme='dark'] .o_psm_0214_portal .card,
+html[data-theme='dark'] .o_psm_0214_portal .alert,
+html[data-bs-theme='dark'] .o_psm_0214_portal .alert,
+html[data-theme='dark'] .o_psm_0214_portal .psm-form-section,
+html[data-bs-theme='dark'] .o_psm_0214_portal .psm-form-section,
+html[data-theme='dark'] .o_psm_0214_portal .psm-form-progress,
+html[data-bs-theme='dark'] .o_psm_0214_portal .psm-form-progress {
+    background: var(--psm-0214-surface) !important;
+    color: var(--psm-0214-text) !important;
+    border-color: var(--psm-0214-border) !important;
+}
+
+html[data-theme='dark'] .o_psm_0214_portal .theme-task-card-inactive,
+html[data-bs-theme='dark'] .o_psm_0214_portal .theme-task-card-inactive,
+html[data-theme='dark'] .o_psm_0214_portal .theme-task-meta,
+html[data-bs-theme='dark'] .o_psm_0214_portal .theme-task-meta,
+html[data-theme='dark'] .o_psm_0214_portal .theme-task-owner,
+html[data-bs-theme='dark'] .o_psm_0214_portal .theme-task-owner {
+    background: color-mix(in srgb, var(--psm-0214-surface) 88%, var(--psm-0214-surface-muted) 12%) !important;
+    color: var(--psm-0214-text-muted) !important;
+}
+
+html[data-theme='dark'] .o_psm_0214_portal .theme-survey-card,
+html[data-bs-theme='dark'] .o_psm_0214_portal .theme-survey-card {
+    background: color-mix(in srgb, var(--psm-0214-surface) 90%, var(--psm-0214-surface-muted) 10%) !important;
+    border-color: color-mix(in srgb, var(--psm-0214-red) 30%, rgba(255, 255, 255, 0.08)) !important;
+}
+
+html[data-theme='dark'] .o_psm_0214_portal .theme-commit-panel,
+html[data-bs-theme='dark'] .o_psm_0214_portal .theme-commit-panel {
+    background: linear-gradient(180deg, #2A2623 0%, #1B1917 100%);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='dark'] .o_psm_0214_portal .theme-commit-panel-intro,
+html[data-bs-theme='dark'] .o_psm_0214_portal .theme-commit-panel-intro {
+    color: #D6D3D1;
+}
+
+html[data-theme='dark'] .o_psm_0214_portal .theme-commit-item,
+html[data-bs-theme='dark'] .o_psm_0214_portal .theme-commit-item {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='dark'] .o_psm_0214_portal .theme-commit-item-text,
+html[data-bs-theme='dark'] .o_psm_0214_portal .theme-commit-item-text {
+    color: #F5F5F4;
+}
+
+html[data-theme='dark'] .o_psm_0214_portal .form-control.psm-form-control,
+html[data-bs-theme='dark'] .o_psm_0214_portal .form-control.psm-form-control,
+html[data-theme='dark'] .o_psm_0214_portal .form-select.psm-form-control,
+html[data-bs-theme='dark'] .o_psm_0214_portal .form-select.psm-form-control {
+    background: #3A3632 !important;
+    color: #F5F5F4 !important;
+    border-color: #6B655F !important;
+}
+
+@media (max-width: 575.98px) {
+    .o_psm_0214_portal .psm-form-header__subtitle {
+        font-size: 1.5rem;
+    }
+
+    .o_psm_0214_portal .psm-form-progress {
+        border-radius: var(--psm-0214-radius-md);
+        position: static;
+    }
+
+    .o_psm_0214_portal .psm-form-progress__dot {
+        flex-direction: column;
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+
+    .o_psm_0214_portal .psm-form-section {
+        padding: 1rem;
+        scroll-margin-top: 1rem;
+    }
+
+    .o_psm_0214_portal .psm-scroll-top {
+        bottom: 1rem;
+        right: 1rem;
+    }
+}

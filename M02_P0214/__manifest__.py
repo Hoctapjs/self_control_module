@@ -1,0 +1,75 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'M02_P0214_QUY_TRINH_OFFBOARDING_RST',
+    'version': '19.0.1.0.13',
+    'category': 'Human Resources',
+    'summary': 'Quy trình nghỉ việc RST',
+    'description': """
+        Module cho phép nhân viên gửi yêu cầu nghỉ việc từ Portal.
+        - Form đơn giản với họ tên, line manager, lý do nghỉ việc
+        - Tích hợp với Approvals để duyệt yêu cầu
+    """,
+    'author': 'PSM',
+    'depends': [
+        'base',
+        'mail',
+        'approvals',
+        'hr',
+        'portal',
+        'survey',
+        'hr_holidays',
+        'hr_expense',
+        'M02_P0200',
+        'M02_P0213',
+        'M00_P9990',
+    ],
+    'data': [
+        'data/departure_reason_data.xml',
+        'data/survey_exit_interview_data.xml',
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'security/acl_cleanup.xml',
+        'wizards/finance_override_wizard_views.xml',
+        'data/approval_category_data.xml',
+        'security/offboarding_request_rules.xml',
+        'data/email_template_exit_survey.xml',
+        'data/email_template_adecco_notification.xml',
+        'data/email_template_social_insurance.xml',
+        'data/email_template_offboarding_completion.xml',
+        'data/email_template_offboarding_reminder.xml',
+        'data/email_template_dept_offboarding_reminder.xml',
+        'data/email_template_manager_approval_reminder.xml',
+        'data/email_template_employee_approved_notification.xml',
+        'data/email_template_dept_offboarding_assignment.xml',
+        'data/email_template_dept_confirm_done.xml',
+        'data/email_template_salary_settlement.xml',
+        'data/ir_cron_data.xml',
+        'data/config_ui_cleanup.xml',
+        'views/resignation_portal_template.xml',
+        'views/offboarding_activities_portal_template.xml',
+        'views/resignation_request_views.xml',
+        'views/hr_employee_views.xml',
+        'views/offboarding_report_views.xml',
+        'views/finance_check_report_views.xml',
+        'views/exit_interview_dashboard_views.xml',
+        'views/res_company_views.xml',
+        'views/config_menu_views.xml',
+
+        # 'data/offboarding_activity_plan_data.xml'
+        'data/rst_demo_data.xml',
+        'data/test_security_users.xml',
+        'data/offboarding_plan_rst.xml',
+    ],
+    'assets': {
+        'web.assets_backend': [
+            'M02_P0214/static/src/scss/backend_0214.scss',
+        ],
+        'web.assets_frontend': [
+            'M02_P0214/static/src/scss/portal_resignation_0214.scss',
+            'M02_P0214/static/src/js/portal_resignation_0214.js',
+        ],
+    },
+    'installable': True,
+    'application': False,
+    'license': 'LGPL-3',
+}

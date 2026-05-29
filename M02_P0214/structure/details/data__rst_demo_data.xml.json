@@ -1,0 +1,358 @@
+{
+  "file": "data/rst_demo_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "dept_rst_sales",
+      "model": "hr.department",
+      "fields": {
+        "name": "RST Sales Department"
+      }
+    },
+    {
+      "id": "dept_rst_it",
+      "model": "hr.department",
+      "fields": {
+        "name": "RST IT Department"
+      }
+    },
+    {
+      "id": "dept_rst_admin",
+      "model": "hr.department",
+      "fields": {
+        "name": "RST Admin Department"
+      }
+    },
+    {
+      "id": "dept_rst_hr",
+      "model": "hr.department",
+      "fields": {
+        "name": "RST HR Department"
+      }
+    },
+    {
+      "id": "user_rst_manager",
+      "model": "res.users",
+      "fields": {
+        "name": "RST Manager",
+        "login": "manager_rst",
+        "password": "123",
+        "email": "manager_rst@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [ref('base.group_user'), ref('hr.group_hr_manager'), ref('approvals.group_approval_manager')])]"
+        }
+      }
+    },
+    {
+      "id": "user_rst_employee",
+      "model": "res.users",
+      "fields": {
+        "name": "RST Employee",
+        "login": "employee_rst",
+        "password": "123",
+        "email": "employee_rst@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [ref('base.group_user')])]"
+        }
+      }
+    },
+    {
+      "id": "user_rst_employee_al_advance",
+      "model": "res.users",
+      "fields": {
+        "name": "RST Employee Advance AL",
+        "login": "employee_rst_al_advance",
+        "password": "123",
+        "email": "employee_rst_al_advance@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [ref('base.group_user')])]"
+        }
+      }
+    },
+    {
+      "id": "user_rst_it",
+      "model": "res.users",
+      "fields": {
+        "name": "RST IT Staff",
+        "login": "it_rst",
+        "password": "123",
+        "email": "it_rst@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [ref('base.group_user')])]"
+        }
+      }
+    },
+    {
+      "id": "user_rst_admin",
+      "model": "res.users",
+      "fields": {
+        "name": "RST Admin Staff",
+        "login": "admin_rst",
+        "password": "123",
+        "email": "admin_rst@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [ref('base.group_user')])]"
+        }
+      }
+    },
+    {
+      "id": "user_rst_hr",
+      "model": "res.users",
+      "fields": {
+        "name": "RST HR Staff",
+        "login": "hr_rst",
+        "password": "123",
+        "email": "hr_rst@example.com",
+        "group_ids": {
+          "eval": "[(6, 0, [ref('base.group_user'), ref('hr.group_hr_user'), ref('survey.group_survey_manager')])]"
+        }
+      }
+    },
+    {
+      "id": "emp_rst_manager",
+      "model": "hr.employee",
+      "fields": {
+        "name": "RST Manager",
+        "user_id": {
+          "ref": "user_rst_manager"
+        },
+        "department_id": {
+          "ref": "dept_rst_sales"
+        },
+        "work_email": "manager_rst@example.com"
+      }
+    },
+    {
+      "id": "emp_rst_employee",
+      "model": "hr.employee",
+      "fields": {
+        "name": "RST Employee",
+        "user_id": {
+          "ref": "user_rst_employee"
+        },
+        "department_id": {
+          "ref": "dept_rst_sales"
+        },
+        "parent_id": {
+          "ref": "emp_rst_manager"
+        },
+        "work_email": "employee_rst@example.com"
+      }
+    },
+    {
+      "id": "emp_rst_employee_al_advance",
+      "model": "hr.employee",
+      "fields": {
+        "name": "RST Employee Advance AL",
+        "user_id": {
+          "ref": "user_rst_employee_al_advance"
+        },
+        "department_id": {
+          "ref": "dept_rst_sales"
+        },
+        "parent_id": {
+          "ref": "emp_rst_manager"
+        },
+        "work_email": "employee_rst_al_advance@example.com"
+      }
+    },
+    {
+      "id": "emp_rst_it",
+      "model": "hr.employee",
+      "fields": {
+        "name": "RST IT Staff",
+        "user_id": {
+          "ref": "user_rst_it"
+        },
+        "department_id": {
+          "ref": "dept_rst_it"
+        },
+        "work_email": "it_rst@example.com"
+      }
+    },
+    {
+      "id": "emp_rst_admin",
+      "model": "hr.employee",
+      "fields": {
+        "name": "RST Admin Staff",
+        "user_id": {
+          "ref": "user_rst_admin"
+        },
+        "department_id": {
+          "ref": "dept_rst_admin"
+        },
+        "work_email": "admin_rst@example.com"
+      }
+    },
+    {
+      "id": "emp_rst_hr",
+      "model": "hr.employee",
+      "fields": {
+        "name": "RST HR Staff",
+        "user_id": {
+          "ref": "user_rst_hr"
+        },
+        "department_id": {
+          "ref": "dept_rst_hr"
+        },
+        "work_email": "hr_rst@example.com"
+      }
+    },
+    {
+      "id": "leave_type_rst_annual_leave",
+      "model": "hr.leave.type",
+      "fields": {
+        "name": "RST Annual Leave",
+        "requires_allocation": "1",
+        "employee_requests": "1",
+        "allocation_validation_type": "no_validation",
+        "leave_validation_type": "no_validation",
+        "request_unit": "day",
+        "allows_negative": "1",
+        "max_allowed_negative": {
+          "eval": "20"
+        }
+      }
+    },
+    {
+      "id": "allocation_rst_employee_annual_leave",
+      "model": "hr.leave.allocation",
+      "fields": {
+        "name": "RST Employee Annual Leave Balance",
+        "holiday_status_id": {
+          "ref": "leave_type_rst_annual_leave"
+        },
+        "employee_id": {
+          "ref": "emp_rst_employee"
+        },
+        "number_of_days": {
+          "eval": "12.0"
+        }
+      }
+    },
+    {
+      "id": "allocation_rst_employee_al_advance",
+      "model": "hr.leave.allocation",
+      "fields": {
+        "name": "RST Employee Advance AL Balance",
+        "holiday_status_id": {
+          "ref": "leave_type_rst_annual_leave"
+        },
+        "employee_id": {
+          "ref": "emp_rst_employee_al_advance"
+        },
+        "number_of_days": {
+          "eval": "5.0"
+        }
+      }
+    },
+    {
+      "id": "request_rst_employee_al_advance",
+      "model": "approval.request",
+      "fields": {
+        "name": "RST Demo Resignation - Advance AL",
+        "category_id": {
+          "ref": "approval_category_resignation"
+        },
+        "request_owner_id": {
+          "ref": "user_rst_employee_al_advance"
+        },
+        "employee_id": {
+          "ref": "emp_rst_employee_al_advance"
+        },
+        "x_psm_0214_employee_id": {
+          "ref": "emp_rst_employee_al_advance"
+        },
+        "x_psm_0214_resignation_date": {
+          "eval": "time.strftime('%Y-%m-%d')"
+        },
+        "x_psm_0214_remaining_al_days": {
+          "eval": "-7.0"
+        },
+        "x_psm_0214_al_deduction_rate": {
+          "eval": "100000.0"
+        },
+        "x_psm_0214_al_deduction_amount": {
+          "eval": "700000.0"
+        },
+        "x_psm_0214_al_deduction_note": "Demo case: employee has used 7 annual leave days in advance."
+      }
+    },
+    {
+      "id": "expense_rst_employee_draft",
+      "model": "hr.expense",
+      "fields": {
+        "name": "RST draft expense",
+        "employee_id": {
+          "ref": "emp_rst_employee"
+        },
+        "product_id": {
+          "ref": "hr_expense.product_product_no_cost"
+        },
+        "total_amount_currency": {
+          "eval": "350000.0"
+        },
+        "date": {
+          "eval": "time.strftime('%Y-%m-%d')"
+        }
+      }
+    },
+    {
+      "id": "expense_rst_employee_submitted",
+      "model": "hr.expense",
+      "fields": {
+        "name": "RST submitted expense",
+        "employee_id": {
+          "ref": "emp_rst_employee"
+        },
+        "product_id": {
+          "ref": "hr_expense.product_product_no_cost"
+        },
+        "total_amount_currency": {
+          "eval": "780000.0"
+        },
+        "date": {
+          "eval": "time.strftime('%Y-%m-%d')"
+        },
+        "approval_state": "submitted"
+      }
+    },
+    {
+      "id": "advance_rst_employee_open",
+      "model": "x_psm_0214_advance_request",
+      "fields": {
+        "name": "ADV-RST-001",
+        "employee_id": {
+          "ref": "emp_rst_employee"
+        },
+        "amount": {
+          "eval": "1200000.0"
+        },
+        "currency_id": {
+          "ref": "base.VND"
+        },
+        "date": {
+          "eval": "time.strftime('%Y-%m-%d')"
+        },
+        "state": "open"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "approval.request",
+    "hr.department",
+    "hr.employee",
+    "hr.expense",
+    "hr.leave.allocation",
+    "hr.leave.type",
+    "res.users",
+    "x_psm_0214_advance_request"
+  ]
+}

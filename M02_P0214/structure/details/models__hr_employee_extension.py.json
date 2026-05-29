@@ -1,0 +1,51 @@
+{
+  "file": "models/hr_employee_extension.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: hr.employee; 1 classes; 2 fields",
+  "classes": [
+    {
+      "python_class": "HrEmployeeRSTExtension",
+      "description": "Extends hr.employee in models/hr_employee_extension.py.",
+      "model": null,
+      "inherit": "hr.employee",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "is_rst_employee",
+          "type": "Boolean",
+          "string": "Is RST Employee",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": "Check this if the employee is part of RST (Resignation & Turnover Support) team"
+        },
+        {
+          "name": "x_psm_0214_is_rst_employee",
+          "type": "Boolean",
+          "string": "Is RST Employee",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": "is_rst_employee",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

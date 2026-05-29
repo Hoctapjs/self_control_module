@@ -1,0 +1,1611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_psm_discipline_sidebar_link"
+        inherit_id="portal_custom.portal_my_home_inherit" priority="50">
+        <xpath expr="//a[@href='/my/payslips']" position="after">
+            <a href="/my/disciplines" class="sidebar-link">
+                <div class="app-icon-wrapper me-3 position-relative"
+                    style="background: #FFC72C; color: #000000;">
+                    <i class="fa fa-exclamation-triangle" />
+                    <t t-if="discipline_needs_action_count and discipline_needs_action_count > 0">
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle p-1 border border-light rounded-circle"
+                            style="background: #DA291C;">
+                            <span class="visually-hidden">New alerts</span>
+                        </span>
+                    </t>
+                </div>
+                <span>Viết Bản Tường Trình</span>
+            </a>
+
+        </xpath>
+    </template>
+
+    <template id="portal_psm_my_home_menu_discipline" name="Portal layout : discipline entries"
+        inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'discipline'" class="breadcrumb-item active">
+                Disciplinary Records
+            </li>
+
+            <li t-if="page_name == 'discipline_form'" class="breadcrumb-item">
+                <a href="/my/disciplines">Disciplinary Records</a>
+            </li>
+            <li t-if="page_name == 'discipline_form'" class="breadcrumb-item active">
+                <t t-esc="record.name" />
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_psm_my_home_discipline" name="Show Discipline on Portal Home"
+        inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Viết Bản Tường Trình (Kỷ Luật)</t>
+                <t t-set="url" t-value="'/my/disciplines'" />
+                <t t-set="placeholder_count" t-value="'discipline_count'" />
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_psm_my_disciplines" name="My Disciplinary Records">
+        <t t-call="portal.portal_layout">
+            <div class="o_psm_0215_portal">
+                <t t-set="breadcrumbs_searchbar" t-value="True" />
+
+                <t t-set="status_labels"
+                    t-value="{
+                    'draft': 'Khởi tạo',
+                    'under_review': 'Đang xem xét',
+                    'level_determination': 'Xác định cấp xử lý',
+                    'investigation': 'Xác minh nâng cao',
+                    'hearing': 'Họp kỷ luật',
+                    'proposal': 'Đề xuất kỷ luật',
+                    'issued': 'Ban hành quyết định',
+                    'approval': 'Phê duyệt',
+                    'notified': 'Thông báo',
+                    'active': 'Đang hiệu lực',
+                    'expired': 'Hết hiệu lực',
+                    'cancel': 'Đã hủy'
+                }" />
+                <t t-set="status_classes"
+                    t-value="{
+                    'draft': 'psm-status-neutral',
+                    'under_review': 'psm-status-progress',
+                    'level_determination': 'psm-status-progress-deep',
+                    'investigation': 'psm-status-progress-deep',
+                    'hearing': 'psm-status-progress-deep',
+                    'proposal': 'psm-status-action',
+                    'issued': 'psm-status-action',
+                    'approval': 'psm-status-progress-deep',
+                    'notified': 'psm-status-waiting',
+                    'active': 'psm-status-list-active',
+                    'expired': 'psm-status-neutral',
+                    'cancel': 'psm-status-neutral'
+                }" />
+                <t t-set="list_status_labels"
+                    t-value="{
+                    'draft': 'NHÁP',
+                    'under_review': 'XEM XÉT',
+                    'level_determination': 'XÁC ĐỊNH CẤP',
+                    'investigation': 'XÁC MINH',
+                    'hearing': 'HỌP KL',
+                    'proposal': 'ĐỀ XUẤT',
+                    'issued': 'BAN HÀNH QĐ',
+                    'approval': 'PHÊ DUYỆT',
+                    'notified': 'CHỜ XÁC NHẬN',
+                    'active': 'HIỆU LỰC',
+                    'expired': 'HẾT HẠN',
+                    'cancel': 'ĐÃ HỦY'
+                }" />
+
+                <div class="psm-list-commandbar">
+                    <div class="psm-list-commandbar__filters">
+                        <div class="psm-list-filter-wrap" t-if="disciplines">
+                            <label class="visually-hidden" for="psm_discipline_list_filter">Lọc hồ
+                                sơ kỷ luật</label>
+                            <i class="fa fa-search" aria-hidden="true" />
+                            <input type="search"
+                                id="psm_discipline_list_filter"
+                                class="psm-list-filter"
+                                placeholder="Lọc trong trang hiện tại..."
+                                autocomplete="off"
+                                data-psm-filter-target=".psm-table tbody tr" />
+                            <button type="button" class="psm-list-filter__clear"
+                                aria-label="Xóa bộ lọc" hidden="hidden">
+                                <i class="fa fa-times" aria-hidden="true" />
+                            </button>
+                        </div>
+                        <span class="psm-list-count" data-psm-filter-count="" t-if="disciplines">
+                            <t t-esc="len(disciplines)" /> / <t
+                                t-esc="total_count or len(disciplines)" /> hồ sơ </span>
+                    </div>
+                    <div class="psm-list-commandbar__actions">
+                        <form action="/my/disciplines" method="get" class="psm-list-sort">
+                            <label class="psm-list-sort__label" for="psm_discipline_sortby">Sort By:</label>
+                            <select id="psm_discipline_sortby" name="sortby"
+                                class="psm-list-sort__select" onchange="this.form.submit()">
+                                <t t-foreach="searchbar_sortings.items()" t-as="sorting">
+                                    <option t-att-value="sorting[0]"
+                                        t-att-selected="sorting[0] == sortby">
+                                        <t t-esc="sorting[1]['label']" />
+                                    </option>
+                                </t>
+                            </select>
+                        </form>
+                        <a t-if="is_manager" href="/my/discipline/create"
+                            class="psm-btn psm-btn--primary psm-list-create-btn">
+                            <i class="fa fa-plus-circle" aria-hidden="true" /> Tạo Counseling Log </a>
+                    </div>
+                </div>
+
+                <t t-if="not disciplines">
+                    <div class="psm-empty" role="status" aria-live="polite">
+                        <i class="fa fa-folder-open psm-empty__icon" aria-hidden="true" />
+                        <h5 class="psm-empty__title">
+                            <t t-if="is_manager">Chưa có hồ sơ kỷ luật</t>
+                            <t t-else="">Bạn chưa có hồ sơ kỷ luật nào. Đây là tin tốt!</t>
+                        </h5>
+                        <p class="psm-empty__hint">
+                            <t t-if="is_manager">Bấm 'Tạo Counseling Log' khi cần ghi nhận vi phạm.</t>
+                            <t t-else="">Hiện tại không có hồ sơ cần xử lý trong tài khoản của bạn.</t>
+                        </p>
+                        <a t-if="is_manager" href="/my/discipline/create"
+                            class="psm-btn psm-btn--primary">
+                            <i class="fa fa-plus-circle" aria-hidden="true" /> Tạo Counseling Log </a>
+                    </div>
+                </t>
+                <t t-if="disciplines">
+                    <div class="table-responsive mb-2">
+                        <table class="table mb-0 bg-white psm-table psm-mobile-stack">
+                            <thead>
+                                <tr class="active">
+                                    <th class="text-start psm-col-ref" scope="col">Mã hồ sơ</th>
+                                    <th class="text-start psm-col-employee" scope="col">Nhân viên</th>
+                                    <th class="text-start psm-col-violation" scope="col">Vi phạm</th>
+                                    <th class="text-start psm-col-date" scope="col">Ngày</th>
+                                    <th class="text-start psm-col-start-date" scope="col">Ngày bắt đầu</th>
+                                    <th class="text-start psm-col-end-date" scope="col">Ngày kết thúc</th>
+                                    <th class="text-start psm-col-status" scope="col">Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="disciplines" t-as="rec">
+                                    <t t-set="employee_name"
+                                        t-value="rec.x_psm_employee_name or '---'" />
+                                    <t t-set="violation_type"
+                                        t-value="rec.x_psm_violation_type or '---'" />
+                                    <t t-set="violation_category"
+                                        t-value="rec.x_psm_violation_category_id.name or '---'" />
+                                    <tr t-if="rec.id"
+                                        t-attf-data-href="/my/discipline/#{rec.id}"
+                                        tabindex="0"
+                                        t-att-class="'psm-row--needs-action' if rec.state in ('notified', 'issued', 'proposal') else ''">
+                                        <td class="text-start psm-cell-ref" data-label="Mã hồ sơ">
+                                            <a t-attf-href="/my/discipline/#{rec.id}"
+                                                class="psm-cell-ref__link">
+                                                <t t-esc="rec.name or '---'" />
+                                            </a>
+                                        </td>
+                                        <td class="text-start psm-cell-employee"
+                                            data-label="Nhân viên">
+                                            <span class="psm-cell-employee__avatar"
+                                                aria-hidden="true">
+                                                <t
+                                                    t-esc="employee_name[:1] if employee_name != '---' else '?'" />
+                                            </span>
+                                            <span class="psm-cell-employee__name">
+                                                <t t-esc="employee_name" />
+                                            </span>
+                                        </td>
+                                        <td class="text-start psm-cell-violation"
+                                            data-label="Vi phạm">
+                                            <div class="psm-cell-violation__type">
+                                                <t t-esc="violation_type" />
+                                            </div>
+                                            <div class="psm-cell-violation__category">
+                                                <i class="fa fa-tag" aria-hidden="true" />
+                                                <span>
+                                                    <t t-esc="violation_category" />
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="text-start psm-cell-date" data-label="Ngày">
+                                            <span t-field="rec.x_psm_date"
+                                                t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}" />
+                                        </td>
+                                        <td class="text-start psm-cell-start-date" data-label="Ngày bắt đầu">
+                                            <span t-field="rec.x_psm_start_date"
+                                                t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}" />
+                                        </td>
+                                        <td class="text-start psm-cell-end-date" data-label="Ngày kết thúc">
+                                            <span t-field="rec.x_psm_end_date"
+                                                t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}" />
+                                        </td>
+                                        <td class="text-start psm-cell-status psm-col-status"
+                                            data-label="Trạng thái">
+                                            <span
+                                                t-att-class="'psm-status ' + status_classes.get(rec.state, 'psm-status-progress')">
+                                                <t
+                                                    t-esc="list_status_labels.get(rec.state, status_labels.get(rec.state, rec.state or '---'))" />
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="psm-list-summary"> Hiển thị <strong>
+                            <t t-esc="len(disciplines)" />
+                        </strong> hồ sơ
+                        trên trang này. Tổng số hồ sơ: <strong>
+                            <t t-esc="total_count or len(disciplines)" />
+                        </strong>
+                    </div>
+                </t>
+                <div t-if="pager" class="o_portal_pager text-center">
+                    <t t-call="portal.pager" />
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+
+    <template id="portal_psm_discipline_create" name="Create Counseling Log">
+        <t t-call="portal.portal_layout">
+            <div class="o_psm_0215_portal">
+                <div class="container mt-4 mb-5">
+                    <div class="psm-panel overflow-hidden">
+                        <div class="psm-banner">
+                            <h4 class="mb-0 text-center">COUNSELLING LOG</h4>
+                        </div>
+                        <div class="psm-form-body p-4 bg-white">
+                            <form id="discipline_create_form" class="psm-form-create"
+                                action="/my/discipline/create" method="post"
+                                enctype="multipart/form-data" data-psm-loading="1">
+                                <input type="hidden" name="csrf_token"
+                                    t-att-value="request.csrf_token()" />
+                                <nav class="psm-form-progress" aria-label="Tiến trình điền form">
+                                    <a href="#psm-section-1"
+                                        class="psm-form-progress__dot is-active" data-section="1">
+                                        <span class="psm-form-progress__num">1</span>
+                                        <span class="psm-form-progress__lbl">Các bên</span>
+                                    </a>
+                                    <a href="#psm-section-2" class="psm-form-progress__dot"
+                                        data-section="2">
+                                        <span class="psm-form-progress__num">2</span>
+                                        <span class="psm-form-progress__lbl">Ngày &amp; mục đích</span>
+                                    </a>
+                                    <a href="#psm-section-3" class="psm-form-progress__dot"
+                                        data-section="3">
+                                        <span class="psm-form-progress__num">3</span>
+                                        <span class="psm-form-progress__lbl">Vi phạm</span>
+                                    </a>
+                                    <a href="#psm-section-4" class="psm-form-progress__dot"
+                                        data-section="4">
+                                        <span class="psm-form-progress__num">4</span>
+                                        <span class="psm-form-progress__lbl">Nội dung</span>
+                                    </a>
+                                    <a href="#psm-section-5" class="psm-form-progress__dot"
+                                        data-section="5">
+                                        <span class="psm-form-progress__num">5</span>
+                                        <span class="psm-form-progress__lbl">Chữ ký</span>
+                                    </a>
+                                </nav>
+
+                                <!-- Header Info -->
+                                <section class="psm-form-section" id="psm-section-1">
+                                    <div class="psm-section__head">
+                                        <span class="psm-section__index">1</span>
+                                        <h5 class="psm-section__title">Thông tin các bên</h5>
+                                    </div>
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <div class="psm-section psm-section--quiet h-100">
+                                                <h6 class="text-muted small fw-bold mb-3 uppercase">ĐẠI
+                                                    DIỆN CÔNG TY</h6>
+                                                <div class="mb-2">
+                                                    <span class="text-muted small">Họ và tên:</span>
+                                                    <span class="fw-bold ms-2">
+                                                        <t t-esc="request.env.user.name" />
+                                                    </span>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <span class="text-muted small">Nhà hàng/Bộ phận:</span>
+                                                    <span class="fw-bold ms-2">
+                                                        <t
+                                                            t-esc="request.env.user.employee_id.department_id.name or '---'" />
+                                                    </span>
+                                                </div>
+                                                <div class="mb-0">
+                                                    <span class="text-muted small">Vị trí làm việc:</span>
+                                                    <span class="fw-bold ms-2">
+                                                        <t
+                                                            t-esc="request.env.user.employee_id.job_id.name or '---'" />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="psm-section psm-section--quiet h-100">
+                                                <h6 class="text-muted small fw-bold mb-3 uppercase">NGƯỜI
+                                                    LAO ĐỘNG ("Nhân viên")</h6>
+                                                <div class="mb-3">
+                                                    <label class="form-label fw-bold">Chọn nhân
+                                                        viên:</label>
+                                                    <select name="x_psm_employee_id"
+                                                        id="employee_select"
+                                                        class="form-select border-warning shadow-sm"
+                                                        required="1">
+                                                        <option value="">-- Chọn nhân viên --</option>
+                                                        <t t-foreach="subordinates" t-as="sub">
+                                                            <option t-att-value="sub.id"
+                                                                t-att-data-dept="sub.department_id.name"
+                                                                t-att-data-job="sub.job_id.name"
+                                                                t-att-data-empid="sub.id">
+                                                                <t t-esc="sub.name" /> (<t
+                                                                    t-esc="sub.id" />) </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <span class="text-muted small">Họ và tên:</span>
+                                                    <span id="emp_name_display" class="fw-bold ms-2">
+                                                        ---</span>
+                                                    <span class="text-muted small ms-3">Mã số nhân
+                                                        viên:</span>
+                                                    <span id="emp_barcode_display"
+                                                        class="fw-bold ms-2">---</span>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <span class="text-muted small">Nhà hàng/Bộ phận:</span>
+                                                    <span id="emp_dept_display" class="fw-bold ms-2">
+                                                        ---</span>
+                                                </div>
+                                                <div class="mb-0">
+                                                    <span class="text-muted small">Vị trí làm việc:</span>
+                                                    <span id="emp_job_display" class="fw-bold ms-2">
+                                                        ---</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="psm-section psm-section--quiet mt-4"
+                                        id="witness_section">
+                                        <h6 class="text-muted small fw-bold mb-3 uppercase">NGƯỜI
+                                            LÀM CHỨNG</h6>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label fw-bold small">Chọn người
+                                                    làm chứng:</label>
+                                                <select name="witness_id" id="witness_select"
+                                                    class="form-select border-info shadow-sm">
+                                                    <option value="">-- Có người làm chứng không? --</option>
+                                                    <t t-foreach="subordinates" t-as="sub">
+                                                        <option t-att-value="sub.id"
+                                                            t-att-data-dept="sub.department_id.name"
+                                                            t-att-data-job="sub.job_id.name"
+                                                            t-att-data-empid="sub.id">
+                                                            <t t-esc="sub.name" /> (<t
+                                                                t-esc="sub.id" />) </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 pt-md-2">
+                                                <div class="mb-2">
+                                                    <span class="text-muted small">Họ và tên:</span>
+                                                    <span id="witness_name_display"
+                                                        class="fw-bold ms-2 small">---</span>
+                                                    <span class="text-muted small ms-3">Mã số nhân
+                                                        viên:</span>
+                                                    <span id="witness_id_display"
+                                                        class="fw-bold ms-2 small">---</span>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <span class="text-muted small">Nhà hàng/Bộ phận:</span>
+                                                    <span id="witness_dept_display"
+                                                        class="fw-bold ms-2 small">---</span>
+                                                </div>
+                                                <div class="mb-0">
+                                                    <span class="text-muted small">Vị trí làm việc:</span>
+                                                    <span id="witness_job_display"
+                                                        class="fw-bold ms-2 small">---</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section class="psm-form-section" id="psm-section-2">
+                                    <div class="psm-section__head">
+                                        <span class="psm-section__index">2</span>
+                                        <h5 class="psm-section__title">Ngày thực hiện &amp; mục đích</h5>
+                                    </div>
+                                    <div class="row g-4">
+                                        <div class="col-lg-4">
+                                            <label class="form-label fw-bold psm-section-title mb-2">NGÀY
+                                                THỰC HIỆN:</label>
+                                            <input type="date" name="x_psm_date"
+                                                class="form-control shadow-sm"
+                                                t-att-value="datetime.date.today()" required="1" />
+                                        </div>
+                                        <!-- Purpose -->
+                                        <div class="col-lg-8">
+                                            <label
+                                                class="form-label d-block fw-bold psm-section-title mb-3">MỤC
+                                                ĐÍCH:</label>
+                                            <div
+                                                class="d-flex flex-wrap gap-4 px-3 py-3 psm-section psm-section--quiet">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="x_psm_discipline_purpose"
+                                                        value="discipline" id="p_disc" required="1"
+                                                        checked="1" />
+                                                    <label class="form-check-label fw-bold"
+                                                        for="p_disc">Discipline</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="x_psm_discipline_purpose" value="pip"
+                                                        id="p_pip" />
+                                                    <label class="form-check-label fw-bold"
+                                                        for="p_pip">PIP</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="x_psm_discipline_purpose"
+                                                        value="counseling_1" id="p_c1" />
+                                                    <label class="form-check-label fw-bold"
+                                                        for="p_c1">Counseling 1st</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="x_psm_discipline_purpose"
+                                                        value="counseling_2" id="p_c2" />
+                                                    <label class="form-check-label fw-bold"
+                                                        for="p_c2">Counseling 2nd</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section class="psm-form-section" id="psm-section-3">
+                                    <div class="psm-section__head">
+                                        <span class="psm-section__index">3</span>
+                                        <h5 class="psm-section__title">Vi phạm</h5>
+                                    </div>
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-bold psm-section-title mb-2">Danh
+                                                mục vi phạm:</label>
+                                            <select name="violation_category"
+                                                id="x_psm_violation_category_select"
+                                                class="form-select shadow-sm" required="1">
+                                                <option value="">-- Chọn danh mục --</option>
+                                                <t t-foreach="violation_categories" t-as="cat">
+                                                    <option t-att-value="cat.id" t-esc="cat.name" />
+                                                </t>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-bold psm-section-title mb-2">Loại
+                                                vi phạm:</label>
+                                            <input type="text" name="x_psm_violation_type"
+                                                id="x_psm_violation_type_input"
+                                                class="form-control shadow-sm" required="1"
+                                                placeholder="Nhập loại vi phạm..." />
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section class="psm-form-section" id="psm-section-4">
+                                    <div class="psm-section__head">
+                                        <span class="psm-section__index">4</span>
+                                        <h5 class="psm-section__title">Nội dung</h5>
+                                    </div>
+                                    <!-- Section I -->
+                                    <div class="mb-4">
+                                        <label class="form-label fw-bold psm-section-title mb-2">I.
+                                            Mô tả tình huống vi phạm/không hoàn thành công việc được
+                                            giao:</label>
+                                        <textarea name="section_i_description"
+                                            class="form-control shadow-sm psm-autosize" rows="5"
+                                            required="1"
+                                            placeholder="Mô tả cụ thể hành vi, thời gian, địa điểm..."></textarea>
+                                    </div>
+
+                                    <!-- Section II -->
+                                    <div class="mb-4">
+                                        <label class="form-label fw-bold psm-section-title mb-2">II.
+                                            Phản hồi/ Ý kiến của nhân viên:</label>
+                                        <textarea name="section_ii_feedback"
+                                            class="form-control shadow-sm psm-autosize" rows="3"
+                                            required="1"
+                                            placeholder="Ghi nhận phản hồi trực tiếp từ nhân viên..."></textarea>
+                                    </div>
+
+                                    <!-- Section III -->
+                                    <div class="mb-4">
+                                        <label class="form-label fw-bold psm-section-title mb-2">III.
+                                            Xác định hành vi vi phạm &amp; xác nhận của nhân viên:</label>
+                                        <textarea name="section_iii_identification"
+                                            class="form-control shadow-sm psm-autosize" rows="3"
+                                            required="1"
+                                            placeholder="Kết luận vi phạm sau khi đã trao đổi..."></textarea>
+                                    </div>
+
+                                    <!-- Section IV -->
+                                    <div class="mb-4">
+                                        <label class="form-label fw-bold psm-section-title mb-2">IV.
+                                            Hai bên đồng ý với những nội dung sau:</label>
+                                        <textarea name="section_iv_agreement"
+                                            class="form-control shadow-sm psm-autosize" rows="3"
+                                            required="1"
+                                            placeholder="Các cam kết, thỏa thuận cải thiện..."></textarea>
+                                    </div>
+
+                                    <div>
+                                        <label class="form-label fw-bold psm-section-title mb-2">Upload
+                                            ảnh bản tường trình giấy (B1-B4):</label>
+                                        <div class="input-group shadow-sm mb-3">
+                                            <input type="file" name="explanation_images"
+                                                id="explanation_images_input" class="form-control"
+                                                multiple="1" accept="image/*" required="1" />
+                                        </div>
+                                        <div id="image_preview_container"
+                                            class="d-flex flex-wrap gap-2 mb-2"></div>
+                                        <p class="text-muted small mt-2 italic"><i
+                                                class="fa fa-info-circle me-1" /> Nếu nhân viên viết
+                                            bản giấy, Manager hãy chụp ảnh và upload tại đây.</p>
+                                    </div>
+                                </section>
+
+                                <!-- Signatures -->
+                                <section class="psm-form-section" id="psm-section-5">
+                                    <div class="psm-section__head">
+                                        <span class="psm-section__index">5</span>
+                                        <h5 class="psm-section__title">Chữ ký &amp; xác nhận</h5>
+                                    </div>
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <label
+                                                class="form-label fw-bold small uppercase text-muted">Chữ
+                                                ký Quản lý:</label>
+                                            <div class="psm-signature-pad p-1">
+                                                <canvas id="manager-pad" class="signature-pad"
+                                                    style="width: 100%; height: 160px; cursor: crosshair; touch-action: none;"></canvas>
+                                            </div>
+                                            <input type="hidden" name="manager_signature"
+                                                id="manager_sig_data" />
+                                            <div class="psm-signature-tools">
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2"
+                                                    onclick="clearPad('manager-pad')"><i
+                                                        class="fa fa-eraser me-1" /> Xóa chữ ký</button>
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2 psm-signature-fullscreen-btn"
+                                                    data-canvas-id="manager-pad"><i
+                                                        class="fa fa-expand me-1" /> Vẽ to hơn</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label
+                                                class="form-label fw-bold small uppercase text-muted">Chữ
+                                                ký Nhân viên:</label>
+                                            <div class="psm-signature-pad p-1">
+                                                <canvas id="employee-pad" class="signature-pad"
+                                                    style="width: 100%; height: 160px; cursor: crosshair; touch-action: none;"></canvas>
+                                            </div>
+                                            <input type="hidden" name="employee_signature"
+                                                id="employee_sig_data" />
+                                            <div class="psm-signature-tools">
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2"
+                                                    onclick="clearPad('employee-pad')"><i
+                                                        class="fa fa-eraser me-1" /> Xóa chữ ký</button>
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2 psm-signature-fullscreen-btn"
+                                                    data-canvas-id="employee-pad"><i
+                                                        class="fa fa-expand me-1" /> Vẽ to hơn</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Witness Signature row (dynamic) -->
+                                    <div class="row g-4 d-none mt-1" id="witness_signature_row">
+                                        <div class="col-md-6">
+                                            <label
+                                                class="form-label fw-bold small uppercase text-muted">Chữ
+                                                ký Người làm chứng:</label>
+                                            <div class="psm-signature-pad p-1">
+                                                <canvas id="witness-pad" class="signature-pad"
+                                                    style="width: 100%; height: 160px; cursor: crosshair; touch-action: none;"></canvas>
+                                            </div>
+                                            <input type="hidden" name="witness_signature"
+                                                id="witness_sig_data" />
+                                            <div class="psm-signature-tools">
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2"
+                                                    onclick="clearPad('witness-pad')"><i
+                                                        class="fa fa-eraser me-1" /> Xóa chữ ký</button>
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2 psm-signature-fullscreen-btn"
+                                                    data-canvas-id="witness-pad"><i
+                                                        class="fa fa-expand me-1" /> Vẽ to hơn</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <div class="psm-sticky-actions text-center">
+                                    <button type="submit"
+                                        class="psm-btn psm-btn--primary psm-btn-lg">
+                                        <i class="fa fa-save me-2" /> LƯU &amp; TẠO LOG </button>
+                                    <div class="mt-3 mt-lg-0">
+                                        <a href="/my/disciplines" class="psm-link-muted"><i
+                                                class="fa fa-arrow-left me-1" /> Hủy bỏ và quay lại</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Validation Modal - Branded -->
+                <div class="modal fade" id="psm_validation_modal" tabindex="-1"
+                    aria-labelledby="psm_validation_modal_label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content"
+                            style="border-radius: 12px; overflow: hidden; border: none;">
+                            <div class="modal-header text-white"
+                                style="background-color: #DA291C; border-bottom: 3px solid #FFC72C;">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fa fa-exclamation-circle fa-lg"
+                                        style="color: #FFC72C;" />
+                                    <h5 class="modal-title fw-bold mb-0"
+                                        id="psm_validation_modal_label"
+                                        style="color: #FFFFFF; letter-spacing: 0.5px;">
+                                        KHÔNG THỂ LƯU HỒ SƠ
+                                    </h5>
+                                </div>
+                                <button type="button" class="btn-close btn-close-white"
+                                    data-bs-dismiss="modal" aria-label="Đóng" />
+                            </div>
+                            <div class="modal-body" style="background: #FFFFFF; padding: 24px;">
+                                <p class="mb-3 fw-semibold" style="color: #000000;">
+                                    Vui lòng hoàn tất các mục sau trước khi gửi:
+                                </p>
+                                <ul id="psm_validation_error_list" class="list-unstyled mb-0"
+                                    style="display: flex; flex-direction: column; gap: 10px;" />
+                            </div>
+                            <div class="modal-footer justify-content-center"
+                                style="background: #FFFFFF; border-top: 1px solid #f0f0f0;">
+                                <button type="button" class="btn fw-bold px-5 rounded-pill"
+                                    data-bs-dismiss="modal"
+                                    style="background-color: #FFC72C; color: #000000; border: none; font-size: 15px;">
+                                    <i class="fa fa-times-circle me-2" />ĐÓNG LẠI </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                function clearPad(canvasId) {
+                    var canvas = document.getElementById(canvasId);
+                    if (!canvas) return;
+                    var ctx = canvas.getContext('2d');
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    var inputId = '';
+                    if (canvasId === 'employee-pad') inputId = 'employee_sig_data';
+                    else if (canvasId === 'manager-pad') inputId = 'manager_sig_data';
+                    else if (canvasId === 'witness-pad') inputId = 'witness_sig_data';
+                    
+                    var input = document.getElementById(inputId);
+                    if (input) input.value = '';
+                }
+
+                function psmShowValidationModal(errors) {
+                    var list = document.getElementById('psm_validation_error_list');
+                    if (!list) return;
+                    list.innerHTML = '';
+                    errors.forEach(function(msg) {
+                        var li = document.createElement('li');
+                        li.style.cssText = 'display:flex;align-items:flex-start;gap:10px;' +
+                                           'background:#FFF8E1;border-left:4px solid #FFC72C;' +
+                                           'border-radius:6px;padding:10px 14px;';
+                        li.innerHTML = '&lt;i class="fa fa-exclamation-triangle mt-1" ' +
+                                       'style="color:#FFC72C;flex-shrink:0;"&gt;&lt;/i&gt;' +
+                                       '&lt;span style="color:#000000;font-weight:500;"&gt;' + msg + '&lt;/span&gt;';
+                        list.appendChild(li);
+                    });
+
+                    var modalEl = document.getElementById('psm_validation_modal');
+                    var bsApi = window.bootstrap || (window.odoo &amp;&amp; window.odoo.bootstrap) || null;
+                    if (modalEl &amp;&amp; bsApi &amp;&amp; bsApi.Modal) {
+                        bsApi.Modal.getOrCreateInstance(modalEl).show();
+                    } else if (modalEl) {
+                        modalEl.style.display = 'block';
+                        modalEl.classList.add('show');
+                        document.body.classList.add('modal-open');
+                        document.body.style.overflow = 'hidden';
+                        modalEl.querySelectorAll('[data-bs-dismiss="modal"]').forEach(function(btn) {
+                            btn.addEventListener('click', function() {
+                                modalEl.classList.remove('show');
+                                modalEl.style.display = 'none';
+                                document.body.classList.remove('modal-open');
+                                document.body.style.overflow = '';
+                            });
+                        });
+                    }
+                }
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    var empSelect = document.getElementById('employee_select');
+                    var deptDisplay = document.getElementById('emp_dept_display');
+                    var jobDisplay = document.getElementById('emp_job_display');
+                    var nameDisplay = document.getElementById('emp_name_display');
+                    var barcodeDisplay = document.getElementById('emp_barcode_display');
+
+                    if (empSelect) {
+                        empSelect.addEventListener('change', function() {
+                            var selectedOption = empSelect.options[empSelect.selectedIndex];
+                            if (selectedOption &amp;&amp; selectedOption.value) {
+                                nameDisplay.textContent = selectedOption.textContent.split('(')[0].trim() || '---';
+                                barcodeDisplay.textContent = selectedOption.getAttribute('data-empid') || '---';
+                                deptDisplay.textContent = selectedOption.getAttribute('data-dept') || '---';
+                                jobDisplay.textContent = selectedOption.getAttribute('data-job') || '---';
+                            } else {
+                                nameDisplay.textContent = '---';
+                                barcodeDisplay.textContent = '---';
+                                deptDisplay.textContent = '---';
+                                jobDisplay.textContent = '---';
+                            }
+                        });
+                    }
+
+                    // Witness Logic
+                    var witnessSelect = document.getElementById('witness_select');
+                    var witnessDeptDisplay = document.getElementById('witness_dept_display');
+                    var witnessNameDisplay = document.getElementById('witness_name_display');
+                    var witnessIdDisplay = document.getElementById('witness_id_display');
+                    var witnessJobDisplay = document.getElementById('witness_job_display');
+                    var witnessSigRow = document.getElementById('witness_signature_row');
+
+
+                    if (witnessSelect) {
+                        witnessSelect.addEventListener('change', function() {
+                            var selectedOption = witnessSelect.options[witnessSelect.selectedIndex];
+                            if (selectedOption &amp;&amp; selectedOption.value) {
+                                witnessNameDisplay.textContent = selectedOption.textContent.split('(')[0].trim() || '---';
+                                witnessIdDisplay.textContent = selectedOption.getAttribute('data-empid') || '---';
+                                witnessDeptDisplay.textContent = selectedOption.getAttribute('data-dept') || '---';
+                                witnessJobDisplay.textContent = selectedOption.getAttribute('data-job') || '---';
+                                witnessSigRow.classList.remove('d-none');
+                                // Re-initialize witness pad size after showing it
+                                setTimeout(function() {
+                                    var canvas = document.getElementById('witness-pad');
+                                    if (canvas) {
+                                        var rect = canvas.getBoundingClientRect();
+                                        canvas.width = rect.width;
+                                        canvas.height = 160;
+                                        var ctx = canvas.getContext('2d');
+                                        ctx.strokeStyle = '#2c3e50';
+                                        ctx.lineWidth = 3;
+                                        ctx.lineCap = 'round';
+                                    }
+                                }, 100);
+                            } else {
+                                witnessNameDisplay.textContent = '---';
+                                witnessIdDisplay.textContent = '---';
+                                witnessDeptDisplay.textContent = '---';
+                                witnessJobDisplay.textContent = '---';
+                                witnessSigRow.classList.add('d-none');
+                                clearPad('witness-pad');
+                            }
+                        });
+                    }
+
+                    // Image Preview Logic
+                    var imageInput = document.getElementById('explanation_images_input');
+                    var previewContainer = document.getElementById('image_preview_container');
+                    
+                    if (imageInput &amp;&amp; previewContainer) {
+                        imageInput.addEventListener('change', function() {
+                            previewContainer.innerHTML = '';
+                            if (this.files) {
+                                Array.from(this.files).forEach(file => {
+                                    if (!file.type.startsWith('image/')) return;
+                                    
+                                    var reader = new FileReader();
+                                    reader.onload = function(e) {
+                                        var div = document.createElement('div');
+                                        div.className = 'position-relative border rounded p-1 bg-white shadow-sm';
+                                        div.style.width = '120px';
+                                        
+                                        var img = document.createElement('img');
+                                        img.src = e.target.result;
+                                        img.className = 'img-thumbnail border-0';
+                                        img.style.width = '110px';
+                                        img.style.height = '110px';
+                                        img.style.objectFit = 'cover';
+                                        
+                                        div.appendChild(img);
+                                        previewContainer.appendChild(div);
+                                    }
+                                    reader.readAsDataURL(file);
+                                });
+                            }
+                        });
+                    }
+
+                    // Signature Pads Initialization
+                    var pads = document.querySelectorAll('.signature-pad');
+                    pads.forEach(function(canvas) {
+                        var ctx = canvas.getContext('2d');
+                        var drawing = false;
+                        var lastX, lastY;
+
+                        function resize() {
+                            var rect = canvas.getBoundingClientRect();
+                            canvas.width = rect.width;
+                            canvas.height = 160;
+                            ctx.strokeStyle = '#2c3e50';
+                            ctx.lineWidth = 3;
+                            ctx.lineCap = 'round';
+                        }
+                        resize();
+
+                        function getPos(e) {
+                            var rect = canvas.getBoundingClientRect();
+                            var pos = e.touches ? e.touches[0] : e;
+                            return { x: pos.clientX - rect.left, y: pos.clientY - rect.top };
+                        }
+
+                        canvas.addEventListener('mousedown', function(e) { drawing = true; var pos = getPos(e); lastX = pos.x; lastY = pos.y; });
+                        canvas.addEventListener('mousemove', function(e) {
+                            if (!drawing) return; e.preventDefault();
+                            var pos = getPos(e); ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(pos.x, pos.y); ctx.stroke();
+                            lastX = pos.x; lastY = pos.y; updateData();
+                        });
+                        window.addEventListener('mouseup', function() { drawing = false; });
+
+                        canvas.addEventListener('touchstart', function(e) { drawing = true; var pos = getPos(e); lastX = pos.x; lastY = pos.y; });
+                        canvas.addEventListener('touchmove', function(e) { if (!drawing) return; e.preventDefault(); var pos = getPos(e); ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(pos.x, pos.y); ctx.stroke(); lastX = pos.x; lastY = pos.y; updateData(); });
+                        window.addEventListener('touchend', function() { drawing = false; });
+
+                        function updateData() {
+                            var dataUrl = canvas.toDataURL('image/png');
+                            var inputId = '';
+                            if (canvas.id === 'employee-pad') inputId = 'employee_sig_data';
+                            else if (canvas.id === 'manager-pad') inputId = 'manager_sig_data';
+                            else if (canvas.id === 'witness-pad') inputId = 'witness_sig_data';
+                            
+                            var input = document.getElementById(inputId);
+                            if (input) input.value = dataUrl.split(',')[1];
+                        }
+                    });
+
+                    // Form Submission Validation
+                    var form = document.getElementById('discipline_create_form');
+                    if (form) {
+                        form.addEventListener('submit', function(e) {
+                            var managerSig = document.getElementById('manager_sig_data').value;
+                            var employeeSig = document.getElementById('employee_sig_data').value;
+                            var images = document.getElementById('explanation_images_input').files;
+
+                            var errors = [];
+                            if (!managerSig || managerSig.length &lt; 500) errors.push("Vui lòng ký tên Quản lý.");
+                            if (!employeeSig || employeeSig.length &lt; 500) errors.push("Vui lòng ký tên Nhân viên.");
+                            if (images.length === 0) errors.push("Vui lòng tải lên ít nhất 1 ảnh bản tường trình.");
+
+                            if (errors.length &gt; 0) {
+                                e.preventDefault();
+                                psmShowValidationModal(errors);
+                            }
+                        });
+                    }
+                });
+            </script>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_psm_discipline_explanation_template" name="Discipline Explanation">
+        <t t-call="portal.portal_layout">
+            <div class="o_psm_0215_portal">
+                <t t-set="state_group"
+                    t-value="'neutral' if record.state in ('draft', 'cancel', 'expired') else 'pending' if record.state == 'notified' else 'success' if record.state == 'active' else 'progress'" />
+                <t t-set="psm_step_states"
+                    t-value="[
+                    ('draft', 'Khởi tạo'),
+                    ('under_review', 'Xem xét'),
+                    ('level_determination', 'Xác định cấp'),
+                    ('investigation', 'Xác minh'),
+                    ('hearing', 'Họp kỷ luật'),
+                    ('proposal', 'Đề xuất'),
+                    ('issued', 'Ban hành'),
+                    ('approval', 'Phê duyệt'),
+                    ('notified', 'Thông báo'),
+                    ('active', 'Hiệu lực')
+                ]" />
+                <t t-set="psm_step_keys"
+                    t-value="['draft', 'under_review', 'level_determination', 'investigation', 'hearing', 'proposal', 'issued', 'approval', 'notified', 'active']" />
+                <t t-set="psm_current_step"
+                    t-value="psm_step_keys.index(record.state) if record.state in psm_step_keys else 0" />
+                <div class="container mt-4 mb-5">
+                    <div class="psm-panel overflow-hidden">
+                        <div
+                            class="psm-banner d-flex flex-wrap justify-content-between align-items-center gap-3">
+                            <h4 class="mb-0">COUNSELLING LOG #<t t-esc="record.name" /></h4>
+                            <span t-att-class="'psm-status psm-status-' + state_group">
+                                <t
+                                    t-esc="dict(record._fields['state'].selection).get(record.state, record.state)" />
+                            </span>
+                        </div>
+                        <nav class="psm-stepper" aria-label="Tiến trình hồ sơ">
+                            <t t-foreach="psm_step_states" t-as="step">
+                                <span
+                                    t-attf-class="psm-stepper__step #{'is-current' if step[0] == record.state else 'is-done' if psm_step_keys.index(step[0]) &lt; psm_current_step else ''}">
+                                    <span class="psm-stepper__dot" aria-hidden="true" />
+                                    <span class="psm-stepper__label">
+                                        <t t-esc="step[1]" />
+                                    </span>
+                                </span>
+                            </t>
+                        </nav>
+                        <div class="psm-form-body p-4 bg-white">
+                            <div class="psm-flash-slot" aria-live="polite" />
+                            <t t-if="request.params.get('success') == 'created'">
+                                <div class="psm-alert psm-alert--success mb-4" role="status"
+                                    aria-live="polite">
+                                    <i class="fa fa-check-circle" aria-hidden="true" />
+                                    <span>Hồ sơ đã được tạo thành công.</span>
+                                </div>
+                            </t>
+                            <t t-if="error == 'missing_signature'">
+                                <div class="psm-alert psm-alert--danger mb-4" role="alert">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true" />
+                                    <span>Vui lòng ký tên trước khi gửi.</span>
+                                </div>
+                            </t>
+                            <t t-if="error == 'missing_reject_note'">
+                                <div class="psm-alert psm-alert--danger mb-4" role="alert">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true" />
+                                    <span>Vui lòng nhập lý do từ chối trước khi gửi.</span>
+                                </div>
+                            </t>
+                            <!-- HEADER INFO -->
+                            <section class="psm-form-section">
+                                <div class="psm-section__head">
+                                    <span class="psm-section__index">1</span>
+                                    <h5 class="psm-section__title">Thông tin các bên</h5>
+                                </div>
+                                <div class="row g-4 text-center text-md-start">
+                                    <div
+                                        t-att-class="'col-md-4' if record.x_psm_witness_id else 'col-md-6'">
+                                        <div class="psm-section psm-section--quiet h-100">
+                                            <h6 class="text-muted small fw-bold mb-3 uppercase">Đại
+                                                diện công ty</h6>
+                                            <h5 class="fw-bold">
+                                                <t t-esc="record.x_psm_company_rep_id.name" />
+                                            </h5>
+                                            <p class="mb-1 small text-muted">Nhà hàng/Bộ phận: <strong>
+                                                    <t
+                                                        t-esc="record.x_psm_rep_department_id.name or '---'" />
+                                                </strong></p>
+                                            <p class="mb-0 small text-muted">Vị trí làm việc: <strong>
+                                                    <t t-esc="record.x_psm_rep_job_id.name or '---'" />
+                                                </strong></p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        t-att-class="'col-md-4' if record.x_psm_witness_id else 'col-md-6'">
+                                        <div class="psm-section psm-section--quiet h-100">
+                                            <h6 class="text-muted small fw-bold mb-3 uppercase">Người
+                                                lao động</h6>
+                                            <h5 class="fw-bold">
+                                                <t t-esc="record.x_psm_employee_id.name" />
+                                            </h5>
+                                            <p class="mb-1 small text-muted">Mã số NV: <strong>
+                                                    <t t-esc="record.x_psm_employee_id.id" />
+                                                </strong></p>
+                                            <p class="mb-1 small text-muted">Nhà hàng/Bộ phận: <strong>
+                                                    <t
+                                                        t-esc="record.x_psm_emp_department_id.name or '---'" />
+                                                </strong></p>
+                                            <p class="mb-0 small text-muted">Vị trí làm việc: <strong>
+                                                    <t t-esc="record.x_psm_emp_job_id.name or '---'" />
+                                                </strong></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" t-if="record.x_psm_witness_id">
+                                        <div class="psm-section psm-section--quiet h-100">
+                                            <h6 class="text-muted small fw-bold mb-3 uppercase">Người
+                                                làm chứng</h6>
+                                            <h5 class="fw-bold">
+                                                <t t-esc="record.x_psm_witness_id.name" />
+                                            </h5>
+                                            <p class="mb-1 small text-muted">Mã số NV: <strong>
+                                                    <t t-esc="record.x_psm_witness_id.id" />
+                                                </strong></p>
+                                            <p class="mb-1 small text-muted">Nhà hàng/Bộ phận: <strong>
+                                                    <t
+                                                        t-esc="record.x_psm_witness_id.department_id.name or '---'" />
+                                                </strong></p>
+                                            <p class="mb-0 small text-muted">Vị trí làm việc: <strong>
+                                                    <t
+                                                        t-esc="record.x_psm_witness_id.job_id.name or '---'" />
+                                                </strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="psm-form-section">
+                                <div class="psm-section__head">
+                                    <span class="psm-section__index">2</span>
+                                    <h5 class="psm-section__title">Thông tin vi phạm</h5>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <div class="psm-section psm-section--quiet h-100">
+                                            <p class="mb-1 small text-muted">Ngày thực hiện:</p>
+                                            <strong>
+                                                <t t-esc="record.x_psm_date or '---'" />
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="psm-section psm-section--quiet h-100">
+                                            <p class="mb-1 small text-muted">Mục đích:</p>
+                                            <strong>
+                                                <t
+                                                    t-esc="dict(record._fields['x_psm_discipline_purpose'].selection).get(record.x_psm_discipline_purpose, '---')" />
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="psm-section psm-section--quiet h-100">
+                                            <p class="mb-1 small text-muted">Danh mục vi phạm:</p>
+                                            <strong>
+                                                <t
+                                                    t-esc="record.x_psm_violation_category_id.name or '---'" />
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="psm-section psm-section--quiet h-100">
+                                            <p class="mb-1 small text-muted">Loại vi phạm:</p>
+                                            <strong>
+                                                <t t-esc="record.x_psm_violation_type or '---'" />
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+
+                            <!-- SECTION I -->
+                            <section class="psm-form-section">
+                                <div class="psm-section__head">
+                                    <span class="psm-section__index">3</span>
+                                    <h5 class="psm-section__title">I. Mô tả tình huống vi phạm</h5>
+                                </div>
+                                <div class="psm-section psm-section--quiet">
+                                    <t t-esc="record.x_psm_section_i_description or '---'" />
+                                </div>
+                                <t t-if="record.x_psm_explanation_image_ids">
+                                    <div class="mt-4 d-flex flex-wrap gap-3">
+                                        <t t-foreach="record.x_psm_explanation_image_ids" t-as="att">
+                                            <a t-attf-href="/web/image/#{att.id}" target="_blank"
+                                                class="d-block shadow-sm rounded overflow-hidden">
+                                                <img t-attf-src="/web/image/#{att.id}"
+                                                    class="img-thumbnail"
+                                                    style="width: 180px; height: 180px; object-fit: cover; transition: transform .3s;" />
+                                            </a>
+                                        </t>
+                                    </div>
+                                </t>
+                            </section>
+
+                            <!-- SECTION II -->
+                            <section class="psm-form-section">
+                                <div class="psm-section__head">
+                                    <span class="psm-section__index">4</span>
+                                    <h5 class="psm-section__title">II. Phản hồi / Ý kiến của nhân
+                                        viên</h5>
+                                </div>
+                                <t t-if="record.x_psm_section_ii_feedback">
+                                    <div class="psm-section psm-section--quiet mb-4">
+                                        <t t-esc="record.x_psm_section_ii_feedback" />
+                                    </div>
+
+                                    <form
+                                        t-if="is_subject and not record.x_psm_employee_signature and record.state in ('draft', 'under_review')"
+                                        action="/my/discipline/submit_section_ii" method="post"
+                                        id="employee_sig_form" class="psm-action-panel mt-3">
+                                        <input type="hidden" name="csrf_token"
+                                            t-att-value="request.csrf_token()" />
+                                        <input type="hidden" name="x_psm_record_id"
+                                            t-att-value="record.id" />
+                                        <input type="hidden" name="section_ii_feedback"
+                                            t-att-value="record.x_psm_section_ii_feedback or ''" />
+                                        <div class="mb-4">
+                                            <label class="form-label fw-bold">Chữ ký điện tử:</label>
+                                            <div class="psm-signature-pad p-1">
+                                                <canvas id="employee-pad" class="signature-pad"
+                                                    style="width: 100%; height: 200px; cursor: crosshair; touch-action: none;"></canvas>
+                                            </div>
+                                            <input type="hidden" name="employee_signature"
+                                                id="employee_sig_data" />
+                                            <div class="psm-signature-tools">
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2"
+                                                    onclick="clearPad('employee-pad')"><i
+                                                        class="fa fa-eraser me-1" /> Xóa chữ ký</button>
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2 psm-signature-fullscreen-btn"
+                                                    data-canvas-id="employee-pad"><i
+                                                        class="fa fa-expand me-1" /> Vẽ to hơn</button>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="psm-btn psm-btn--primary">KÝ BỔ
+                                            SUNG</button>
+                                    </form>
+                                </t>
+                                <t t-elif="is_subject and record.state == 'draft'">
+                                    <form action="/my/discipline/submit_section_ii" method="post"
+                                        id="employee_sig_form" class="psm-action-panel mt-3">
+                                        <input type="hidden" name="csrf_token"
+                                            t-att-value="request.csrf_token()" />
+                                        <input type="hidden" name="x_psm_record_id"
+                                            t-att-value="record.id" />
+                                        <label class="form-label fw-bold">Nội dung phản hồi:</label>
+                                        <textarea name="section_ii_feedback"
+                                            class="form-control mb-4 shadow-sm psm-autosize"
+                                            rows="4" required="1"
+                                            placeholder="Nhập ý kiến phản hồi của bạn tại đây..."></textarea>
+
+                                        <div class="mb-4">
+                                            <label class="form-label fw-bold">Chữ ký điện tử:</label>
+                                            <div class="psm-signature-pad p-1">
+                                                <canvas id="employee-pad" class="signature-pad"
+                                                    style="width: 100%; height: 200px; cursor: crosshair; touch-action: none;"></canvas>
+                                            </div>
+                                            <input type="hidden" name="employee_signature"
+                                                id="employee_sig_data" />
+                                            <div class="psm-signature-tools">
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2"
+                                                    onclick="clearPad('employee-pad')"><i
+                                                        class="fa fa-eraser me-1" /> Xóa chữ ký</button>
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2 psm-signature-fullscreen-btn"
+                                                    data-canvas-id="employee-pad"><i
+                                                        class="fa fa-expand me-1" /> Vẽ to hơn</button>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="psm-btn psm-btn--primary">Gửi
+                                            phản hồi &amp; Ký xác nhận</button>
+                                    </form>
+                                </t>
+                                <t t-else="">
+                                    <div class="psm-alert psm-alert--warning">
+                                        <i class="fa fa-clock-o" aria-hidden="true" />
+                                        <span>Đang chờ nhân viên phản hồi ý kiến.</span>
+                                    </div>
+                                </t>
+                            </section>
+
+                            <!-- SECTION III & IV -->
+                            <section class="psm-form-section">
+                                <div class="psm-section__head">
+                                    <span class="psm-section__index">5</span>
+                                    <h5 class="psm-section__title">III &amp; IV. Xác định &amp; Đồng
+                                        ý cam kết</h5>
+                                </div>
+                                <t t-if="record.x_psm_section_iii_identification">
+                                    <div class="row g-4 mb-4">
+                                        <div class="col-md-6">
+                                            <p class="mb-2 small fw-bold text-muted uppercase">III.
+                                                Xác định vi phạm:</p>
+                                            <div class="psm-section psm-section--quiet">
+                                                <t t-esc="record.x_psm_section_iii_identification" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="mb-2 small fw-bold text-muted uppercase">IV.
+                                                Nội dung hai bên đồng ý:</p>
+                                            <div class="psm-section psm-section--quiet">
+                                                <t t-esc="record.x_psm_section_iv_agreement" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-4 mt-3">
+                                        <div class="psm-signature-card text-center"
+                                            t-if="record.x_psm_employee_signature">
+                                            <p class="small text-muted mb-2">Chữ ký nhân viên</p>
+                                            <img
+                                                t-attf-src="data:image/png;base64,#{record.x_psm_employee_signature.decode('utf-8')}"
+                                                height="100" class="bg-white" />
+                                            <p class="small fw-bold mt-2 mb-0">
+                                                <t t-esc="record.x_psm_employee_signature_date" />
+                                            </p>
+                                        </div>
+                                        <div class="psm-signature-card text-center"
+                                            t-if="record.x_psm_manager_signature">
+                                            <p class="small text-muted mb-2">Chữ ký Quản lý</p>
+                                            <img
+                                                t-attf-src="data:image/png;base64,#{record.x_psm_manager_signature.decode('utf-8')}"
+                                                height="100" class="bg-white" />
+                                            <p class="small fw-bold mt-2 mb-0">
+                                                <t t-esc="record.x_psm_manager_signature_date" />
+                                            </p>
+                                        </div>
+                                        <div class="psm-signature-card text-center"
+                                            t-if="record.x_psm_witness_id and record.x_psm_witness_signature">
+                                            <p class="small text-muted mb-2">Chữ ký Người làm chứng
+                                                (<t t-esc="record.x_psm_witness_id.name" />)</p>
+                                            <img
+                                                t-attf-src="data:image/png;base64,#{record.x_psm_witness_signature.decode('utf-8')}"
+                                                height="100" class="bg-white" />
+                                            <p class="small fw-bold mt-2 mb-0">
+                                                <t
+                                                    t-esc="record.x_psm_witness_signature_date or record.create_date.date()" />
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <form
+                                        t-if="is_manager and not record.x_psm_manager_signature and record.state in ('draft', 'under_review')"
+                                        action="/my/discipline/manager_finalize" method="post"
+                                        id="manager_sig_form" class="psm-action-panel mt-3">
+                                        <input type="hidden" name="csrf_token"
+                                            t-att-value="request.csrf_token()" />
+                                        <input type="hidden" name="x_psm_record_id"
+                                            t-att-value="record.id" />
+                                        <input type="hidden" name="section_iii_identification"
+                                            t-att-value="record.x_psm_section_iii_identification or ''" />
+                                        <input type="hidden" name="section_iv_agreement"
+                                            t-att-value="record.x_psm_section_iv_agreement or ''" />
+                                        <div class="mb-4">
+                                            <label class="form-label fw-bold">Chữ ký quản lý:</label>
+                                            <div class="psm-signature-pad p-1">
+                                                <canvas id="manager-pad" class="signature-pad"
+                                                    style="width: 100%; height: 200px; cursor: crosshair; touch-action: none;"></canvas>
+                                            </div>
+                                            <input type="hidden" name="manager_signature"
+                                                id="manager_sig_data" />
+                                            <div class="psm-signature-tools">
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2"
+                                                    onclick="clearPad('manager-pad')"><i
+                                                        class="fa fa-eraser me-1" /> Xóa chữ ký</button>
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2 psm-signature-fullscreen-btn"
+                                                    data-canvas-id="manager-pad"><i
+                                                        class="fa fa-expand me-1" /> Vẽ to hơn</button>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="psm-btn psm-btn--primary">KÝ BỔ
+                                            SUNG</button>
+                                    </form>
+                                </t>
+                                <t t-elif="is_manager and record.state == 'draft'">
+                                    <form action="/my/discipline/manager_finalize" method="post"
+                                        id="manager_sig_form" class="psm-action-panel">
+                                        <input type="hidden" name="csrf_token"
+                                            t-att-value="request.csrf_token()" />
+                                        <input type="hidden" name="x_psm_record_id"
+                                            t-att-value="record.id" />
+
+                                        <div class="mb-4">
+                                            <label class="form-label fw-bold">III. Xác định hành vi
+                                                vi phạm:</label>
+                                            <textarea name="section_iii_identification"
+                                                class="form-control shadow-sm psm-autosize" rows="3"
+                                                required="1"
+                                                placeholder="Nhập kết luận vi phạm của quản lý..."></textarea>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label fw-bold">IV. Nội dung hai bên
+                                                đồng ý:</label>
+                                            <textarea name="section_iv_agreement"
+                                                class="form-control shadow-sm psm-autosize" rows="3"
+                                                required="1"
+                                                placeholder="Nhập các cam kết khắc phục..."></textarea>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label class="form-label fw-bold">Chữ ký quản lý:</label>
+                                            <div class="psm-signature-pad p-1">
+                                                <canvas id="manager-pad" class="signature-pad"
+                                                    style="width: 100%; height: 200px; cursor: crosshair; touch-action: none;"></canvas>
+                                            </div>
+                                            <input type="hidden" name="manager_signature"
+                                                id="manager_sig_data" />
+                                            <div class="psm-signature-tools">
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2"
+                                                    onclick="clearPad('manager-pad')"><i
+                                                        class="fa fa-eraser me-1" /> Xóa chữ ký</button>
+                                                <button type="button"
+                                                    class="psm-btn psm-btn-secondary mt-2 psm-signature-fullscreen-btn"
+                                                    data-canvas-id="manager-pad"><i
+                                                        class="fa fa-expand me-1" /> Vẽ to hơn</button>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="psm-btn psm-btn--primary">HOÀN
+                                            TẤT &amp; CHỐT PHIẾU</button>
+                                    </form>
+                                </t>
+                            </section>
+
+
+                            <!-- BƯỚC 9: Phản hồi của Nhân viên -->
+                            <t
+                                t-if="record.state == 'notified' and is_subject and not record.x_psm_is_accepted">
+                                <div class="psm-action-panel">
+                                    <div class="psm-action-panel__heading psm-section__head">
+                                        <span class="psm-section__index">!</span>
+                                        <h5 class="psm-section__title"><i class="fa fa-bell me-2"
+                                                aria-hidden="true" />Thông báo: Hình thức kỷ luật đã
+                                            được ban hành</h5>
+                                    </div>
+                                    <p class="mb-2">Hình thức: <strong>
+                                            <t t-esc="record.x_psm_action_id.name" />
+                                        </strong></p>
+                                    <form action="/my/discipline/respond" method="post"
+                                        class="mt-3 psm-form-response" id="employee_response_form"
+                                        data-psm-loading="1">
+                                        <input type="hidden" name="csrf_token"
+                                            t-att-value="request.csrf_token()" />
+                                        <input type="hidden" name="x_psm_record_id"
+                                            t-att-value="record.id" />
+                                        <div class="mb-3">
+                                            <label class="form-label">Lý do từ chối (nếu có):</label>
+                                            <textarea name="note" id="employee_reject_note"
+                                                class="form-control psm-autosize" rows="3"
+                                                placeholder="Nêu rõ lý do nếu bạn không đồng ý với quyết định này..." />
+                                        </div>
+                                        <div class="d-flex flex-wrap gap-3">
+                                            <button type="submit" name="respond" value="accept"
+                                                class="psm-btn psm-btn--primary"><i
+                                                    class="fa fa-check me-2" />Chấp nhận</button>
+                                            <button type="submit" name="respond" value="reject"
+                                                id="employee_reject_btn"
+                                                class="psm-btn psm-btn--danger"
+                                                data-psm-confirm="reject"><i
+                                                    class="fa fa-times me-2" />Từ chối hình thức kỷ
+                                                luật</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </t>
+
+                            <!-- BƯỚC 9: Phản hồi của Nhân viên (Lý do từ chối - Chỉ Manager thấy) -->
+                            <div class="psm-result-panel psm-result-panel--rejected mb-4"
+                                t-if="is_manager and record.x_psm_employee_response_note"
+                                style="border-left: 4px solid #dc3545; background-color: #fff5f5; padding: 20px; border-radius: 8px; box-shadow: 0 2px 12px rgba(220, 53, 69, 0.1);">
+                                <h6 class="fw-bold text-danger small uppercase mb-2"><i class="fa fa-times-circle me-1"/> Lý do từ chối của nhân viên:</h6>
+                                <div class="psm-section psm-section--quiet bg-white p-3 border rounded">
+                                    <t t-esc="record.x_psm_employee_response_note" />
+                                </div>
+                                <p class="mb-0 text-muted small mt-2" t-if="record.x_psm_employee_response_date">
+                                    Ngày từ chối: <t t-esc="record.x_psm_employee_response_date" />
+                                </p>
+                            </div>
+
+                            <!-- LOG DISPLAY -->
+                            <div class="psm-result-panel"
+                                t-if="record.x_psm_action_id and record.x_psm_is_accepted">
+                                <h6 class="fw-bold text-muted small uppercase mb-2">Kết quả xử lý:</h6>
+                                <h3 class="fw-bold mb-1">
+                                    <t t-esc="record.x_psm_action_id.name" />
+                                </h3>
+                                <p class="mb-0 text-muted" t-if="record.x_psm_start_date"> Hiệu lực
+                                    từ <t t-esc="record.x_psm_start_date" /> đến <t
+                                        t-esc="record.x_psm_end_date" />
+                                </p>
+                                <t t-if="record.x_psm_is_accepted">
+                                    <!-- <span class="psm-status psm-status-success mt-2"><i
+                                    class="fa fa-check me-1"/>Nhân viên đã chấp nhận</span> -->
+                                    <span class="psm-status psm-status-success mt-2">Nhân viên đã
+                                        chấp nhận</span>
+                                </t>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Validation Modal - Branded -->
+                <div class="modal fade" id="psm_validation_modal" tabindex="-1"
+                    aria-labelledby="psm_validation_modal_label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content"
+                            style="border-radius: 12px; overflow: hidden; border: none;">
+                            <div class="modal-header text-white"
+                                style="background-color: #DA291C; border-bottom: 3px solid #FFC72C;">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fa fa-exclamation-circle fa-lg"
+                                        style="color: #FFC72C;" />
+                                    <h5 class="modal-title fw-bold mb-0"
+                                        id="psm_validation_modal_label"
+                                        style="color: #FFFFFF; letter-spacing: 0.5px;">
+                                        KHÔNG THỂ LƯU HỒ SƠ
+                                    </h5>
+                                </div>
+                                <button type="button" class="btn-close btn-close-white"
+                                    data-bs-dismiss="modal" aria-label="Đóng" />
+                            </div>
+                            <div class="modal-body" style="background: #FFFFFF; padding: 24px;">
+                                <p class="mb-3 fw-semibold" style="color: #000000;">
+                                    Vui lòng hoàn tất các mục sau trước khi gửi:
+                                </p>
+                                <ul id="psm_validation_error_list" class="list-unstyled mb-0"
+                                    style="display: flex; flex-direction: column; gap: 10px;" />
+                            </div>
+                            <div class="modal-footer justify-content-center"
+                                style="background: #FFFFFF; border-top: 1px solid #f0f0f0;">
+                                <button type="button" class="btn fw-bold px-5 rounded-pill"
+                                    data-bs-dismiss="modal"
+                                    style="background-color: #FFC72C; color: #000000; border: none; font-size: 15px;">
+                                    <i class="fa fa-times-circle me-2" />ĐÓNG LẠI </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Signature Logic (Reusable) -->
+                <script type="text/javascript">
+                if (typeof clearPad !== 'function') {
+                    window.clearPad = function(canvasId) {
+                        var canvas = document.getElementById(canvasId);
+                        if (!canvas) return;
+                        var ctx = canvas.getContext('2d');
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        var inputId = '';
+                        if (canvasId === 'employee-pad') inputId = 'employee_sig_data';
+                        else if (canvasId === 'manager-pad') inputId = 'manager_sig_data';
+                        else if (canvasId === 'witness-pad') inputId = 'witness_sig_data';
+                        
+                        var input = document.getElementById(inputId);
+                        if (input) input.value = '';
+                    };
+                }
+
+                function psmShowValidationModal(errors) {
+                    var list = document.getElementById('psm_validation_error_list');
+                    if (!list) return;
+                    list.innerHTML = '';
+                    errors.forEach(function(msg) {
+                        var li = document.createElement('li');
+                        li.style.cssText = 'display:flex;align-items:flex-start;gap:10px;' +
+                                           'background:#FFF8E1;border-left:4px solid #FFC72C;' +
+                                           'border-radius:6px;padding:10px 14px;';
+                        li.innerHTML = '&lt;i class="fa fa-exclamation-triangle mt-1" ' +
+                                       'style="color:#FFC72C;flex-shrink:0;"&gt;&lt;/i&gt;' +
+                                       '&lt;span style="color:#000000;font-weight:500;"&gt;' + msg + '&lt;/span&gt;';
+                        list.appendChild(li);
+                    });
+
+                    var modalEl = document.getElementById('psm_validation_modal');
+                    var bsApi = window.bootstrap || (window.odoo &amp;&amp; window.odoo.bootstrap) || null;
+                    if (modalEl &amp;&amp; bsApi &amp;&amp; bsApi.Modal) {
+                        bsApi.Modal.getOrCreateInstance(modalEl).show();
+                    } else if (modalEl) {
+                        modalEl.style.display = 'block';
+                        modalEl.classList.add('show');
+                        document.body.classList.add('modal-open');
+                        document.body.style.overflow = 'hidden';
+                        modalEl.querySelectorAll('[data-bs-dismiss="modal"]').forEach(function(btn) {
+                            btn.addEventListener('click', function() {
+                                modalEl.classList.remove('show');
+                                modalEl.style.display = 'none';
+                                document.body.classList.remove('modal-open');
+                                document.body.style.overflow = '';
+                            });
+                        });
+                    }
+                }
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    var pads = document.querySelectorAll('.signature-pad');
+                    pads.forEach(function(canvas) {
+                        var ctx = canvas.getContext('2d');
+                        var drawing = false;
+                        var lastX, lastY;
+
+                        function resize() {
+                            var rect = canvas.getBoundingClientRect();
+                            canvas.width = rect.width;
+                            canvas.height = canvas.getAttribute('id') === 'witness-pad' ? 160 : 200;
+                            ctx.strokeStyle = '#2c3e50';
+                            ctx.lineWidth = 4;
+                            ctx.lineCap = 'round';
+                        }
+                        resize();
+
+                        function getPos(e) {
+                            var rect = canvas.getBoundingClientRect();
+                            var pos = e.touches ? e.touches[0] : e;
+                            return { x: pos.clientX - rect.left, y: pos.clientY - rect.top };
+                        }
+
+                        canvas.addEventListener('mousedown', function(e) { drawing = true; var pos = getPos(e); lastX = pos.x; lastY = pos.y; });
+                        canvas.addEventListener('mousemove', function(e) {
+                            if (!drawing) return; e.preventDefault();
+                            var pos = getPos(e); ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(pos.x, pos.y); ctx.stroke();
+                            lastX = pos.x; lastY = pos.y; updateData();
+                        });
+                        window.addEventListener('mouseup', function() { drawing = false; });
+
+                        canvas.addEventListener('touchstart', function(e) { drawing = true; var pos = getPos(e); lastX = pos.x; lastY = pos.y; });
+                        canvas.addEventListener('touchmove', function(e) { if (!drawing) return; e.preventDefault(); var pos = getPos(e); ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(pos.x, pos.y); ctx.stroke(); lastX = pos.x; lastY = pos.y; updateData(); });
+                        window.addEventListener('touchend', function() { drawing = false; });
+
+                        function updateData() {
+                            var dataUrl = canvas.toDataURL('image/png');
+                            var inputId = '';
+                            if (canvas.id === 'employee-pad') inputId = 'employee_sig_data';
+                            else if (canvas.id === 'manager-pad') inputId = 'manager_sig_data';
+                            else if (canvas.id === 'witness-pad') inputId = 'witness_sig_data';
+                            
+                            var input = document.getElementById(inputId);
+                            if (input) input.value = dataUrl.split(',')[1];
+                        }
+                    });
+
+                    function requireSignature(formId, inputId, message, contentFieldName, contentMessage) {
+                        var form = document.getElementById(formId);
+                        var input = document.getElementById(inputId);
+                        if (!form || !input) return;
+                        form.addEventListener('submit', function(ev) {
+                            var errors = [];
+                            if (contentFieldName) {
+                                var content = form.querySelector('[name="' + contentFieldName + '"]');
+                                if (!content || !content.value || !content.value.trim()) {
+                                    errors.push(contentMessage);
+                                }
+                            }
+                            if (!input.value || input.value.length &lt; 500) {
+                                errors.push(message);
+                            }
+                            if (errors.length &gt; 0) {
+                                ev.preventDefault();
+                                psmShowValidationModal(errors);
+                            }
+                        });
+                    }
+
+                    requireSignature(
+                        'employee_sig_form',
+                        'employee_sig_data',
+                        'Vui lòng ký tên Nhân viên trước khi gửi.',
+                        'section_ii_feedback',
+                        'Vui lòng nhập nội dung phản hồi của Nhân viên.'
+                    );
+                    requireSignature(
+                        'manager_sig_form',
+                        'manager_sig_data',
+                        'Vui lòng ký tên Quản lý trước khi hoàn tất.'
+                    );
+                    var responseForm = document.getElementById('employee_response_form');
+                    if (responseForm) {
+                        responseForm.addEventListener('submit', function(ev) {
+                            var submitter = ev.submitter || document.activeElement;
+                            if (submitter &amp;&amp; submitter.value === 'reject') {
+                                var note = document.getElementById('employee_reject_note');
+                                if (!note || !note.value || !note.value.trim()) {
+                                    ev.preventDefault();
+                                    psmShowValidationModal(['Vui lòng nhập lý do từ chối trước khi gửi.']);
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+            </div>
+        </t>
+    </template>
+</odoo>

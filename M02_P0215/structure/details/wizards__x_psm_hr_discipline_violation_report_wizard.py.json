@@ -1,0 +1,164 @@
+{
+  "file": "wizards/x_psm_hr_discipline_violation_report_wizard.py",
+  "type": "python",
+  "bucket": "wizards",
+  "summary": "models: x_psm.hr.discipline.violation.report.wizard; 1 classes; 6 fields; 1 actions",
+  "classes": [
+    {
+      "python_class": "HrDisciplineViolationReportWizard",
+      "description": "Violation Headcount Report Wizard",
+      "model": "x_psm.hr.discipline.violation.report.wizard",
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_date_from",
+          "type": "Date",
+          "string": "Date From",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "_default_x_psm_date_from",
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_date_to",
+          "type": "Date",
+          "string": "Date To",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "fields.Date.context_today",
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_state_filter",
+          "type": "Selection",
+          "string": "Status",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": "[[\"all\", \"All\"], [\"draft\", \"Draft\"], [\"under_review\", \"Under Review\"], [\"level_determination\", \"Level Determination\"]...",
+          "default": "all",
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_include_cancelled",
+          "type": "Boolean",
+          "string": "Include Cancelled Records",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_employee_count",
+          "type": "Integer",
+          "string": "Violation Employee Count",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_counts",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_record_count",
+          "type": "Integer",
+          "string": "Violation Record Count",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_counts",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [
+        {
+          "name": "_default_x_psm_date_from",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_get_domain",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_compute_x_psm_counts",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_date_from",
+                "x_psm_date_to",
+                "x_psm_state_filter",
+                "x_psm_include_cancelled"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_check_dates",
+          "type": "constraint",
+          "decorators": [
+            {
+              "call": "api.constrains",
+              "args": [
+                "x_psm_date_from",
+                "x_psm_date_to"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "constraint"
+        },
+        {
+          "name": "action_psm_view_records",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        }
+      ],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

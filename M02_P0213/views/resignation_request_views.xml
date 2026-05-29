@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extend approval.request form view to show resignation fields -->
+    <record id="view_psm_0213_approval_request_form" model="ir.ui.view">
+        <field name="name">approval.request.resignation.form</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref="approvals.approval_request_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_withdraw']" position="attributes">
+                <attribute name="invisible">request_status == 'new' or user_status in ['waiting', 'pending', 'cancel'] or not user_status or (category_id == %(M02_P0213.psm_0213_approval_category_resignation)d and request_status in ['approved', 'refused'])</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="invisible">request_status in ['new', 'cancel'] or request_owner_id != uid or (category_id == %(M02_P0213.psm_0213_approval_category_resignation)d and request_status in ['approved', 'refused'])</attribute>
+            </xpath>
+            <xpath expr="//header/widget[@name='attach_document'][last()]" position="after">
+                <!-- <button name="action_launch_plan" string="Launch Plan" type="object" class="btn btn-secondary" groups="hr.group_hr_user" confirm="Bạn có chắc chắn muốn Launch Plan không? Nút này sẽ ẩn sau khi bạn nhấn OK." invisible="x_psm_0213_is_plan_launched == True or category_id != %(M02_P0213.psm_0213_approval_category_resignation)d or not x_psm_0213_employee_id" /> -->
+                <button name="action_send_social_insurance" string="Gửi thông tin bảo hiểm xã hội" type="object" class="oe_highlight o_psm_0213_backend_action"
+                    groups="M02_P0200.GDH_RST_HR_ADMIN_S,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                    invisible="request_status == 'done' or category_id != %(M02_P0213.psm_0213_approval_category_resignation)d or not x_psm_0213_is_social_insurance_contract or not x_psm_0213_all_activities_completed" />
+                <button name="action_send_adecco_notification" string="Gửi thông tin Adecco" type="object" class="oe_highlight o_psm_0213_backend_action"
+                    groups="M02_P0200.GDH_RST_HR_ADMIN_S,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                    invisible="request_status != 'approved' or category_id != %(M02_P0213.psm_0213_approval_category_resignation)d or x_psm_0213_is_social_insurance_contract or not x_psm_0213_all_activities_completed or not x_psm_0213_exit_survey_completed or x_psm_0213_adecco_notification_sent"
+                    confirm="Xác nhận gửi thông tin nghỉ việc cho Adecco?" />
+                <button name="action_done" string="Hoàn thành nghỉ việc" type="object"
+                    class="btn-success o_psm_0213_backend_action"
+                    groups="M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                    invisible="request_status != 'approved' or category_id != %(M02_P0213.psm_0213_approval_category_resignation)d or not x_psm_0213_all_activities_completed or not x_psm_0213_exit_survey_completed or (not x_psm_0213_is_social_insurance_contract and not x_psm_0213_adecco_notification_sent)"
+                    confirm="Xác nhận hoàn tất quy trình nghỉ việc? Tài khoản của nhân viên sẽ bị vô hiệu hóa." />
+                <!-- <button name="action_rehire" string="Tái tuyển" type="object"
+                    class="btn-primary o_psm_0213_backend_action"
+                    invisible="request_status != 'done' or not category_id.x_psm_0213_is_offboarding or x_psm_0213_is_rehire or x_psm_0213_is_blacklisted"
+                    confirm="Xác nhận đánh dấu nhân viên này đủ điều kiện tái tuyển dụng?" /> -->
+                <!-- <button name="action_rehire" string="Tái tuyển" type="object"
+                    class="btn-primary"
+                    invisible="category_id != %(M02_P0213.psm_0213_approval_category_resignation)d" />
+                <button name="action_blacklist" string="Đưa vào Blacklist" type="object"
+                    class="btn-danger o_psm_0213_backend_action"
+                    invisible="request_status != 'done' or not category_id.x_psm_0213_is_offboarding or x_psm_0213_is_rehire or x_psm_0213_is_blacklisted"
+                    confirm="Xác nhận đưa nhân viên này vào danh sách đen?" /> -->
+                <button name="action_rehire" string="Tái tuyển" type="object"
+                    class="btn-primary"
+                    groups="M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                    invisible="request_status != 'done' or category_id != %(M02_P0213.psm_0213_approval_category_resignation)d or x_psm_0213_is_rehire or x_psm_0213_is_blacklisted"
+                    confirm="Xác nhận đánh dấu nhân viên này đủ điều kiện tái tuyển dụng?" />
+                <button name="action_blacklist" string="Đưa vào Blacklist" type="object"
+                    class="btn-danger"
+                    groups="M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                    invisible="request_status != 'done' or category_id != %(M02_P0213.psm_0213_approval_category_resignation)d or x_psm_0213_is_rehire or x_psm_0213_is_blacklisted"
+                    confirm="Xác nhận đưa nhân viên này vào danh sách đen?" />
+            </xpath>
+            <xpath expr="//field[@name='request_status']" position="attributes">
+                <attribute name="statusbar_visible">new,pending,approved,done</attribute>
+            </xpath>
+            <!-- Add employee field (invisible) for context -->
+            <xpath expr="//field[@name='has_access_to_request']" position="after">
+                <field name="x_psm_0213_employee_id" invisible="1" />
+                <field name="x_psm_0213_adecco_notification_sent" invisible="1" />
+                <field name="x_psm_0213_is_social_insurance_contract" invisible="1" />
+                <field name="x_psm_0213_al_has_advance" invisible="1" />
+                <field name="x_psm_0213_al_settled" invisible="1" />
+            </xpath>
+            <!-- Resignation info tab -->
+            <xpath expr="//notebook" position="inside">
+                <!-- <page name="resignation_info" string="Thông tin nghỉ việc" invisible="not category_id.x_psm_0213_is_offboarding"> -->
+                <page name="resignation_info" string="Thông tin nghỉ việc"
+                    groups="M02_P0200.GDH_RST_OPS_OC_S,M02_P0200.GDH_RST_OPS_OM_M,M02_P0200.GDH_RST_HR_ADMIN_S,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HRBP_S,M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                    invisible="category_id != %(M02_P0213.psm_0213_approval_category_resignation)d">
+                    <div class="o_psm_0213_backend_view">
+                        <group>
+                            <group string="Thông tin nhân viên">
+                                <field name="x_psm_0213_resignation_employee_name" />
+                                <field name="x_psm_0213_resignation_manager_name" />
+                                <field name="x_psm_0213_resignation_department" />
+                                <field name="x_psm_0213_employee_id" invisible="1" />
+                                <field name="x_psm_0213_job_id" />
+                                <field name="x_psm_0213_type_contract" />
+                                <label for="x_psm_0213_exit_survey_completed" />
+                                <div class="o_row">
+                                    <field name="x_psm_0213_exit_survey_completed" widget="boolean_toggle" readonly="1" />
+                                    <button name="action_view_survey_results" string="Xem kết quả" type="object" class="btn btn-link py-0 o_psm_0213_backend_action"
+                                        groups="M02_P0200.GDH_RST_OPS_OM_M,M02_P0200.GDH_RST_HR_ADMIN_S,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HRBP_S,M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                                        invisible="not x_psm_0213_exit_survey_completed" />
+                                </div>
+                                <field name="x_psm_0213_all_activities_completed" widget="boolean_toggle" readonly="1" />
+                                <field name="x_psm_0213_is_plan_launched" widget="boolean_toggle" readonly="1" />
+                                <field name="x_psm_0213_adecco_notification_sent" widget="boolean_toggle" readonly="1" invisible="x_psm_0213_is_social_insurance_contract" />
+                                <field name="x_psm_0213_resignation_owner_email" widget="email" />
+                                <field name="x_psm_0200_remaining_al_days" readonly="1" />
+                                <field name="x_psm_0213_is_rehire" widget="boolean_toggle" readonly="1" invisible="request_status != 'done'" />
+                                <field name="x_psm_0213_is_blacklisted" widget="boolean_toggle" readonly="1" invisible="request_status != 'done'" />
+                            </group>
+                            <group string="Chi tiết yêu cầu">
+                                <field name="x_psm_0213_resignation_reason_id" string="Loại nghỉ việc" />
+                                <field name="x_psm_0213_resignation_date" />
+                                <field name="x_psm_0213_official_resignation_date"
+                                       readonly="request_status == 'done'" />
+                                <field name="x_psm_0213_resignation_reason" widget="text" />
+                            </group>
+                            <group string="Advance Annual Leave Deduction"
+                                invisible="not x_psm_0213_al_has_advance"
+                                groups="M02_P0200.GDH_RST_HR_ADMIN_S,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M">
+                                <field name="x_psm_0213_al_advance_days" readonly="1" />
+                                <field name="x_psm_0213_al_deduction_currency_id" invisible="1" />
+                                <field name="x_psm_0213_al_deduction_rate" />
+                                <field name="x_psm_0213_al_deduction_amount" />
+                                <field name="x_psm_0213_al_deduction_note" />
+                                <field name="x_psm_0213_al_settled" widget="boolean_toggle" readonly="1" />
+                                <button name="action_settle_advance_al" type="object"
+                                    string="Ch&#7889;t kh&#7845;u tr&#7915; ph&#233;p"
+                                    class="btn-primary o_psm_0213_backend_action"
+                                    invisible="x_psm_0213_al_settled"
+                                    groups="M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M" />
+                            </group>
+                        </group>
+                    </div>
+                </page>
+                <!-- Offboarding process activities tab -->
+                <page name="offboarding_activities" string="Quá trình nghỉ việc"
+                    groups="M02_P0200.GDH_RST_OPS_OC_S,M02_P0200.GDH_RST_OPS_OM_M,M02_P0200.GDH_RST_HR_ADMIN_S,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HRBP_S,M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+                    invisible="category_id != %(M02_P0213.psm_0213_approval_category_resignation)d">
+                    <div class="o_psm_0213_backend_view">
+                        <field name="x_psm_0213_employee_activity_ids" readonly="1" nolabel="1"
+                               context="{'active_test': False}"
+                               domain="['|', ('active', '=', True), ('active', '=', False)]">
+                            <list create="0" delete="0" edit="0"
+                                  decoration-muted="active == False"
+                                  default_order="date_deadline asc">
+                                <field name="active" column_invisible="True" />
+                                <field name="activity_type_id" />
+                                <field name="summary" />
+                                <field name="date_deadline" widget="remaining_days" />
+                                <field name="user_id" widget="many2one_avatar_user" />
+                                <field name="x_psm_0213_ops_display_state" widget="badge"
+                                       decoration-success="x_psm_0213_ops_display_state == 'done'"
+                                       decoration-warning="x_psm_0213_ops_display_state == 'pending'"
+                                       decoration-danger="x_psm_0213_ops_display_state == 'overdue'"
+                                       string="Trạng thái" />
+                            </list>
+                        </field>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extend approval.category form view to add x_psm_0213_is_offboarding field -->
+    <record id="view_psm_0213_approval_category_form" model="ir.ui.view">
+        <field name="name">approval.category.resignation.form</field>
+        <field name="model">approval.category</field>
+        <field name="inherit_id" ref="approvals.approval_category_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='description']" position="after">
+                <div class="o_psm_0213_backend_view">
+                    <field name="x_psm_0213_is_offboarding" widget="boolean_toggle" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

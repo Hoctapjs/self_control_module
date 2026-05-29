@@ -1,0 +1,29 @@
+{
+  "file": "data/email_template_dept_offboarding_reminder.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "email_template_dept_offboarding_reminder",
+      "model": "mail.template",
+      "fields": {
+        "name": "RST - Nhắc nhở công việc Offboarding (Bộ phận)",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "subject": "[RST Offboarding] Bạn có công việc trễ hạn trong đơn nghỉ việc của {{ object.employee_id.name }}",
+        "email_from": "{{ (user.email or user.company_id.email) }}",
+        "body_html": ""
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "mail.template"
+  ]
+}

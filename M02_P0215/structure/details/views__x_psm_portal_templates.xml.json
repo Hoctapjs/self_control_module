@@ -1,0 +1,50 @@
+{
+  "file": "views/x_psm_portal_templates.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "6 templates",
+  "records": [],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [
+    {
+      "id": "portal_psm_discipline_sidebar_link",
+      "name": null,
+      "inherit_id": "portal_custom.portal_my_home_inherit",
+      "file": "views/x_psm_portal_templates.xml"
+    },
+    {
+      "id": "portal_psm_my_home_menu_discipline",
+      "name": "Portal layout : discipline entries",
+      "inherit_id": "portal.portal_breadcrumbs",
+      "file": "views/x_psm_portal_templates.xml"
+    },
+    {
+      "id": "portal_psm_my_home_discipline",
+      "name": "Show Discipline on Portal Home",
+      "inherit_id": "portal.portal_my_home",
+      "file": "views/x_psm_portal_templates.xml"
+    },
+    {
+      "id": "portal_psm_my_disciplines",
+      "name": "My Disciplinary Records",
+      "inherit_id": null,
+      "file": "views/x_psm_portal_templates.xml"
+    },
+    {
+      "id": "portal_psm_discipline_create",
+      "name": "Create Counseling Log",
+      "inherit_id": null,
+      "file": "views/x_psm_portal_templates.xml"
+    },
+    {
+      "id": "portal_psm_discipline_explanation_template",
+      "name": "Discipline Explanation",
+      "inherit_id": null,
+      "file": "views/x_psm_portal_templates.xml"
+    }
+  ],
+  "functions": [],
+  "referenced_models": []
+}

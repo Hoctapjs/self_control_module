@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============================================ -->
+        <!-- CỬA HÀNG (POS CONFIG) + PHÒNG BAN (OPS)     -->
+        <!-- ============================================ -->
+
+        <!-- 4170001 - DA KAO -->
+        <record id="pos_4170001" model="pos.config">
+            <field name="name">Da Kao</field>
+            <field name="store_code">4170001</field>
+        </record>
+        <record id="dept_4170001" model="hr.department">
+            <field name="name">Da Kao</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170001"/>
+            <field name="x_psm_store_number">1</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170002 - BEN THANH -->
+        <record id="pos_4170002" model="pos.config">
+            <field name="name">Ben Thanh</field>
+            <field name="store_code">4170002</field>
+        </record>
+        <record id="dept_4170002" model="hr.department">
+            <field name="name">Ben Thanh</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170002"/>
+            <field name="x_psm_store_number">2</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170003 - PHU LAM -->
+        <record id="pos_4170003" model="pos.config">
+            <field name="name">Phu Lam</field>
+            <field name="store_code">4170003</field>
+        </record>
+        <record id="dept_4170003" model="hr.department">
+            <field name="name">Phu Lam</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170003"/>
+            <field name="x_psm_store_number">3</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170004 - GO VAP -->
+        <record id="pos_4170004" model="pos.config">
+            <field name="name">Go Vap</field>
+            <field name="store_code">4170004</field>
+        </record>
+        <record id="dept_4170004" model="hr.department">
+            <field name="name">Go Vap</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170004"/>
+            <field name="x_psm_store_number">4</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170005 - VIVO -->
+        <record id="pos_4170005" model="pos.config">
+            <field name="name">Vivo</field>
+            <field name="store_code">4170005</field>
+        </record>
+        <record id="dept_4170005" model="hr.department">
+            <field name="name">Vivo</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170005"/>
+            <field name="x_psm_store_number">5</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170006 - NGUYEN HUE -->
+        <record id="pos_4170006" model="pos.config">
+            <field name="name">Nguyen Hue</field>
+            <field name="store_code">4170006</field>
+        </record>
+        <record id="dept_4170006" model="hr.department">
+            <field name="name">Nguyen Hue</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170006"/>
+            <field name="x_psm_store_number">6</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170007 - VINCOM MASTERI -->
+        <record id="pos_4170007" model="pos.config">
+            <field name="name">Vincom Masteri</field>
+            <field name="store_code">4170007</field>
+        </record>
+        <record id="dept_4170007" model="hr.department">
+            <field name="name">Vincom Masteri</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170007"/>
+            <field name="x_psm_store_number">7</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170008 - POST OFFICE -->
+        <record id="pos_4170008" model="pos.config">
+            <field name="name">Post Office</field>
+            <field name="store_code">4170008</field>
+        </record>
+        <record id="dept_4170008" model="hr.department">
+            <field name="name">Post Office</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170008"/>
+            <field name="x_psm_store_number">8</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170009 - SGS -->
+        <record id="pos_4170009" model="pos.config">
+            <field name="name">Sgs</field>
+            <field name="store_code">4170009</field>
+        </record>
+        <record id="dept_4170009" model="hr.department">
+            <field name="name">Sgs</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170009"/>
+            <field name="x_psm_store_number">9</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170010 - SGC -->
+        <record id="pos_4170010" model="pos.config">
+            <field name="name">Sgc</field>
+            <field name="store_code">4170010</field>
+        </record>
+        <record id="dept_4170010" model="hr.department">
+            <field name="name">Sgc</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170010"/>
+            <field name="x_psm_store_number">10</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170011 - TSN -->
+        <record id="pos_4170011" model="pos.config">
+            <field name="name">Tsn</field>
+            <field name="store_code">4170011</field>
+        </record>
+        <record id="dept_4170011" model="hr.department">
+            <field name="name">Tsn</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170011"/>
+            <field name="x_psm_store_number">11</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170012 - HOANG DIEU -->
+        <record id="pos_4170012" model="pos.config">
+            <field name="name">Hoang Dieu</field>
+            <field name="store_code">4170012</field>
+        </record>
+        <record id="dept_4170012" model="hr.department">
+            <field name="name">Hoang Dieu</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170012"/>
+            <field name="x_psm_store_number">12</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170013 - SATRA PHAM HUNG -->
+        <record id="pos_4170013" model="pos.config">
+            <field name="name">Satra Pham Hung</field>
+            <field name="store_code">4170013</field>
+        </record>
+        <record id="dept_4170013" model="hr.department">
+            <field name="name">Satra Pham Hung</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170013"/>
+            <field name="x_psm_store_number">13</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170014 - VINCOM THU DUC -->
+        <record id="pos_4170014" model="pos.config">
+            <field name="name">Vincom Thu Duc</field>
+            <field name="store_code">4170014</field>
+        </record>
+        <record id="dept_4170014" model="hr.department">
+            <field name="name">Vincom Thu Duc</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170014"/>
+            <field name="x_psm_store_number">14</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170015 - AU CO -->
+        <record id="pos_4170015" model="pos.config">
+            <field name="name">Au Co</field>
+            <field name="store_code">4170015</field>
+        </record>
+        <record id="dept_4170015" model="hr.department">
+            <field name="name">Au Co</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170015"/>
+            <field name="x_psm_store_number">15</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170016 - HONG BANG -->
+        <record id="pos_4170016" model="pos.config">
+            <field name="name">Hong Bang</field>
+            <field name="store_code">4170016</field>
+        </record>
+        <record id="dept_4170016" model="hr.department">
+            <field name="name">Hong Bang</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170016"/>
+            <field name="x_psm_store_number">16</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170017 - HO GUOM -->
+        <record id="pos_4170017" model="pos.config">
+            <field name="name">Ho Guom</field>
+            <field name="store_code">4170017</field>
+        </record>
+        <record id="dept_4170017" model="hr.department">
+            <field name="name">Ho Guom</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170017"/>
+            <field name="x_psm_store_number">17</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170018 - AEON TAN PHU -->
+        <record id="pos_4170018" model="pos.config">
+            <field name="name">Aeon Tan Phu</field>
+            <field name="store_code">4170018</field>
+        </record>
+        <record id="dept_4170018" model="hr.department">
+            <field name="name">Aeon Tan Phu</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170018"/>
+            <field name="x_psm_store_number">18</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170019 - HOANG DAO THUY -->
+        <record id="pos_4170019" model="pos.config">
+            <field name="name">Hoang Dao Thuy</field>
+            <field name="store_code">4170019</field>
+        </record>
+        <record id="dept_4170019" model="hr.department">
+            <field name="name">Hoang Dao Thuy</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170019"/>
+            <field name="x_psm_store_number">19</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170020 - GIGA MALL -->
+        <record id="pos_4170020" model="pos.config">
+            <field name="name">Giga Mall</field>
+            <field name="store_code">4170020</field>
+        </record>
+        <record id="dept_4170020" model="hr.department">
+            <field name="name">Giga Mall</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170020"/>
+            <field name="x_psm_store_number">20</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170021 - VINCOM TRAN DUY HUNG -->
+        <record id="pos_4170021" model="pos.config">
+            <field name="name">Vincom Tran Duy Hung</field>
+            <field name="store_code">4170021</field>
+        </record>
+        <record id="dept_4170021" model="hr.department">
+            <field name="name">Vincom Tran Duy Hung</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170021"/>
+            <field name="x_psm_store_number">21</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170022 - THAI HA -->
+        <record id="pos_4170022" model="pos.config">
+            <field name="name">Thai Ha</field>
+            <field name="store_code">4170022</field>
+        </record>
+        <record id="dept_4170022" model="hr.department">
+            <field name="name">Thai Ha</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170022"/>
+            <field name="x_psm_store_number">22</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170023 - AEON HA DONG -->
+        <record id="pos_4170023" model="pos.config">
+            <field name="name">Aeon Ha Dong</field>
+            <field name="store_code">4170023</field>
+        </record>
+        <record id="dept_4170023" model="hr.department">
+            <field name="name">Aeon Ha Dong</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170023"/>
+            <field name="x_psm_store_number">23</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170024 - AEON BINH DUONG -->
+        <record id="pos_4170024" model="pos.config">
+            <field name="name">Aeon Binh Duong</field>
+            <field name="store_code">4170024</field>
+        </record>
+        <record id="dept_4170024" model="hr.department">
+            <field name="name">Aeon Binh Duong</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170024"/>
+            <field name="x_psm_store_number">24</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170025 - AEON BINH TAN -->
+        <record id="pos_4170025" model="pos.config">
+            <field name="name">Aeon Binh Tan</field>
+            <field name="store_code">4170025</field>
+        </record>
+        <record id="dept_4170025" model="hr.department">
+            <field name="name">Aeon Binh Tan</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170025"/>
+            <field name="x_psm_store_number">25</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170026 - LOTTE MART GO VAP -->
+        <record id="pos_4170026" model="pos.config">
+            <field name="name">Lotte Mart Go Vap</field>
+            <field name="store_code">4170026</field>
+        </record>
+        <record id="dept_4170026" model="hr.department">
+            <field name="name">Lotte Mart Go Vap</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170026"/>
+            <field name="x_psm_store_number">26</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170027 - AB CENTRAL SQUARE -->
+        <record id="pos_4170027" model="pos.config">
+            <field name="name">Ab Central Square</field>
+            <field name="store_code">4170027</field>
+        </record>
+        <record id="dept_4170027" model="hr.department">
+            <field name="name">Ab Central Square</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170027"/>
+            <field name="x_psm_store_number">27</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170028 - VINCOM MEGA MALL SMART CITY -->
+        <record id="pos_4170028" model="pos.config">
+            <field name="name">Vincom Mega Mall Smart City</field>
+            <field name="store_code">4170028</field>
+        </record>
+        <record id="dept_4170028" model="hr.department">
+            <field name="name">Vincom Mega Mall Smart City</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170028"/>
+            <field name="x_psm_store_number">28</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170029 - AEON LONG BIEN -->
+        <record id="pos_4170029" model="pos.config">
+            <field name="name">Aeon Long Bien</field>
+            <field name="store_code">4170029</field>
+        </record>
+        <record id="dept_4170029" model="hr.department">
+            <field name="name">Aeon Long Bien</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170029"/>
+            <field name="x_psm_store_number">29</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170030 - TIMES CITY -->
+        <record id="pos_4170030" model="pos.config">
+            <field name="name">Times City</field>
+            <field name="store_code">4170030</field>
+        </record>
+        <record id="dept_4170030" model="hr.department">
+            <field name="name">Times City</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170030"/>
+            <field name="x_psm_store_number">30</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170031 - AEON HAI PHONG -->
+        <record id="pos_4170031" model="pos.config">
+            <field name="name">Aeon Hai Phong</field>
+            <field name="store_code">4170031</field>
+        </record>
+        <record id="dept_4170031" model="hr.department">
+            <field name="name">Aeon Hai Phong</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170031"/>
+            <field name="x_psm_store_number">31</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170032 - THE GRACE -->
+        <record id="pos_4170032" model="pos.config">
+            <field name="name">The Grace</field>
+            <field name="store_code">4170032</field>
+        </record>
+        <record id="dept_4170032" model="hr.department">
+            <field name="name">The Grace</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170032"/>
+            <field name="x_psm_store_number">32</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170033 - 2 THANG 9 -->
+        <record id="pos_4170033" model="pos.config">
+            <field name="name">2 Thang 9</field>
+            <field name="store_code">4170033</field>
+        </record>
+        <record id="dept_4170033" model="hr.department">
+            <field name="name">2 Thang 9</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170033"/>
+            <field name="x_psm_store_number">33</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170034 - NGUYEN VAN LOC -->
+        <record id="pos_4170034" model="pos.config">
+            <field name="name">Nguyen Van Loc</field>
+            <field name="store_code">4170034</field>
+        </record>
+        <record id="dept_4170034" model="hr.department">
+            <field name="name">Nguyen Van Loc</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170034"/>
+            <field name="x_psm_store_number">34</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170035 - TRAN NAO -->
+        <record id="pos_4170035" model="pos.config">
+            <field name="name">Tran Nao</field>
+            <field name="store_code">4170035</field>
+        </record>
+        <record id="dept_4170035" model="hr.department">
+            <field name="name">Tran Nao</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170035"/>
+            <field name="x_psm_store_number">35</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170036 - THE LOOP IPH -->
+        <record id="pos_4170036" model="pos.config">
+            <field name="name">The Loop Iph</field>
+            <field name="store_code">4170036</field>
+        </record>
+        <record id="dept_4170036" model="hr.department">
+            <field name="name">The Loop Iph</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170036"/>
+            <field name="x_psm_store_number">36</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170037 - NGUYEN VAN LINH -->
+        <record id="pos_4170037" model="pos.config">
+            <field name="name">Nguyen Van Linh</field>
+            <field name="store_code">4170037</field>
+        </record>
+        <record id="dept_4170037" model="hr.department">
+            <field name="name">Nguyen Van Linh</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170037"/>
+            <field name="x_psm_store_number">37</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170038 - NHA TRANG DEPOT -->
+        <record id="pos_4170038" model="pos.config">
+            <field name="name">Nha Trang Depot</field>
+            <field name="store_code">4170038</field>
+        </record>
+        <record id="dept_4170038" model="hr.department">
+            <field name="name">Nha Trang Depot</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170038"/>
+            <field name="x_psm_store_number">38</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170039 - VO THI SAU -->
+        <record id="pos_4170039" model="pos.config">
+            <field name="name">Vo Thi Sau</field>
+            <field name="store_code">4170039</field>
+        </record>
+        <record id="dept_4170039" model="hr.department">
+            <field name="name">Vo Thi Sau</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170039"/>
+            <field name="x_psm_store_number">39</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170040 - BICONSI YERSIN -->
+        <record id="pos_4170040" model="pos.config">
+            <field name="name">Biconsi Yersin</field>
+            <field name="store_code">4170040</field>
+        </record>
+        <record id="dept_4170040" model="hr.department">
+            <field name="name">Biconsi Yersin</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170040"/>
+            <field name="x_psm_store_number">40</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170041 - VINCOM GRAND PARK -->
+        <record id="pos_4170041" model="pos.config">
+            <field name="name">Vincom Grand Park</field>
+            <field name="store_code">4170041</field>
+        </record>
+        <record id="dept_4170041" model="hr.department">
+            <field name="name">Vincom Grand Park</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170041"/>
+            <field name="x_psm_store_number">41</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170042 - LINH DAM -->
+        <record id="pos_4170042" model="pos.config">
+            <field name="name">Linh Dam</field>
+            <field name="store_code">4170042</field>
+        </record>
+        <record id="dept_4170042" model="hr.department">
+            <field name="name">Linh Dam</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170042"/>
+            <field name="x_psm_store_number">42</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170043 - PHAM NGU LAO -->
+        <record id="pos_4170043" model="pos.config">
+            <field name="name">Pham Ngu Lao</field>
+            <field name="store_code">4170043</field>
+        </record>
+        <record id="dept_4170043" model="hr.department">
+            <field name="name">Pham Ngu Lao</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170043"/>
+            <field name="x_psm_store_number">43</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170044 - HOI AN -->
+        <record id="pos_4170044" model="pos.config">
+            <field name="name">Hoi An</field>
+            <field name="store_code">4170044</field>
+        </record>
+        <record id="dept_4170044" model="hr.department">
+            <field name="name">Hoi An</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170044"/>
+            <field name="x_psm_store_number">44</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170045 - DA LAT MARKET -->
+        <record id="pos_4170045" model="pos.config">
+            <field name="name">Da Lat Market</field>
+            <field name="store_code">4170045</field>
+        </record>
+        <record id="dept_4170045" model="hr.department">
+            <field name="name">Da Lat Market</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170045"/>
+            <field name="x_psm_store_number">45</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170046 - VAN CAO -->
+        <record id="pos_4170046" model="pos.config">
+            <field name="name">Van Cao</field>
+            <field name="store_code">4170046</field>
+        </record>
+        <record id="dept_4170046" model="hr.department">
+            <field name="name">Van Cao</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170046"/>
+            <field name="x_psm_store_number">46</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170047 - PHAN XICH LONG -->
+        <record id="pos_4170047" model="pos.config">
+            <field name="name">Phan Xich Long</field>
+            <field name="store_code">4170047</field>
+        </record>
+        <record id="dept_4170047" model="hr.department">
+            <field name="name">Phan Xich Long</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170047"/>
+            <field name="x_psm_store_number">47</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170048 - BEN THANH MARKET -->
+        <record id="pos_4170048" model="pos.config">
+            <field name="name">Ben Thanh Market</field>
+            <field name="store_code">4170048</field>
+        </record>
+        <record id="dept_4170048" model="hr.department">
+            <field name="name">Ben Thanh Market</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170048"/>
+            <field name="x_psm_store_number">48</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170049 - CACH MANG THANG 8 -->
+        <record id="pos_4170049" model="pos.config">
+            <field name="name">Cach Mang Thang 8</field>
+            <field name="store_code">4170049</field>
+        </record>
+        <record id="dept_4170049" model="hr.department">
+            <field name="name">Cach Mang Thang 8</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170049"/>
+            <field name="x_psm_store_number">49</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170050 - THUY VAN -->
+        <record id="pos_4170050" model="pos.config">
+            <field name="name">Thuy Van</field>
+            <field name="store_code">4170050</field>
+        </record>
+        <record id="dept_4170050" model="hr.department">
+            <field name="name">Thuy Van</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170050"/>
+            <field name="x_psm_store_number">50</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170051 - HUNG VUONG -->
+        <record id="pos_4170051" model="pos.config">
+            <field name="name">Hung Vuong</field>
+            <field name="store_code">4170051</field>
+        </record>
+        <record id="dept_4170051" model="hr.department">
+            <field name="name">Hung Vuong</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170051"/>
+            <field name="x_psm_store_number">51</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170052 - HA NOI CENTRE -->
+        <record id="pos_4170052" model="pos.config">
+            <field name="name">Ha Noi Centre</field>
+            <field name="store_code">4170052</field>
+        </record>
+        <record id="dept_4170052" model="hr.department">
+            <field name="name">Ha Noi Centre</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170052"/>
+            <field name="x_psm_store_number">52</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170053 - NGUYEN VAN THOAI -->
+        <record id="pos_4170053" model="pos.config">
+            <field name="name">Nguyen Van Thoai</field>
+            <field name="store_code">4170053</field>
+        </record>
+        <record id="dept_4170053" model="hr.department">
+            <field name="name">Nguyen Van Thoai</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170053"/>
+            <field name="x_psm_store_number">53</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170054 - PHU QUOC-LONG BEACH -->
+        <record id="pos_4170054" model="pos.config">
+            <field name="name">Phu Quoc-Long Beach</field>
+            <field name="store_code">4170054</field>
+        </record>
+        <record id="dept_4170054" model="hr.department">
+            <field name="name">Phu Quoc-Long Beach</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170054"/>
+            <field name="x_psm_store_number">54</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+        <!-- 4170055 - GOLD COAST -->
+        <record id="pos_4170055" model="pos.config">
+            <field name="name">Gold Coast</field>
+            <field name="store_code">4170055</field>
+        </record>
+        <record id="dept_4170055" model="hr.department">
+            <field name="name">Gold Coast</field>
+            <field name="block_id" ref="block_ops"/>
+            <field name="pos_config_id" ref="pos_4170055"/>
+            <field name="x_psm_store_number">55</field>
+            <field name="x_psm_is_store">True</field>
+        </record>
+
+    </data>
+</odoo>

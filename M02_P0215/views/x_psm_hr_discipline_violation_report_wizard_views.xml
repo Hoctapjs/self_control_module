@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- View Form Wizard -->
+    <record id="view_psm_hr_discipline_violation_report_wizard_form" model="ir.ui.view">
+        <field name="name">hr.discipline.violation.report.wizard.form</field>
+        <field name="model">x_psm.hr.discipline.violation.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Violation Person Count Report">
+                <sheet>
+                    <div class="mb-3 text-muted">
+                        Count disciplinary records by date range and status. Results respect the current user's record access.
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <group string="Date Range">
+                                <field name="x_psm_date_from"/>
+                                <field name="x_psm_date_to"/>
+                            </group>
+                        </div>
+                        <div class="col-lg-6">
+                            <group string="Filters">
+                                <field name="x_psm_state_filter"/>
+                                <field name="x_psm_include_cancelled"/>
+                            </group>
+                        </div>
+                    </div>
+                    <separator string="Results"/>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="p-3 rounded border bg-white shadow-sm">
+                                <div class="text-muted text-uppercase fw-semibold small mb-2">Violating Employees</div>
+                                <div class="d-flex align-items-baseline gap-2">
+                                    <field name="x_psm_employee_count" nolabel="1" class="fw-bold text-primary" style="font-size: 32px;"/>
+                                    <span class="text-muted">people</span>
+                                </div>
+                                <div class="text-muted small mt-2">Distinct employees in the selected records.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 rounded border bg-white shadow-sm">
+                                <div class="text-muted text-uppercase fw-semibold small mb-2">Disciplinary Records</div>
+                                <div class="d-flex align-items-baseline gap-2">
+                                    <field name="x_psm_record_count" nolabel="1" class="fw-bold text-primary" style="font-size: 32px;"/>
+                                    <span class="text-muted">records</span>
+                                </div>
+                                <div class="text-muted small mt-2">Total records matching the current filters.</div>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+                <footer>
+                    <button name="action_psm_view_records" string="View Matching Records" type="object" class="btn-primary"/>
+                    <button string="Close" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_psm_hr_discipline_violation_report" model="ir.actions.act_window">
+        <field name="name">Violation Person Count Report</field>
+        <field name="res_model">x_psm.hr.discipline.violation.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_psm_hr_discipline_violation_report"
+              name="Violation Person Count Report"
+              parent="menu_psm_hr_discipline_root"
+              action="action_psm_hr_discipline_violation_report"
+              sequence="50"
+              groups="M02_P0200.GDH_OPS_STORE_SM_M,M02_P0200.GDH_OPS_STORE_RGM_M,M02_P0200.GDH_RST_HR_HRBP_S,M02_P0200.GDH_RST_OPS_OC_S,hr.group_hr_manager"/>
+</odoo>

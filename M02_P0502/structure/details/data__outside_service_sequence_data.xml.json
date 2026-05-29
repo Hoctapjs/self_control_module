@@ -1,0 +1,29 @@
+{
+  "file": "data/outside_service_sequence_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "seq_psm_0502_outside_service_request",
+      "model": "ir.sequence",
+      "fields": {
+        "name": "0502 Outside Service Request",
+        "code": "psm.0502.outside.service.request",
+        "prefix": "0502/OS/%(year)s/",
+        "padding": "5",
+        "company_id": {
+          "eval": "False"
+        }
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.sequence"
+  ]
+}

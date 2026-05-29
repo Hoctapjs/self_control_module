@@ -1,0 +1,30 @@
+{
+  "file": "data/email_template_social_insurance.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "email_template_social_insurance",
+      "model": "mail.template",
+      "fields": {
+        "name": "[HR] Nhận Sổ/Tờ rời BHXH và Quyết Định Nghỉ việc",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "subject": "[HR] Nhận Sổ/Tờ rời BHXH và Quyết Định Nghỉ việc",
+        "email_from": "{{ (object.company_id.email or object.x_psm_0214_employee_id.company_id.email or user.email_formatted) }}",
+        "email_to": "{{ object.x_psm_0214_employee_id.work_email or object.x_psm_0214_employee_id.user_id.email or object.x_psm_0214_employee_id.private_email or object.request_owner_id.partner_id.email or object.request_owner_id.email }}",
+        "body_html": ""
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "mail.template"
+  ]
+}

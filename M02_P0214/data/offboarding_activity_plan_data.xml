@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Offboarding Activity Plan for Employees -->
+    <record id="offboarding_activity_plan" model="mail.activity.plan">
+        <field name="name">RST Resignation Process (22 Steps)</field>
+        <field name="res_model">hr.employee</field>
+        <field name="active" eval="True"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <!-- Step 8: Exit Interview (Employee) -->
+    <record id="plan_step_8_exit_interview" model="mail.activity.plan.template">
+        <field name="plan_id" ref="offboarding_activity_plan"/>
+        <field name="sequence">8</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo"/>
+        <field name="summary">Step 8: Conduct Exit Interview</field>
+        <field name="note">Employee completes the exit interview using the template.</field>
+        <field name="responsible_type">employee</field>
+    </record>
+
+    <!-- Step 9: Handover Work (Employee) -->
+    <record id="plan_step_9_handover_work" model="mail.activity.plan.template">
+        <field name="plan_id" ref="offboarding_activity_plan"/>
+        <field name="sequence">9</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo"/>
+        <field name="summary">Step 9: Hand over work and documents</field>
+        <field name="note">Hand over work, documents and related papers.</field>
+        <field name="responsible_type">employee</field>
+    </record>
+
+    <!-- Step 10: Evaluate Handover (Manager) -->
+    <record id="plan_step_10_evaluate" model="mail.activity.plan.template">
+        <field name="plan_id" ref="offboarding_activity_plan"/>
+        <field name="sequence">10</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo"/>
+        <field name="summary">Step 10: Evaluate the handover</field>
+        <field name="note">Direct manager evaluates handover quality.</field>
+        <field name="responsible_type">manager</field>
+    </record>
+
+    <!-- Step 11: Confirm Recovery (Manager) -->
+    <record id="plan_step_11_confirm_recovery" model="mail.activity.plan.template">
+        <field name="plan_id" ref="offboarding_activity_plan"/>
+        <field name="sequence">11</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo"/>
+        <field name="summary">Step 11: Confirm full recovery completion</field>
+        <field name="note">Confirm all handover checklist items have been recovered.</field>
+        <field name="responsible_type">manager</field>
+    </record>
+
+    <!-- Step 12: Check Pending Payments (Manager/Accountant) -->
+    <record id="plan_step_12_check_payments" model="mail.activity.plan.template">
+        <field name="plan_id" ref="offboarding_activity_plan"/>
+        <field name="sequence">12</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo"/>
+        <field name="summary">Step 12: Check outstanding payments</field>
+        <field name="note"><![CDATA[System/Accounting reviews outstanding payments:
+- Unsettled advances
+- Unpaid business-trip expenses
+- Company loans/borrowings
+Notify the employee if any items remain.
+]]></field>
+        <field name="responsible_type">manager</field>
+    </record>
+
+    <!-- Step 13: IT Confirm (IT - assigned to Manager/Admin acting) -->
+    <record id="plan_step_13_it_confirm" model="mail.activity.plan.template">
+        <field name="plan_id" ref="offboarding_activity_plan"/>
+        <field name="sequence">13</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo"/>
+        <field name="summary">Step 13: IT confirms checklist completion</field>
+        <field name="note"><![CDATA[IT confirms:
+- Email deactivated
+- Internal accounts deactivated
+- Equipment/devices recovered
+]]></field>
+        <field name="responsible_type">manager</field>
+    </record>
+
+    <!-- Step 14: Admin Confirm (Admin - assigned to Manager acting) -->
+    <record id="plan_step_14_admin_confirm" model="mail.activity.plan.template">
+        <field name="plan_id" ref="offboarding_activity_plan"/>
+        <field name="sequence">14</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo"/>
+        <field name="summary">Step 14: Admin confirms handover checklist</field>
+        <field name="note"><![CDATA[Admin confirms recovery:
+- Office keyboard
+- Biometric Staff ID Deletion
+- Desk / cabinet keys
+- Mobile phone & accessories
+- ...
+]]></field>
+        <field name="responsible_type">manager</field>
+    </record>
+
+    <!-- Step 15: HR Confirm PVI (HR - assigned to Manager acting) -->
+    <record id="plan_step_15_hr_pvi" model="mail.activity.plan.template">
+        <field name="plan_id" ref="offboarding_activity_plan"/>
+        <field name="sequence">15</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo"/>
+        <field name="summary">Step 15: HR confirms PVI card</field>
+        <field name="note">HR confirms PVI Health Insurance Card handover (including dependents).</field>
+        <field name="responsible_type">manager</field>
+    </record>
+
+    <!-- Step 17: Sign Settlement (Manager) -->
+    <record id="plan_step_17_sign_settlement" model="mail.activity.plan.template">
+        <field name="plan_id" ref="offboarding_activity_plan"/>
+        <field name="sequence">17</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo"/>
+        <field name="summary">Step 17: Sign salary settlement</field>
+        <field name="note">Sign the final salary settlement record.</field>
+        <field name="responsible_type">manager</field>
+    </record>
+
+    <!-- Step 19: Pay Period Payment (Manager) -->
+    <record id="plan_step_19_pay_period" model="mail.activity.plan.template">
+        <field name="plan_id" ref="offboarding_activity_plan"/>
+        <field name="sequence">19</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo"/>
+        <field name="summary">Step 19: Pay according to payroll cycle</field>
+        <field name="note">Execute payment per the payroll cycle.</field>
+        <field name="responsible_type">manager</field>
+    </record>
+
+    <!-- Step 20: Final Handover (Manager/HR) -->
+    <record id="plan_step_20_final_handover" model="mail.activity.plan.template">
+        <field name="plan_id" ref="offboarding_activity_plan"/>
+        <field name="sequence">20</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo"/>
+        <field name="summary">Step 20: Hand over Resignation Decision &amp; Documents</field>
+        <field name="note">Employee receives the resignation decision, final pay and related documents.</field>
+        <field name="responsible_type">manager</field>
+    </record>
+</odoo>

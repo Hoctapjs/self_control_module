@@ -1,0 +1,55 @@
+{
+  "file": "models/x_psm_approval_request.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: approval.request; 1 classes; 1 fields; 3 actions",
+  "classes": [
+    {
+      "python_class": "ApprovalRequest",
+      "description": "Extends approval.request in models/x_psm_approval_request.py.",
+      "model": null,
+      "inherit": "approval.request",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_discipline_record_id",
+          "type": "Many2one",
+          "string": "Discipline Record 0215",
+          "comodel": "x_psm.hr.discipline.record",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [
+        {
+          "name": "action_approve",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_refuse",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_open_discipline_record",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        }
+      ],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

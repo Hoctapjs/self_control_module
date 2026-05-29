@@ -1,0 +1,6 @@
+{
+  "file": "__manifest__.py",
+  "type": "file",
+  "bucket": "manifest",
+  "summary": "# Khai bao ma hoa file Python # -*- coding: utf-8 -*- # Khai bao thong tin module Odoo nay { # Ten hien thi cua module \"name\": \"M02_P0502_QUAN_LY_BAO_TRI\", #..."
+}

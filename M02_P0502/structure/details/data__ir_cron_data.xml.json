@@ -1,0 +1,52 @@
+{
+  "file": "data/ir_cron_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "ir_cron_psm_generate_preventive_requests",
+      "model": "ir.cron",
+      "fields": {
+        "name": "0502 Generate Preventive Maintenance Requests",
+        "model_id": {
+          "ref": "maintenance.model_maintenance_equipment"
+        },
+        "state": "code",
+        "code": "model.cron_psm_generate_preventive_requests()",
+        "interval_number": "1",
+        "interval_type": "days",
+        "nextcall": {
+          "eval": "DateTime.now()"
+        },
+        "active": "True"
+      }
+    },
+    {
+      "id": "ir_cron_psm_create_intake_sla_warning_activities",
+      "model": "ir.cron",
+      "fields": {
+        "name": "0502 Create Intake SLA Warning Activities",
+        "model_id": {
+          "ref": "maintenance.model_maintenance_request"
+        },
+        "state": "code",
+        "code": "model.cron_psm_create_intake_sla_warning_activities()",
+        "interval_number": "1",
+        "interval_type": "hours",
+        "nextcall": {
+          "eval": "DateTime.now()"
+        },
+        "active": "True"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.cron"
+  ]
+}

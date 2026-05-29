@@ -1,0 +1,46 @@
+{
+  "file": "data/cron_auto_archive.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "cron_psm_discipline_auto_archive",
+      "model": "ir.cron",
+      "fields": {
+        "name": "Discipline: Auto Expire Active Records",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "state": "code",
+        "code": "model._x_psm_cron_auto_expire()",
+        "interval_number": "1",
+        "interval_type": "days",
+        "active": "True"
+      }
+    },
+    {
+      "id": "cron_psm_discipline_auto_complete",
+      "model": "ir.cron",
+      "fields": {
+        "name": "Discipline: Auto Complete Improvement",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "state": "code",
+        "code": "model._cron_auto_complete_improvement()",
+        "interval_number": "1",
+        "interval_type": "days",
+        "active": "True"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.cron"
+  ]
+}

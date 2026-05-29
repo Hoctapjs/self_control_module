@@ -1,0 +1,58 @@
+{
+  "file": "wizards/finance_override_wizard.py",
+  "type": "python",
+  "bucket": "wizards",
+  "summary": "models: x_psm_0214_finance_override_wizard; 1 classes; 2 fields; 1 actions",
+  "classes": [
+    {
+      "python_class": "Xpsm0214FinanceOverrideWizard",
+      "description": "RST Accounting Override Wizard",
+      "model": "x_psm_0214_finance_override_wizard",
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "request_id",
+          "type": "Many2one",
+          "string": "Resignation Request",
+          "comodel": "approval.request",
+          "required": true,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "reason",
+          "type": "Text",
+          "string": "Override Reason",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [
+        {
+          "name": "action_apply",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        }
+      ],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

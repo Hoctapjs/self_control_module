@@ -1,0 +1,56 @@
+{
+  "file": "views/stock_picking_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "2 views",
+  "records": [
+    {
+      "id": "view_psm_stock_picking_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.stock.picking.form",
+        "model": "stock.picking",
+        "inherit_id": {
+          "ref": "stock.view_picking_form"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_stock_picking_list",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.stock.picking.list",
+        "model": "stock.picking",
+        "inherit_id": {
+          "ref": "stock.vpicktree"
+        },
+        "arch": ""
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_stock_picking_form",
+      "model": "stock.picking",
+      "name": "psm.stock.picking.form",
+      "inherit_id": "stock.view_picking_form",
+      "file": "views/stock_picking_views.xml"
+    },
+    {
+      "id": "view_psm_stock_picking_list",
+      "model": "stock.picking",
+      "name": "psm.stock.picking.list",
+      "inherit_id": "stock.vpicktree",
+      "file": "views/stock_picking_views.xml"
+    }
+  ],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.ui.view",
+    "stock.picking"
+  ]
+}

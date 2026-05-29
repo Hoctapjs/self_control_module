@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ===================== -->
+        <!-- KHỐI PHÒNG BAN        -->
+        <!-- ===================== -->
+        <record id="block_rst" model="department.block">
+            <field name="name">HEAD OFFICE</field>
+            <field name="code">RST</field>
+        </record>
+
+        <record id="block_ops" model="department.block">
+            <field name="name">OPERATION</field>
+            <field name="code">OPS</field>
+        </record>
+
+        <record id="block_sv" model="department.block">
+            <field name="name">SERVICE</field>
+            <field name="code">SV</field>
+        </record>
+
+        <!-- ===================== -->
+        <!-- KHU VỰC LỚN          -->
+        <!-- ===================== -->
+        <record id="area_onb" model="restaurant.area">
+            <field name="name">Onboarding</field>
+            <field name="code">ONB</field>
+        </record>
+
+        <record id="area_kit" model="restaurant.area">
+            <field name="name">Kitchen</field>
+            <field name="code">KIT</field>
+        </record>
+
+        <record id="area_ser" model="restaurant.area">
+            <field name="name">Service</field>
+            <field name="code">SER</field>
+        </record>
+
+        <record id="area_na" model="restaurant.area">
+            <field name="name">N/A</field>
+            <field name="code">NA</field>
+        </record>
+
+        <!-- ===================== -->
+        <!-- KHU VỰC NHỎ           -->
+        <!-- ===================== -->
+        <record id="pos_area_fou" model="restaurant.positioning.area">
+            <field name="name">Foundation</field>
+            <field name="area_id" ref="area_onb"/>
+        </record>
+
+        <record id="pos_area_pro" model="restaurant.positioning.area">
+            <field name="name">Production</field>
+            <field name="area_id" ref="area_kit"/>
+        </record>
+
+        <record id="pos_area_sup" model="restaurant.positioning.area">
+            <field name="name">Support</field>
+            <field name="area_id" ref="area_kit"/>
+        </record>
+
+        <record id="pos_area_pmt" model="restaurant.positioning.area">
+            <field name="name">PM Task</field>
+            <field name="area_id" ref="area_kit"/>
+        </record>
+
+        <record id="pos_area_frc" model="restaurant.positioning.area">
+            <field name="name">Front Counter</field>
+            <field name="area_id" ref="area_ser"/>
+        </record>
+
+        <record id="pos_area_din" model="restaurant.positioning.area">
+            <field name="name">Dining Room</field>
+            <field name="area_id" ref="area_ser"/>
+        </record>
+
+        <record id="pos_area_drt" model="restaurant.positioning.area">
+            <field name="name">Drive-Thru</field>
+            <field name="area_id" ref="area_ser"/>
+        </record>
+
+        <record id="pos_area_mcc" model="restaurant.positioning.area">
+            <field name="name">McCafe</field>
+            <field name="area_id" ref="area_ser"/>
+        </record>
+
+        <record id="pos_area_mds" model="restaurant.positioning.area">
+            <field name="name">MDS/3PO</field>
+            <field name="area_id" ref="area_ser"/>
+        </record>
+
+        <record id="pos_area_na" model="restaurant.positioning.area">
+            <field name="name">N/A</field>
+            <field name="area_id" ref="area_na"/>
+        </record>
+
+        <!-- ===================== -->
+        <!-- CA LÀM VIỆC           -->
+        <!-- ===================== -->
+        <record id="shift_am" model="restaurant.shift">
+            <field name="name">AM</field>
+            <field name="code">AM</field>
+            <field name="hour_from" eval="6.0"/>
+            <field name="hour_to" eval="14.5"/>
+        </record>
+
+        <record id="shift_pm" model="restaurant.shift">
+            <field name="name">PM</field>
+            <field name="code">PM</field>
+            <field name="hour_from" eval="14.0"/>
+            <field name="hour_to" eval="22.5"/>
+        </record>
+
+        <record id="shift_on" model="restaurant.shift">
+            <field name="name">ON</field>
+            <field name="code">ON</field>
+            <field name="hour_from" eval="22.0"/>
+            <field name="hour_to" eval="6.75"/>
+        </record>
+
+        <!-- ================================ -->
+        <!-- STATION (VỊ TRÍ CHI TIẾT)       -->
+        <!-- ================================ -->
+        <record id="station_appr" model="restaurant.station">
+            <field name="name">APPEARANCE</field>
+            <field name="code">APPR</field>
+            <field name="positioning_area_id" ref="pos_area_fou"/>
+        </record>
+
+        <record id="station_fs" model="restaurant.station">
+            <field name="name">FOOD SAFETY</field>
+            <field name="code">FS</field>
+            <field name="positioning_area_id" ref="pos_area_fou"/>
+        </record>
+
+        <record id="station_hptlt" model="restaurant.station">
+            <field name="name">HOSPITALITY</field>
+            <field name="code">HPTLT</field>
+            <field name="positioning_area_id" ref="pos_area_fou"/>
+        </record>
+
+        <record id="station_sft" model="restaurant.station">
+            <field name="name">SAFETY</field>
+            <field name="code">SFT</field>
+            <field name="positioning_area_id" ref="pos_area_fou"/>
+        </record>
+
+        <record id="station_scrt" model="restaurant.station">
+            <field name="name">SECURITY</field>
+            <field name="code">SCRT</field>
+            <field name="positioning_area_id" ref="pos_area_fou"/>
+        </record>
+
+        <record id="station_tw" model="restaurant.station">
+            <field name="name">TEAMWORK</field>
+            <field name="code">TW</field>
+            <field name="positioning_area_id" ref="pos_area_fou"/>
+        </record>
+
+        <record id="station_bb_brk_i_a" model="restaurant.station">
+            <field name="name">BB BREAKFAST MENU - INITIATOR-ASSEMBLE</field>
+            <field name="code">BB Brk-I/A</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_bb_reg_gr" model="restaurant.station">
+            <field name="name">BB REGULAR MENU - GRILL</field>
+            <field name="code">BB Reg-GR</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_bb_reg_i_a" model="restaurant.station">
+            <field name="name">BB REGULAR MENU - INITIATOR-ASSEMBLE</field>
+            <field name="code">BB Reg-I/A</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_bic_b" model="restaurant.station">
+            <field name="name">BIC BREADING</field>
+            <field name="code">BIC-B</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_bic_cwa" model="restaurant.station">
+            <field name="name">BIC COOKING, WARMING &amp; ASSEMBLING</field>
+            <field name="code">BIC-CWA</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_bic_p" model="restaurant.station">
+            <field name="name">BIC PREPPING</field>
+            <field name="code">BIC-P</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_brk_gr" model="restaurant.station">
+            <field name="name">BREAKFAST MENU - GRILL</field>
+            <field name="code">Brk-GR</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_egg" model="restaurant.station">
+            <field name="name">EGG STATION</field>
+            <field name="code">EGG</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_fr" model="restaurant.station">
+            <field name="name">FRIED STATION</field>
+            <field name="code">FR</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_ipl_b_i_a" model="restaurant.station">
+            <field name="name">BREAKFAST MENU - INITIATOR-ASSEMBLE</field>
+            <field name="code">IPL B-I/A</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_ipl_r_i_as" model="restaurant.station">
+            <field name="name">REGULAR MENU - INITIATOR-ASSEMBLE</field>
+            <field name="code">IPL-R I-AS</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_new_bic_b" model="restaurant.station">
+            <field name="name">NEW BIC BREADING</field>
+            <field name="code">NEW BIC-B</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_new_bic_cwa" model="restaurant.station">
+            <field name="name">NEW BIC COOKING, WARMING &amp; ASSEMBLING</field>
+            <field name="code">NEW BIC-CWA</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_n_bic_p" model="restaurant.station">
+            <field name="name">NEW BIC PREPPING</field>
+            <field name="code">N-BIC-P</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_rice" model="restaurant.station">
+            <field name="name">RICE STATION</field>
+            <field name="code">RICE</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_spa_cwa" model="restaurant.station">
+            <field name="name">SPAGHETTI COOKING, WARMING &amp; ASSEMBLING</field>
+            <field name="code">SPA-CWA</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_spa_prep" model="restaurant.station">
+            <field name="name">SPAGHETTI - PREPPING</field>
+            <field name="code">SPA-PREP</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_spa_thaw" model="restaurant.station">
+            <field name="name">SPAGHETTI - PREPPING THAWING</field>
+            <field name="code">SPA-THAW</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_ss_s" model="restaurant.station">
+            <field name="name">SHAKE SHAKE SALAD</field>
+            <field name="code">SS S</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_a_ass" model="restaurant.station">
+            <field name="name">ASSEMBLER</field>
+            <field name="code">A-ASS</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_a_bic" model="restaurant.station">
+            <field name="name">BIC STATION</field>
+            <field name="code">A-BIC</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_a_egg" model="restaurant.station">
+            <field name="name">EGG STATION</field>
+            <field name="code">A-EGG</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_a_fri" model="restaurant.station">
+            <field name="name">FRIED STATION</field>
+            <field name="code">A-FRI</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_a_gri" model="restaurant.station">
+            <field name="name">GRILL STATION</field>
+            <field name="code">A-GRI</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_a_ini" model="restaurant.station">
+            <field name="name">INITIATOR</field>
+            <field name="code">A-INI</field>
+            <field name="positioning_area_id" ref="pos_area_pro"/>
+        </record>
+
+        <record id="station_bb_prep_os" model="restaurant.station">
+            <field name="name">BB PREPPING OTHERS</field>
+            <field name="code">BB PREP OS</field>
+            <field name="positioning_area_id" ref="pos_area_sup"/>
+        </record>
+
+        <record id="station_bb_prep_s" model="restaurant.station">
+            <field name="name">BB PREPPING SAUCE</field>
+            <field name="code">BB PREP S</field>
+            <field name="positioning_area_id" ref="pos_area_sup"/>
+        </record>
+
+        <record id="station_bb_prep_t_t" model="restaurant.station">
+            <field name="name">BB PREPPING THAWING,TEMPERING</field>
+            <field name="code">BB PREP T,T</field>
+            <field name="positioning_area_id" ref="pos_area_sup"/>
+        </record>
+
+        <record id="station_d_s" model="restaurant.station">
+            <field name="name">DELIVERY &amp; STORAGE</field>
+            <field name="code">D&amp;S</field>
+            <field name="positioning_area_id" ref="pos_area_sup"/>
+        </record>
+
+        <record id="station_mt_cl" model="restaurant.station">
+            <field name="name">MAIN STORE CLOSE</field>
+            <field name="code">MT-CL</field>
+            <field name="positioning_area_id" ref="pos_area_sup"/>
+        </record>
+
+        <record id="station_mt_op" model="restaurant.station">
+            <field name="name">MAIN STORE OPEN</field>
+            <field name="code">MT-OP</field>
+            <field name="positioning_area_id" ref="pos_area_sup"/>
+        </record>
+
+        <record id="station_prep_v" model="restaurant.station">
+            <field name="name">PREPPING VEGGIE</field>
+            <field name="code">PREP V</field>
+            <field name="positioning_area_id" ref="pos_area_sup"/>
+        </record>
+
+        <record id="station_prep_p" model="restaurant.station">
+            <field name="name">PREPPING (PROTEIN)</field>
+            <field name="code">PREP-P</field>
+            <field name="positioning_area_id" ref="pos_area_sup"/>
+        </record>
+
+        <record id="station_rs_t" model="restaurant.station">
+            <field name="name">REMOTE STORAGE (TRANSPORATION)</field>
+            <field name="code">RS (T)</field>
+            <field name="positioning_area_id" ref="pos_area_sup"/>
+        </record>
+
+        <record id="station_ab_1_w1" model="restaurant.station">
+            <field name="name">VỆ SINH KHU VỰC SAU QUẦY</field>
+            <field name="code">AB 1 W1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_be_1_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY NƯỚC NGỌT</field>
+            <field name="code">BE 1 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_be_1_w1" model="restaurant.station">
+            <field name="name">VỆ SINH ĐẦU DẪN SYRUP VÀ XẢ BÌNH KHÍ NÉN</field>
+            <field name="code">BE 1 W1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_be_68_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY XAY CÀ PHÊ</field>
+            <field name="code">BE 68 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_be_68_w1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY XAY CÀ PHÊ</field>
+            <field name="code">BE 68 W1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_be_69_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY ESPRESSO</field>
+            <field name="code">BE 69 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_bm_1_d1" model="restaurant.station">
+            <field name="name">VỆ SINH BẪY MỠ</field>
+            <field name="code">BM 1 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_fr_2_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY CHIÊN GÀ BIC VÀ PAN LỌC DẦU</field>
+            <field name="code">FR 2 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_fr_3_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY CHIÊN LOV VÀ PAN LỌC DẦU</field>
+            <field name="code">FR 3 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_gl_3_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY GRILL</field>
+            <field name="code">GL 3 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_gr_1_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY GRILL</field>
+            <field name="code">GR 1 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_gr_2_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY NẤU TRỨNG</field>
+            <field name="code">GR 2 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_gr_5_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY GRILL</field>
+            <field name="code">GR 5 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_hb_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY XAY SINH TỐ</field>
+            <field name="code">HB D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_ht_d" model="restaurant.station">
+            <field name="name">VỆ SINH TỦ GIỮ NÓNG GÀ (HHC)</field>
+            <field name="code">HT D</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_lhb_1_d1" model="restaurant.station">
+            <field name="name">VỆ SINH HOTBATH</field>
+            <field name="code">LHB 1 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_lhc_d" model="restaurant.station">
+            <field name="name">VỆ SINH TỦ GIỮ NÓNG GÀ (Local HHC)</field>
+            <field name="code">LHC D</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_mb_d1" model="restaurant.station">
+            <field name="name">VỆ SINH LÒ VI SÓNG (MICROWAVE)</field>
+            <field name="code">MB D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_mc_d1" model="restaurant.station">
+            <field name="name">VỆ SINH LÒ VI SÓNG (COMBI-OVEN)</field>
+            <field name="code">MC D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_or_d" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY TRỘN OREO MCFLURRY</field>
+            <field name="code">OR D</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_pd_10_w1" model="restaurant.station">
+            <field name="name">VỆ SINH VÀ KIỂM TRA TRANSPORTER HẰNG TUẦN</field>
+            <field name="code">PD 10 W1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_ph_10_d1" model="restaurant.station">
+            <field name="name">VỆ SINH VÀ KIỂM TRA TRANSPORTER</field>
+            <field name="code">PH 10 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_pr_30_d" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY HẤP BÁNH</field>
+            <field name="code">PR 30 D</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_pr_32_d" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY NƯỚNG BÁNH</field>
+            <field name="code">PR 32 D</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_pr_50_d" model="restaurant.station">
+            <field name="name">VỆ SINH UHC</field>
+            <field name="code">PR 50 D</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_rc_1_d1" model="restaurant.station">
+            <field name="name">VỆ SINH NỒI NẤU CƠM</field>
+            <field name="code">RC 1 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_rf_10_d" model="restaurant.station">
+            <field name="name">VỆ SINH TỦ LẠNH, TỦ ĐÔNG</field>
+            <field name="code">RF 10 D</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_rf_11_d00" model="restaurant.station">
+            <field name="name">VỆ SINH TỦ TRƯNG BÀY MCCAFE</field>
+            <field name="code">RF 11 D00</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_rf_3_d1" model="restaurant.station">
+            <field name="name">VỆ SINH TỦ RA KHOAI (FRENCH FRIES DISPENSER)</field>
+            <field name="code">RF 3 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_ss_3_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY KEM</field>
+            <field name="code">SS 3 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_ss_3_d2" model="restaurant.station">
+            <field name="name">VỆ SINH DỤNG CỤ BƠM SỐT/TOPPING VÀ HỘC ĐỰNG CONE</field>
+            <field name="code">SS 3 D2</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_ss_3_w1" model="restaurant.station">
+            <field name="name">VỆ SINH NGĂN HÂM NÓNG TOPPING</field>
+            <field name="code">SS 3 W1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_ss_4_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY KEM</field>
+            <field name="code">SS 4 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_ts_018_d" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY NƯỚNG MUFFIN</field>
+            <field name="code">TS 018 D</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_xx_1_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY RỬA LY</field>
+            <field name="code">XX 1 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_xx_2_d1" model="restaurant.station">
+            <field name="name">VỆ SINH MÁY RỬA LY</field>
+            <field name="code">XX 2 D1</field>
+            <field name="positioning_area_id" ref="pos_area_pmt"/>
+        </record>
+
+        <record id="station_lob" model="restaurant.station">
+            <field name="name">LOBBY</field>
+            <field name="code">LOB</field>
+            <field name="positioning_area_id" ref="pos_area_din"/>
+        </record>
+
+        <record id="station_sok_h" model="restaurant.station">
+            <field name="name">SELF ORDER KIOSK (SOK) HOST</field>
+            <field name="code">SOK-H</field>
+            <field name="positioning_area_id" ref="pos_area_din"/>
+        </record>
+
+        <record id="station_ts" model="restaurant.station">
+            <field name="name">TABLE SERVER</field>
+            <field name="code">TS</field>
+            <field name="positioning_area_id" ref="pos_area_din"/>
+        </record>
+
+        <record id="station_dt_erp" model="restaurant.station">
+            <field name="name">DT - Expeditor/Runner/Presenter</field>
+            <field name="code">DT ERP</field>
+            <field name="positioning_area_id" ref="pos_area_drt"/>
+        </record>
+
+        <record id="station_dt_otc" model="restaurant.station">
+            <field name="name">DT - Order Taker Cashier</field>
+            <field name="code">DT OTC</field>
+            <field name="positioning_area_id" ref="pos_area_drt"/>
+        </record>
+
+        <record id="station_b_d" model="restaurant.station">
+            <field name="name">BEVERAGES &amp; DESSERTS</field>
+            <field name="code">B&amp;D</field>
+            <field name="positioning_area_id" ref="pos_area_frc"/>
+        </record>
+
+        <record id="station_fc_erp" model="restaurant.station">
+            <field name="name">FC - Expeditor/Runner/Presenter</field>
+            <field name="code">FC ERP</field>
+            <field name="positioning_area_id" ref="pos_area_frc"/>
+        </record>
+
+        <record id="station_fc_otc" model="restaurant.station">
+            <field name="name">FC - Order Taker Cashier</field>
+            <field name="code">FC OTC</field>
+            <field name="positioning_area_id" ref="pos_area_frc"/>
+        </record>
+
+        <record id="station_ff" model="restaurant.station">
+            <field name="name">FRENCH FRIES</field>
+            <field name="code">FF</field>
+            <field name="positioning_area_id" ref="pos_area_frc"/>
+        </record>
+
+        <record id="station_hb" model="restaurant.station">
+            <field name="name">HASH BROWN</field>
+            <field name="code">HB</field>
+            <field name="positioning_area_id" ref="pos_area_frc"/>
+        </record>
+
+        <record id="station_ph" model="restaurant.station">
+            <field name="name">PAYMENT HANDLING</field>
+            <field name="code">PH</field>
+            <field name="positioning_area_id" ref="pos_area_frc"/>
+        </record>
+
+        <record id="station_a_b_d" model="restaurant.station">
+            <field name="name">BEVERAGES &amp; DESSERTS</field>
+            <field name="code">A-B&amp;D</field>
+            <field name="positioning_area_id" ref="pos_area_frc"/>
+        </record>
+
+        <record id="station_a_f_h" model="restaurant.station">
+            <field name="name">FRENCH FRIES/HASH BROWN</field>
+            <field name="code">A-F&amp;H</field>
+            <field name="positioning_area_id" ref="pos_area_frc"/>
+        </record>
+
+        <record id="station_3po_udp_erp" model="restaurant.station">
+            <field name="name">3PO UDP - Expeditor/Runner/Presenter</field>
+            <field name="code">3PO UDP ERP</field>
+            <field name="positioning_area_id" ref="pos_area_mds"/>
+        </record>
+
+        <record id="station_3po_w" model="restaurant.station">
+            <field name="name">3PO WALKER</field>
+            <field name="code">3PO W</field>
+            <field name="positioning_area_id" ref="pos_area_mds"/>
+        </record>
+
+        <record id="station_mds_r" model="restaurant.station">
+            <field name="name">MDS RIDER</field>
+            <field name="code">MDS R</field>
+            <field name="positioning_area_id" ref="pos_area_mds"/>
+        </record>
+
+        <record id="station_mds_ge_erp" model="restaurant.station">
+            <field name="name">MDS,GE - Expeditor/Runner/Presenter</field>
+            <field name="code">MDS,GE ERP</field>
+            <field name="positioning_area_id" ref="pos_area_mds"/>
+        </record>
+
+        <record id="station_cf_vn" model="restaurant.station">
+            <field name="name">CÀ PHÊ VIETNAM</field>
+            <field name="code">CF VN</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_ch_ds" model="restaurant.station">
+            <field name="name">CHILLER DRINKS</field>
+            <field name="code">CH DS</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_esp_mf_s" model="restaurant.station">
+            <field name="name">ESPRESSO - MILK FROTH &amp; STEAM</field>
+            <field name="code">ESP-MF&amp;S</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_f_a300_h_ds_cb" model="restaurant.station">
+            <field name="name">F-A300 HOT DRINKS (COFFEE BASE)</field>
+            <field name="code">F-A300 H DS (CB)</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_f_a300_h_ds_nc" model="restaurant.station">
+            <field name="name">F-A300 HOT DRINKS (NON COFFEE)</field>
+            <field name="code">F-A300 H DS (NC)</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_f_a300_i_ds" model="restaurant.station">
+            <field name="name">F-A300 ICE DRINKS</field>
+            <field name="code">F-A300 I DS</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_fp_ds" model="restaurant.station">
+            <field name="name">FRAPPE DRINKS</field>
+            <field name="code">FP DS</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_h_ds_cb" model="restaurant.station">
+            <field name="name">HOT DRINKS (COFFEE BASE)</field>
+            <field name="code">H DS (CB)</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_h_ds_nc" model="restaurant.station">
+            <field name="name">HOT DRINKS (NON COFFEE)</field>
+            <field name="code">H DS (NC)</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_i_ds" model="restaurant.station">
+            <field name="name">ICED DRINKS</field>
+            <field name="code">I DS</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_mcc_ck" model="restaurant.station">
+            <field name="name">McCafé CAKE</field>
+            <field name="code">McC CK</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_mcc_cl" model="restaurant.station">
+            <field name="name">McCafe CLOSE</field>
+            <field name="code">McC CL</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_mcc_op" model="restaurant.station">
+            <field name="name">McCafé OPEN</field>
+            <field name="code">McC OP</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_mcc_prep" model="restaurant.station">
+            <field name="name">McCafé PREPPING</field>
+            <field name="code">McC PREP</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_t_ds" model="restaurant.station">
+            <field name="name">TEA DRINKS</field>
+            <field name="code">T DS</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_wmf1100s_h_ds_cb" model="restaurant.station">
+            <field name="name">WMF1100s HOT DRINKS (COFFEE BASE)</field>
+            <field name="code">WMF1100s H DS (CB)</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_wmf1100s_h_ds_nc" model="restaurant.station">
+            <field name="name">WMF1100s HOT DRINKS (NON COFFEE)</field>
+            <field name="code">WMF1100s H DS (NC)</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_wmf1100s_i_ds" model="restaurant.station">
+            <field name="name">WMF1100s ICE DRINKS</field>
+            <field name="code">WMF1100s I DS</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_y_ds" model="restaurant.station">
+            <field name="name">YOGURT DRINKS</field>
+            <field name="code">Y DS</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_a_esp_mf_s" model="restaurant.station">
+            <field name="name">McCafe Coffee Base &amp; Milk</field>
+            <field name="code">A-ESP-MF&amp;S</field>
+            <field name="positioning_area_id" ref="pos_area_mcc"/>
+        </record>
+
+        <record id="station_ct_v" model="restaurant.station">
+            <field name="name">Crew Trainer Verification</field>
+            <field name="code">CT-V</field>
+            <field name="positioning_area_id" ref="pos_area_na"/>
+        </record>
+
+    </data>
+</odoo>

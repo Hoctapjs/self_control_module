@@ -1,0 +1,66 @@
+{
+  "file": "models/survey_user_input.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: survey.survey, survey.user_input; 2 classes; 1 fields",
+  "classes": [
+    {
+      "python_class": "SurveySurvey",
+      "description": "Extends survey.survey in models/survey_user_input.py.",
+      "model": null,
+      "inherit": "survey.survey",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_0213_is_exit_survey",
+          "type": "Boolean",
+          "string": "0213 Exit Interview Survey",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": "Đánh dấu khảo sát dùng cho quy trình nghỉ việc OPS 0213."
+        }
+      ],
+      "methods": [],
+      "kind": "inherit_only"
+    },
+    {
+      "python_class": "SurveyUserInput",
+      "description": "Extends survey.user_input in models/survey_user_input.py.",
+      "model": null,
+      "inherit": "survey.user_input",
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "_mark_done",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "write",
+          "type": "override",
+          "decorators": [],
+          "summary": "override"
+        },
+        {
+          "name": "_check_and_mark_exit_interview_done",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        }
+      ],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

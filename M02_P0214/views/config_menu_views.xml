@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_psm_0214_offboarding_settings_server" model="ir.actions.server">
+            <field name="name">RST Offboarding Configuration</field>
+            <field name="model_id" ref="base.model_res_company"/>
+            <field name="group_ids" eval="[(6, 0, [ref('M02_P0200.GDH_RST_HR_ADMIN_M'), ref('M02_P0200.GDH_RST_HR_HEAD_M'), ref('M02_P0200.GDH_RST_SYSTEM_ST_M')])]"/>
+            <field name="state">code</field>
+            <field name="code"><![CDATA[
+action = {
+    "type": "ir.actions.act_window",
+    "name": "RST Offboarding Configuration",
+    "res_model": "res.company",
+    "res_id": env.company.id,
+    "view_mode": "form",
+    "views": [(env.ref("M02_P0214.view_psm_0214_company_offboarding_config_form").id, "form")],
+    "target": "current",
+}
+            ]]></field>
+        </record>
+
+        <menuitem id="menu_psm_0214_offboarding_settings"
+            name="Offboarding RST"
+            parent="approvals.approvals_menu_config"
+            action="action_psm_0214_offboarding_settings_server"
+            groups="M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+            sequence="31" />
+    </data>
+</odoo>
+

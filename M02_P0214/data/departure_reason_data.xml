@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="departure_reason_personal_reasons" model="hr.departure.reason">
+            <field name="name">Personal Reasons</field>
+            <field name="sequence">40</field>
+        </record>
+
+        <record id="departure_reason_career_opportunity" model="hr.departure.reason">
+            <field name="name">Career Opportunity</field>
+            <field name="sequence">50</field>
+        </record>
+
+        <record id="departure_reason_relocation" model="hr.departure.reason">
+            <field name="name">Relocation</field>
+            <field name="sequence">60</field>
+        </record>
+
+        <record id="departure_reason_health_reasons" model="hr.departure.reason">
+            <field name="name">Health Reasons</field>
+            <field name="sequence">70</field>
+        </record>
+
+        <record id="departure_reason_study_education" model="hr.departure.reason">
+            <field name="name">Study / Education</field>
+            <field name="sequence">80</field>
+        </record>
+
+        <record id="departure_reason_end_of_contract" model="hr.departure.reason">
+            <field name="name">End of Contract</field>
+            <field name="sequence">90</field>
+        </record>
+
+        <record id="departure_reason_mutual_agreement" model="hr.departure.reason">
+            <field name="name">Mutual Agreement</field>
+            <field name="sequence">100</field>
+        </record>
+    </data>
+</odoo>

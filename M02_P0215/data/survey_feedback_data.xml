@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="survey_psm_feedback" model="survey.survey">
+            <field name="title">0215 - Feedback cai thien ngay</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="access_mode">public</field>
+            <field name="users_login_required" eval="True"/>
+            <field name="users_can_go_back" eval="True"/>
+            <field name="questions_layout">page_per_section</field>
+            <field name="lang_ids" eval="False"/>
+            <field name="description" type="html">
+                <p>Phieu ghi nhan trao doi cai thien ngay trong quy trinh 0215.</p>
+            </field>
+            <field name="description_done" type="html">
+                <p>Thong tin feedback da duoc ghi nhan.</p>
+            </field>
+        </record>
+
+        <record id="survey_psm_feedback_page_main" model="survey.question">
+            <field name="title">Noi dung feedback</field>
+            <field name="survey_id" ref="survey_psm_feedback"/>
+            <field name="sequence">1</field>
+            <field name="question_type" eval="False"/>
+            <field name="is_page" eval="True"/>
+        </record>
+
+        <record id="survey_psm_feedback_question_issue" model="survey.question">
+            <field name="survey_id" ref="survey_psm_feedback"/>
+            <field name="sequence">2</field>
+            <field name="title">Van de can cai thien</field>
+            <field name="question_type">text_box</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+
+        <record id="survey_psm_feedback_question_cause" model="survey.question">
+            <field name="survey_id" ref="survey_psm_feedback"/>
+            <field name="sequence">3</field>
+            <field name="title">Nguyen nhan</field>
+            <field name="question_type">text_box</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+
+        <record id="survey_psm_feedback_question_guidance" model="survey.question">
+            <field name="survey_id" ref="survey_psm_feedback"/>
+            <field name="sequence">4</field>
+            <field name="title">Huong dan da trao doi</field>
+            <field name="question_type">text_box</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+
+        <record id="survey_psm_feedback_question_employee_commitment" model="survey.question">
+            <field name="survey_id" ref="survey_psm_feedback"/>
+            <field name="sequence">5</field>
+            <field name="title">Cam ket cua nhan vien</field>
+            <field name="question_type">text_box</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+
+        <record id="survey_psm_feedback_question_follow_up_period" model="survey.question">
+            <field name="survey_id" ref="survey_psm_feedback"/>
+            <field name="sequence">6</field>
+            <field name="title">Thoi gian theo doi</field>
+            <field name="question_type">char_box</field>
+            <field name="question_placeholder">Vi du: 30 ngay</field>
+            <field name="constr_mandatory" eval="True"/>
+        </record>
+
+        <record id="survey_psm_feedback_question_follow_up_result" model="survey.question">
+            <field name="survey_id" ref="survey_psm_feedback"/>
+            <field name="sequence">7</field>
+            <field name="title">Ket qua sau theo doi (neu da co)</field>
+            <field name="question_type">text_box</field>
+            <field name="constr_mandatory" eval="False"/>
+        </record>
+    </data>
+</odoo>

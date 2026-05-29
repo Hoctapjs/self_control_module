@@ -1,0 +1,43 @@
+{
+  "file": "data/request_type_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "psm_request_type_maintenance",
+      "model": "x_psm_request_type",
+      "fields": {
+        "name": "Maintenance",
+        "code": "maintenance",
+        "sequence": "10"
+      }
+    },
+    {
+      "id": "psm_request_type_repair",
+      "model": "x_psm_request_type",
+      "fields": {
+        "name": "Repair",
+        "code": "repair",
+        "sequence": "20"
+      }
+    },
+    {
+      "id": "psm_request_type_inspection",
+      "model": "x_psm_request_type",
+      "fields": {
+        "name": "Inspection",
+        "code": "inspection",
+        "sequence": "30"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "x_psm_request_type"
+  ]
+}

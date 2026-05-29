@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Phòng ban chính tham gia quy trình PIF -->
+        <record id="dept_rsg" model="hr.department">
+            <field name="name">RSG</field>
+        </record>
+
+        <record id="dept_it" model="hr.department">
+            <field name="name">IT</field>
+        </record>
+
+        <record id="dept_menu" model="hr.department">
+            <field name="name">MENU</field>
+        </record>
+
+        <record id="dept_digital" model="hr.department">
+            <field name="name">DIGITAL</field>
+        </record>
+
+        <record id="dept_mkt" model="hr.department">
+            <field name="name">MKT</field>
+        </record>
+
+        <record id="dept_si" model="hr.department">
+            <field name="name">S&amp;I</field>
+        </record>
+
+        <record id="dept_sc" model="hr.department">
+            <field name="name">SC / DC</field>
+        </record>
+    </data>
+</odoo>

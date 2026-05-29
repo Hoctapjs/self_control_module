@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extend hr.employee form view to show x_psm_0214_is_rst_employee field -->
+    <record id="view_psm_employee_form_rst_extension" model="ir.ui.view">
+        <field name="name">hr.employee.form.rst.extension</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <!-- Add x_psm_0214_is_rst_employee field to the form -->
+            <xpath expr="//field[@name='employee_type']" position="after">
+                <field name="x_psm_0214_is_rst_employee" widget="boolean_toggle" class="o_psm_0214_backend_view"
+                       groups="M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

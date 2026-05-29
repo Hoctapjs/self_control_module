@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="rule_0213_survey_internal_read" model="ir.rule">
+            <field name="name">0213 internal chi xem survey exit interview</field>
+            <field name="model_id" ref="survey.model_survey_survey"/>
+            <field name="groups" eval="[
+                (6, 0, [
+                    ref('base.group_user'),
+                    ref('M02_P0200.GDH_RST_OPS_OM_M'),
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_S'),
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_M'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_S'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_M'),
+                    ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+                    ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+                ])
+            ]"/>
+            <field name="domain_force" eval="[('id', '=', ref('M02_P0213.psm_0213_survey_exit_interview'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_0213_survey_question_internal_read" model="ir.rule">
+            <field name="name">0213 internal chi xem survey question exit interview</field>
+            <field name="model_id" ref="survey.model_survey_question"/>
+            <field name="groups" eval="[
+                (6, 0, [
+                    ref('base.group_user'),
+                    ref('M02_P0200.GDH_RST_OPS_OM_M'),
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_S'),
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_M'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_S'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_M'),
+                    ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+                    ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+                ])
+            ]"/>
+            <field name="domain_force" eval="[('survey_id', '=', ref('M02_P0213.psm_0213_survey_exit_interview'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_0213_survey_question_answer_internal_read" model="ir.rule">
+            <field name="name">0213 internal chi xem survey question answer exit interview</field>
+            <field name="model_id" ref="survey.model_survey_question_answer"/>
+            <field name="groups" eval="[
+                (6, 0, [
+                    ref('base.group_user'),
+                    ref('M02_P0200.GDH_RST_OPS_OM_M'),
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_S'),
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_M'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_S'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_M'),
+                    ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+                    ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+                ])
+            ]"/>
+            <field name="domain_force" eval="[
+                '|',
+                ('question_id.survey_id', '=', ref('M02_P0213.psm_0213_survey_exit_interview')),
+                ('matrix_question_id.survey_id', '=', ref('M02_P0213.psm_0213_survey_exit_interview'))
+            ]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_0213_survey_user_input_portal_own" model="ir.rule">
+            <field name="name">0213 portal chi thao tac survey.user_input exit interview cua chinh minh</field>
+            <field name="model_id" ref="survey.model_survey_user_input"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[
+                ('survey_id.x_psm_0213_is_exit_survey', '=', True),
+                '|',
+                ('partner_id', '=', user.partner_id.id),
+                ('email', '=', user.email)
+            ]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_0213_survey_user_input_internal_write" model="ir.rule">
+            <field name="name">0213 HR/System tao sua survey.user_input exit interview</field>
+            <field name="model_id" ref="survey.model_survey_user_input"/>
+            <field name="groups" eval="[
+                (6, 0, [
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_S'),
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_M'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_M'),
+                    ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+                ])
+            ]"/>
+            <field name="domain_force" eval="[('survey_id', '=', ref('M02_P0213.psm_0213_survey_exit_interview'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_0213_survey_user_input_internal_results_read" model="ir.rule">
+            <field name="name">0213 internal chi xem ket qua survey exit interview</field>
+            <field name="model_id" ref="survey.model_survey_user_input"/>
+            <field name="groups" eval="[
+                (6, 0, [
+                    ref('base.group_user'),
+                    ref('M02_P0200.GDH_RST_OPS_OM_M'),
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_S'),
+                    ref('M02_P0200.GDH_RST_HR_ADMIN_M'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_S'),
+                    ref('M02_P0200.GDH_RST_HR_HRBP_M'),
+                    ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+                    ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+                ])
+            ]"/>
+            <field name="domain_force" eval="[
+                ('survey_id', '=', ref('M02_P0213.psm_0213_survey_exit_interview')),
+                ('state', '=', 'done')
+            ]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+    </data>
+</odoo>

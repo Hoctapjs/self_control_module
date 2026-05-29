@@ -1,0 +1,96 @@
+{
+  "file": "models/portal_event.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: portal.event; 1 classes; 5 fields",
+  "classes": [
+    {
+      "python_class": "PortalEvent",
+      "description": "Portal Upcoming Events",
+      "model": "portal.event",
+      "inherit": null,
+      "order": "date asc",
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "name",
+          "type": "Char",
+          "string": "Tên sự kiện",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "date",
+          "type": "Datetime",
+          "string": "Thời gian",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "location",
+          "type": "Char",
+          "string": "Địa điểm",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "color",
+          "type": "Selection",
+          "string": "Màu sắc",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": "[[\"primary\", \"Blue\"], [\"danger\", \"Red\"], [\"warning\", \"Yellow\"], [\"success\", \"Green\"], [\"info\", \"Cyan\"]]",
+          "default": "primary",
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "image",
+          "type": "Image",
+          "string": "Hình ảnh minh họa",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

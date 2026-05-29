@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_psm_0214_res_config_settings_form" model="ir.ui.view">
+            <field name="name">res.config.settings.psm.0214.offboarding.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="arch" type="xml">
+                <form string="RST Offboarding Configuration" class="o_psm_0214_backend_view">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>RST Offboarding Configuration</h1>
+                            <div class="text-muted">
+                                Configure the 0214 offboarding business flow within Approvals.
+                            </div>
+                        </div>
+                        <group>
+                            <group string="Context">
+                                <field name="company_id" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                        <group string="Email and Reminder Flow" col="2">
+                            <group>
+                                <field name="x_psm_0214_adecco_notification_email" placeholder="hr.vendor@example.com"/>
+                            </group>
+                        </group>
+                        <group string="Fallback Users by Role" col="3">
+                            <group>
+                                <field name="x_psm_0214_default_it_user_id" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="x_psm_0214_default_admin_user_id" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="x_psm_0214_default_hr_user_id" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

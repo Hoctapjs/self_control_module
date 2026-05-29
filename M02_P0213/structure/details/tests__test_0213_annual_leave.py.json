@@ -1,0 +1,65 @@
+{
+  "file": "tests/test_0213_annual_leave.py",
+  "type": "python",
+  "bucket": "tests",
+  "summary": "1 classes; 0 fields",
+  "classes": [
+    {
+      "python_class": "TestM02P0213AnnualLeave",
+      "description": "Python helper class TestM02P0213AnnualLeave.",
+      "model": null,
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "setUpClass",
+          "type": "method",
+          "decorators": [
+            "classmethod"
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "_create_request",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_create_validated_al_allocation",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_create_validated_al_leave",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "test_remaining_al_and_advance_compute",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_action_approve_snapshots_remaining_al",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_action_settle_advance_al_validates_amount",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        }
+      ],
+      "kind": "python_class"
+    }
+  ],
+  "routes": []
+}

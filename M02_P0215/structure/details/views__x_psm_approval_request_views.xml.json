@@ -1,0 +1,37 @@
+{
+  "file": "views/x_psm_approval_request_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "1 views",
+  "records": [
+    {
+      "id": "x_psm_approval_request_view_form_inherit",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "x_psm.approval.request.view.form.inherit",
+        "model": "approval.request",
+        "inherit_id": {
+          "ref": "approvals.approval_request_view_form"
+        },
+        "arch": ""
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "x_psm_approval_request_view_form_inherit",
+      "model": "approval.request",
+      "name": "x_psm.approval.request.view.form.inherit",
+      "inherit_id": "approvals.approval_request_view_form",
+      "file": "views/x_psm_approval_request_views.xml"
+    }
+  ],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "approval.request",
+    "ir.ui.view"
+  ]
+}

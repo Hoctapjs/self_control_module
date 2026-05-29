@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="psm_0213_email_template_adecco_notification" model="mail.template">
+            <field name="name">OPS - Thông báo nghỉ việc - Adecco</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="subject">[OPS Offboarding] Thông báo nghỉ việc - {{ object.name }}</field>
+            <field name="email_from">{{ (object.company_id.email or user.email_formatted) }}</field>
+            <field name="email_to"></field>
+            <field name="body_html" type="html">
+                <div style="margin:0;padding:24px 0;background-color:#f4f1ea;font-family:'Segoe UI',Arial,sans-serif;color:#2f2a26;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="640" style="width:640px;max-width:640px;background-color:#fffdf9;border:1px solid #eadfce;border-radius:20px;overflow:hidden;">
+                                    <tr>
+                                        <td style="padding:0;background-color:#b5121b;background-image:linear-gradient(135deg,#b5121b 0%,#da291c 58%,#ffbc0d 100%);">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                <tr>
+                                                    <td style="padding:28px 32px 22px 32px;">
+                                                        <div style="font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#ffe7a3;font-weight:700;margin-bottom:10px;">OPS Offboarding</div>
+                                                        <h1 style="margin:0;font-size:28px;line-height:1.25;color:#ffffff;font-weight:800;">Thông báo nghỉ việc gửi Adecco</h1>
+                                                        <p style="margin:10px 0 0 0;font-size:14px;line-height:1.6;color:#fff4da;">Nhờ Adecco tiếp nhận và thực hiện bước xử lý tiếp theo cho nhân sự đã hoàn tất quy trình nghỉ việc.</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:30px 32px 10px 32px;">
+                                            <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;">Kính gửi <strong>Adecco Team</strong>,</p>
+                                            <p style="margin:0 0 22px 0;font-size:15px;line-height:1.7;">Nhân viên <strong><t t-out="object.name"/></strong> đã hoàn tất thủ tục nghỉ việc tại McDonald's Việt Nam. Vui lòng hỗ trợ thực hiện các bước xử lý tiếp theo theo quy trình hiện hành.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 18px 32px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:separate;border-spacing:0;background-color:#fff7e8;border:1px solid #f2d39a;border-radius:16px;">
+                                                <tr>
+                                                    <td style="padding:18px 20px;">
+                                                        <div style="font-size:13px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:#8d5a00;margin-bottom:14px;">Thông tin nhân viên</div>
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                            <tr>
+                                                                <td style="padding:0 0 10px 0;font-size:14px;color:#6b625a;width:34%;">Họ tên</td>
+                                                                <td style="padding:0 0 10px 0;font-size:14px;color:#221f1c;font-weight:700;"><t t-out="object.name"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding:0 0 10px 0;font-size:14px;color:#6b625a;">Bộ phận</td>
+                                                                <td style="padding:0 0 10px 0;font-size:14px;color:#221f1c;font-weight:600;"><t t-out="object.department_id.name or 'N/A'"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding:0;font-size:14px;color:#6b625a;">Chức vụ</td>
+                                                                <td style="padding:0;font-size:14px;color:#221f1c;font-weight:600;"><t t-out="object.job_id.name or 'N/A'"/></td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 28px 32px;">
+                                            <div style="padding:18px 20px;background-color:#f8f5ef;border-left-width:4px;border-left-style:solid;border-left-color:#da291c;border-radius:14px;">
+                                                <div style="font-size:14px;line-height:1.7;color:#3d3833;">
+                                                    <strong style="color:#221f1c;">Đề nghị xử lý:</strong> Vui lòng tiếp nhận thông tin và thực hiện các thủ tục, liên hệ cần thiết theo quy trình Adecco.
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 30px 32px;">
+                                            <p style="margin:0;font-size:15px;line-height:1.8;">Trân trọng,<br/><strong>Phòng Nhân sự</strong><br/>McDonald's Việt Nam</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:16px 32px;background-color:#f7f2e8;border-top:1px solid #eadfce;">
+                                            <p style="margin:0;font-size:12px;line-height:1.6;color:#7b7269;">Email này được gửi tự động từ quy trình offboarding OPS. Vui lòng không trả lời nếu không cần thiết.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

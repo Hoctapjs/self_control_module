@@ -1,0 +1,37 @@
+{
+  "file": "views/hr_employee_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "1 views",
+  "records": [
+    {
+      "id": "view_psm_employee_form_rst_extension",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.employee.form.rst.extension",
+        "model": "hr.employee",
+        "inherit_id": {
+          "ref": "hr.view_employee_form"
+        },
+        "arch": ""
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_employee_form_rst_extension",
+      "model": "hr.employee",
+      "name": "hr.employee.form.rst.extension",
+      "inherit_id": "hr.view_employee_form",
+      "file": "views/hr_employee_views.xml"
+    }
+  ],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "hr.employee",
+    "ir.ui.view"
+  ]
+}

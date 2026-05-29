@@ -1,0 +1,34 @@
+{
+  "file": "data/email_template_rejection.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "email_template_psm_explanation_rejected",
+      "model": "mail.template",
+      "fields": {
+        "name": "Discipline: Explanation Rejected",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "email_from": "{{ user.email_formatted }}",
+        "email_to": "{{ object.x_psm_employee_email }}",
+        "partner_to": "",
+        "use_default_to": {
+          "eval": "False"
+        },
+        "subject": "Please resubmit your explanation - {{ object.name }}",
+        "body_html": ""
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "mail.template"
+  ]
+}

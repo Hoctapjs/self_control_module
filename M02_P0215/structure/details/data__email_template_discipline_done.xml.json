@@ -1,0 +1,96 @@
+{
+  "file": "data/email_template_discipline_done.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "3 functions/rules",
+  "records": [
+    {
+      "id": "email_template_psm_discipline_done",
+      "model": "mail.template",
+      "fields": {
+        "name": "Discipline: Improvement Completed",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "subject": "Improvement period completed - {{ object.name }}",
+        "email_from": "{{ user.email_formatted }}",
+        "email_to": "{{ object.x_psm_employee_email }}",
+        "partner_to": "",
+        "use_default_to": {
+          "eval": "False"
+        },
+        "body_html": "",
+        "auto_delete": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "email_template_psm_discipline_notified",
+      "model": "mail.template",
+      "fields": {
+        "name": "Discipline: Decision Notified",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "subject": "Disciplinary decision issued - {{ object.name }}",
+        "email_from": "{{ user.email_formatted }}",
+        "email_to": "{{ object.x_psm_employee_email }}",
+        "partner_to": "",
+        "use_default_to": {
+          "eval": "False"
+        },
+        "body_html": "",
+        "auto_delete": {
+          "eval": "True"
+        }
+      }
+    },
+    {
+      "id": "email_template_psm_discipline_active_notified",
+      "model": "mail.template",
+      "fields": {
+        "name": "Discipline: Active Notified",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "subject": "Disciplinary action is now active - {{ object.name }}",
+        "email_from": "{{ user.email_formatted }}",
+        "email_to": "{{ object.x_psm_employee_email }}",
+        "partner_to": "",
+        "use_default_to": {
+          "eval": "False"
+        },
+        "body_html": "",
+        "auto_delete": {
+          "eval": "True"
+        }
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [
+    {
+      "kind": "function",
+      "model": "ir.model.data",
+      "name": "write"
+    },
+    {
+      "kind": "function",
+      "model": "ir.model.data",
+      "name": "write"
+    },
+    {
+      "kind": "function",
+      "model": "ir.model.data",
+      "name": "write"
+    }
+  ],
+  "referenced_models": [
+    "ir.model.data",
+    "mail.template"
+  ]
+}

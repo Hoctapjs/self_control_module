@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- noupdate=1: du lieu chi tao khi install lan dau, khong bi ghi de khi update module -->
+<odoo noupdate="1">
+    <!-- ================= REQUEST TYPE: MAINTENANCE ================= -->
+    <!-- tao loai request la bao tri dinh ky -->
+    <record id="psm_request_type_maintenance" model="x_psm_request_type">
+        <!-- ten hien thi tren giao dien -->
+        <field name="name">Maintenance</field>
+        <!-- code ky thuat, dung trong logic -->
+        <field name="code">maintenance</field>
+        <!-- thu tu sap xep -->
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- ================= REQUEST TYPE: REPAIR ================= -->
+    <!-- tao loai request la sua chua -->
+    <record id="psm_request_type_repair" model="x_psm_request_type">
+        <field name="name">Repair</field>
+        <field name="code">repair</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <!-- ================= REQUEST TYPE: INSPECTION ================= -->
+    <!-- tao loai request la kiem tra -->
+    <record id="psm_request_type_inspection" model="x_psm_request_type">
+        <field name="name">Inspection</field>
+        <field name="code">inspection</field>
+        <field name="sequence">30</field>
+    </record>
+</odoo>

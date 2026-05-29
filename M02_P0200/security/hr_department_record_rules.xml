@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Record Rules: hr.department | Từ: P0200 -->
+
+    <!-- Role Member, People Manager, Department Manager: sees own department -->
+    <record id="rule_hr_department_pm_own_dept" model="ir.rule">
+        <field name="name">Department: Role Member, PM, Dept Manager see own department</field>
+        <field name="model_id" ref="hr.model_hr_department"/>
+        <field name="domain_force">[('id', 'child_of', user.employee_id.department_id.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user')), (4, ref('GDH_RST_ALL_BASE_S')), (4, ref('GDH_OPS_STORE_PM_M')), (4, ref('hr.group_hr_manager'))]"/>
+    </record>
+
+    <!-- HR Staff, System Manager: sees all -->
+    <record id="rule_hr_department_hr_staff_all" model="ir.rule">
+        <field name="name">Department: HR Staff, System Manager see all</field>
+        <field name="model_id" ref="hr.model_hr_department"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('GDH_RST_HR_RECRUITMENT_S')), (4, ref('GDH_RST_HR_CNB_S')), (4, ref('GDH_RST_HR_HRBP_S')), (4, ref('GDH_RST_HR_ADMIN_S')), (4, ref('GDH_RST_SYSTEM_ST_M'))]"/>
+    </record>
+
+
+    <record id="rule_hr_department_hierarchy" model="ir.rule">
+        <field name="name">Legacy Department Hierarchy Rule (Disabled)</field>
+        <field name="model_id" ref="hr.model_hr_department"/>
+        <field name="groups" eval="[(6, 0, [ref('M02_P0200.GDH_RST_HR_RECRUITMENT_M')])]"/>
+        <field name="active" eval="False"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read">1</field>
+        <field name="perm_write">0</field>
+        <field name="perm_create">0</field>
+        <field name="perm_unlink">0</field>
+    </record>
+</odoo>

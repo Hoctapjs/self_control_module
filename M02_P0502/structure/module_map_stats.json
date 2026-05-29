@@ -1,0 +1,64 @@
+{
+  "module_name": "M02_P0502",
+  "detail_file_count": 119,
+  "relation_count": 157,
+  "top_buckets": [
+    [
+      "notes",
+      75
+    ],
+    [
+      "models",
+      15
+    ],
+    [
+      "views",
+      8
+    ],
+    [
+      "data",
+      6
+    ],
+    [
+      "wizards",
+      3
+    ],
+    [
+      "migrations",
+      2
+    ],
+    [
+      "reports",
+      2
+    ],
+    [
+      "security",
+      2
+    ],
+    [
+      "tests",
+      2
+    ],
+    [
+      "python",
+      1
+    ],
+    [
+      "manifest",
+      1
+    ],
+    [
+      "convention",
+      1
+    ],
+    [
+      "demo",
+      1
+    ]
+  ],
+  "model_count": 15,
+  "view_count": 23,
+  "security_file_count": 2,
+  "controller_file_count": 0,
+  "sample_files": "__init__.py, __manifest__.py, convention/QUY_UOC_DAT_TEN_VA_RULE.md, data/document_sequence_data.xml, data/ir_cron_data.xml, data/maintenance_stage_data.xml, data/outside_service_sequence_data.xml, data/request_source_data.xml, data/request_type_data.xml, demo/psm_0502_demo_data.xml"
+}

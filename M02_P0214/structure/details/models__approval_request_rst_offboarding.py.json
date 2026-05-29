@@ -1,0 +1,119 @@
+{
+  "file": "models/approval_request_rst_offboarding.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: approval.request; 1 classes; 0 fields; 3 actions",
+  "classes": [
+    {
+      "python_class": "ResignationRequest",
+      "description": "Extends approval.request in models/approval_request_rst_offboarding.py.",
+      "model": null,
+      "inherit": "approval.request",
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "_compute_0214_file_hash",
+          "type": "compute",
+          "decorators": [],
+          "summary": "compute"
+        },
+        {
+          "name": "_get_0214_department_offboarding_activities",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_are_0214_department_activities_completed",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_send_settlement_with_attachment",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_check_and_send_salary_settlement",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_find_configured_offboarding_responsible",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_find_offboarding_responsible",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_activity_deadline",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0214_email_cc_for_department_activity",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_notify_dept_assignment",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_notify_missing_pic",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_template_deadline",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_schedule_offboarding_activity",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_checklist_completed",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_view_my_activities",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_pending_offboarding_subordinates",
+          "type": "action",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "action"
+        }
+      ],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

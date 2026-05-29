@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Record Rules: slide.channel + slide.slide | Từ: P0209 -->
+
+    <!-- [P0209] BASE: full access all courses -->
+    <record id="x_psm_slide_channel_base_rule" model="ir.rule">
+        <field name="name">eLearning: Odoo Base view all courses</field>
+        <field name="model_id" ref="website_slides.model_slide_channel"/>
+        <field name="groups" eval="[(4, ref('GDH_RST_ALL_BASE_S'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- [P0209] BASE: full access all slides -->
+    <record id="x_psm_slide_slide_base_rule" model="ir.rule">
+        <field name="name">eLearning: Odoo Base view all slides</field>
+        <field name="model_id" ref="website_slides.model_slide_slide"/>
+        <field name="groups" eval="[(4, ref('GDH_RST_ALL_BASE_S'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+
+    <!-- ============================================================
+         NOTE: Rules below are COMMENTED OUT because field
+         x_psm_active_department_ids is defined in M02_P0209, which
+         is NOT a dependency of M02_P0200. These rules should be
+         defined in M02_P0209.
+         ============================================================ -->
+    <!--
+        <record id="x_psm_slide_channel_department_rule" model="ir.rule">
+            <field name="name">eLearning: Channel visibility by department</field>
+            <field name="model_id" ref="website_slides.model_slide_channel" />
+            <field name="groups" eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">['|', ('x_psm_active_department_ids', '=', False),
+                ('x_psm_active_department_ids', 'in',
+                user.employee_ids.mapped('department_id').ids)]</field>
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+        </record>
+        <record id="x_psm_slide_slide_department_rule" model="ir.rule">
+            <field name="name">eLearning: Slide visibility by department</field>
+            <field name="model_id" ref="website_slides.model_slide_slide" />
+            <field name="groups" eval="[(4, ref('base.group_user'))]" />
+            <field name="domain_force">['|', ('x_psm_active_department_ids', '=', False),
+                ('x_psm_active_department_ids', 'in',
+                user.employee_ids.mapped('department_id').ids)]</field>
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_unlink" eval="0" />
+        </record>
+    -->
+</odoo>

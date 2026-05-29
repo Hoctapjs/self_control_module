@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_psm_exit_interview_report_graph" model="ir.ui.view">
+        <field name="name">x_psm_0214.exit.interview.report.graph</field>
+        <field name="model">x_psm_0214_exit_interview_report</field>
+        <field name="arch" type="xml">
+            <graph string="Exit Interview Dashboard" type="bar">
+                <field name="resignation_reason_id" type="row"/>
+                <field name="request_count" type="measure"/>
+                <field name="satisfaction_score" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_psm_exit_interview_report_pivot" model="ir.ui.view">
+        <field name="name">x_psm_0214.exit.interview.report.pivot</field>
+        <field name="model">x_psm_0214_exit_interview_report</field>
+        <field name="arch" type="xml">
+            <pivot string="Exit Interview Analysis">
+                <field name="department_id" type="row"/>
+                <field name="job_id" type="row"/>
+                <field name="request_count" type="measure"/>
+                <field name="satisfaction_score" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_psm_exit_interview_report_tree" model="ir.ui.view">
+        <field name="name">x_psm_0214.exit.interview.report.tree</field>
+        <field name="model">x_psm_0214_exit_interview_report</field>
+        <field name="arch" type="xml">
+            <list string="Exit Interview Report" create="0" delete="0" edit="0"
+                  default_order="resignation_date desc">
+                <field name="request_id"/>
+                <field name="employee_id" widget="many2one_avatar"/>
+                <field name="department_id"/>
+                <field name="job_id"/>
+                <field name="resignation_reason_id"/>
+                <field name="resignation_date"/>
+                <field name="satisfaction_score"/>
+                <field name="is_completed" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_psm_exit_interview_report_search" model="ir.ui.view">
+        <field name="name">x_psm_0214.exit.interview.report.search</field>
+        <field name="model">x_psm_0214_exit_interview_report</field>
+        <field name="arch" type="xml">
+            <search string="Exit Interview Report">
+                <field name="employee_id"/>
+                <field name="department_id"/>
+                <field name="job_id"/>
+                <field name="resignation_reason_id"/>
+                <field name="resignation_date"/>
+                <filter name="completed" string="Completed"
+                        domain="[('is_completed', '=', True)]"/>
+                <filter name="not_completed" string="Not Completed"
+                        domain="[('is_completed', '=', False)]"/>
+                <separator/>
+                <filter name="groupby_department" string="Group by Department"
+                        context="{'group_by': 'department_id'}"/>
+                <filter name="groupby_job" string="Group by Job Position"
+                        context="{'group_by': 'job_id'}"/>
+                <filter name="groupby_reason" string="Group by Reason"
+                        context="{'group_by': 'resignation_reason_id'}"/>
+                <filter name="groupby_month" string="Group by Resignation Month"
+                        context="{'group_by': 'resignation_date:month'}"/>
+                <filter name="groupby_completed" string="Group by Completed"
+                        context="{'group_by': 'is_completed'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_psm_exit_interview_dashboard" model="ir.actions.act_window">
+        <field name="name">Exit Interview Dashboard</field>
+        <field name="res_model">x_psm_0214_exit_interview_report</field>
+        <field name="view_mode">graph,pivot,list</field>
+        <field name="views" eval="[
+            (ref('view_psm_exit_interview_report_graph'), 'graph'),
+            (ref('view_psm_exit_interview_report_pivot'), 'pivot'),
+            (ref('view_psm_exit_interview_report_tree'), 'list')
+        ]"/>
+        <field name="search_view_id" ref="view_psm_exit_interview_report_search"/>
+        <field name="context">{'search_default_groupby_reason': 1}</field>
+    </record>
+
+    <menuitem id="menu_psm_exit_interview_dashboard"
+              name="Exit Interview Dashboard"
+              parent="menu_psm_rst_reports"
+              action="action_psm_exit_interview_dashboard"
+              groups="M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+              sequence="30"/>
+</odoo>

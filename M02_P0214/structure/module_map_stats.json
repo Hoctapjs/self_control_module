@@ -1,0 +1,68 @@
+{
+  "module_name": "M02_P0214",
+  "detail_file_count": 91,
+  "relation_count": 100,
+  "top_buckets": [
+    [
+      "data",
+      21
+    ],
+    [
+      "models",
+      16
+    ],
+    [
+      "notes",
+      13
+    ],
+    [
+      "views",
+      11
+    ],
+    [
+      "docs",
+      8
+    ],
+    [
+      "security",
+      5
+    ],
+    [
+      "controllers",
+      3
+    ],
+    [
+      "static",
+      3
+    ],
+    [
+      "tests",
+      3
+    ],
+    [
+      "wizards",
+      3
+    ],
+    [
+      "convention",
+      2
+    ],
+    [
+      "python",
+      1
+    ],
+    [
+      "manifest",
+      1
+    ],
+    [
+      "root",
+      1
+    ]
+  ],
+  "model_count": 14,
+  "view_count": 14,
+  "security_file_count": 4,
+  "controller_file_count": 2,
+  "sample_files": "__init__.py, __manifest__.py, BAO_CAO_RAA_SOAT_BAO_MAT_P0214.md, BEFORE_AFTER_THAY_DOI_QUYEN_0214.md, controllers/__init__.py, controllers/desktop.ini, controllers/main.py, convention/desktop.ini, convention/QUY_UOC_DAT_TEN_VA_RULE.md, DANH_SACH_TEXT_CAN_DICH_0214.md"
+}

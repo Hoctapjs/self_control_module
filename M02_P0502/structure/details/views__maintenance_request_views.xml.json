@@ -1,0 +1,512 @@
+{
+  "file": "views/maintenance_request_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "3 views, 14 actions, 14 menus",
+  "records": [
+    {
+      "id": "view_psm_maintenance_request_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.maintenance.request.form",
+        "model": "maintenance.request",
+        "inherit_id": {
+          "ref": "maintenance.hr_equipment_request_view_form"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_maintenance_request_list",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.maintenance.request.list",
+        "model": "maintenance.request",
+        "inherit_id": {
+          "ref": "maintenance.hr_equipment_request_view_tree"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_maintenance_request_search",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.maintenance.request.search",
+        "model": "maintenance.request",
+        "inherit_id": {
+          "ref": "maintenance.hr_equipment_request_view_search"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "action_psm_requests_to_plan",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Requests To Plan",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "context": "{\n            'search_default_active': 1,\n            'search_default_filter_psm_requests_to_plan': 1,\n            'search_default_group_psm_department': 1\n        }",
+        "domain": "['&', '&', ('archive', '=', False), ('stage_id.done', '=', False), '|', '&', '&', ('maintenance_type', '=', 'preventive'), ('x_psm_0502_request_source_code', '=', 'preventive_schedule'), ('x_psm_0502_lead_notified_at', '!=', False), '&', ('x_psm_0502_request_source_code', '=', 'store_request'), ('x_psm_0502_inspection_result', '=', 'action_needed')]",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_preventive_queue",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Preventive Queue",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "context": "{\n            'search_default_active': 1,\n            'search_default_filter_psm_preventive_queue': 1,\n            'search_default_group_psm_team': 1\n        }",
+        "domain": "[('maintenance_type', '=', 'preventive'), ('x_psm_0502_request_source_code', '=', 'preventive_schedule'), ('x_psm_0502_lead_notified_at', '!=', False), ('archive', '=', False), ('stage_id.done', '=', False)]",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_store_action_needed_queue",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Store Action Needed",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "context": "{\n            'search_default_active': 1,\n            'search_default_filter_psm_store_action_needed': 1,\n            'search_default_group_psm_department': 1\n        }",
+        "domain": "[('x_psm_0502_request_source_code', '=', 'store_request'), ('x_psm_0502_inspection_result', '=', 'action_needed'), ('archive', '=', False), ('stage_id.done', '=', False)]",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_overdue_queue",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Overdue Queue",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "context": "{\n            'search_default_active': 1,\n            'search_default_filter_psm_overdue_queue': 1,\n            'search_default_group_psm_department': 1\n        }",
+        "domain": "['&', '&', ('archive', '=', False), ('stage_id.done', '=', False), '|', '&', ('schedule_date', '!=', False), ('schedule_date', '<', context_today().strftime('%Y-%m-%d 00:00:00')), '&', ('schedule_date', '=', False), ('request_date', '<', context_today())]",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_ready_to_plan_queue",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Ready To Plan Queue",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "context": "{\n            'search_default_active': 1,\n            'search_default_filter_psm_ready_to_plan_queue': 1,\n            'search_default_group_psm_department': 1\n        }",
+        "domain": "[('x_psm_0502_ready_to_plan', '=', True), ('archive', '=', False), ('stage_id.done', '=', False)]",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_critical_queue",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Critical Queue",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "context": "{\n            'search_default_active': 1,\n            'search_default_filter_psm_critical_queue': 1,\n            'search_default_group_psm_department': 1\n        }",
+        "domain": "['&', '&', ('archive', '=', False), ('stage_id.done', '=', False), '|', '|', ('x_psm_0502_inspection_safety_risk', '=', 'high'), ('x_psm_0502_inspection_action_urgency', '=', 'immediate'), ('x_psm_0502_inspection_equipment_status', '=', 'stopped')]",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_lead_assigned_queue",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Lead Assigned Queue",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "context": "{\n            'search_default_active': 1,\n            'search_default_filter_psm_lead_assigned_queue': 1,\n            'search_default_group_psm_lead_notified_user': 1\n        }",
+        "domain": "[('x_psm_0502_lead_notified_user_id', '!=', False), ('archive', '=', False), ('stage_id.done', '=', False)]",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_0502_request_monitoring",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Request Monitoring",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+        "context": "{\n            'search_default_filter_psm_0502_open_requests': 1,\n            'search_default_group_psm_department': 1\n        }",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_0502_progress_monitoring",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Progress Monitoring",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+        "context": "{\n            'search_default_filter_psm_0502_open_requests': 1,\n            'search_default_group_psm_0502_stage': 1\n        }",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_0502_overdue_monitoring",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Overdue Monitoring",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+        "context": "{\n            'search_default_filter_psm_overdue_queue': 1,\n            'search_default_group_psm_department': 1\n        }",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_0502_supply_monitoring",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Supply Monitoring",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+        "context": "{\n            'search_default_filter_psm_0502_open_requests': 1,\n            'search_default_group_psm_supply_branch_status': 1\n        }",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_0502_preventive_monitoring",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Preventive Monitoring",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+        "context": "{\n            'search_default_filter_psm_preventive_request': 1,\n            'search_default_group_psm_team': 1\n        }",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_0502_intake_sla_monitoring",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Intake SLA Monitoring",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+        "context": "{\n            'search_default_group_psm_intake_sla_result': 1,\n            'search_default_filter_psm_intake_sla_pending': 1\n        }",
+        "help": ""
+      }
+    },
+    {
+      "id": "action_psm_0502_follow_up_monitoring",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Follow-up Needed",
+        "res_model": "maintenance.request",
+        "view_mode": "list,kanban,form,pivot,graph,activity",
+        "search_view_id": {
+          "ref": "view_psm_maintenance_request_search"
+        },
+        "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+        "context": "{\n            'search_default_filter_psm_follow_up_needed': 1,\n            'search_default_group_psm_department': 1\n        }",
+        "help": ""
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_maintenance_request_form",
+      "model": "maintenance.request",
+      "name": "psm.maintenance.request.form",
+      "inherit_id": "maintenance.hr_equipment_request_view_form",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_request_list",
+      "model": "maintenance.request",
+      "name": "psm.maintenance.request.list",
+      "inherit_id": "maintenance.hr_equipment_request_view_tree",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_request_search",
+      "model": "maintenance.request",
+      "name": "psm.maintenance.request.search",
+      "inherit_id": "maintenance.hr_equipment_request_view_search",
+      "file": "views/maintenance_request_views.xml"
+    }
+  ],
+  "actions": [
+    {
+      "id": "action_psm_requests_to_plan",
+      "name": "0502 Requests To Plan",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "['&', '&', ('archive', '=', False), ('stage_id.done', '=', False), '|', '&', '&', ('maintenance_type', '=', 'preventive'), ('x_psm_0502_request_source_code', '=', 'preventive_schedule'), ('x_psm_0502_lead_notified_at', '!=', False), '&', ('x_psm_0502_request_source_code', '=', 'store_request'), ('x_psm_0502_inspection_result', '=', 'action_needed')]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_preventive_queue",
+      "name": "0502 Preventive Queue",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "[('maintenance_type', '=', 'preventive'), ('x_psm_0502_request_source_code', '=', 'preventive_schedule'), ('x_psm_0502_lead_notified_at', '!=', False), ('archive', '=', False), ('stage_id.done', '=', False)]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_store_action_needed_queue",
+      "name": "0502 Store Action Needed",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "[('x_psm_0502_request_source_code', '=', 'store_request'), ('x_psm_0502_inspection_result', '=', 'action_needed'), ('archive', '=', False), ('stage_id.done', '=', False)]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_overdue_queue",
+      "name": "0502 Overdue Queue",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "['&', '&', ('archive', '=', False), ('stage_id.done', '=', False), '|', '&', ('schedule_date', '!=', False), ('schedule_date', '<', context_today().strftime('%Y-%m-%d 00:00:00')), '&', ('schedule_date', '=', False), ('request_date', '<', context_today())]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_ready_to_plan_queue",
+      "name": "0502 Ready To Plan Queue",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "[('x_psm_0502_ready_to_plan', '=', True), ('archive', '=', False), ('stage_id.done', '=', False)]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_critical_queue",
+      "name": "0502 Critical Queue",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "['&', '&', ('archive', '=', False), ('stage_id.done', '=', False), '|', '|', ('x_psm_0502_inspection_safety_risk', '=', 'high'), ('x_psm_0502_inspection_action_urgency', '=', 'immediate'), ('x_psm_0502_inspection_equipment_status', '=', 'stopped')]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_lead_assigned_queue",
+      "name": "0502 Lead Assigned Queue",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "[('x_psm_0502_lead_notified_user_id', '!=', False), ('archive', '=', False), ('stage_id.done', '=', False)]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_0502_request_monitoring",
+      "name": "0502 Request Monitoring",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_0502_progress_monitoring",
+      "name": "0502 Progress Monitoring",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_0502_overdue_monitoring",
+      "name": "0502 Overdue Monitoring",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_0502_supply_monitoring",
+      "name": "0502 Supply Monitoring",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_0502_preventive_monitoring",
+      "name": "0502 Preventive Monitoring",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_0502_intake_sla_monitoring",
+      "name": "0502 Intake SLA Monitoring",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "action_psm_0502_follow_up_monitoring",
+      "name": "0502 Follow-up Needed",
+      "res_model": "maintenance.request",
+      "view_mode": "list,kanban,form,pivot,graph,activity",
+      "domain": "[('x_psm_0502_request_source_id', '!=', False)]",
+      "file": "views/maintenance_request_views.xml"
+    }
+  ],
+  "menus": [
+    {
+      "id": "menu_psm_requests_to_plan",
+      "name": "0502 Requests To Plan",
+      "parent": "maintenance.menu_m_request",
+      "action": "action_psm_requests_to_plan",
+      "groups": "M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_preventive_queue",
+      "name": "0502 Preventive Queue",
+      "parent": "maintenance.menu_m_request",
+      "action": "action_psm_preventive_queue",
+      "groups": "M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_store_action_needed",
+      "name": "0502 Store Action Needed",
+      "parent": "maintenance.menu_m_request",
+      "action": "action_psm_store_action_needed_queue",
+      "groups": "M02_P0502.group_psm_0502_store_user,M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_overdue_queue",
+      "name": "0502 Overdue Queue",
+      "parent": "maintenance.menu_m_request",
+      "action": "action_psm_overdue_queue",
+      "groups": "M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_ready_to_plan_queue",
+      "name": "0502 Ready To Plan Queue",
+      "parent": "maintenance.menu_m_request",
+      "action": "action_psm_ready_to_plan_queue",
+      "groups": "M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_critical_queue",
+      "name": "0502 Critical Queue",
+      "parent": "maintenance.menu_m_request",
+      "action": "action_psm_critical_queue",
+      "groups": "M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_lead_assigned_queue",
+      "name": "0502 Lead Assigned Queue",
+      "parent": "maintenance.menu_m_request",
+      "action": "action_psm_lead_assigned_queue",
+      "groups": "M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_0502_request_monitoring",
+      "name": "0502 Request Monitoring",
+      "parent": "maintenance.menu_m_reports",
+      "action": "action_psm_0502_request_monitoring",
+      "groups": "M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_store_approver,M02_P0502.group_psm_0502_store_final_approver,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_0502_progress_monitoring",
+      "name": "0502 Progress Monitoring",
+      "parent": "maintenance.menu_m_reports",
+      "action": "action_psm_0502_progress_monitoring",
+      "groups": "M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_0502_preventive_monitoring",
+      "name": "0502 Preventive Monitoring",
+      "parent": "maintenance.menu_m_reports",
+      "action": "action_psm_0502_preventive_monitoring",
+      "groups": "M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_0502_supply_monitoring",
+      "name": "0502 Supply Monitoring",
+      "parent": "maintenance.menu_m_reports",
+      "action": "action_psm_0502_supply_monitoring",
+      "groups": "M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_0502_overdue_monitoring",
+      "name": "0502 Overdue Monitoring",
+      "parent": "maintenance.menu_m_reports",
+      "action": "action_psm_0502_overdue_monitoring",
+      "groups": "M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_0502_intake_sla_monitoring",
+      "name": "0502 Intake SLA Monitoring",
+      "parent": "maintenance.menu_m_reports",
+      "action": "action_psm_0502_intake_sla_monitoring",
+      "groups": "M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "menu_psm_0502_follow_up_monitoring",
+      "name": "0502 Follow-up Needed",
+      "parent": "maintenance.menu_m_reports",
+      "action": "action_psm_0502_follow_up_monitoring",
+      "groups": "M02_P0502.group_psm_0502_store_user,M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_manager",
+      "file": "views/maintenance_request_views.xml"
+    }
+  ],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.actions.act_window",
+    "ir.ui.view",
+    "maintenance.request"
+  ]
+}

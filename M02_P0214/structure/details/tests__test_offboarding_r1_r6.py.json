@@ -1,0 +1,83 @@
+{
+  "file": "tests/test_offboarding_r1_r6.py",
+  "type": "python",
+  "bucket": "tests",
+  "summary": "1 classes; 0 fields",
+  "classes": [
+    {
+      "python_class": "TestM02P0214OffboardingR1R6",
+      "description": "Python helper class TestM02P0214OffboardingR1R6.",
+      "model": null,
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "setUpClass",
+          "type": "method",
+          "decorators": [
+            "classmethod"
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "_create_request",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_create_validated_al_allocation",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_create_validated_al_leave",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "test_remaining_al_and_employee_email_helpers",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_negative_al_computes_advance_days",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_action_approve_requires_signed_resignation_file",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_finance_check_blocks_then_passes_after_settlement",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_finance_check_blocks_for_unsettled_advance_al",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_exit_interview_report_reads_linked_survey_input",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        }
+      ],
+      "kind": "python_class"
+    }
+  ],
+  "routes": []
+}

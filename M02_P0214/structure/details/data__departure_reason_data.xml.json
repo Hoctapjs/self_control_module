@@ -1,0 +1,72 @@
+{
+  "file": "data/departure_reason_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "departure_reason_personal_reasons",
+      "model": "hr.departure.reason",
+      "fields": {
+        "name": "Personal Reasons",
+        "sequence": "40"
+      }
+    },
+    {
+      "id": "departure_reason_career_opportunity",
+      "model": "hr.departure.reason",
+      "fields": {
+        "name": "Career Opportunity",
+        "sequence": "50"
+      }
+    },
+    {
+      "id": "departure_reason_relocation",
+      "model": "hr.departure.reason",
+      "fields": {
+        "name": "Relocation",
+        "sequence": "60"
+      }
+    },
+    {
+      "id": "departure_reason_health_reasons",
+      "model": "hr.departure.reason",
+      "fields": {
+        "name": "Health Reasons",
+        "sequence": "70"
+      }
+    },
+    {
+      "id": "departure_reason_study_education",
+      "model": "hr.departure.reason",
+      "fields": {
+        "name": "Study / Education",
+        "sequence": "80"
+      }
+    },
+    {
+      "id": "departure_reason_end_of_contract",
+      "model": "hr.departure.reason",
+      "fields": {
+        "name": "End of Contract",
+        "sequence": "90"
+      }
+    },
+    {
+      "id": "departure_reason_mutual_agreement",
+      "model": "hr.departure.reason",
+      "fields": {
+        "name": "Mutual Agreement",
+        "sequence": "100"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "hr.departure.reason"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "file": "data/ir_cron_data.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "ir_cron_psm_offboarding_reminder_rst",
+      "model": "ir.cron",
+      "fields": {
+        "name": "Offboarding (RST): Remind Pending Activities",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "state": "code",
+        "code": "model._cron_send_offboarding_reminders()",
+        "interval_number": "1",
+        "interval_type": "days"
+      }
+    },
+    {
+      "id": "ir_cron_psm_manager_approval_reminder_rst",
+      "model": "ir.cron",
+      "fields": {
+        "name": "Offboarding (RST): Remind Manager Approval",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "state": "code",
+        "code": "model._cron_send_manager_approval_reminders()",
+        "interval_number": "1",
+        "interval_type": "days"
+      }
+    },
+    {
+      "id": "ir_cron_psm_settlement_upload_reminder_rst",
+      "model": "ir.cron",
+      "fields": {
+        "name": "Offboarding (RST): Remind Salary Settlement Upload",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "state": "code",
+        "code": "model._cron_send_settlement_upload_reminders()",
+        "interval_number": "1",
+        "interval_type": "days"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.cron"
+  ]
+}

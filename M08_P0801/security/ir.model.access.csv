@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_x_psm_pif_object_user,x_psm_pif_object.user,model_x_psm_pif_object,base.group_user,1,1,1,1
+access_x_psm_pif_data_line_user,x_psm_pif_data_line.user,model_x_psm_pif_data_line,base.group_user,1,1,1,1
+access_x_psm_pif_process_tracking_user,x_psm_pif_process_tracking.user,model_x_psm_pif_process_tracking,base.group_user,1,1,1,1
+access_x_psm_pif_platform_user,x_psm_pif_platform.user,model_x_psm_pif_platform,base.group_user,1,1,1,1
+access_x_psm_pif_component_line_user,x_psm_pif_component_line.user,model_x_psm_pif_component_line,base.group_user,1,1,1,1
+access_x_psm_pif_display_check_user,x_psm_pif_display_check.user,model_x_psm_pif_display_check,base.group_user,1,1,1,1
+access_x_psm_pif_request_raw_line_user,x_psm_pif_request_raw_line.user,model_x_psm_pif_request_raw_line,base.group_user,1,1,1,1
+access_x_psm_pif_object_raw_line_user,x_psm_pif_object_raw_line.user,model_x_psm_pif_object_raw_line,base.group_user,1,1,1,1
+access_pif_mrp_bom_read,mrp.bom.pif.read,mrp.model_mrp_bom,base.group_user,1,0,0,0
+access_pif_mrp_bom_line_read,mrp.bom.line.pif.read,mrp.model_mrp_bom_line,base.group_user,1,0,0,0
+access_x_psm_pif_lab_history_user,x_psm_pif_lab_history.user,model_x_psm_pif_lab_history,base.group_user,1,1,1,1

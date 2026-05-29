@@ -1,0 +1,114 @@
+{
+  "file": "views/maintenance_equipment_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "5 views",
+  "records": [
+    {
+      "id": "view_psm_maintenance_equipment_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.maintenance.equipment.form",
+        "model": "maintenance.equipment",
+        "inherit_id": {
+          "ref": "maintenance.hr_equipment_view_form"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_maintenance_equipment_list",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.maintenance.equipment.list",
+        "model": "maintenance.equipment",
+        "inherit_id": {
+          "ref": "maintenance.hr_equipment_view_tree"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_maintenance_equipment_search",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.maintenance.equipment.search",
+        "model": "maintenance.equipment",
+        "inherit_id": {
+          "ref": "maintenance.hr_equipment_view_search"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_maintenance_equipment_category_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.maintenance.equipment.category.form",
+        "model": "maintenance.equipment.category",
+        "inherit_id": {
+          "ref": "maintenance.hr_equipment_category_view_form"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_maintenance_equipment_category_list",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.maintenance.equipment.category.list",
+        "model": "maintenance.equipment.category",
+        "inherit_id": {
+          "ref": "maintenance.hr_equipment_category_view_tree"
+        },
+        "arch": ""
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_maintenance_equipment_form",
+      "model": "maintenance.equipment",
+      "name": "psm.maintenance.equipment.form",
+      "inherit_id": "maintenance.hr_equipment_view_form",
+      "file": "views/maintenance_equipment_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_equipment_list",
+      "model": "maintenance.equipment",
+      "name": "psm.maintenance.equipment.list",
+      "inherit_id": "maintenance.hr_equipment_view_tree",
+      "file": "views/maintenance_equipment_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_equipment_search",
+      "model": "maintenance.equipment",
+      "name": "psm.maintenance.equipment.search",
+      "inherit_id": "maintenance.hr_equipment_view_search",
+      "file": "views/maintenance_equipment_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_equipment_category_form",
+      "model": "maintenance.equipment.category",
+      "name": "psm.maintenance.equipment.category.form",
+      "inherit_id": "maintenance.hr_equipment_category_view_form",
+      "file": "views/maintenance_equipment_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_equipment_category_list",
+      "model": "maintenance.equipment.category",
+      "name": "psm.maintenance.equipment.category.list",
+      "inherit_id": "maintenance.hr_equipment_category_view_tree",
+      "file": "views/maintenance_equipment_views.xml"
+    }
+  ],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.ui.view",
+    "maintenance.equipment",
+    "maintenance.equipment.category"
+  ]
+}

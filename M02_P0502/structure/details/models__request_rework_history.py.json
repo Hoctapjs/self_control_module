@@ -1,0 +1,139 @@
+{
+  "file": "models/request_rework_history.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: x_psm_request_rework_history; 1 classes; 7 fields",
+  "classes": [
+    {
+      "python_class": "X0502RequestReworkHistory",
+      "description": "0502 Request Rework History",
+      "model": "x_psm_request_rework_history",
+      "inherit": null,
+      "order": "x_psm_round_number desc, id desc",
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_request_id",
+          "type": "Many2one",
+          "string": "Maintenance Request",
+          "comodel": "maintenance.request",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "0502 maintenance request that this rework history line belongs to."
+        },
+        {
+          "name": "x_psm_round_number",
+          "type": "Integer",
+          "string": "Rework Round",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": 1,
+          "tracking": null,
+          "help": "Sequential rework round number recorded each time acceptance is reopened."
+        },
+        {
+          "name": "x_psm_previous_acceptance_result",
+          "type": "Selection",
+          "string": "Previous Acceptance Result",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "accepted",
+              "Accepted"
+            ],
+            [
+              "follow_up_needed",
+              "Follow-up Needed"
+            ],
+            [
+              "rework_required",
+              "Rework Required"
+            ]
+          ],
+          "default": null,
+          "tracking": null,
+          "help": "Acceptance result that triggered this rework round."
+        },
+        {
+          "name": "x_psm_rework_reason",
+          "type": "Text",
+          "string": "Rework Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Reason or follow-up note captured before the request was reopened for rework."
+        },
+        {
+          "name": "x_psm_created_by_id",
+          "type": "Many2one",
+          "string": "Created By",
+          "comodel": "res.users",
+          "required": true,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "lambda",
+          "tracking": null,
+          "help": "User who reopened the request for this rework round."
+        },
+        {
+          "name": "x_psm_created_at",
+          "type": "Datetime",
+          "string": "Created At",
+          "comodel": null,
+          "required": true,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "fields.Datetime.now",
+          "tracking": null,
+          "help": "Date and time when this rework history entry was recorded."
+        },
+        {
+          "name": "x_psm_linked_fsm_task_id",
+          "type": "Many2one",
+          "string": "Linked FSM Task",
+          "comodel": "project.task",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "FSM task that was linked to the request before the rework round was opened."
+        }
+      ],
+      "methods": [],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

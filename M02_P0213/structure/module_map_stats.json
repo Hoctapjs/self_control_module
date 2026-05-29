@@ -1,0 +1,68 @@
+{
+  "module_name": "M02_P0213",
+  "detail_file_count": 102,
+  "relation_count": 77,
+  "top_buckets": [
+    [
+      "notes",
+      46
+    ],
+    [
+      "data",
+      13
+    ],
+    [
+      "models",
+      8
+    ],
+    [
+      "static",
+      7
+    ],
+    [
+      "tests",
+      7
+    ],
+    [
+      "views",
+      6
+    ],
+    [
+      "docs",
+      4
+    ],
+    [
+      "security",
+      3
+    ],
+    [
+      "controllers",
+      2
+    ],
+    [
+      "migrations",
+      2
+    ],
+    [
+      "python",
+      1
+    ],
+    [
+      "manifest",
+      1
+    ],
+    [
+      "root",
+      1
+    ],
+    [
+      "convention",
+      1
+    ]
+  ],
+  "model_count": 9,
+  "view_count": 5,
+  "security_file_count": 3,
+  "controller_file_count": 2,
+  "sample_files": "__init__.py, __manifest__.py, AUDIT_TRAIL_2026_05.txt, controllers/__init__.py, controllers/main.py, convention/QUY_UOC_DAT_TEN_VA_RULE.md, data/approval_category_data.xml, data/config_ui_cleanup.xml, data/email_template_adecco_notification.xml, data/email_template_dept_offboarding_reminder.xml"
+}

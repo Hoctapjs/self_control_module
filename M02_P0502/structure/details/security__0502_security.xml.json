@@ -1,0 +1,660 @@
+{
+  "file": "security/0502_security.xml",
+  "type": "xml",
+  "bucket": "security",
+  "summary": "24 functions/rules",
+  "records": [
+    {
+      "id": "group_psm_0502_store_user",
+      "model": "res.groups",
+      "fields": {
+        "name": "0502 Store User",
+        "sequence": "20",
+        "privilege_id": {
+          "ref": "maintenance.res_groups_privilege_maintenance"
+        },
+        "implied_ids": {
+          "eval": "[(4, ref('base.group_user'))]"
+        },
+        "comment": "Store user can create and follow 0502 maintenance requests for their own department."
+      }
+    },
+    {
+      "id": "group_psm_0502_store_approver",
+      "model": "res.groups",
+      "fields": {
+        "name": "0502 Store Approver",
+        "sequence": "30",
+        "privilege_id": {
+          "ref": "maintenance.res_groups_privilege_maintenance"
+        },
+        "implied_ids": {
+          "eval": "[(4, ref('group_psm_0502_store_user'))]"
+        },
+        "comment": "Store approver can approve first-level 0502 proposal decisions."
+      }
+    },
+    {
+      "id": "group_psm_0502_store_final_approver",
+      "model": "res.groups",
+      "fields": {
+        "name": "0502 Store Final Approver",
+        "sequence": "40",
+        "privilege_id": {
+          "ref": "maintenance.res_groups_privilege_maintenance"
+        },
+        "implied_ids": {
+          "eval": "[(4, ref('group_psm_0502_store_approver'))]"
+        },
+        "comment": "Store final approver can approve final-level 0502 proposal decisions."
+      }
+    },
+    {
+      "id": "group_psm_0502_cmt_user",
+      "model": "res.groups",
+      "fields": {
+        "name": "0502 CMT User",
+        "sequence": "50",
+        "privilege_id": {
+          "ref": "maintenance.res_groups_privilege_maintenance"
+        },
+        "implied_ids": {
+          "eval": "[(4, ref('base.group_user'))]"
+        },
+        "comment": "CMT technician can receive, inspect, propose and execute 0502 maintenance work."
+      }
+    },
+    {
+      "id": "group_psm_0502_cmt_lead",
+      "model": "res.groups",
+      "fields": {
+        "name": "0502 CMT Lead",
+        "sequence": "60",
+        "privilege_id": {
+          "ref": "maintenance.res_groups_privilege_maintenance"
+        },
+        "implied_ids": {
+          "eval": "[(4, ref('group_psm_0502_cmt_user'))]"
+        },
+        "comment": "CMT Lead can plan, dispatch FSM work and approve material issue requests for 0502."
+      }
+    },
+    {
+      "id": "group_psm_0502_manager",
+      "model": "res.groups",
+      "fields": {
+        "name": "0502 Manager",
+        "sequence": "70",
+        "privilege_id": {
+          "ref": "maintenance.res_groups_privilege_maintenance"
+        },
+        "implied_ids": {
+          "eval": "[(4, ref('group_psm_0502_cmt_lead')), (4, ref('group_psm_0502_store_final_approver')), (4, ref('maintenance.group_equipment_manager'))]"
+        },
+        "comment": "0502 manager has full maintenance process access."
+      }
+    },
+    {
+      "id": "rule_psm_0502_request_store_department",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 Store user own department requests",
+        "model_id": {
+          "ref": "maintenance.model_maintenance_request"
+        },
+        "domain_force": "[('x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_store_user'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_request_cmt_team_member",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 CMT user team requests",
+        "model_id": {
+          "ref": "maintenance.model_maintenance_request"
+        },
+        "domain_force": "[('maintenance_team_id.member_ids', 'in', [user.id])]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_cmt_user'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_request_cmt_lead",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 CMT lead requests",
+        "model_id": {
+          "ref": "maintenance.model_maintenance_request"
+        },
+        "domain_force": "[('maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_cmt_lead'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_request_manager_all",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 manager all requests",
+        "model_id": {
+          "ref": "maintenance.model_maintenance_request"
+        },
+        "domain_force": "[(1, '=', 1)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_manager'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_material_line_store_department",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 material lines store department",
+        "model_id": {
+          "ref": "model_x_psm_request_material_line"
+        },
+        "domain_force": "[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_store_user'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_material_line_cmt_team",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 material lines CMT team",
+        "model_id": {
+          "ref": "model_x_psm_request_material_line"
+        },
+        "domain_force": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_cmt_user'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_material_line_cmt_lead",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 material lines CMT lead",
+        "model_id": {
+          "ref": "model_x_psm_request_material_line"
+        },
+        "domain_force": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_cmt_lead'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_material_line_manager_all",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 material lines manager all",
+        "model_id": {
+          "ref": "model_x_psm_request_material_line"
+        },
+        "domain_force": "[(1, '=', 1)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_manager'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_planning_history_store_department",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 planning history store department",
+        "model_id": {
+          "ref": "model_x_psm_request_planning_history"
+        },
+        "domain_force": "[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_store_user'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_planning_history_cmt_team",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 planning history CMT team",
+        "model_id": {
+          "ref": "model_x_psm_request_planning_history"
+        },
+        "domain_force": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_cmt_user'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_planning_history_cmt_lead",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 planning history CMT lead",
+        "model_id": {
+          "ref": "model_x_psm_request_planning_history"
+        },
+        "domain_force": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_cmt_lead'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_planning_history_manager_all",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 planning history manager all",
+        "model_id": {
+          "ref": "model_x_psm_request_planning_history"
+        },
+        "domain_force": "[(1, '=', 1)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_manager'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_proposal_history_store_department",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 proposal history store department",
+        "model_id": {
+          "ref": "model_x_psm_request_proposal_history"
+        },
+        "domain_force": "[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_store_user'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_proposal_history_cmt_team",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 proposal history CMT team",
+        "model_id": {
+          "ref": "model_x_psm_request_proposal_history"
+        },
+        "domain_force": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_cmt_user'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_proposal_history_cmt_lead",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 proposal history CMT lead",
+        "model_id": {
+          "ref": "model_x_psm_request_proposal_history"
+        },
+        "domain_force": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_cmt_lead'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_proposal_history_manager_all",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 proposal history manager all",
+        "model_id": {
+          "ref": "model_x_psm_request_proposal_history"
+        },
+        "domain_force": "[(1, '=', 1)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_manager'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_rework_history_store_department",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 rework history store department",
+        "model_id": {
+          "ref": "model_x_psm_request_rework_history"
+        },
+        "domain_force": "[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_store_user'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_rework_history_cmt_team",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 rework history CMT team",
+        "model_id": {
+          "ref": "model_x_psm_request_rework_history"
+        },
+        "domain_force": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_cmt_user'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_rework_history_cmt_lead",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 rework history CMT lead",
+        "model_id": {
+          "ref": "model_x_psm_request_rework_history"
+        },
+        "domain_force": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_cmt_lead'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_rework_history_manager_all",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 rework history manager all",
+        "model_id": {
+          "ref": "model_x_psm_request_rework_history"
+        },
+        "domain_force": "[(1, '=', 1)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_manager'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_outside_service_store_department",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 outside service store department",
+        "model_id": {
+          "ref": "model_x_psm_outside_service_request"
+        },
+        "domain_force": "[('x_psm_department_id', 'in', user.employee_ids.department_id.ids)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_store_user'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_outside_service_cmt_team",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 outside service CMT team",
+        "model_id": {
+          "ref": "model_x_psm_outside_service_request"
+        },
+        "domain_force": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_cmt_user'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_outside_service_cmt_lead",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 outside service CMT lead",
+        "model_id": {
+          "ref": "model_x_psm_outside_service_request"
+        },
+        "domain_force": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_cmt_lead'))]"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_0502_aux_manager_all",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0502 manager all outside service",
+        "model_id": {
+          "ref": "model_x_psm_outside_service_request"
+        },
+        "domain_force": "[(1, '=', 1)]",
+        "groups": {
+          "eval": "[(4, ref('group_psm_0502_manager'))]"
+        }
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_request_store_department",
+      "name": "0502 Store user own department requests",
+      "model_ref": {
+        "ref": "maintenance.model_maintenance_request"
+      },
+      "domain": "[('x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_request_cmt_team_member",
+      "name": "0502 CMT user team requests",
+      "model_ref": {
+        "ref": "maintenance.model_maintenance_request"
+      },
+      "domain": "[('maintenance_team_id.member_ids', 'in', [user.id])]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_request_cmt_lead",
+      "name": "0502 CMT lead requests",
+      "model_ref": {
+        "ref": "maintenance.model_maintenance_request"
+      },
+      "domain": "[('maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_request_manager_all",
+      "name": "0502 manager all requests",
+      "model_ref": {
+        "ref": "maintenance.model_maintenance_request"
+      },
+      "domain": "[(1, '=', 1)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_material_line_store_department",
+      "name": "0502 material lines store department",
+      "model_ref": {
+        "ref": "model_x_psm_request_material_line"
+      },
+      "domain": "[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_material_line_cmt_team",
+      "name": "0502 material lines CMT team",
+      "model_ref": {
+        "ref": "model_x_psm_request_material_line"
+      },
+      "domain": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_material_line_cmt_lead",
+      "name": "0502 material lines CMT lead",
+      "model_ref": {
+        "ref": "model_x_psm_request_material_line"
+      },
+      "domain": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_material_line_manager_all",
+      "name": "0502 material lines manager all",
+      "model_ref": {
+        "ref": "model_x_psm_request_material_line"
+      },
+      "domain": "[(1, '=', 1)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_planning_history_store_department",
+      "name": "0502 planning history store department",
+      "model_ref": {
+        "ref": "model_x_psm_request_planning_history"
+      },
+      "domain": "[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_planning_history_cmt_team",
+      "name": "0502 planning history CMT team",
+      "model_ref": {
+        "ref": "model_x_psm_request_planning_history"
+      },
+      "domain": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_planning_history_cmt_lead",
+      "name": "0502 planning history CMT lead",
+      "model_ref": {
+        "ref": "model_x_psm_request_planning_history"
+      },
+      "domain": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_planning_history_manager_all",
+      "name": "0502 planning history manager all",
+      "model_ref": {
+        "ref": "model_x_psm_request_planning_history"
+      },
+      "domain": "[(1, '=', 1)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_proposal_history_store_department",
+      "name": "0502 proposal history store department",
+      "model_ref": {
+        "ref": "model_x_psm_request_proposal_history"
+      },
+      "domain": "[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_proposal_history_cmt_team",
+      "name": "0502 proposal history CMT team",
+      "model_ref": {
+        "ref": "model_x_psm_request_proposal_history"
+      },
+      "domain": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_proposal_history_cmt_lead",
+      "name": "0502 proposal history CMT lead",
+      "model_ref": {
+        "ref": "model_x_psm_request_proposal_history"
+      },
+      "domain": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_proposal_history_manager_all",
+      "name": "0502 proposal history manager all",
+      "model_ref": {
+        "ref": "model_x_psm_request_proposal_history"
+      },
+      "domain": "[(1, '=', 1)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_rework_history_store_department",
+      "name": "0502 rework history store department",
+      "model_ref": {
+        "ref": "model_x_psm_request_rework_history"
+      },
+      "domain": "[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_rework_history_cmt_team",
+      "name": "0502 rework history CMT team",
+      "model_ref": {
+        "ref": "model_x_psm_request_rework_history"
+      },
+      "domain": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_rework_history_cmt_lead",
+      "name": "0502 rework history CMT lead",
+      "model_ref": {
+        "ref": "model_x_psm_request_rework_history"
+      },
+      "domain": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_rework_history_manager_all",
+      "name": "0502 rework history manager all",
+      "model_ref": {
+        "ref": "model_x_psm_request_rework_history"
+      },
+      "domain": "[(1, '=', 1)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_outside_service_store_department",
+      "name": "0502 outside service store department",
+      "model_ref": {
+        "ref": "model_x_psm_outside_service_request"
+      },
+      "domain": "[('x_psm_department_id', 'in', user.employee_ids.department_id.ids)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_outside_service_cmt_team",
+      "name": "0502 outside service CMT team",
+      "model_ref": {
+        "ref": "model_x_psm_outside_service_request"
+      },
+      "domain": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_outside_service_cmt_lead",
+      "name": "0502 outside service CMT lead",
+      "model_ref": {
+        "ref": "model_x_psm_outside_service_request"
+      },
+      "domain": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_0502_aux_manager_all",
+      "name": "0502 manager all outside service",
+      "model_ref": {
+        "ref": "model_x_psm_outside_service_request"
+      },
+      "domain": "[(1, '=', 1)]"
+    }
+  ],
+  "referenced_models": [
+    "ir.rule",
+    "res.groups"
+  ]
+}

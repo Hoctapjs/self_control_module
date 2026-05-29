@@ -1,0 +1,89 @@
+{
+  "file": "views/offboarding_report_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "2 views, 2 menus",
+  "records": [
+    {
+      "id": "view_psm_offboarding_report_tree",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "approval.request.offboarding.report.tree",
+        "model": "approval.request",
+        "group_ids": {
+          "eval": "[(6, 0, [             ref('M02_P0200.GDH_RST_HR_HRBP_S'),             ref('M02_P0200.GDH_RST_HR_HRBP_M'),             ref('M02_P0200.GDH_RST_HR_HEAD_M'),             ref('M02_P0200.GDH_RST_SYSTEM_ST_M')         ])]"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_offboarding_report_search",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "approval.request.offboarding.report.search",
+        "model": "approval.request",
+        "group_ids": {
+          "eval": "[(6, 0, [             ref('M02_P0200.GDH_RST_HR_HRBP_S'),             ref('M02_P0200.GDH_RST_HR_HRBP_M'),             ref('M02_P0200.GDH_RST_HR_HEAD_M'),             ref('M02_P0200.GDH_RST_SYSTEM_ST_M')         ])]"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "action_psm_pending_offboarding_activities",
+      "model": "ir.actions.server",
+      "fields": {
+        "name": "Offboarding Report",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "group_ids": {
+          "eval": "[(6, 0, [             ref('M02_P0200.GDH_RST_HR_HRBP_S'),             ref('M02_P0200.GDH_RST_HR_HRBP_M'),             ref('M02_P0200.GDH_RST_HR_HEAD_M'),             ref('M02_P0200.GDH_RST_SYSTEM_ST_M')         ])]"
+        },
+        "state": "code",
+        "code": "action = model.action_pending_offboarding_subordinates()"
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_offboarding_report_tree",
+      "model": "approval.request",
+      "name": "approval.request.offboarding.report.tree",
+      "inherit_id": null,
+      "file": "views/offboarding_report_views.xml"
+    },
+    {
+      "id": "view_psm_offboarding_report_search",
+      "model": "approval.request",
+      "name": "approval.request.offboarding.report.search",
+      "inherit_id": null,
+      "file": "views/offboarding_report_views.xml"
+    }
+  ],
+  "actions": [],
+  "menus": [
+    {
+      "id": "menu_psm_rst_reports",
+      "name": "Report",
+      "parent": "approvals.approvals_menu_root",
+      "action": null,
+      "groups": "M02_P0200.GDH_RST_HR_HRBP_S,M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M",
+      "file": "views/offboarding_report_views.xml"
+    },
+    {
+      "id": "menu_psm_pending_offboarding_activities",
+      "name": "Offboarding Report",
+      "parent": "menu_psm_rst_reports",
+      "action": "action_psm_pending_offboarding_activities",
+      "groups": "M02_P0200.GDH_RST_HR_HRBP_S,M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M",
+      "file": "views/offboarding_report_views.xml"
+    }
+  ],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "approval.request",
+    "ir.actions.server",
+    "ir.ui.view"
+  ]
+}

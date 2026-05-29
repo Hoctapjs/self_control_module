@@ -1,0 +1,143 @@
+{
+  "file": "views/x_psm_hr_discipline_record_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "5 views, 1 actions, 1 menus",
+  "records": [
+    {
+      "id": "seq_psm_hr_discipline_record",
+      "model": "ir.sequence",
+      "fields": {
+        "name": "Discipline Record Sequence",
+        "code": "x_psm.hr.discipline.record",
+        "prefix": "DIS/%(year)s/",
+        "padding": "4",
+        "company_id": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "view_psm_hr_discipline_record_tree",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.discipline.record.tree",
+        "model": "x_psm.hr.discipline.record",
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_hr_discipline_record_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.discipline.record.form",
+        "model": "x_psm.hr.discipline.record",
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_hr_discipline_record_kanban",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.discipline.record.kanban",
+        "model": "x_psm.hr.discipline.record",
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_hr_discipline_record_search",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.discipline.record.search",
+        "model": "x_psm.hr.discipline.record",
+        "arch": ""
+      }
+    },
+    {
+      "id": "action_psm_hr_discipline_record_main",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "Disciplinary Records",
+        "res_model": "x_psm.hr.discipline.record",
+        "view_mode": "kanban,list,form"
+      }
+    },
+    {
+      "id": "view_psm_hr_discipline_record_form_internal_ux",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.discipline.record.form.internal.ux",
+        "model": "x_psm.hr.discipline.record",
+        "inherit_id": {
+          "ref": "view_psm_hr_discipline_record_form"
+        },
+        "arch": ""
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_hr_discipline_record_tree",
+      "model": "x_psm.hr.discipline.record",
+      "name": "hr.discipline.record.tree",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_record_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_record_form",
+      "model": "x_psm.hr.discipline.record",
+      "name": "hr.discipline.record.form",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_record_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_record_kanban",
+      "model": "x_psm.hr.discipline.record",
+      "name": "hr.discipline.record.kanban",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_record_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_record_search",
+      "model": "x_psm.hr.discipline.record",
+      "name": "hr.discipline.record.search",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_record_views.xml"
+    },
+    {
+      "id": "view_psm_hr_discipline_record_form_internal_ux",
+      "model": "x_psm.hr.discipline.record",
+      "name": "hr.discipline.record.form.internal.ux",
+      "inherit_id": "view_psm_hr_discipline_record_form",
+      "file": "views/x_psm_hr_discipline_record_views.xml"
+    }
+  ],
+  "actions": [
+    {
+      "id": "action_psm_hr_discipline_record_main",
+      "name": "Disciplinary Records",
+      "res_model": "x_psm.hr.discipline.record",
+      "view_mode": "kanban,list,form",
+      "domain": null,
+      "file": "views/x_psm_hr_discipline_record_views.xml"
+    }
+  ],
+  "menus": [
+    {
+      "id": "menu_psm_hr_discipline_record_main",
+      "name": "Records",
+      "parent": "menu_psm_hr_discipline_root",
+      "action": "action_psm_hr_discipline_record_main",
+      "groups": null,
+      "file": "views/x_psm_hr_discipline_record_views.xml"
+    }
+  ],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.actions.act_window",
+    "ir.sequence",
+    "ir.ui.view",
+    "x_psm.hr.discipline.record"
+  ]
+}

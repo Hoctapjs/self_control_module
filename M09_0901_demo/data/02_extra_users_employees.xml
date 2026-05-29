@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- noupdate="1": tao 1 lan, khong ghi de password khi upgrade -->
+    <data noupdate="1">
+
+        <!-- ===== OPS ===== -->
+        <record id="demo_user_ops" model="res.users">
+            <field name="name">Trần Quang Huy (OPS)</field>
+            <field name="login">demo.ops@mcvn.local</field>
+            <field name="email">demo.ops@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+        <record id="demo_user_ops_head" model="res.users">
+            <field name="name">Phạm Văn Đạt (OPS Head)</field>
+            <field name="login">demo.ops.head@mcvn.local</field>
+            <field name="email">demo.ops.head@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+
+        <!-- ===== Finance ===== -->
+        <record id="demo_user_finance" model="res.users">
+            <field name="name">Nguyễn Thu Trang (Finance)</field>
+            <field name="login">demo.finance@mcvn.local</field>
+            <field name="email">demo.finance@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+        <record id="demo_user_finance_head" model="res.users">
+            <field name="name">Lý Thành Trung (Finance Head)</field>
+            <field name="login">demo.finance.head@mcvn.local</field>
+            <field name="email">demo.finance.head@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+
+        <!-- ===== Legal ===== -->
+        <record id="demo_user_legal" model="res.users">
+            <field name="name">Đỗ Mai Hương (Legal)</field>
+            <field name="login">demo.legal@mcvn.local</field>
+            <field name="email">demo.legal@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+        <record id="demo_user_legal_head" model="res.users">
+            <field name="name">Trịnh Bảo Khang (Legal Head)</field>
+            <field name="login">demo.legal.head@mcvn.local</field>
+            <field name="email">demo.legal.head@mcvn.local</field>
+            <field name="password">1</field>
+            <field name="group_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
+
+        <!-- ===== Employees ===== -->
+        <record id="demo_emp_ops" model="hr.employee">
+            <field name="name">Trần Quang Huy</field>
+            <field name="user_id" ref="demo_user_ops"/>
+            <field name="department_id" ref="dept_ops"/>
+        </record>
+        <record id="demo_emp_ops_head" model="hr.employee">
+            <field name="name">Phạm Văn Đạt</field>
+            <field name="user_id" ref="demo_user_ops_head"/>
+            <field name="department_id" ref="dept_ops"/>
+        </record>
+
+        <record id="demo_emp_finance" model="hr.employee">
+            <field name="name">Nguyễn Thu Trang</field>
+            <field name="user_id" ref="demo_user_finance"/>
+            <field name="department_id" ref="dept_finance"/>
+        </record>
+        <record id="demo_emp_finance_head" model="hr.employee">
+            <field name="name">Lý Thành Trung</field>
+            <field name="user_id" ref="demo_user_finance_head"/>
+            <field name="department_id" ref="dept_finance"/>
+        </record>
+
+        <record id="demo_emp_legal" model="hr.employee">
+            <field name="name">Đỗ Mai Hương</field>
+            <field name="user_id" ref="demo_user_legal"/>
+            <field name="department_id" ref="dept_legal"/>
+        </record>
+        <record id="demo_emp_legal_head" model="hr.employee">
+            <field name="name">Trịnh Bảo Khang</field>
+            <field name="user_id" ref="demo_user_legal_head"/>
+            <field name="department_id" ref="dept_legal"/>
+        </record>
+
+    </data>
+
+    <!-- Gan truong phong cho 3 phong ban moi - chay moi lan upgrade -->
+    <data>
+        <record id="dept_ops" model="hr.department">
+            <field name="manager_id" ref="demo_emp_ops_head"/>
+        </record>
+        <record id="dept_finance" model="hr.department">
+            <field name="manager_id" ref="demo_emp_finance_head"/>
+        </record>
+        <record id="dept_legal" model="hr.department">
+            <field name="manager_id" ref="demo_emp_legal_head"/>
+        </record>
+    </data>
+</odoo>

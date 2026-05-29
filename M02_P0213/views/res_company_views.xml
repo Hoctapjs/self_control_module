@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_psm_0213_company_offboarding_config_form" model="ir.ui.view">
+            <field name="name">res.company.psm.0213.offboarding.config.form</field>
+            <field name="model">res.company</field>
+            <field name="arch" type="xml">
+                <form string="OPS Offboarding Configuration" class="o_psm_0213_backend_view">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>OPS Offboarding Configuration</h1>
+                            <div class="text-muted">
+                                Configure the 0213 offboarding business flow within Approvals.
+                            </div>
+                        </div>
+                        <group>
+                            <group string="Context">
+                                <field name="name" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Adecco and Social Insurance Flow" col="2">
+                            <group>
+                                <field name="x_psm_0213_exit_survey_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0213_adecco_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0213_social_insurance_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0213_adecco_notification_email" placeholder="hr.vendor@example.com"/>
+                                <field name="x_psm_0213_social_insurance_contract_type_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="x_psm_0213_employee_reminder_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0213_department_reminder_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0213_employee_approved_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0213_completion_template_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0213_default_it_user_id" options="{'no_create': True}"/>
+                                <field name="x_psm_0213_default_on_demand_user_id" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                        <group string="Annual Leave (AL) Configuration">
+                            <field name="x_psm_0213_al_leave_type_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,402 @@
+{
+  "file": "security/security_rules.xml",
+  "type": "xml",
+  "bucket": "security",
+  "summary": "11 functions/rules",
+  "records": [
+    {
+      "id": "rule_psm_hr_discipline_record_portal_own",
+      "model": "ir.rule",
+      "fields": {
+        "name": "PSM Discipline Record Portal Own",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "domain_force": "[\n                '|',\n                ('x_psm_employee_id.user_id', '=', user.id),\n                ('x_psm_employee_id.work_email', 'in', [user.login, user.email])\n                ]",
+        "groups": {
+          "eval": "[(4, ref('base.group_portal'))]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_hr_discipline_record_store_manager",
+      "model": "ir.rule",
+      "fields": {
+        "name": "PSM Discipline Record Store Manager Scope",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "domain_force": "[\n                '|', '|', '|',\n                ('x_psm_employee_id.user_id', '=', user.id),\n                ('x_psm_company_rep_id.user_id', '=', user.id),\n                ('x_psm_employee_id.parent_id.user_id', '=', user.id),\n                '&',\n                ('x_psm_employee_id.department_id', '!=', False),\n                ('x_psm_employee_id.department_id', '=', user.employee_id.department_id.id)\n                ]",
+        "groups": {
+          "eval": "[                 (4, ref('M02_P0200.GDH_OPS_STORE_SM_M')),                 (4, ref('M02_P0200.GDH_OPS_STORE_PM_M')),                 (4, ref('M02_P0200.GDH_OPS_STORE_ST_M'))             ]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "True"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_hr_discipline_record_hrbp",
+      "model": "ir.rule",
+      "fields": {
+        "name": "PSM Discipline Record HRBP",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "domain_force": "[(1, '=', 1)]",
+        "groups": {
+          "eval": "[(4, ref('M02_P0200.GDH_RST_HR_HRBP_S'))]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "True"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_hr_discipline_record_oc",
+      "model": "ir.rule",
+      "fields": {
+        "name": "PSM Discipline Record OC",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "domain_force": "[(1, '=', 1)]",
+        "groups": {
+          "eval": "[(4, ref('M02_P0200.GDH_RST_OPS_OC_S'))]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_hr_discipline_record_rgm",
+      "model": "ir.rule",
+      "fields": {
+        "name": "PSM Discipline Record RGM Scope",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "domain_force": "[\n                '|', '|',\n                ('x_psm_employee_id.parent_id.user_id', '=', user.id),\n                ('x_psm_company_rep_id.user_id', '=', user.id),\n                '&',\n                ('x_psm_employee_id.department_id', '!=', False),\n                ('x_psm_employee_id.department_id', '=', user.employee_id.department_id.id)\n                ]",
+        "groups": {
+          "eval": "[(4, ref('M02_P0200.GDH_OPS_STORE_RGM_M'))]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_hr_discipline_explanation_portal_own",
+      "model": "ir.rule",
+      "fields": {
+        "name": "PSM Discipline Explanation Portal Own",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_explanation"
+        },
+        "domain_force": "[\n                '|',\n                ('x_psm_record_id.x_psm_employee_id.user_id', '=', user.id),\n                ('x_psm_record_id.x_psm_employee_id.work_email', 'in', [user.login, user.email])\n                ]",
+        "groups": {
+          "eval": "[(4, ref('base.group_portal'))]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_hr_discipline_explanation_store_manager",
+      "model": "ir.rule",
+      "fields": {
+        "name": "PSM Discipline Explanation Store Manager Scope",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_explanation"
+        },
+        "domain_force": "[\n                '|', '|', '|',\n                ('x_psm_record_id.x_psm_employee_id.user_id', '=', user.id),\n                ('x_psm_record_id.x_psm_company_rep_id.user_id', '=', user.id),\n                ('x_psm_record_id.x_psm_employee_id.parent_id.user_id', '=', user.id),\n                '&',\n                ('x_psm_record_id.x_psm_employee_id.department_id', '!=', False),\n                ('x_psm_record_id.x_psm_employee_id.department_id', '=',\n                user.employee_id.department_id.id)\n                ]",
+        "groups": {
+          "eval": "[                 (4, ref('M02_P0200.GDH_OPS_STORE_SM_M')),                 (4, ref('M02_P0200.GDH_OPS_STORE_PM_M')),                 (4, ref('M02_P0200.GDH_OPS_STORE_ST_M'))             ]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "True"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_hr_discipline_explanation_hrbp",
+      "model": "ir.rule",
+      "fields": {
+        "name": "PSM Discipline Explanation HRBP",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_explanation"
+        },
+        "domain_force": "[(1, '=', 1)]",
+        "groups": {
+          "eval": "[(4, ref('M02_P0200.GDH_RST_HR_HRBP_S'))]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "True"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_hr_discipline_explanation_rgm",
+      "model": "ir.rule",
+      "fields": {
+        "name": "PSM Discipline Explanation RGM Scope",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_explanation"
+        },
+        "domain_force": "[\n                '|', '|',\n                ('x_psm_record_id.x_psm_employee_id.parent_id.user_id', '=', user.id),\n                ('x_psm_record_id.x_psm_company_rep_id.user_id', '=', user.id),\n                '&',\n                ('x_psm_record_id.x_psm_employee_id.department_id', '!=', False),\n                ('x_psm_record_id.x_psm_employee_id.department_id', '=',\n                user.employee_id.department_id.id)\n                ]",
+        "groups": {
+          "eval": "[(4, ref('M02_P0200.GDH_OPS_STORE_RGM_M'))]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_hr_discipline_record_clevel",
+      "model": "ir.rule",
+      "fields": {
+        "name": "PSM Discipline Record C-Level",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "domain_force": "[(1, '=', 1)]",
+        "groups": {
+          "eval": "[(4, ref('M02_P0200.GDH_RST_MGMT_MANAGER_M'))]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "True"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_psm_hr_discipline_explanation_clevel",
+      "model": "ir.rule",
+      "fields": {
+        "name": "PSM Discipline Explanation C-Level",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_explanation"
+        },
+        "domain_force": "[(1, '=', 1)]",
+        "groups": {
+          "eval": "[(4, ref('M02_P0200.GDH_RST_MGMT_MANAGER_M'))]"
+        },
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "True"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_hr_discipline_record_portal_own",
+      "name": "PSM Discipline Record Portal Own",
+      "model_ref": {
+        "ref": "model_x_psm_hr_discipline_record"
+      },
+      "domain": "[\n                '|',\n                ('x_psm_employee_id.user_id', '=', user.id),\n                ('x_psm_employee_id.work_email', 'in', [user.login, user.email])\n                ]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_hr_discipline_record_store_manager",
+      "name": "PSM Discipline Record Store Manager Scope",
+      "model_ref": {
+        "ref": "model_x_psm_hr_discipline_record"
+      },
+      "domain": "[\n                '|', '|', '|',\n                ('x_psm_employee_id.user_id', '=', user.id),\n                ('x_psm_company_rep_id.user_id', '=', user.id),\n                ('x_psm_employee_id.parent_id.user_id', '=', user.id),\n                '&',\n                ('x_psm_employee_id.department_id', '!=', False),\n                ('x_psm_employee_id.department_id', '=', user.employee_id.department_id.id)\n                ]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_hr_discipline_record_hrbp",
+      "name": "PSM Discipline Record HRBP",
+      "model_ref": {
+        "ref": "model_x_psm_hr_discipline_record"
+      },
+      "domain": "[(1, '=', 1)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_hr_discipline_record_oc",
+      "name": "PSM Discipline Record OC",
+      "model_ref": {
+        "ref": "model_x_psm_hr_discipline_record"
+      },
+      "domain": "[(1, '=', 1)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_hr_discipline_record_rgm",
+      "name": "PSM Discipline Record RGM Scope",
+      "model_ref": {
+        "ref": "model_x_psm_hr_discipline_record"
+      },
+      "domain": "[\n                '|', '|',\n                ('x_psm_employee_id.parent_id.user_id', '=', user.id),\n                ('x_psm_company_rep_id.user_id', '=', user.id),\n                '&',\n                ('x_psm_employee_id.department_id', '!=', False),\n                ('x_psm_employee_id.department_id', '=', user.employee_id.department_id.id)\n                ]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_hr_discipline_explanation_portal_own",
+      "name": "PSM Discipline Explanation Portal Own",
+      "model_ref": {
+        "ref": "model_x_psm_hr_discipline_explanation"
+      },
+      "domain": "[\n                '|',\n                ('x_psm_record_id.x_psm_employee_id.user_id', '=', user.id),\n                ('x_psm_record_id.x_psm_employee_id.work_email', 'in', [user.login, user.email])\n                ]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_hr_discipline_explanation_store_manager",
+      "name": "PSM Discipline Explanation Store Manager Scope",
+      "model_ref": {
+        "ref": "model_x_psm_hr_discipline_explanation"
+      },
+      "domain": "[\n                '|', '|', '|',\n                ('x_psm_record_id.x_psm_employee_id.user_id', '=', user.id),\n                ('x_psm_record_id.x_psm_company_rep_id.user_id', '=', user.id),\n                ('x_psm_record_id.x_psm_employee_id.parent_id.user_id', '=', user.id),\n                '&',\n                ('x_psm_record_id.x_psm_employee_id.department_id', '!=', False),\n                ('x_psm_record_id.x_psm_employee_id.department_id', '=',\n                user.employee_id.department_id.id)\n                ]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_hr_discipline_explanation_hrbp",
+      "name": "PSM Discipline Explanation HRBP",
+      "model_ref": {
+        "ref": "model_x_psm_hr_discipline_explanation"
+      },
+      "domain": "[(1, '=', 1)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_hr_discipline_explanation_rgm",
+      "name": "PSM Discipline Explanation RGM Scope",
+      "model_ref": {
+        "ref": "model_x_psm_hr_discipline_explanation"
+      },
+      "domain": "[\n                '|', '|',\n                ('x_psm_record_id.x_psm_employee_id.parent_id.user_id', '=', user.id),\n                ('x_psm_record_id.x_psm_company_rep_id.user_id', '=', user.id),\n                '&',\n                ('x_psm_record_id.x_psm_employee_id.department_id', '!=', False),\n                ('x_psm_record_id.x_psm_employee_id.department_id', '=',\n                user.employee_id.department_id.id)\n                ]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_hr_discipline_record_clevel",
+      "name": "PSM Discipline Record C-Level",
+      "model_ref": {
+        "ref": "model_x_psm_hr_discipline_record"
+      },
+      "domain": "[(1, '=', 1)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_psm_hr_discipline_explanation_clevel",
+      "name": "PSM Discipline Explanation C-Level",
+      "model_ref": {
+        "ref": "model_x_psm_hr_discipline_explanation"
+      },
+      "domain": "[(1, '=', 1)]"
+    }
+  ],
+  "referenced_models": [
+    "ir.rule"
+  ]
+}

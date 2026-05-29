@@ -1,0 +1,96 @@
+{
+  "file": "models/purchase_order.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: purchase.order; 1 classes; 5 fields",
+  "classes": [
+    {
+      "python_class": "PurchaseOrder",
+      "description": "Extends purchase.order in models/purchase_order.py.",
+      "model": null,
+      "inherit": "purchase.order",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_0502_request_id",
+          "type": "Many2one",
+          "string": "0502 Maintenance Request",
+          "comodel": "maintenance.request",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Maintenance request that triggered this purchase order in 0502 phase 1 step 19."
+        },
+        {
+          "name": "x_psm_0502_fsm_task_id",
+          "type": "Many2one",
+          "string": "0502 FSM Task",
+          "comodel": "project.task",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_0502_request_id.x_psm_0502_fsm_task_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "FSM task linked to the 0502 maintenance request that triggered this purchase order."
+        },
+        {
+          "name": "x_psm_0502_department_id",
+          "type": "Many2one",
+          "string": "0502 Store Department",
+          "comodel": "hr.department",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_0502_request_id.x_psm_0502_department_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Store department linked to the 0502 maintenance request that triggered this purchase order."
+        },
+        {
+          "name": "x_psm_0502_source_system",
+          "type": "Selection",
+          "string": "0502 Source System",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_0502_request_id.x_psm_0502_source_system",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Source system of the 0502 maintenance request that triggered this purchase order."
+        },
+        {
+          "name": "x_psm_0502_outside_service_request_id",
+          "type": "Many2one",
+          "string": "0502 Outside Service Request",
+          "comodel": "x_psm_outside_service_request",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Outside service request that triggered this purchase order in phase 3B."
+        }
+      ],
+      "methods": [],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

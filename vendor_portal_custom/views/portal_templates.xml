@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sửa lại lỗi ẩn toàn bộ portal docs của portal_custom bằng cách hiển thị lại khi không phải employee -->
+    <template id="portal_my_home_vendor_fix" inherit_id="portal.portal_my_home" priority="105">
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="attributes">
+            <attribute name="class" remove="d-none" separator=" "/>
+            <attribute name="t-attf-class">o_portal_my_home row #{'d-none' if is_employee else ''}</attribute>
+        </xpath>
+    </template>
+
+    <!-- Thêm thẻ (card) vào Dashboard chuẩn khi không phải là employee -->
+    <template id="portal_my_home_receipts" name="Show Warehouse Receipts" inherit_id="portal.portal_my_home" priority="110">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-if="not is_employee">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="title">Phiếu Nhập Kho</t>
+                    <t t-set="url" t-value="'/my/receipts'"/>
+                    <t t-set="placeholder_count" t-value="'receipt_count'"/>
+                </t>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Trang danh sách Phiếu Nhập Kho -->
+    <template id="portal_my_receipts" name="My Receipts">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Phiếu Nhập Kho</t>
+            </t>
+            
+            <t t-if="not receipts">
+                <p>Bạn chưa có phiếu nhập kho nào.</p>
+            </t>
+            
+            <t t-if="receipts" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Mã Phiếu</th>
+                        <th>Ngày Dự Kiến</th>
+                        <th>Đơn Hàng Gốc</th>
+                        <th>Trạng Thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="receipts" t-as="receipt">
+                        <tr>
+                            <td>
+                                <a t-attf-href="/my/receipts/#{receipt.id}"><t t-esc="receipt.name"/></a>
+                            </td>
+                            <td><span t-field="receipt.scheduled_date" t-options='{"widget": "date"}'/></td>
+                            <td><span t-esc="receipt.origin"/></td>
+                            <td>
+                                <span class="badge rounded-pill text-bg-info" t-if="receipt.state == 'assigned'">Sẵn Sàng</span>
+                                <span class="badge rounded-pill text-bg-success" t-if="receipt.state == 'done'">Hoàn Thành</span>
+                                <span class="badge rounded-pill text-bg-secondary" t-if="receipt.state in ['draft', 'waiting', 'confirmed']">Đang Chờ</span>
+                                <span class="badge rounded-pill text-bg-danger" t-if="receipt.state == 'cancel'">Hủy</span>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <!-- Trang Chi Tiết Phiếu Nhập Kho -->
+    <template id="portal_receipt_page" name="Receipt Page">
+        <t t-call="portal.portal_layout">
+            <t t-set="o_portal_fullwidth_alert" t-value="True"/>
+
+            <div class="row mt16 o_portal_receipt_sidebar">
+                <!-- Sidebar -->
+                <t t-call="portal.portal_record_sidebar">
+                    <t t-set="classes" t-value="'col-lg-auto d-print-none'"/>
+
+                    <t t-set="entries">
+                        <div class="d-flex flex-column gap-4">
+                            <div class="flex-grow-1">
+                                <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+                                    <div class="btn-group flex-grow-1 me-1 mb-1">
+                                        <a class="btn btn-secondary btn-block o_download_btn" title="Download" href="#" disabled="1">
+                                            <i class="fa fa-download"/> Tải Xuống
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="navspy flex-grow-1" t-if="receipt.origin">
+                                <h5 class="mb-1">Đơn Hàng Gốc</h5>
+                                <p><t t-esc="receipt.origin"/></p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+
+                <!-- Content -->
+                <div class="col-12 col-lg justify-content-end">
+                    <div class="card p-3">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3><t t-esc="receipt.name"/></h3>
+                            <div>
+                                <span class="badge text-bg-info" t-if="receipt.state == 'assigned'" style="font-size: 16px;">Sẵn Sàng</span>
+                                <span class="badge text-bg-success" t-if="receipt.state == 'done'" style="font-size: 16px;">Hoàn Thành</span>
+                                <span class="badge text-bg-secondary" t-if="receipt.state in ['draft', 'waiting', 'confirmed']" style="font-size: 16px;">Đang Chờ</span>
+                                <span class="badge text-bg-danger" t-if="receipt.state == 'cancel'" style="font-size: 16px;">Hủy</span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <strong>Ngày Dự Kiến:</strong> <span t-field="receipt.scheduled_date" t-options='{"widget": "date"}'/>
+                            </div>
+                            <div class="col-6" t-if="receipt.date_done">
+                                <strong>Ngày Hoàn Thành:</strong> <span t-field="receipt.date_done" t-options='{"widget": "date"}'/>
+                            </div>
+                        </div>
+
+                        <h4>Chi tiết Hàng Hóa</h4>
+                        <table class="table table-sm table-striped">
+                            <thead class="bg-100">
+                                <tr>
+                                    <th>Sản Phẩm</th>
+                                    <th class="text-end">Số Lượng Yêu Cầu</th>
+                                    <th class="text-end">Số Lượng Đã Nhận</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="receipt.move_ids_without_package" t-as="move">
+                                    <tr>
+                                        <td><span t-field="move.product_id.display_name"/></td>
+                                        <td class="text-end"><span t-esc="move.product_uom_qty"/> <span t-field="move.product_uom.name"/></td>
+                                        <td class="text-end"><span t-esc="move.quantity"/> <span t-field="move.product_uom.name"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

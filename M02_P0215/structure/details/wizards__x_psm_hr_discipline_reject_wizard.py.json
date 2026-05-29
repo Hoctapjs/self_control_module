@@ -1,0 +1,106 @@
+{
+  "file": "wizards/x_psm_hr_discipline_reject_wizard.py",
+  "type": "python",
+  "bucket": "wizards",
+  "summary": "models: x_psm.hr.discipline.reject.wizard; 1 classes; 4 fields; 3 actions",
+  "classes": [
+    {
+      "python_class": "HrDisciplineRejectWizard",
+      "description": "Reject Explanation Wizard",
+      "model": "x_psm.hr.discipline.reject.wizard",
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_mode",
+          "type": "Selection",
+          "string": null,
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": "[[\"explanation\", \"Reject Explanation\"], [\"skip_hearing\", \"Skip Hearing\"], [\"ceo_reject\", \"CEO Reject\"]]",
+          "default": "explanation",
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_record_id",
+          "type": "Many2one",
+          "string": null,
+          "comodel": "x_psm.hr.discipline.record",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_reason",
+          "type": "Text",
+          "string": "Reason",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_rejection_reason",
+          "type": "Text",
+          "string": "Rejection Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [
+        {
+          "name": "_x_psm_get_reason",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_confirm_reject",
+          "type": "action",
+          "decorators": [],
+          "summary": "Confirm rejection and send email to employee"
+        },
+        {
+          "name": "action_psm_skip_hearing",
+          "type": "action",
+          "decorators": [],
+          "summary": "Confirm skip hearing reason, then move record to proposal."
+        },
+        {
+          "name": "action_psm_ceo_reject",
+          "type": "action",
+          "decorators": [],
+          "summary": "Confirm CEO rejection reason, then return record to issued."
+        }
+      ],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

@@ -1,0 +1,30 @@
+{
+  "file": "data/email_template_manager_approval_reminder.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "email_template_manager_approval_reminder",
+      "model": "mail.template",
+      "fields": {
+        "name": "RST - Nhắc quản lý duyệt đơn nghỉ việc",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "subject": "[RST Offboarding] Bạn có đơn nghỉ việc cần duyệt - {{ object.employee_id.name or object.request_owner_id.name }}",
+        "email_from": "{{ (object.company_id.email or user.email) }}",
+        "body_html": "",
+        "auto_delete": "True"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "mail.template"
+  ]
+}

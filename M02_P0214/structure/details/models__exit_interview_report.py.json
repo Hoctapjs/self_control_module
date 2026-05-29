@@ -1,0 +1,163 @@
+{
+  "file": "models/exit_interview_report.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: x_psm_0214_exit_interview_report; 1 classes; 9 fields",
+  "classes": [
+    {
+      "python_class": "ExitInterviewReport",
+      "description": "Exit Interview Report",
+      "model": "x_psm_0214_exit_interview_report",
+      "inherit": null,
+      "order": null,
+      "rec_name": "employee_id",
+      "fields": [
+        {
+          "name": "request_id",
+          "type": "Many2one",
+          "string": "Resignation Request",
+          "comodel": "approval.request",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "employee_id",
+          "type": "Many2one",
+          "string": "Employee",
+          "comodel": "hr.employee",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "department_id",
+          "type": "Many2one",
+          "string": "Department",
+          "comodel": "hr.department",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "job_id",
+          "type": "Many2one",
+          "string": "Job Position",
+          "comodel": "hr.job",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "resignation_reason_id",
+          "type": "Many2one",
+          "string": "Resignation Reason",
+          "comodel": "hr.departure.reason",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "resignation_date",
+          "type": "Date",
+          "string": "Resignation Date",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "satisfaction_score",
+          "type": "Float",
+          "string": "Satisfaction Score (%)",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "is_completed",
+          "type": "Boolean",
+          "string": "Completed",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "request_count",
+          "type": "Integer",
+          "string": "Number of Surveys",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [
+        {
+          "name": "init",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        }
+      ],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

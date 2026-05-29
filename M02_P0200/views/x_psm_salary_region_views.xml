@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ========================================== -->
+    <!-- Tree/List View: Vùng Lương                -->
+    <!-- ========================================== -->
+    <record id="view_x_psm_salary_region_tree" model="ir.ui.view">
+        <field name="name">x_psm_salary_region.list</field>
+        <field name="model">x_psm_salary_region</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ========================================== -->
+    <!-- Form View: Vùng Lương                    -->
+    <!-- ========================================== -->
+    <record id="view_x_psm_salary_region_form" model="ir.ui.view">
+        <field name="name">x_psm_salary_region.form</field>
+        <field name="model">x_psm_salary_region</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ========================================== -->
+    <!-- Search View: Vùng Lương                   -->
+    <!-- ========================================== -->
+    <record id="view_x_psm_salary_region_search" model="ir.ui.view">
+        <field name="name">x_psm_salary_region.search</field>
+        <field name="model">x_psm_salary_region</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ========================================== -->
+    <!-- Action: Vùng Lương                        -->
+    <!-- ========================================== -->
+    <record id="action_x_psm_salary_region" model="ir.actions.act_window">
+        <field name="name">Vùng Lương</field>
+        <field name="res_model">x_psm_salary_region</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_x_psm_salary_region_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo vùng lương mới
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_x_psm_salary_region"
+              name="Vùng Lương"
+              parent="contacts.res_partner_menu_config"
+              action="action_x_psm_salary_region"
+              sequence="80"/>
+
+</odoo>

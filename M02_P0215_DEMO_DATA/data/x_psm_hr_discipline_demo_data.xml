@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Demo departments -->
+        <record id="dept_demo_0215_store_ops" model="hr.department">
+            <field name="name">0215 Demo Store Operations</field>
+        </record>
+
+        <record id="dept_demo_0215_hr" model="hr.department">
+            <field name="name">0215 Demo HR</field>
+        </record>
+
+        <!-- Demo users -->
+        <record id="user_demo_0215_rgm" model="res.users">
+            <field name="name">0215 Demo RGM</field>
+            <field name="login">demo0215_rgm</field>
+            <field name="password">123</field>
+            <field name="email">demo0215_rgm@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('M02_P0200.GDH_OPS_STORE_RGM_M')])]"/>
+        </record>
+
+        <record id="user_demo_0215_sm" model="res.users">
+            <field name="name">0215 Demo Shift Manager</field>
+            <field name="login">demo0215_sm</field>
+            <field name="password">123</field>
+            <field name="email">demo0215_sm@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('M02_P0200.GDH_OPS_STORE_SM_M')])]"/>
+        </record>
+
+        <record id="user_demo_0215_hrbp" model="res.users">
+            <field name="name">0215 Demo HRBP</field>
+            <field name="login">demo0215_hrbp</field>
+            <field name="password">123</field>
+            <field name="email">demo0215_hrbp@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('M02_P0200.GDH_RST_HR_HRBP_S')])]"/>
+        </record>
+
+        <record id="user_demo_0215_hr_manager" model="res.users">
+            <field name="name">0215 Demo HR Manager</field>
+            <field name="login">demo0215_hrmgr</field>
+            <field name="password">123</field>
+            <field name="email">demo0215_hrmgr@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('hr.group_hr_manager'), ref('approvals.group_approval_manager')])]"/>
+        </record>
+
+        <record id="user_demo_0215_employee_a" model="res.users">
+            <field name="name">0215 Demo Employee A</field>
+            <field name="login">demo0215_emp_a</field>
+            <field name="password">123</field>
+            <field name="email">demo0215_emp_a@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <record id="user_demo_0215_employee_b" model="res.users">
+            <field name="name">0215 Demo Employee B</field>
+            <field name="login">demo0215_emp_b</field>
+            <field name="password">123</field>
+            <field name="email">demo0215_emp_b@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <record id="user_demo_0215_employee_c" model="res.users">
+            <field name="name">0215 Demo Employee C</field>
+            <field name="login">demo0215_emp_c</field>
+            <field name="password">123</field>
+            <field name="email">demo0215_emp_c@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <!-- Demo employees -->
+        <record id="emp_demo_0215_rgm" model="hr.employee">
+            <field name="name">0215 Demo RGM</field>
+            <field name="user_id" ref="user_demo_0215_rgm"/>
+            <field name="department_id" ref="dept_demo_0215_store_ops"/>
+            <field name="work_email">demo0215_rgm@example.com</field>
+        </record>
+
+        <record id="emp_demo_0215_sm" model="hr.employee">
+            <field name="name">0215 Demo Shift Manager</field>
+            <field name="user_id" ref="user_demo_0215_sm"/>
+            <field name="department_id" ref="dept_demo_0215_store_ops"/>
+            <field name="parent_id" ref="emp_demo_0215_rgm"/>
+            <field name="work_email">demo0215_sm@example.com</field>
+        </record>
+
+        <record id="emp_demo_0215_hrbp" model="hr.employee">
+            <field name="name">0215 Demo HRBP</field>
+            <field name="user_id" ref="user_demo_0215_hrbp"/>
+            <field name="department_id" ref="dept_demo_0215_hr"/>
+            <field name="work_email">demo0215_hrbp@example.com</field>
+        </record>
+
+        <record id="emp_demo_0215_hr_manager" model="hr.employee">
+            <field name="name">0215 Demo HR Manager</field>
+            <field name="user_id" ref="user_demo_0215_hr_manager"/>
+            <field name="department_id" ref="dept_demo_0215_hr"/>
+            <field name="work_email">demo0215_hrmgr@example.com</field>
+        </record>
+
+        <record id="emp_demo_0215_employee_a" model="hr.employee">
+            <field name="name">0215 Demo Employee A</field>
+            <field name="user_id" ref="user_demo_0215_employee_a"/>
+            <field name="department_id" ref="dept_demo_0215_store_ops"/>
+            <field name="parent_id" ref="emp_demo_0215_rgm"/>
+            <field name="work_email">demo0215_emp_a@example.com</field>
+        </record>
+
+        <record id="emp_demo_0215_employee_b" model="hr.employee">
+            <field name="name">0215 Demo Employee B</field>
+            <field name="user_id" ref="user_demo_0215_employee_b"/>
+            <field name="department_id" ref="dept_demo_0215_store_ops"/>
+            <field name="parent_id" ref="emp_demo_0215_rgm"/>
+            <field name="work_email">demo0215_emp_b@example.com</field>
+        </record>
+
+        <record id="emp_demo_0215_employee_c" model="hr.employee">
+            <field name="name">0215 Demo Employee C</field>
+            <field name="user_id" ref="user_demo_0215_employee_c"/>
+            <field name="department_id" ref="dept_demo_0215_hr"/>
+            <field name="parent_id" ref="emp_demo_0215_hrbp"/>
+            <field name="work_email">demo0215_emp_c@example.com</field>
+        </record>
+
+        <!-- Demo record 1: newly created -->
+        <record id="x_psm_discipline_demo_record_draft" model="x_psm.hr.discipline.record">
+            <field name="name">DEMO-0215-DRAFT</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_a"/>
+            <field name="x_psm_violation_type">Late arrival / early leave without permission</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-05-05</field>
+            <field name="x_psm_discipline_purpose">discipline</field>
+            <field name="x_psm_section_i_description">The employee arrived 25 minutes late for the shift without notifying the shift manager in advance.</field>
+        </record>
+
+        <!-- Demo record 2: waiting for RGM quick handling decision -->
+        <record id="x_psm_discipline_demo_record_under_review" model="x_psm.hr.discipline.record">
+            <field name="name">DEMO-0215-UNDER-REVIEW</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_a"/>
+            <field name="x_psm_violation_type">Eating during working hours outside the designated area</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-05-06</field>
+            <field name="state">under_review</field>
+            <field name="x_psm_employee_explanation">The employee confirmed the violation and acknowledged the initial reminder.</field>
+            <field name="x_psm_explanation_date">2026-05-06</field>
+            <field name="x_psm_section_i_description">The employee ate in the service area while assigned to lobby duty.</field>
+            <field name="x_psm_section_ii_feedback">I confirm the violation and will not repeat it.</field>
+        </record>
+
+        <!-- Demo record 3: company-level decision issued, ready for approval submission -->
+        <record id="x_psm_discipline_demo_record_company_issued" model="x_psm.hr.discipline.record">
+            <field name="name">DEMO-0215-COMPANY-ISSUED</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_b"/>
+            <field name="x_psm_violation_type">Verbal harassment</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_2"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-05-02</field>
+            <field name="state">issued</field>
+            <field name="x_psm_discipline_level">company</field>
+            <field name="x_psm_action_id" ref="M02_P0215.x_psm_action_company_written_warning"/>
+            <field name="x_psm_issued_date">2026-05-04</field>
+            <field name="x_psm_employee_explanation">The employee stated that the reaction happened during a heated shift dispute.</field>
+            <field name="x_psm_explanation_date">2026-05-03</field>
+            <field name="x_psm_section_i_description">The manager recorded inappropriate language toward a coworker in the kitchen area.</field>
+            <field name="x_psm_section_ii_feedback">I acknowledge the inappropriate language and agree to cooperate.</field>
+            <field name="x_psm_meeting_notes">The record has been summarized by HRBP and is ready for company-level approval submission.</field>
+        </record>
+
+        <!-- Demo record 4: store-level decision notified, waiting for employee acceptance or refusal -->
+        <record id="x_psm_discipline_demo_record_notified" model="x_psm.hr.discipline.record">
+            <field name="name">DEMO-0215-NOTIFIED</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_b"/>
+            <field name="x_psm_violation_type">Incorrect uniform</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-05-01</field>
+            <field name="state">notified</field>
+            <field name="x_psm_discipline_level">store</field>
+            <field name="x_psm_action_id" ref="M02_P0215.x_psm_action_store_counseling_1"/>
+            <field name="x_psm_issued_date">2026-05-03</field>
+            <field name="x_psm_section_i_description">The employee did not wear the full required uniform when starting the morning shift.</field>
+            <field name="x_psm_section_ii_feedback">I have received the notice and am reviewing my response.</field>
+        </record>
+
+        <!-- Demo record 5: completed feedback, currently active -->
+        <record id="x_psm_discipline_demo_record_active_feedback" model="x_psm.hr.discipline.record">
+            <field name="name">DEMO-0215-ACTIVE-FEEDBACK</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_a"/>
+            <field name="x_psm_violation_type">Improvement feedback after store reminder</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_rgm"/>
+            <field name="x_psm_date">2026-04-20</field>
+            <field name="state">active</field>
+            <field name="x_psm_discipline_level">store</field>
+            <field name="x_psm_action_id" ref="M02_P0215.x_psm_action_store_feedback"/>
+            <field name="x_psm_start_date">2026-04-21</field>
+            <field name="x_psm_is_accepted">1</field>
+            <field name="x_psm_employee_response_date">2026-04-21</field>
+            <field name="x_psm_section_iii_identification">RGM determined this is a minor violation, prioritizing feedback and 30-day follow-up.</field>
+            <field name="x_psm_section_iv_agreement">The employee agreed to the improvement plan and committed to punctuality and shift compliance.</field>
+        </record>
+
+        <!-- Demo record 6: expired history for repeat-offense testing -->
+        <record id="x_psm_discipline_demo_record_expired_history" model="x_psm.hr.discipline.record">
+            <field name="name">DEMO-0215-EXPIRED</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_a"/>
+            <field name="x_psm_violation_type">Late arrival / early leave without permission</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_rgm"/>
+            <field name="x_psm_date">2026-03-01</field>
+            <field name="state">expired</field>
+            <field name="x_psm_discipline_level">store</field>
+            <field name="x_psm_action_id" ref="M02_P0215.x_psm_action_store_counseling_1"/>
+            <field name="x_psm_issued_date">2026-03-02</field>
+            <field name="x_psm_start_date">2026-03-02</field>
+            <field name="x_psm_is_accepted">1</field>
+            <field name="x_psm_employee_response_date">2026-03-02</field>
+            <field name="x_psm_section_i_description">Historical record used to test repeat-offense detection.</field>
+            <field name="x_psm_section_ii_feedback">The employee completed the previous improvement period.</field>
+        </record>
+
+        <!-- Violation-person-count report matrix: 2026-04-01 to 2026-04-05 = 5 records / 3 employees -->
+        <record id="x_psm_discipline_report_case1_emp_a_1" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE1-A1</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_a"/>
+            <field name="x_psm_violation_type">Report matrix case 1 - employee A attempt 1</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-04-01</field>
+            <field name="x_psm_section_i_description">Sample data used to test total record count and distinct violating employee count.</field>
+        </record>
+
+        <record id="x_psm_discipline_report_case1_emp_a_2" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE1-A2</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_a"/>
+            <field name="x_psm_violation_type">Report matrix case 1 - employee A attempt 2</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-04-02</field>
+            <field name="x_psm_section_i_description">Same employee A, used to confirm distinct employee count does not increase with record count.</field>
+        </record>
+
+        <record id="x_psm_discipline_report_case1_emp_b_1" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE1-B1</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_b"/>
+            <field name="x_psm_violation_type">Report matrix case 1 - employee B attempt 1</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-04-03</field>
+            <field name="x_psm_section_i_description">Employee B within the same Case 1 date range.</field>
+        </record>
+
+        <record id="x_psm_discipline_report_case1_emp_b_2" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE1-B2</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_b"/>
+            <field name="x_psm_violation_type">Report matrix case 1 - employee B attempt 2</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-04-04</field>
+            <field name="x_psm_section_i_description">Employee B has one additional record to test record counting.</field>
+        </record>
+
+        <record id="x_psm_discipline_report_case1_emp_c_1" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE1-C1</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_c"/>
+            <field name="x_psm_violation_type">Report matrix case 1 - employee C attempt 1</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_2"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_hrbp"/>
+            <field name="x_psm_date">2026-04-05</field>
+            <field name="x_psm_section_i_description">Employee C belongs to the HR department for department-based permission testing.</field>
+        </record>
+
+        <!-- Violation-person-count report matrix: 2026-04-10 to 2026-04-12 = 3 records / 1 employee -->
+        <record id="x_psm_discipline_report_case2_emp_a_1" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE2-A1</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_a"/>
+            <field name="x_psm_violation_type">Report matrix case 2 - employee A attempt 1</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-04-10</field>
+            <field name="x_psm_section_i_description">Case 2 includes 3 records for the same employee.</field>
+        </record>
+
+        <record id="x_psm_discipline_report_case2_emp_a_2" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE2-A2</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_a"/>
+            <field name="x_psm_violation_type">Report matrix case 2 - employee A attempt 2</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-04-11</field>
+            <field name="x_psm_section_i_description">Case 2 second record for the same employee A.</field>
+        </record>
+
+        <record id="x_psm_discipline_report_case2_emp_a_3" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE2-A3</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_a"/>
+            <field name="x_psm_violation_type">Report matrix case 2 - employee A attempt 3</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-04-12</field>
+            <field name="x_psm_section_i_description">Case 2 third record for the same employee A.</field>
+        </record>
+
+        <!-- Violation-person-count report matrix: 2026-04-24 to 2026-04-27 = cancel and active-state testing -->
+        <record id="x_psm_discipline_report_case3_active_a" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE3-ACTIVE-A</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_a"/>
+            <field name="x_psm_violation_type">Report matrix case 3 - active employee A</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_rgm"/>
+            <field name="x_psm_date">2026-04-24</field>
+            <field name="state">active</field>
+            <field name="x_psm_discipline_level">store</field>
+            <field name="x_psm_action_id" ref="M02_P0215.x_psm_action_store_feedback"/>
+            <field name="x_psm_start_date">2026-04-24</field>
+            <field name="x_psm_section_i_description">First active record for state-filter testing.</field>
+        </record>
+
+        <record id="x_psm_discipline_report_case3_draft_b" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE3-DRAFT-B</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_b"/>
+            <field name="x_psm_violation_type">Report matrix case 3 - draft employee B</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-04-25</field>
+            <field name="x_psm_section_i_description">Non-cancelled record used to test the default exclusion of cancelled records.</field>
+        </record>
+
+        <record id="x_psm_discipline_report_case3_active_c" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE3-ACTIVE-C</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_c"/>
+            <field name="x_psm_violation_type">Report matrix case 3 - active employee C</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_2"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_hrbp"/>
+            <field name="x_psm_date">2026-04-26</field>
+            <field name="state">active</field>
+            <field name="x_psm_discipline_level">store</field>
+            <field name="x_psm_action_id" ref="M02_P0215.x_psm_action_store_feedback"/>
+            <field name="x_psm_start_date">2026-04-26</field>
+            <field name="x_psm_section_i_description">Second active record used to test state filtering across multiple employees.</field>
+        </record>
+
+        <record id="x_psm_discipline_report_case3_cancel_a" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE3-CANCEL-A</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_a"/>
+            <field name="x_psm_violation_type">Report matrix case 3 - cancel employee A</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_rgm"/>
+            <field name="x_psm_date">2026-04-27</field>
+            <field name="state">cancel</field>
+            <field name="x_psm_section_i_description">Cancelled record used to test the include-cancelled option.</field>
+        </record>
+
+        <!-- Violation-person-count report matrix: 2026-04-28 to 2026-04-29 = SM versus HRBP permission testing -->
+        <record id="x_psm_discipline_report_case7_store_a" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE7-STORE-A</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_a"/>
+            <field name="x_psm_violation_type">Report matrix case 7 - store employee A</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-04-28</field>
+            <field name="x_psm_section_i_description">The demo SM can see this record because it belongs to the same Store Operations department.</field>
+        </record>
+
+        <record id="x_psm_discipline_report_case7_store_b" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE7-STORE-B</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_b"/>
+            <field name="x_psm_violation_type">Report matrix case 7 - store employee B</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_1"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_sm"/>
+            <field name="x_psm_date">2026-04-28</field>
+            <field name="x_psm_section_i_description">The demo SM can see this record because it belongs to the same Store Operations department.</field>
+        </record>
+
+        <record id="x_psm_discipline_report_case7_hr_c" model="x_psm.hr.discipline.record">
+            <field name="name">REPORT-0215-CASE7-HR-C</field>
+            <field name="x_psm_employee_id" ref="emp_demo_0215_employee_c"/>
+            <field name="x_psm_violation_type">Report matrix case 7 - HR employee C</field>
+            <field name="x_psm_violation_category_id" ref="M02_P0215.x_psm_violation_category_2"/>
+            <field name="x_psm_company_rep_id" ref="emp_demo_0215_hrbp"/>
+            <field name="x_psm_date">2026-04-29</field>
+            <field name="x_psm_section_i_description">The demo SM should not see this record; HRBP and HR Manager use it to confirm broader access.</field>
+        </record>
+
+        <!-- Demo explanation history -->
+        <record id="x_psm_discipline_demo_explanation_company_issued" model="x_psm.hr.discipline.explanation">
+            <field name="x_psm_record_id" ref="x_psm_discipline_demo_record_company_issued"/>
+            <field name="sequence">1</field>
+            <field name="x_psm_incident_date_time">2026-05-02 09:15:00</field>
+            <field name="x_psm_incident_location">0215 demo kitchen area</field>
+            <field name="x_psm_witness_names">0215 Demo Shift Manager</field>
+            <field name="x_psm_explanation_content">The employee confirmed the dispute and the use of inappropriate language.</field>
+            <field name="x_psm_explanation_reason">High work pressure during peak hours.</field>
+            <field name="x_psm_explanation_commitment">Commits to adjusting attitude and not repeating the behavior.</field>
+            <field name="state">accepted</field>
+        </record>
+    </data>
+</odoo>

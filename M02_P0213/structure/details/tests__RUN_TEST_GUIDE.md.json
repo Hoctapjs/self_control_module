@@ -1,0 +1,6 @@
+{
+  "file": "tests/RUN_TEST_GUIDE.md",
+  "type": "document",
+  "bucket": "tests",
+  "summary": "# 🧪 HƯỚNG DẪN CHẠY TEST — Dành cho người mới **File test:** `addons/M02_P0213/tests/test_email_template_fixes.py` --- ## I. CHUẨN BỊ ### Điều kiện - ✅ Odoo đ..."
+}

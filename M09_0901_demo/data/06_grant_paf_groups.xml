@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+            Gan group M09_0901 cho cac user demo M08_P0801_demo + M09_0901_demo
+            de:
+              - demo.mkt co the tao/sua PAF (PAF Creator)
+              - demo.si / demo.ops / demo.finance / demo.sc / demo.legal
+                co the danh gia line cua minh
+              - cac *.head user co quyen duyet Head, dong thoi
+                demo.mkt.head duyet C-Level
+
+            Khong gan group thong qua post_init_hook (de tranh phai chay
+            hook lai khi upgrade) - dat o data file de Odoo tu reconcile
+            khi upgrade.
+        -->
+
+        <!-- MKT: tao PAF + xem moi PAF -->
+        <function name="write" model="res.users">
+            <value
+                model="res.users"
+                search="[('id', 'in', [
+                    ref('M08_P0801_demo.demo_user_mkt'),
+                    ref('M08_P0801_demo.demo_user_mkt_head'),
+                ])]"
+            />
+            <value eval="{'group_ids': [(4, ref('M09_0901.MKT_0901_creator'))]}"/>
+        </function>
+
+        <!-- S&I -->
+        <function name="write" model="res.users">
+            <value
+                model="res.users"
+                search="[('id', 'in', [
+                    ref('M08_P0801_demo.demo_user_si'),
+                    ref('M08_P0801_demo.demo_user_si_head'),
+                ])]"
+            />
+            <value eval="{'group_ids': [(4, ref('M09_0901.MKT_0901_si_analyst'))]}"/>
+        </function>
+
+        <!-- OPS -->
+        <function name="write" model="res.users">
+            <value
+                model="res.users"
+                search="[('id', 'in', [
+                    ref('M09_0901_demo.demo_user_ops'),
+                    ref('M09_0901_demo.demo_user_ops_head'),
+                ])]"
+            />
+            <value eval="{'group_ids': [(4, ref('M09_0901.MKT_0901_ops_evaluator'))]}"/>
+        </function>
+
+        <!-- Finance -->
+        <function name="write" model="res.users">
+            <value
+                model="res.users"
+                search="[('id', 'in', [
+                    ref('M09_0901_demo.demo_user_finance'),
+                    ref('M09_0901_demo.demo_user_finance_head'),
+                ])]"
+            />
+            <value eval="{'group_ids': [(4, ref('M09_0901.MKT_0901_finance_evaluator'))]}"/>
+        </function>
+
+        <!-- SC -->
+        <function name="write" model="res.users">
+            <value
+                model="res.users"
+                search="[('id', 'in', [
+                    ref('M08_P0801_demo.demo_user_sc'),
+                    ref('M08_P0801_demo.demo_user_sc_head'),
+                ])]"
+            />
+            <value eval="{'group_ids': [(4, ref('M09_0901.MKT_0901_sc_evaluator'))]}"/>
+        </function>
+
+        <!-- Legal -->
+        <function name="write" model="res.users">
+            <value
+                model="res.users"
+                search="[('id', 'in', [
+                    ref('M09_0901_demo.demo_user_legal'),
+                    ref('M09_0901_demo.demo_user_legal_head'),
+                ])]"
+            />
+            <value eval="{'group_ids': [(4, ref('M09_0901.MKT_0901_legal_evaluator'))]}"/>
+        </function>
+
+        <!-- Head Approver: tat ca *.head users (RSG/IT/MENU/DIGITAL/MKT/S&I/SC + OPS/Finance/Legal head) -->
+        <function name="write" model="res.users">
+            <value
+                model="res.users"
+                search="[('id', 'in', [
+                    ref('M08_P0801_demo.demo_user_rsg_head'),
+                    ref('M08_P0801_demo.demo_user_it_head'),
+                    ref('M08_P0801_demo.demo_user_menu_head'),
+                    ref('M08_P0801_demo.demo_user_digital_head'),
+                    ref('M08_P0801_demo.demo_user_mkt_head'),
+                    ref('M08_P0801_demo.demo_user_si_head'),
+                    ref('M08_P0801_demo.demo_user_sc_head'),
+                    ref('M09_0901_demo.demo_user_ops_head'),
+                    ref('M09_0901_demo.demo_user_finance_head'),
+                    ref('M09_0901_demo.demo_user_legal_head'),
+                ])]"
+            />
+            <value eval="{'group_ids': [(4, ref('M09_0901.MKT_0901_approver_head'))]}"/>
+        </function>
+
+        <!-- C-Level: demo_user_mkt_head dong vai C-Level cho demo -->
+        <function name="write" model="res.users">
+            <value
+                model="res.users"
+                search="[('id', '=', ref('M08_P0801_demo.demo_user_mkt_head'))]"
+            />
+            <value eval="{'group_ids': [(4, ref('M09_0901.MKT_0901_clevel_approver'))]}"/>
+        </function>
+
+        <!-- Brand reviewer: demo_user_mkt_head dong vai Brand reviewer cho Phase 3 -->
+        <function name="write" model="res.users">
+            <value
+                model="res.users"
+                search="[('id', '=', ref('M08_P0801_demo.demo_user_mkt_head'))]"
+            />
+            <value eval="{'group_ids': [(4, ref('M09_0901.MKT_0901_brand_reviewer'))]}"/>
+        </function>
+    </data>
+</odoo>

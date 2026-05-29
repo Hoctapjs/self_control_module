@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_psm_0502_request_document" model="ir.actions.report">
+        <field name="name">0502 Request Document</field>
+        <field name="model">maintenance.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">M02_P0502.report_psm_0502_request_document</field>
+        <field name="report_file">M02_P0502.report_psm_0502_request_document</field>
+        <field name="binding_model_id" ref="maintenance.model_maintenance_request"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'0502 Request - %s' % (object.name)</field>
+    </record>
+
+    <record id="action_report_psm_0502_inspection_report" model="ir.actions.report">
+        <field name="name">0502 Inspection Report</field>
+        <field name="model">maintenance.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">M02_P0502.report_psm_0502_inspection_report</field>
+        <field name="report_file">M02_P0502.report_psm_0502_inspection_report</field>
+        <field name="binding_model_id" ref="maintenance.model_maintenance_request"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'0502 Inspection - %s' % (object.x_psm_0502_inspection_doc_no or object.name)</field>
+    </record>
+
+    <record id="action_report_psm_0502_treatment_proposal" model="ir.actions.report">
+        <field name="name">0502 Treatment Proposal</field>
+        <field name="model">maintenance.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">M02_P0502.report_psm_0502_treatment_proposal</field>
+        <field name="report_file">M02_P0502.report_psm_0502_treatment_proposal</field>
+        <field name="binding_model_id" ref="maintenance.model_maintenance_request"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'0502 Proposal - %s' % (object.x_psm_0502_proposal_doc_no or object.name)</field>
+    </record>
+
+    <record id="action_report_psm_0502_material_issue_request" model="ir.actions.report">
+        <field name="name">0502 Material Issue Request</field>
+        <field name="model">maintenance.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">M02_P0502.report_psm_0502_material_issue_request</field>
+        <field name="report_file">M02_P0502.report_psm_0502_material_issue_request</field>
+        <field name="binding_model_id" ref="maintenance.model_maintenance_request"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'0502 Material Issue - %s' % (object.x_psm_0502_material_issue_doc_no or object.name)</field>
+    </record>
+
+    <record id="action_report_psm_0502_acceptance_record" model="ir.actions.report">
+        <field name="name">0502 Acceptance Record</field>
+        <field name="model">maintenance.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">M02_P0502.report_psm_0502_acceptance_record</field>
+        <field name="report_file">M02_P0502.report_psm_0502_acceptance_record</field>
+        <field name="binding_model_id" ref="maintenance.model_maintenance_request"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'0502 Acceptance - %s' % (object.x_psm_0502_acceptance_doc_no or object.name)</field>
+    </record>
+
+    <record id="action_report_psm_0502_document_pack" model="ir.actions.report">
+        <field name="name">0502 Document Pack</field>
+        <field name="model">x_psm_0502_document_pack_wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">M02_P0502.report_psm_0502_document_pack</field>
+        <field name="report_file">M02_P0502.report_psm_0502_document_pack</field>
+        <field name="print_report_name">'0502 Document Pack - %s' % (object.x_psm_request_id.name)</field>
+    </record>
+
+    <template id="psm_0502_signature_block">
+        <div class="row mt32">
+            <div class="col-3 text-center">
+                <p><strong>Store</strong></p>
+                <br/><br/>
+                <p>____________________</p>
+            </div>
+            <div class="col-3 text-center">
+                <p><strong>CMT</strong></p>
+                <br/><br/>
+                <p>____________________</p>
+            </div>
+            <div class="col-3 text-center">
+                <p><strong>CMT Lead</strong></p>
+                <br/><br/>
+                <p>____________________</p>
+            </div>
+            <div class="col-3 text-center">
+                <p><strong>Approver</strong></p>
+                <br/><br/>
+                <p>____________________</p>
+            </div>
+        </div>
+    </template>
+
+    <template id="psm_0502_request_summary">
+        <table class="table table-sm o_main_table">
+            <tbody>
+                <tr>
+                    <td><strong>Request No.</strong></td>
+                    <td><span t-field="doc.name"/></td>
+                    <td><strong>Created Date</strong></td>
+                    <td><span t-field="doc.create_date"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Department</strong></td>
+                    <td><span t-field="doc.x_psm_0502_department_id"/></td>
+                    <td><strong>Equipment</strong></td>
+                    <td><span t-field="doc.equipment_id"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Request Type</strong></td>
+                    <td><span t-field="doc.x_psm_0502_request_type_id"/></td>
+                    <td><strong>Request Source</strong></td>
+                    <td><span t-field="doc.x_psm_0502_request_source_id"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Source Reference</strong></td>
+                    <td><span t-esc="doc.x_psm_0502_source_reference or ''"/></td>
+                    <td><strong>Stage</strong></td>
+                    <td><span t-field="doc.stage_id"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+
+    <template id="psm_0502_intake_section">
+        <h3>Intake Detail</h3>
+        <table class="table table-sm o_main_table">
+            <tbody>
+                <tr>
+                    <td><strong>Problem Detail</strong></td>
+                    <td colspan="3"><span t-esc="doc.x_psm_0502_intake_problem_detail or ''"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Impact Scope</strong></td>
+                    <td><span t-field="doc.x_psm_0502_intake_impact_scope"/></td>
+                    <td><strong>Contact</strong></td>
+                    <td><span t-esc="doc.x_psm_0502_intake_contact_name or ''"/> <span t-esc="doc.x_psm_0502_intake_contact_phone or ''"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+
+    <template id="psm_0502_inspection_section">
+        <h3>Initial Inspection</h3>
+        <table class="table table-sm o_main_table">
+            <tbody>
+                <tr>
+                    <td><strong>Inspection Doc No.</strong></td>
+                    <td><span t-esc="doc.x_psm_0502_inspection_doc_no or ''"/></td>
+                    <td><strong>Result</strong></td>
+                    <td><span t-field="doc.x_psm_0502_inspection_result"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Inspected By</strong></td>
+                    <td><span t-field="doc.x_psm_0502_inspected_by_id"/></td>
+                    <td><strong>Inspected At</strong></td>
+                    <td><span t-field="doc.x_psm_0502_inspected_at"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Symptom</strong></td>
+                    <td><span t-field="doc.x_psm_0502_inspection_symptom_status"/></td>
+                    <td><strong>Equipment Status</strong></td>
+                    <td><span t-field="doc.x_psm_0502_inspection_equipment_status"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Safety Risk</strong></td>
+                    <td><span t-field="doc.x_psm_0502_inspection_safety_risk"/></td>
+                    <td><strong>Urgency</strong></td>
+                    <td><span t-field="doc.x_psm_0502_inspection_action_urgency"/></td>
+                </tr>
+            </tbody>
+        </table>
+        <p t-if="doc.x_psm_0502_inspection_note" style="white-space: pre-line;"><strong>Inspection Note:</strong><br/><span t-esc="doc.x_psm_0502_inspection_note"/></p>
+        <p t-if="doc.x_psm_0502_inspection_checklist_result" style="white-space: pre-line;"><strong>Checklist Result:</strong><br/><span t-esc="doc.x_psm_0502_inspection_checklist_result"/></p>
+        <p t-if="doc.x_psm_0502_inspection_worksheet" style="white-space: pre-line;"><strong>Inspection Worksheet:</strong><br/><span t-esc="doc.x_psm_0502_inspection_worksheet"/></p>
+    </template>
+
+    <template id="psm_0502_proposal_section">
+        <h3>Treatment Proposal</h3>
+        <table class="table table-sm o_main_table">
+            <tbody>
+                <tr>
+                    <td><strong>Proposal Doc No.</strong></td>
+                    <td><span t-esc="doc.x_psm_0502_proposal_doc_no or ''"/></td>
+                    <td><strong>Estimated Cost</strong></td>
+                    <td><span t-field="doc.x_psm_0502_estimated_cost"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Estimated Timeline</strong></td>
+                    <td><span t-esc="doc.x_psm_0502_estimated_timeline or ''"/></td>
+                    <td><strong>Proposed By</strong></td>
+                    <td><span t-field="doc.x_psm_0502_proposed_by_id"/></td>
+                </tr>
+            </tbody>
+        </table>
+        <p t-if="doc.x_psm_0502_root_cause_analysis" style="white-space: pre-line;"><strong>Root Cause:</strong><br/><span t-esc="doc.x_psm_0502_root_cause_analysis"/></p>
+        <p t-if="doc.x_psm_0502_technical_solution" style="white-space: pre-line;"><strong>Technical Solution:</strong><br/><span t-esc="doc.x_psm_0502_technical_solution"/></p>
+        <p t-if="doc.x_psm_0502_treatment_proposal" style="white-space: pre-line;"><strong>Proposal Summary:</strong><br/><span t-esc="doc.x_psm_0502_treatment_proposal"/></p>
+
+        <h4>Approval</h4>
+        <table class="table table-sm o_main_table">
+            <tbody>
+                <tr>
+                    <td><strong>Status</strong></td>
+                    <td><span t-field="doc.x_psm_0502_approval_status"/></td>
+                    <td><strong>Current Approver</strong></td>
+                    <td><span t-field="doc.x_psm_0502_approval_user_id"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Flow</strong></td>
+                    <td><span t-field="doc.x_psm_0502_approval_flow_type"/></td>
+                    <td><strong>Level</strong></td>
+                    <td><span t-esc="doc.x_psm_0502_approval_current_level or ''"/> / <span t-esc="doc.x_psm_0502_approval_level_count or ''"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+
+    <template id="psm_0502_material_section">
+        <h3>Material Issue Request</h3>
+        <table class="table table-sm o_main_table">
+            <tbody>
+                <tr>
+                    <td><strong>Material Doc No.</strong></td>
+                    <td><span t-esc="doc.x_psm_0502_material_issue_doc_no or ''"/></td>
+                    <td><strong>Stock Check</strong></td>
+                    <td><span t-field="doc.x_psm_0502_stock_check_result"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Approval Status</strong></td>
+                    <td><span t-field="doc.x_psm_0502_material_approval_status"/></td>
+                    <td><strong>Approval Value</strong></td>
+                    <td><span t-field="doc.x_psm_0502_material_approval_value"/></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm o_main_table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>UoM</th>
+                    <th>Source</th>
+                    <th>Estimated Unit Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr t-foreach="doc.x_psm_0502_material_line_ids" t-as="line">
+                    <td><span t-esc="line.x_psm_sequence"/></td>
+                    <td><span t-field="line.x_psm_product_id"/></td>
+                    <td><span t-field="line.x_psm_estimated_qty"/></td>
+                    <td><span t-field="line.x_psm_uom_id"/></td>
+                    <td><span t-field="line.x_psm_source_type"/></td>
+                    <td><span t-field="line.x_psm_estimated_unit_price"/></td>
+                    <td><span t-field="line.x_psm_estimated_subtotal"/></td>
+                </tr>
+            </tbody>
+        </table>
+        <p t-if="not doc.x_psm_0502_material_line_ids">No material lines were recorded.</p>
+    </template>
+
+    <template id="psm_0502_execution_acceptance_section">
+        <h3>Execution and Acceptance</h3>
+        <p t-if="doc.x_psm_0502_execution_note" style="white-space: pre-line;"><strong>Execution Summary:</strong><br/><span t-esc="doc.x_psm_0502_execution_note"/></p>
+        <table class="table table-sm o_main_table">
+            <tbody>
+                <tr>
+                    <td><strong>Acceptance Doc No.</strong></td>
+                    <td><span t-esc="doc.x_psm_0502_acceptance_doc_no or ''"/></td>
+                    <td><strong>Acceptance Result</strong></td>
+                    <td><span t-field="doc.x_psm_0502_acceptance_result"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Store Contact</strong></td>
+                    <td><span t-esc="doc.x_psm_0502_acceptance_contact_name or ''"/></td>
+                    <td><strong>Role</strong></td>
+                    <td><span t-esc="doc.x_psm_0502_acceptance_contact_role or ''"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Equipment Result</strong></td>
+                    <td><span t-field="doc.x_psm_0502_acceptance_equipment_result"/></td>
+                    <td><strong>Reviewed At</strong></td>
+                    <td><span t-field="doc.x_psm_0502_acceptance_reviewed_at"/></td>
+                </tr>
+            </tbody>
+        </table>
+        <p t-if="doc.x_psm_0502_acceptance_note" style="white-space: pre-line;"><strong>Acceptance Note:</strong><br/><span t-esc="doc.x_psm_0502_acceptance_note"/></p>
+        <p t-if="doc.x_psm_0502_acceptance_follow_up_note" style="white-space: pre-line;"><strong>Follow-up Note:</strong><br/><span t-esc="doc.x_psm_0502_acceptance_follow_up_note"/></p>
+    </template>
+
+    <template id="report_psm_0502_request_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>0502 Maintenance Request Document</h2>
+                        <t t-call="M02_P0502.psm_0502_request_summary"/>
+                        <t t-call="M02_P0502.psm_0502_intake_section"/>
+                        <t t-call="M02_P0502.psm_0502_inspection_section"/>
+                        <t t-call="M02_P0502.psm_0502_proposal_section"/>
+                        <t t-call="M02_P0502.psm_0502_material_section"/>
+                        <t t-call="M02_P0502.psm_0502_execution_acceptance_section"/>
+                        <t t-call="M02_P0502.psm_0502_signature_block"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_psm_0502_inspection_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>0502 Initial Inspection Report</h2>
+                        <t t-call="M02_P0502.psm_0502_request_summary"/>
+                        <t t-call="M02_P0502.psm_0502_inspection_section"/>
+                        <t t-call="M02_P0502.psm_0502_signature_block"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_psm_0502_treatment_proposal">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>0502 Treatment Proposal</h2>
+                        <t t-call="M02_P0502.psm_0502_request_summary"/>
+                        <t t-call="M02_P0502.psm_0502_proposal_section"/>
+                        <t t-call="M02_P0502.psm_0502_signature_block"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_psm_0502_material_issue_request">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>0502 Material Issue Request</h2>
+                        <t t-call="M02_P0502.psm_0502_request_summary"/>
+                        <t t-call="M02_P0502.psm_0502_material_section"/>
+                        <t t-call="M02_P0502.psm_0502_signature_block"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_psm_0502_acceptance_record">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>0502 Acceptance Record</h2>
+                        <t t-call="M02_P0502.psm_0502_request_summary"/>
+                        <t t-call="M02_P0502.psm_0502_execution_acceptance_section"/>
+                        <t t-call="M02_P0502.psm_0502_signature_block"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_psm_0502_document_pack">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="wizard">
+                <t t-set="doc" t-value="wizard.x_psm_request_id"/>
+                <t t-if="wizard.x_psm_include_request_document" t-call="web.external_layout">
+                    <div class="page">
+                        <h2>0502 Maintenance Request Document</h2>
+                        <t t-call="M02_P0502.psm_0502_request_summary"/>
+                        <t t-call="M02_P0502.psm_0502_intake_section"/>
+                        <t t-call="M02_P0502.psm_0502_inspection_section"/>
+                        <t t-call="M02_P0502.psm_0502_proposal_section"/>
+                        <t t-call="M02_P0502.psm_0502_material_section"/>
+                        <t t-call="M02_P0502.psm_0502_execution_acceptance_section"/>
+                        <t t-call="M02_P0502.psm_0502_signature_block"/>
+                    </div>
+                </t>
+                <t t-if="wizard.x_psm_include_inspection_report" t-call="web.external_layout">
+                    <div class="page">
+                        <h2>0502 Initial Inspection Report</h2>
+                        <t t-call="M02_P0502.psm_0502_request_summary"/>
+                        <t t-call="M02_P0502.psm_0502_inspection_section"/>
+                        <t t-call="M02_P0502.psm_0502_signature_block"/>
+                    </div>
+                </t>
+                <t t-if="wizard.x_psm_include_treatment_proposal" t-call="web.external_layout">
+                    <div class="page">
+                        <h2>0502 Treatment Proposal</h2>
+                        <t t-call="M02_P0502.psm_0502_request_summary"/>
+                        <t t-call="M02_P0502.psm_0502_proposal_section"/>
+                        <t t-call="M02_P0502.psm_0502_signature_block"/>
+                    </div>
+                </t>
+                <t t-if="wizard.x_psm_include_material_issue_request" t-call="web.external_layout">
+                    <div class="page">
+                        <h2>0502 Material Issue Request</h2>
+                        <t t-call="M02_P0502.psm_0502_request_summary"/>
+                        <t t-call="M02_P0502.psm_0502_material_section"/>
+                        <t t-call="M02_P0502.psm_0502_signature_block"/>
+                    </div>
+                </t>
+                <t t-if="wizard.x_psm_include_acceptance_record" t-call="web.external_layout">
+                    <div class="page">
+                        <h2>0502 Acceptance Record</h2>
+                        <t t-call="M02_P0502.psm_0502_request_summary"/>
+                        <t t-call="M02_P0502.psm_0502_execution_acceptance_section"/>
+                        <t t-call="M02_P0502.psm_0502_signature_block"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

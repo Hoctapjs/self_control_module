@@ -1,0 +1,51 @@
+{
+  "file": "models/stock_picking.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: stock.picking; 1 classes; 2 fields",
+  "classes": [
+    {
+      "python_class": "StockPicking",
+      "description": "Extends stock.picking in models/stock_picking.py.",
+      "model": null,
+      "inherit": "stock.picking",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_0502_request_id",
+          "type": "Many2one",
+          "string": "0502 Maintenance Request",
+          "comodel": "maintenance.request",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Maintenance request that created this stock picking in process 0502."
+        },
+        {
+          "name": "x_psm_0502_fsm_task_id",
+          "type": "Many2one",
+          "string": "0502 FSM Task",
+          "comodel": "project.task",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_0502_request_id.x_psm_0502_fsm_task_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

@@ -1,0 +1,2026 @@
+{
+  "file": "models/x_psm_hr_discipline_record.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: x_psm.hr.discipline.record; 1 classes; 85 fields; 37 actions",
+  "classes": [
+    {
+      "python_class": "HrDisciplineRecord",
+      "description": "Discipline Record",
+      "model": "x_psm.hr.discipline.record",
+      "inherit": [
+        "portal.mixin",
+        "mail.thread",
+        "mail.activity.mixin"
+      ],
+      "order": "x_psm_date desc, id desc",
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "name",
+          "type": "Char",
+          "string": "Reference",
+          "comodel": null,
+          "required": true,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "New",
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_employee_id",
+          "type": "Many2one",
+          "string": "Employee",
+          "comodel": "hr.employee",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_employee_name",
+          "type": "Char",
+          "string": "Employee Name",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_employee_id.name",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_employee_email",
+          "type": "Char",
+          "string": "Employee Email",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_employee_id.work_email",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_violation_type",
+          "type": "Char",
+          "string": "Violation Type",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_violation_category_id",
+          "type": "Many2one",
+          "string": "Violation Category",
+          "comodel": "x_psm.hr.discipline.violation.category",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_company_rep_id",
+          "type": "Many2one",
+          "string": "Đại diện công ty",
+          "comodel": "hr.employee",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "lambda",
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_rep_department_id",
+          "type": "Many2one",
+          "string": "Nhà hàng/Bộ phận (ĐD)",
+          "comodel": "hr.department",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_company_rep_id.department_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_rep_job_id",
+          "type": "Many2one",
+          "string": "Vị trí làm việc (ĐD)",
+          "comodel": "hr.job",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_company_rep_id.job_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_rep_level",
+          "type": "Char",
+          "string": "Cấp bậc (ĐD)",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_rep_level",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_employee_domain",
+          "type": "Char",
+          "string": "Employee Domain",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": false,
+          "related": null,
+          "compute": "_compute_x_psm_employee_domain",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_emp_department_id",
+          "type": "Many2one",
+          "string": "Nhà hàng/Bộ phận (NV)",
+          "comodel": "hr.department",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_employee_id.department_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_emp_job_id",
+          "type": "Many2one",
+          "string": "Vị trí làm việc (NV)",
+          "comodel": "hr.job",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_employee_id.job_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_emp_level",
+          "type": "Char",
+          "string": "Cấp bậc (NV)",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_emp_level",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_emp_barcode",
+          "type": "Char",
+          "string": "Mã số nhân viên",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_emp_barcode",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_discipline_purpose",
+          "type": "Selection",
+          "string": "Mục đích",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": "[[\"discipline\", \"Discipline\"], [\"pip\", \"PIP\"], [\"counseling_1\", \"Counselling 1st\"], [\"counseling_2\", \"Counselling 2nd\"]]",
+          "default": "discipline",
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_date",
+          "type": "Date",
+          "string": "Date",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "fields.Date.context_today",
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_employee_explanation",
+          "type": "Text",
+          "string": "Employee Explanation",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Truong snapshot/cache de giu noi dung tuong trinh chinh cho report, mail va du lieu cu."
+        },
+        {
+          "name": "x_psm_explanation_date",
+          "type": "Date",
+          "string": "Explanation Date",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Ngay snapshot tuong trinh duoc cap nhat tu survey hoac fallback legacy."
+        },
+        {
+          "name": "x_psm_section_i_description",
+          "type": "Text",
+          "string": "I. Mô tả tình huống vi phạm",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Truong nghiep vu goc. Sau refactor duoc giu lai de tuong thich report va du lieu cu."
+        },
+        {
+          "name": "x_psm_section_ii_feedback",
+          "type": "Text",
+          "string": "II. Phản hồi/ Ý kiến của nhân viên",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Truong snapshot/cache. Noi dung co the duoc dong bo tu survey tuong trinh hoac fallback legacy."
+        },
+        {
+          "name": "x_psm_section_iii_identification",
+          "type": "Text",
+          "string": "III. Xác định hành vi vi phạm",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Truong snapshot/cache. Noi dung co the duoc cap nhat tu quy trinh feedback survey."
+        },
+        {
+          "name": "x_psm_section_iv_agreement",
+          "type": "Text",
+          "string": "IV. Nội dung hai bên đồng ý",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Truong snapshot/cache. Noi dung co the duoc cap nhat tu quy trinh feedback survey."
+        },
+        {
+          "name": "x_psm_explanation_image_ids",
+          "type": "Many2many",
+          "string": "Hình ảnh bản tường trình",
+          "comodel": "ir.attachment",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Hình ảnh bản tường trình giấy do quản lý chụp và tải lên"
+        },
+        {
+          "name": "x_psm_manager_signature",
+          "type": "Binary",
+          "string": "Chữ ký Đại diện công ty",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_manager_signature_date",
+          "type": "Date",
+          "string": "Ngày ký (Quản lý)",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_employee_signature",
+          "type": "Binary",
+          "string": "Chữ ký Người lao động",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_employee_signature_date",
+          "type": "Date",
+          "string": "Ngày ký (Nhân viên)",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_witness_id",
+          "type": "Many2one",
+          "string": "Người làm chứng",
+          "comodel": "hr.employee",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_witness_department_id",
+          "type": "Many2one",
+          "string": "Nhà hàng/Bộ phận (Người làm chứng)",
+          "comodel": "hr.department",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_witness_id.department_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_witness_job_id",
+          "type": "Many2one",
+          "string": "Vị trí làm việc (Người làm chứng)",
+          "comodel": "hr.job",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_witness_id.job_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_witness_level",
+          "type": "Char",
+          "string": "Cấp bậc (Người làm chứng)",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_witness_level",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_witness_signature",
+          "type": "Binary",
+          "string": "Chữ ký Người làm chứng",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_witness_signature_date",
+          "type": "Date",
+          "string": "Ngày ký (Người làm chứng)",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_explanation_ids",
+          "type": "One2many",
+          "string": "Lịch sử tường trình",
+          "comodel": "x_psm.hr.discipline.explanation",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Luu snapshot lich su de giu tuong thich du lieu cu. Khong xoa trong giai doan refactor."
+        },
+        {
+          "name": "x_psm_active_explanation_id",
+          "type": "Many2one",
+          "string": "Tường trình hiện tại",
+          "comodel": "x_psm.hr.discipline.explanation",
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_active_explanation",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_explanation_count",
+          "type": "Integer",
+          "string": "Số lần tường trình",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_explanation_count",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_action_id",
+          "type": "Many2one",
+          "string": "Proposed Action",
+          "comodel": "x_psm.hr.discipline.action",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Automatically suggested by the system based on history."
+        },
+        {
+          "name": "x_psm_portal_needs_attention",
+          "type": "Boolean",
+          "string": "Portal: Cần chú ý",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": true,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_explanation_survey_id",
+          "type": "Many2one",
+          "string": "Explanation Survey",
+          "comodel": "survey.survey",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "lambda",
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_explanation_survey_user_input_id",
+          "type": "Many2one",
+          "string": "Explanation Survey Response",
+          "comodel": "survey.user_input",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_explanation_survey_state",
+          "type": "Selection",
+          "string": "Explanation Survey Status",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_explanation_survey_user_input_id.state",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_explanation_rejection_reason",
+          "type": "Text",
+          "string": "Explanation Rejection Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_skip_hearing_reason",
+          "type": "Text",
+          "string": "Skip Hearing Reason",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_feedback_survey_id",
+          "type": "Many2one",
+          "string": "Feedback Survey",
+          "comodel": "survey.survey",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "lambda",
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_feedback_survey_user_input_id",
+          "type": "Many2one",
+          "string": "Feedback Survey Response",
+          "comodel": "survey.user_input",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_feedback_survey_state",
+          "type": "Selection",
+          "string": "Feedback Survey Status",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_feedback_survey_user_input_id.state",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_feedback_completed_date",
+          "type": "Datetime",
+          "string": "Feedback Completed Date",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_migration_status",
+          "type": "Selection",
+          "string": "Migration Status",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": "[[\"not_needed\", \"Not Needed\"], [\"pending\", \"Pending\"], [\"partial\", \"Partial\"], [\"done\", \"Done\"], [\"failed\", \"Failed\"]]",
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_migration_date",
+          "type": "Datetime",
+          "string": "Migration Date",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_migration_note",
+          "type": "Text",
+          "string": "Migration Note",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_approval_request_id",
+          "type": "Many2one",
+          "string": "Approval Request",
+          "comodel": "approval.request",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_approval_status",
+          "type": "Selection",
+          "string": "Approval Status",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_approval_request_id.request_status",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_approval_requested_date",
+          "type": "Datetime",
+          "string": "Approval Requested Date",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_approval_completed_date",
+          "type": "Datetime",
+          "string": "Approval Completed Date",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_approval_refuse_reason",
+          "type": "Text",
+          "string": "Approval Refuse Note",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_previous_record_id",
+          "type": "Many2one",
+          "string": "Previous Offense Link",
+          "comodel": "x_psm.hr.discipline.record",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Linked to a previous offense if this is an escalation."
+        },
+        {
+          "name": "state",
+          "type": "Selection",
+          "string": "Status",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": "[[\"draft\", \"Khởi tạo\"], [\"under_review\", \"Đang xem xét\"], [\"level_determination\", \"Xác định cấp xử lý\"], [\"investigat...",
+          "default": "draft",
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_rgm_is_repeat",
+          "type": "Boolean",
+          "string": "RGM xác nhận tái phạm",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_is_accepted",
+          "type": "Boolean",
+          "string": "Nhân viên chấp nhận hình thức KL",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_has_ceo_refused",
+          "type": "Boolean",
+          "string": "Has CEO Refused",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_has_ceo_refused",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_employee_response_date",
+          "type": "Date",
+          "string": "Ngày phản hồi",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_employee_response_note",
+          "type": "Text",
+          "string": "Lý do từ chối (nếu có)",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_issued_date",
+          "type": "Date",
+          "string": "Ngày ban hành quyết định",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_start_date",
+          "type": "Date",
+          "string": "Ngày bắt đầu hiệu lực",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_end_date",
+          "type": "Date",
+          "string": "Ngày hết hiệu lực",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_end_date",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_discipline_level",
+          "type": "Selection",
+          "string": "Cấp độ xử lý",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": "[[\"store\", \"Store Level\"], [\"company\", \"Company Level\"]]",
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_is_repeat_offense",
+          "type": "Boolean",
+          "string": "Tái phạm",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_repeat_offense",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_related_records_count",
+          "type": "Integer",
+          "string": "Số lần vi phạm trước",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_repeat_offense",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_days_remaining",
+          "type": "Integer",
+          "string": "Ngày hiệu lực còn lại",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_days_remaining",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_meeting_count",
+          "type": "Integer",
+          "string": null,
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_meeting_count",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_latest_meeting_id",
+          "type": "Many2one",
+          "string": "Cuộc họp mới nhất",
+          "comodel": "calendar.event",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": "_compute_x_psm_latest_meeting",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_meeting_date",
+          "type": "Datetime",
+          "string": "Ngày họp",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_x_psm_latest_meeting",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_meeting_notes",
+          "type": "Text",
+          "string": "Nội dung họp",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_meeting_attachment",
+          "type": "Binary",
+          "string": "Biên bản họp",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_meeting_attachment_filename",
+          "type": "Char",
+          "string": "Tên file biên bản",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_meeting_attachment_ids",
+          "type": "Many2many",
+          "string": "Biên bản họp kỷ luật (nhiều file)",
+          "comodel": "ir.attachment",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_compensation_minutes_ids",
+          "type": "Many2many",
+          "string": "Biên bản bồi thường (nhiều file)",
+          "comodel": "ir.attachment",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_has_compensation",
+          "type": "Boolean",
+          "string": "Có bồi thường",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "x_psm_compensation_amount",
+          "type": "Monetary",
+          "string": "Giá trị bồi thường",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": null
+        },
+        {
+          "name": "currency_id",
+          "type": "Many2one",
+          "string": "Currency",
+          "comodel": "res.currency",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "lambda",
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_disciplinary_decision_attachment",
+          "type": "Binary",
+          "string": "Quyết định xử lý kỷ luật",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_disciplinary_decision_filename",
+          "type": "Char",
+          "string": "Filename kỷ luật",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_compensation_decision_attachment",
+          "type": "Binary",
+          "string": "Quyết định đền bù",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_compensation_decision_filename",
+          "type": "Char",
+          "string": "Filename đền bù",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [
+        {
+          "name": "_compute_x_psm_employee_domain",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_rep_department_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_emp_barcode",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_employee_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_x_psm_get_employee_level_name",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_compute_x_psm_rep_level",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_company_rep_id",
+                "x_psm_company_rep_id.job_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_emp_level",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_employee_id",
+                "x_psm_employee_id.job_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_witness_level",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_witness_id",
+                "x_psm_witness_id.job_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_active_explanation",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_explanation_ids",
+                "x_psm_explanation_ids.state"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_explanation_count",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_explanation_ids"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_group_expand_states",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_state_label",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_allowed_state_transitions",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_validate_state_transition",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_write_state",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_ensure_action_selected",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_ensure_discipline_level",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_compute_x_psm_has_ceo_refused",
+          "type": "compute",
+          "decorators": [],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_end_date",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_start_date",
+                "x_psm_action_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_days_remaining",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "state",
+                "x_psm_end_date"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_x_psm_meeting_domain",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_compute_x_psm_meeting_count",
+          "type": "compute",
+          "decorators": [],
+          "summary": "compute"
+        },
+        {
+          "name": "_x_psm_get_meeting_partner_ids",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_meeting_context",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_open_meeting_action",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_schedule_meeting",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_compute_x_psm_latest_meeting",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_meeting_count"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_x_psm_repeat_offense",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_employee_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_x_psm_resolve_effective_start_date",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_rgm_no_repeat",
+          "type": "action",
+          "decorators": [],
+          "summary": "RGM: Không tái phạm -> Bước 3 (Level Determination)"
+        },
+        {
+          "name": "action_psm_rgm_repeat",
+          "type": "action",
+          "decorators": [],
+          "summary": "RGM: Có tái phạm → Bước 3 (Level Determination)"
+        },
+        {
+          "name": "_compute_x_psm_suggested_action",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.onchange",
+              "args": [
+                "x_psm_employee_id",
+                "x_psm_date"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "create",
+          "type": "override",
+          "decorators": [
+            "api.model_create_multi"
+          ],
+          "summary": "override"
+        },
+        {
+          "name": "_x_psm_sync_signature_dates",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_get_default_explanation_survey",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_get_default_feedback_survey",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_get_explanation_partner",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_prepare_explanation_survey_user_input_vals",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_get_or_create_explanation_survey_user_input",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_get_explanation_survey_url",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_prepare_feedback_survey_user_input_vals",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_get_or_create_feedback_survey_user_input",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_get_feedback_survey_url",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_get_explanation_answer_value",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_create_explanation_snapshot",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_sync_explanation_from_survey_input",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_on_explanation_survey_done",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_sync_feedback_from_survey_input",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_on_feedback_survey_done",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_open_explanation_survey_response",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_open_feedback_survey",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_open_feedback_survey_response",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_x_psm_migration_mark",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_migrate_legacy_explanation_snapshot",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_migrate_legacy_approval_bridge",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_migrate_legacy_feedback_policy",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_migrate_legacy_bridge",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_send_to_employee",
+          "type": "action",
+          "decorators": [],
+          "summary": "Action for Manager to request explanation from Employee"
+        },
+        {
+          "name": "_get_portal_url",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_confirm",
+          "type": "action",
+          "decorators": [],
+          "summary": "Manager xác nhận → Gửi RGM xem xét (Bước 2)"
+        },
+        {
+          "name": "action_psm_reject_explanation",
+          "type": "action",
+          "decorators": [],
+          "summary": "Reject current explanation and request a new one"
+        },
+        {
+          "name": "action_psm_rgm_store_level",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 3: Store Level → Nhảy thẳng Bước 6 (Proposal)"
+        },
+        {
+          "name": "action_psm_activate_store_discipline",
+          "type": "action",
+          "decorators": [],
+          "summary": "Legacy: Store Level đi qua issued/notified, không kích hoạt thẳng."
+        },
+        {
+          "name": "_x_psm_notify_hr_oc_investigation",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_rgm_company_level",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 3: Company Level → Bước 4 (Investigation)"
+        },
+        {
+          "name": "action_psm_schedule_hearing",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 4: HR quyết định cần họp → Bước 5"
+        },
+        {
+          "name": "action_psm_open_skip_hearing_wizard",
+          "type": "action",
+          "decorators": [],
+          "summary": "Open reason wizard before skipping hearing."
+        },
+        {
+          "name": "action_psm_skip_hearing",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 4: HR quyết định không cần họp → Nhảy Bước 6"
+        },
+        {
+          "name": "action_psm_close_hearing",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 5: Kết thúc họp → Bước 6 (Proposal)"
+        },
+        {
+          "name": "action_psm_rgm_recheck_level",
+          "type": "action",
+          "decorators": [],
+          "summary": "Company proposal → RGM rechecks Store/Company level."
+        },
+        {
+          "name": "action_psm_issue_decision",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 6 → 7: Ban hành quyết định"
+        },
+        {
+          "name": "action_psm_submit_for_approval",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 7 → 8 (Company) hoặc 7 → 9 (Store)"
+        },
+        {
+          "name": "action_psm_rehear",
+          "type": "action",
+          "decorators": [],
+          "summary": "CEO từ chối và RGM quyết định Cần họp lại → Quay lại Bước 4 (Xác minh nâng cao/Investigation)"
+        },
+        {
+          "name": "_x_psm_get_approval_approver_users",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_prepare_approval_request_vals",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_create_or_confirm_approval_request",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_on_approval_request_approved",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_on_approval_request_refused",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_clear_approval_activities",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Dọn dẹp các activity phê duyệt khi đã xử lý xong"
+        },
+        {
+          "name": "action_psm_open_approval_request",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_x_psm_notify_employee",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Gửi email thông báo hình thức kỷ luật cho nhân viên"
+        },
+        {
+          "name": "_x_psm_notify_employee_active",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Gửi email thông báo kỷ luật đã có hiệu lực cho nhân viên"
+        },
+        {
+          "name": "_x_psm_get_employee_reject_notify_users",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_notify_rejection",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Thông báo khi record bị từ chối (CEO hoặc NV)\n- Luôn notify RGM (cả Store và Company)\n- Company level: thêm notify HRBP & OC"
+        },
+        {
+          "name": "action_psm_employee_accept",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 9: NV chấp nhận → Bước 10 (Active)"
+        },
+        {
+          "name": "action_psm_employee_reject",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 9: NV từ chối → Quay lại Bước 6 (Proposal)"
+        },
+        {
+          "name": "action_psm_open_rgm_manual_confirm_wizard",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_rgm_manual_confirm",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_expire",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 10 → 11: Hết hiệu lực"
+        },
+        {
+          "name": "action_psm_store_confirm",
+          "type": "action",
+          "decorators": [],
+          "summary": "Legacy - không còn sử dụng, giữ lại để tương thích"
+        },
+        {
+          "name": "_x_psm_get_report_by_name_strict",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_psm_generate_disciplinary_decision",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "write",
+          "type": "override",
+          "decorators": [],
+          "summary": "override"
+        },
+        {
+          "name": "_x_psm_notify_rgm",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Find RGM of the employee's department and create activity"
+        },
+        {
+          "name": "action_psm_generate_compensation_decision",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_hr_submit_meeting",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 7 → 8: Trình CEO duyệt (thay thế bằng action_psm_submit_for_approval)"
+        },
+        {
+          "name": "action_psm_ceo_approve",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 8: CEO phê duyệt → Bước 9 (Thông báo)"
+        },
+        {
+          "name": "action_psm_open_ceo_reject_wizard",
+          "type": "action",
+          "decorators": [],
+          "summary": "Open reason wizard before CEO rejection."
+        },
+        {
+          "name": "action_psm_ceo_reject",
+          "type": "action",
+          "decorators": [],
+          "summary": "Bước 8: CEO từ chối → mở wizard nhập lý do."
+        },
+        {
+          "name": "action_psm_complete_improvement",
+          "type": "action",
+          "decorators": [],
+          "summary": "Legacy: map sang action_psm_expire"
+        },
+        {
+          "name": "action_psm_done",
+          "type": "action",
+          "decorators": [],
+          "summary": "Legacy: map sang action_psm_expire"
+        },
+        {
+          "name": "action_psm_cancel",
+          "type": "action",
+          "decorators": [],
+          "summary": "Cancel the record"
+        },
+        {
+          "name": "_x_psm_cron_auto_expire",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Cron: Tự động chuyển sang Hết hiệu lực khi quá Ngày kết thúc"
+        },
+        {
+          "name": "_cron_auto_complete_improvement",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Legacy alias cho _cron_auto_expire"
+        }
+      ],
+      "kind": "new_model_with_inherit"
+    }
+  ],
+  "routes": []
+}

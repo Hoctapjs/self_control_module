@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root menu -->
+    <menuitem id="mkt_0901_menu_root"
+              name="PAF"
+              sequence="100"
+              web_icon="M09_0901,static/description/icon.png"/>
+
+    <!-- Submenus -->
+    <menuitem id="mkt_0901_menu_my_paf"
+              name="PAF của tôi"
+              parent="mkt_0901_menu_root"
+              action="mkt_0901_action_paf_request"
+              sequence="10"/>
+    <menuitem id="mkt_0901_menu_pending_evaluation"
+              name="Đang chờ tôi đánh giá"
+              parent="mkt_0901_menu_root"
+              action="mkt_0901_action_paf_request"
+              sequence="20"/>
+    <menuitem id="mkt_0901_menu_pending_approval"
+              name="Đang chờ tôi duyệt"
+              parent="mkt_0901_menu_root"
+              action="mkt_0901_action_paf_request"
+              sequence="30"/>
+    <menuitem id="mkt_0901_menu_templates"
+              name="Templates"
+              parent="mkt_0901_menu_root"
+              action="mkt_0901_action_template"
+              sequence="40"/>
+    <menuitem id="mkt_0901_menu_valuation_reports"
+              name="Valuation Reports"
+              parent="mkt_0901_menu_root"
+              action="mkt_0901_action_valuation_report"
+              sequence="50"/>
+    <menuitem id="mkt_0901_menu_config_categories"
+              name="Cấu hình → Categories duyệt"
+              parent="mkt_0901_menu_root"
+              action="mkt_0901_action_approval_category"
+              sequence="60"/>
+</odoo>

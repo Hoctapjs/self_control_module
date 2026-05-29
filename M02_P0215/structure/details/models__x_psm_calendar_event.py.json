@@ -1,0 +1,35 @@
+{
+  "file": "models/x_psm_calendar_event.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: calendar.event; 1 classes; 0 fields",
+  "classes": [
+    {
+      "python_class": "CalendarEvent",
+      "description": "Extends calendar.event in models/x_psm_calendar_event.py.",
+      "model": null,
+      "inherit": "calendar.event",
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "create",
+          "type": "override",
+          "decorators": [
+            "api.model_create_multi"
+          ],
+          "summary": "override"
+        },
+        {
+          "name": "write",
+          "type": "override",
+          "decorators": [],
+          "summary": "override"
+        }
+      ],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

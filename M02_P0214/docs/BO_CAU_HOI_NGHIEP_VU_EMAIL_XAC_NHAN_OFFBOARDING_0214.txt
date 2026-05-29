@@ -1,0 +1,315 @@
+BO CAU HOI NGHIEP VU - EMAIL KEM LINK XAC NHAN CONG VIEC OFFBOARDING 0214
+
+Yeu cau dau vao:
+"Trong quy trinh 0214, khi quy trinh nghi viec duoc khoi tao, tu dong gui email kem link xac nhan cong viec cho tung bo phan lien quan (IT, Admin, HR)."
+
+Ngu canh module hien tai:
+- Module: M02_P0214_QUY_TRINH_OFFBOARDING_RST.
+- Model nghiep vu chinh dang dung: approval.request.
+- Khi nhan vien submit portal, he thong tao approval.request va action_confirm().
+- Sau khi approval duoc phe duyet, action_approve() hien dang tao checklist offboarding tu offboarding_activity_plan_rst.
+- Checklist hien co co cac dau viec IT, Admin, HR duoi dang mail.activity.
+- Hien da co cau hinh default IT/Admin/HR user tren res.company.
+- Hien da co email template nhac viec bo phan, nhung chua ro yeu cau email "link xac nhan cong viec" ngay luc khoi tao.
+
+Muc tieu cua bo cau hoi:
+- Lam ro trigger gui email.
+- Lam ro nguoi nhan va cach xac dinh bo phan phu trach.
+- Lam ro link xac nhan, quyen truy cap, bao mat, trang thai va audit trail.
+- Lam ro noi dung email, reminder, loi va tieu chi nghiem thu.
+
+1. Pham vi va thoi diem kich hoat
+
+1. "Quy trinh nghi viec duoc khoi tao" trong yeu cau nay duoc hieu la thoi diem nao?
+   A. Nhan vien vua submit don tu portal va approval.request duoc tao/action_confirm.
+   B. Line Manager/nguoi duyet da approve va offboarding checklist bat dau duoc tao/action_approve.
+   C. HR chuyen don sang mot trang thai rieng nhu "Bat dau offboarding".
+   D. Thoi diem khac, vui long mo ta cu the.
+
+2. Email cho IT/Admin/HR co can gui ngay ca khi don moi o trang thai pending/chua duoc duyet khong?
+
+3. Neu don nghi viec bi tu choi/huy truoc khi IT/Admin/HR xac nhan, cac link da gui se xu ly nhu the nao?
+
+4. Neu HR thay doi ngay nghi du kien sau khi da gui email, co can gui lai email/cap nhat deadline cho IT/Admin/HR khong?
+
+5. Moi don nghi viec chi duoc gui email mot lan cho moi bo phan, hay co the gui lai thu cong?
+
+6. Neu quy trinh da co checklist activity IT/Admin/HR, yeu cau moi chi bo sung email thong bao kem link, hay can thay doi ca cach tao checklist?
+
+2. Bo phan lien quan va nguoi nhan
+
+7. "Tung bo phan lien quan" gom co dinh 3 bo phan IT, Admin, HR hay co the thay doi theo cong ty/cua hang/khoi/phong ban nhan vien?
+
+8. Moi bo phan nhan email theo 1 user phu trach, nhieu user, mot group Odoo, hay mot dia chi email chung?
+
+9. Cach xac dinh nguoi nhan IT/Admin/HR uu tien theo thu tu nao?
+   - Cau hinh default user tren company.
+   - Responsible user tren activity plan template.
+   - Group phan quyen cua Odoo.
+   - Department cua nhan vien.
+   - Email cau hinh rieng ngoai user Odoo.
+
+10. Neu default IT/Admin/HR user chua duoc cau hinh, he thong can:
+    A. Chan khoi tao quy trinh va bao loi cho HR.
+    B. Van tao quy trinh, ghi log/chatter, khong gui email cho bo phan thieu cau hinh.
+    C. Gui cho HR Admin de xu ly thu cong.
+    D. Cach khac.
+
+11. Nguoi nhan co bat buoc la internal user cua Odoo khong, hay co the la email external?
+
+12. Co can CC/BCC cho HR Admin, line manager, nguoi nghi viec, hoac mailbox chung cua HR khong?
+
+13. Neu mot user phu trach ca IT va Admin, he thong gui 2 email rieng theo tung dau viec hay gop thanh 1 email?
+
+14. IT/Admin/HR co can chi nhan dau viec cua chinh bo phan minh, khong nhin thay dau viec bo phan khac khong?
+
+3. Noi dung cong viec can xac nhan
+
+15. Moi bo phan can xac nhan nhung hang muc nao?
+    - IT: vo hieu hoa email, tai khoan noi bo, thu hoi thiet bi, quyen truy cap he thong.
+    - Admin: thu hoi tai san van phong, the tu/chia khoa, dien thoai/phu kien, van phong pham.
+    - HR: thu hoi the BHYT/PVI, ho so nhan su, quyet toan ban giao.
+    Vui long xac nhan danh sach chuan va co can them/bot muc nao khong.
+
+16. Moi bo phan chi can bam "Xac nhan hoan thanh" mot lan, hay can tick tung checklist item?
+
+17. Co can cho phep bo phan nhap ghi chu khi xac nhan khong?
+
+18. Co can bat buoc upload bang chung/tai lieu dinh kem khi xac nhan khong?
+
+19. Co can cho phep trang thai "Khong ap dung" cho mot dau viec khong?
+
+20. Neu bo phan chua the hoan thanh, co can nut "Can bo sung thong tin" de gui nguoc ve HR/Manager khong?
+
+21. Co can tach cac dau viec cua tung bo phan thanh nhieu activity rieng, hay giu 1 activity dai dien cho moi bo phan?
+
+4. Link xac nhan trong email
+
+22. Link trong email se mo den dau?
+    A. Form approval.request backend.
+    B. Man hinh portal rieng cho nguoi phu trach.
+    C. Route cong khai co token bao mat, khong can login.
+    D. Route co token nhung van bat buoc login.
+
+23. Nguoi nhan bam link co duoc xac nhan truc tiep tu email/trang web bang 1 nut khong, hay chi dieu huong vao Odoo de xu ly activity?
+
+24. Link co can unique theo tung request + tung bo phan + tung activity khong?
+
+25. Link co thoi han het hieu luc khong? Neu co, thoi han la bao lau?
+
+26. Link da su dung mot lan co can vo hieu hoa khong?
+
+27. Neu email bi forward cho nguoi khac, nguoi nhan forward co duoc xac nhan khong?
+
+28. Neu yeu cau bat buoc login, user nao duoc phep mo link va xac nhan?
+
+29. Neu nguoi nhan chua co user Odoo, co can tao portal/internal user tu dong khong?
+
+30. Sau khi bam xac nhan thanh cong, he thong hien trang ket qua nhu the nao?
+
+31. Neu link khong hop le/het han/da xac nhan, thong bao hien thi mong muon la gi?
+
+5. Trang thai, luu vet va dong bo voi Odoo activity
+
+32. Khi bo phan xac nhan qua link, he thong can danh dau mail.activity la done/action_feedback khong?
+
+33. Can luu nhung thong tin audit nao?
+    - Bo phan xac nhan.
+    - User/email nguoi xac nhan.
+    - Thoi diem xac nhan.
+    - Ghi chu.
+    - IP/User-Agent.
+    - Activity/request lien quan.
+
+34. Audit trail hien thi o dau?
+    A. Chatter cua approval.request.
+    B. Tab checklist/offboarding rieng.
+    C. List/report rieng.
+    D. Khong can hien thi, chi luu log ky thuat.
+
+35. Co can them field trang thai rieng cho tung bo phan tren approval.request khong, vi du x_psm_0214_it_confirmed, x_psm_0214_admin_confirmed, x_psm_0214_hr_confirmed?
+
+36. Trang thai tong "all activities completed" hien co co duoc tinh tu cac xac nhan nay khong?
+
+37. Neu activity bi mark done truc tiep trong backend, co can coi nhu da xac nhan qua email khong?
+
+38. Neu xac nhan bi nham, ai duoc phep reopen/reset xac nhan?
+
+39. Khi reset xac nhan, co can gui lai email/link moi khong?
+
+6. Email template va ngon ngu
+
+40. Moi bo phan dung chung mot template co bien noi dung theo role, hay 3 template rieng cho IT/Admin/HR?
+
+41. Subject email mong muon theo format nao?
+    Vi du: [RST Offboarding] Can xac nhan cong viec IT - {employee_name} - {last_working_date}
+
+42. Noi dung email can hien thi nhung thong tin nao?
+    - Ho ten nhan vien nghi viec.
+    - Ma nhan vien.
+    - Phong ban/chuc danh.
+    - Line manager.
+    - Ngay nghi du kien/ngay lam viec cuoi.
+    - Ly do nghi viec.
+    - Danh sach viec can xac nhan.
+    - Deadline.
+    - Nut/link xac nhan.
+
+43. Co thong tin nao khong duoc dua vao email vi ly do bao mat/nhay cam khong?
+
+44. Email gui bang tieng Viet, tieng Anh, hay song ngu?
+
+45. Email co can theo style hien co cua cac template RST trong module 0214 khong?
+
+46. Email_from/reply_to dung email cua system, HR, hay user tao/phu trach quy trinh?
+
+47. Neu gui loi SMTP, he thong can retry tu dong, bao HR, hay chi ghi log?
+
+7. Deadline, reminder va escalation
+
+48. Deadline cho IT/Admin/HR lay tu activity plan template hien co, tu ngay nghi du kien, hay cau hinh rieng?
+
+49. Co can gui reminder truoc han khong? Neu co, truoc bao nhieu ngay?
+
+50. Co can gui reminder khi qua han khong? Tan suat gui nhu the nao?
+
+51. Module hien co co email template nhac viec bo phan va cau hinh gia han deadline. Yeu cau moi co su dung tiep co che nay khong?
+
+52. Khi qua han, co can escalation cho HR Head/Manager khong?
+
+53. Reminder gui lai link xac nhan cu hay tao link moi?
+
+54. Neu mot bo phan da xac nhan, reminder cho bo phan do co dung ngay khong?
+
+8. Phan quyen va bao mat
+
+55. IT/Admin/HR khi vao link duoc xem nhung thong tin nao cua don nghi viec?
+
+56. Co can ap dung nguyen tac minimum permission: user chi duoc xem request/activity minh phu trach khong?
+
+57. Link token co can ma hoa/ky so va khong doan duoc khong?
+
+58. Token co can luu hash thay vi plain text khong?
+
+59. Co can log cac lan truy cap link that bai/het han/sai token khong?
+
+60. Co can chong CSRF cho thao tac xac nhan neu route la portal/http POST khong?
+
+61. Co can cho phep xac nhan tu mobile/email client khong?
+
+62. Neu nguoi phu trach nghi viec/chuyen bo phan, link va activity can chuyen giao nhu the nao?
+
+9. Cau hinh quan tri
+
+63. HR/System Admin co can man hinh cau hinh rieng de quan ly recipient/template/deadline cho IT/Admin/HR khong?
+
+64. Co can cau hinh theo company trong multi-company khong?
+
+65. Co can cau hinh theo khoi RST, nha hang, phong ban, chi nhanh khong?
+
+66. Co can cho HR chinh sua nguoi phu trach IT/Admin/HR tren tung don truoc khi gui email khong?
+
+67. Co can nut "Gui lai email xac nhan" tren form approval.request khong? Ai duoc phep bam nut nay?
+
+68. Co can hien lich su gui email tren form khong?
+
+10. Anh huong den quy trinh hien co
+
+69. Yeu cau moi co thay doi dieu kien hoan tat quy trinh nghi viec khong?
+    Vi du: bat buoc IT/Admin/HR da xac nhan moi cho action_done.
+
+70. Neu Exit Survey da hoan thanh nhung IT/Admin/HR chua xac nhan, trang thai/tac vu tiep theo la gi?
+
+71. Neu IT/Admin/HR xac nhan truoc ngay nghi du kien, co hop le khong?
+
+72. Neu ngay nghi du kien da qua nhung chua xac nhan, co chan action_done hay chi canh bao?
+
+73. Co can thong bao cho nhan vien nghi viec khi tung bo phan da xac nhan khong?
+
+74. Co can thong bao cho line manager khi toan bo IT/Admin/HR da xac nhan khong?
+
+75. Co can cap nhat bao cao offboarding hien co de them cot trang thai IT/Admin/HR khong?
+
+11. Du lieu mau, migration va tuong thich
+
+76. Cac don nghi viec 0214 da ton tai truoc khi tinh nang nay duoc cai dat co can sinh link/gui email bo sung khong?
+
+77. Neu activity IT/Admin/HR da ton tai truoc do, he thong map vao link moi nhu the nao?
+
+78. Co can cap nhat demo data/test user hien co cho IT/Admin/HR khong?
+
+79. Co can migration de them field/token/trang thai cho cac record cu khong?
+
+80. Neu module 0213 co logic tuong tu, co duoc tai su dung khong hay 0214 phai doc lap?
+
+12. Kich ban loi va ngoai le
+
+81. Neu nhan vien khong co email/manager/department thi van tao workflow khong?
+
+82. Neu employee_id khong tim thay tu portal user, co gui email cho IT/Admin/HR khong?
+
+83. Neu mail.activity tao thanh cong nhung email gui that bai, quy trinh coi la thanh cong hay loi?
+
+84. Neu email gui thanh cong nhung activity tao that bai, co can rollback khong?
+
+85. Neu 1 trong 3 bo phan thieu nguoi nhan, 2 bo phan con lai co duoc gui email khong?
+
+86. Neu nguoi nhan bam link nhieu lan, he thong can xu ly idempotent nhu the nao?
+
+87. Neu co 2 don nghi viec cua cung nhan vien, link va activity can phan biet ra sao?
+
+13. Tieu chi nghiem thu
+
+88. Vui long xac nhan acceptance criteria toi thieu:
+    - Khi workflow den dung trigger, he thong tao/gia han checklist cho IT/Admin/HR.
+    - Moi bo phan nhan email dung nguoi nhan.
+    - Email co link xac nhan rieng theo activity/bo phan.
+    - Bam link hop le se danh dau cong viec tuong ung da hoan thanh.
+    - Chatter/audit co ghi nhan nguoi xac nhan va thoi diem.
+    - Quy trinh chi hoan tat khi cac dieu kien bat buoc da xong.
+
+89. Can test case nao la bat buoc truoc khi go-live?
+    - Happy path du 3 bo phan.
+    - Thieu cau hinh nguoi nhan.
+    - Link het han/sai token.
+    - Xac nhan lap lai.
+    - Gui lai email.
+    - Multi-company.
+    - User khong co quyen.
+
+90. Dinh nghia "done" cua tinh nang nay la gi: chi tao spec, hay phai bao gom implementation, test va cap nhat module map?
+
+14. De xuat quyet dinh can chot truoc khi viet spec chi tiet
+
+91. Chot trigger gui email: submit/action_confirm hay approve/action_approve.
+
+92. Chot cach xac dinh nguoi nhan: company default user, activity responsible, group hay email cau hinh.
+
+93. Chot loai link: backend login, portal login, hay public token.
+
+94. Chot cach xac nhan: mark done mail.activity hay luu model/field rieng.
+
+95. Chot audit trail va bao cao can hien thi.
+
+96. Chot co bat buoc 3 bo phan xac nhan de action_done hay khong.
+
+97. Chot email template: 1 template dung chung hay 3 template rieng.
+
+98. Chot reminder/escalation va deadline.
+
+99. Chot xu ly loi khi thieu cau hinh/gui email that bai.
+
+100. Chot yeu cau migration cho du lieu cu.
+
+Tai lieu dinh huong da dung khi lap bo cau hoi:
+- addons/M02_P0214/convention/QUY_UOC_DAT_TEN_VA_RULE.md
+- addons/M02_P0214/structure/module_map.json
+- addons/M02_P0214/structure/module_map_stats.json
+
+Source chinh da doi chieu:
+- addons/M02_P0214/models/approval_request_rst_approval.py
+- addons/M02_P0214/models/approval_request_rst_offboarding.py
+- addons/M02_P0214/models/res_company.py
+- addons/M02_P0214/controllers/main.py
+- addons/M02_P0214/data/offboarding_plan_rst.xml
+- addons/M02_P0214/data/email_template_dept_offboarding_reminder.xml

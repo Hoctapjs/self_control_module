@@ -1,0 +1,6 @@
+{
+  "file": "__manifest__.py",
+  "type": "file",
+  "bucket": "manifest",
+  "summary": "{ 'name': '20260331 Custom Portal', 'version': '1.3', 'summary': 'Custom Portal Module inheriting from standard Portal', 'description': \"\"\" This module exten..."
+}

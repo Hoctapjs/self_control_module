@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Goc tai lieu Odoo, khong cap nhat lai khi upgrade du lieu mau -->
+<odoo noupdate="1">
+    <!-- Cau hinh lich cron tao yeu cau bao tri dinh ky -->
+    <record id="ir_cron_psm_generate_preventive_requests" model="ir.cron">
+        <!-- Ten hien thi cua lich cron -->
+        <field name="name">0502 Generate Preventive Maintenance Requests</field>
+        <!-- Model se duoc goi khi cron chay -->
+         <!-- maintenance.model_maintenance_equipment la external id cua model goc trong module -->
+        <field name="model_id" ref="maintenance.model_maintenance_equipment"/>
+        <!-- Chay code Python truc tiep -->
+        <!-- cron se chay python code nam trong field code thay vi goi theo kieu hanh dong khac -->
+        <!-- khi cron chay, Odoo lấy model ở model_id là maintenance.model_maintenance_equipment va thuc thi dong field name = "code" -->
+        <field name="state">code</field>
+        <!-- Ham se duoc thuc thi khi cron den gio -->
+        <!-- goi ham cron_psm_generate_preventive_requests() ton tai tren model maintenance_equipment -->
+        <!-- trong ngu canh nay, bien model dai dien cho model maintenance_equipment -->
+        <field name="code">model.cron_psm_generate_preventive_requests()</field>
+        <!-- Khoang thoi gian lap lai la 1 don vi -->
+        <field name="interval_number">1</field>
+        <!-- Don vi lap lai la ngay -->
+        <field name="interval_type">days</field>
+        <!-- Thoi diem chay tiep theo -->
+        <field name="nextcall" eval="DateTime.now()"/>
+        <!-- Bat kich hoat cron -->
+        <field name="active">True</field>
+    </record>
+
+    <!-- Cau hinh lich cron tao activity canh bao khi intake SLA sap qua han hoac da qua han -->
+    <record id="ir_cron_psm_create_intake_sla_warning_activities" model="ir.cron">
+        <!-- Ten hien thi cua lich cron -->
+        <field name="name">0502 Create Intake SLA Warning Activities</field>
+        <!-- Model maintenance.request se duoc goi khi cron chay -->
+        <field name="model_id" ref="maintenance.model_maintenance_request"/>
+        <!-- Chay code Python truc tiep -->
+        <field name="state">code</field>
+        <!-- Ham se duoc thuc thi khi cron den gio -->
+        <field name="code">model.cron_psm_create_intake_sla_warning_activities()</field>
+        <!-- Kiem tra moi 1 gio de canh bao truoc han ngan -->
+        <field name="interval_number">1</field>
+        <!-- Don vi lap lai la gio -->
+        <field name="interval_type">hours</field>
+        <!-- Thoi diem chay tiep theo -->
+        <field name="nextcall" eval="DateTime.now()"/>
+        <!-- Bat kich hoat cron -->
+        <field name="active">True</field>
+    </record>
+</odoo>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="view_psm_offboarding_activities_portal" name="Hoạt động cần làm Offboarding RST">
+        <t t-call="portal.portal_layout">
+            <div id="wrap" class="container mt-4 o_psm_0214_portal">
+                <div class="card p-4 shadow-sm">
+                    <div t-if="done" class="alert alert-success psm-alert psm-alert--success mb-4">
+                        <i class="fa fa-check-circle me-2"/>
+                        <strong>Đã ghi nhận:</strong> Hoạt động đã được xác nhận hoàn tất.
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between gap-3 mb-4">
+                        <h3 class="mb-0 text-primary">
+                            <i class="fa fa-list-check me-2"/>Hoạt động cần làm
+                        </h3>
+                        <a href="/my" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left me-2"/>Portal
+                        </a>
+                    </div>
+
+                    <t t-if="activities">
+                        <div class="row g-3">
+                            <t t-foreach="activities" t-as="activity">
+                                <div class="col-12">
+                                    <div t-attf-class="card border-0 shadow-sm theme-task-card #{'theme-task-card-inactive' if not activity.active else ''}" style="border-left:4px solid #9f1f2e !important;">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+                                                <h5 t-attf-class="mb-0 #{'text-muted text-decoration-line-through' if not activity.active else 'text-dark'}">
+                                                    <t t-esc="activity.summary or activity.activity_type_id.name"/>
+                                                </h5>
+                                                <span t-attf-class="badge rounded-pill #{'bg-success' if activity.x_psm_0214_rst_display_state == 'done' else 'bg-danger' if activity.x_psm_0214_rst_display_state == 'overdue' else 'bg-warning text-dark'}">
+                                                    <t t-esc="activity.x_psm_0214_rst_display_state"/>
+                                                </span>
+                                            </div>
+
+                                            <div class="d-flex flex-wrap align-items-center gap-3 mb-2 text-muted small">
+                                                <span t-if="activity.date_deadline">
+                                                    <i class="fa fa-calendar-check-o me-1"/>Hạn: <t t-esc="activity.date_deadline"/>
+                                                </span>
+                                                <span t-if="activity.x_psm_0214_reminder_count">
+                                                    <i class="fa fa-bell-o me-1"/>Đã nhắc: <t t-esc="activity.x_psm_0214_reminder_count"/>
+                                                </span>
+                                            </div>
+
+                                            <div t-if="activity.note" class="small mb-3" style="line-height:1.6;">
+                                                <t t-out="activity.note"/>
+                                            </div>
+
+                                            <form t-if="activity.active" action="/my/offboarding/activity/done" method="post" class="m-0">
+                                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                                <input type="hidden" name="activity_id" t-att-value="activity.id"/>
+                                                <button type="submit" class="btn btn-success">
+                                                    <i class="fa fa-check me-2"/>Xác nhận thực hiện
+                                                </button>
+                                            </form>
+                                            <div t-if="not activity.active" class="text-success fw-semibold">
+                                                <i class="fa fa-check-circle me-2"/>Đã hoàn tất
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="alert alert-info psm-alert psm-alert--info mb-0">
+                            <i class="fa fa-info-circle me-2"/>Hiện không có hoạt động offboarding nào được giao cho bạn.
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

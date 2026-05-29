@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ke thua form view cua purchase order de nhin thay request 0502 nguon -->
+    <record id="view_psm_purchase_order_form" model="ir.ui.view">
+        <field name="name">psm.purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- chen lien ket request 0502 va fsm task sau origin de ben mua nhin thay nguon phat sinh -->
+            <xpath expr="//page[@name='purchase_delivery_invoice']//field[@name='origin']" position="after">
+                <field name="x_psm_0502_request_id" readonly="1"/>
+                <field name="x_psm_0502_department_id" readonly="1"/>
+                <field name="x_psm_0502_source_system" readonly="1"/>
+                <field name="x_psm_0502_fsm_task_id" readonly="1"/>
+                <field name="x_psm_0502_outside_service_request_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ke thua list view cua purchase order de bo sung request 0502 -->
+    <record id="view_psm_purchase_order_list" model="ir.ui.view">
+        <field name="name">psm.purchase.order.list</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="x_psm_0502_request_id" optional="hide"/>
+                <field name="x_psm_0502_department_id" optional="hide"/>
+                <field name="x_psm_0502_source_system" optional="hide"/>
+                <field name="x_psm_0502_fsm_task_id" optional="hide"/>
+                <field name="x_psm_0502_outside_service_request_id" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ke thua search view cua purchase order de tim theo request 0502 nhanh hon -->
+    <record id="view_psm_purchase_order_search" model="ir.ui.view">
+        <field name="name">psm.purchase.order.search</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="x_psm_0502_request_id"/>
+                <field name="x_psm_0502_department_id"/>
+                <field name="x_psm_0502_source_system"/>
+                <field name="x_psm_0502_fsm_task_id"/>
+                <field name="x_psm_0502_outside_service_request_id"/>
+                <group>
+                    <filter string="0502 Request" name="psm_0502_request_group" domain="[]" context="{'group_by': 'x_psm_0502_request_id'}"/>
+                    <filter string="0502 Store Department" name="psm_0502_department_group" domain="[]" context="{'group_by': 'x_psm_0502_department_id'}"/>
+                    <filter string="0502 Source System" name="psm_0502_source_system_group" domain="[]" context="{'group_by': 'x_psm_0502_source_system'}"/>
+                    <filter string="0502 Outside Service" name="psm_0502_outside_service_group" domain="[]" context="{'group_by': 'x_psm_0502_outside_service_request_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

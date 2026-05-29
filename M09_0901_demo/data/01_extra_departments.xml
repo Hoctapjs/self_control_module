@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+            3 phong ban moi can cho PAF evaluation (B5, B6, B8 trong M09_0901).
+            Ten phong ban duoc chon de _get_dept_code_mapping trong
+            mkt_paf.evaluation.line mapping dung department_code:
+              - "OPS"     -> 'ops'
+              - "Finance" -> 'finance'
+              - "Legal"   -> 'legal'
+            S&I va SC tan dung tu M08_P0801_demo (dept_si, dept_sc).
+        -->
+        <record id="dept_ops" model="hr.department">
+            <field name="name">OPS</field>
+        </record>
+
+        <record id="dept_finance" model="hr.department">
+            <field name="name">Finance</field>
+        </record>
+
+        <record id="dept_legal" model="hr.department">
+            <field name="name">Legal</field>
+        </record>
+    </data>
+</odoo>

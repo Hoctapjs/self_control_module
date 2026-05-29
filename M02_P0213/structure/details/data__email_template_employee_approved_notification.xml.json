@@ -1,0 +1,32 @@
+{
+  "file": "data/email_template_employee_approved_notification.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "psm_0213_email_template_employee_approved_notification",
+      "model": "mail.template",
+      "fields": {
+        "name": "RST 0213 - Thông báo đơn nghỉ việc đã được duyệt",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "subject": "[RST Offboarding 0213] Đơn nghỉ việc của bạn đã được duyệt",
+        "email_from": "{{ (object.company_id.email or user.email) }}",
+        "email_to": "{{ object.request_owner_id.partner_id.email or object.request_owner_id.email }}",
+        "body_html": "",
+        "lang": "{{ object.request_owner_id.lang }}",
+        "auto_delete": "True"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "mail.template"
+  ]
+}

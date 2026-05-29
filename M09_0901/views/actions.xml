@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action: Templates list -->
+    <record id="mkt_0901_action_template" model="ir.actions.act_window">
+        <field name="name">PAF Templates</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mkt_paf.template</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Action: Valuation Reports list -->
+    <record id="mkt_0901_action_valuation_report" model="ir.actions.act_window">
+        <field name="name">PAF Valuation Reports</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mkt_paf.valuation.report</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Action: Approval Categories (definition list) -->
+    <record id="mkt_0901_action_approval_category" model="ir.actions.act_window">
+        <field name="name">PAF Approval Categories</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">approval.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_mkt_paf', '=', True)]</field>
+    </record>
+</odoo>

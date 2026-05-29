@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <function name="write" model="ir.model.data">
+            <value model="ir.model.data" search="[('module', '=', 'M02_P0215'), ('name', '=', 'email_template_psm_discipline_done')]"/>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        <function name="write" model="ir.model.data">
+            <value model="ir.model.data" search="[('module', '=', 'M02_P0215'), ('name', '=', 'email_template_psm_discipline_notified')]"/>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        <function name="write" model="ir.model.data">
+            <value model="ir.model.data" search="[('module', '=', 'M02_P0215'), ('name', '=', 'email_template_psm_discipline_active_notified')]"/>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <record id="email_template_psm_discipline_done" model="mail.template">
+            <field name="name">Discipline: Improvement Completed</field>
+            <field name="model_id" ref="model_x_psm_hr_discipline_record"/>
+            <field name="subject">Improvement period completed - {{ object.name }}</field>
+            <field name="email_from">{{ user.email_formatted }}</field>
+            <field name="email_to">{{ object.x_psm_employee_email }}</field>
+            <field name="partner_to"></field>
+            <field name="use_default_to" eval="False"/>
+            <field name="body_html" type="html">
+                <div style="margin:0;padding:24px 0;background-color:#f4f1ea;font-family:'Segoe UI',Arial,sans-serif;color:#2f2a26;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f4f1ea" style="border-collapse:collapse;background-color:#f4f1ea;">
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="640" bgcolor="#fffdf9" style="width:640px;max-width:640px;background-color:#fffdf9;border:1px solid #eadfce;border-radius:20px;overflow:hidden;">
+                                    <tr>
+                                        <td bgcolor="#b5121b" style="padding:28px 32px 22px 32px;background-color:#b5121b;">
+                                            <div style="font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#ffe7a3;font-weight:700;margin-bottom:10px;">0215 Discipline Process</div>
+                                            <h1 style="margin:0;font-size:28px;line-height:1.25;color:#ffffff;font-weight:800;">Improvement completed</h1>
+                                            <p style="margin:10px 0 0 0;font-size:14px;line-height:1.6;color:#fff4da;">The improvement period for this discipline record has been completed.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:30px 32px 8px 32px;">
+                                            <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;">Dear <strong><t t-out="object.x_psm_employee_name"/></strong>,</p>
+                                            <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">Your discipline record <strong><t t-out="object.name"/></strong> has reached the end of its improvement period.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 22px 32px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff7e8" style="border-collapse:separate;border-spacing:0;background-color:#fff7e8;border:1px solid #f2d39a;border-radius:16px;">
+                                                <tr>
+                                                    <td style="padding:18px 20px;">
+                                                        <div style="font-size:13px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:#8d5a00;margin-bottom:12px;">Record details</div>
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-size:14px;line-height:1.7;color:#3d3833;">
+                                                            <tr><td width="150" style="padding:4px 0;color:#7b7269;">Action</td><td style="padding:4px 0;font-weight:700;color:#2f2a26;"><t t-out="object.x_psm_action_id.name or '-'"/></td></tr>
+                                                            <tr><td width="150" style="padding:4px 0;color:#7b7269;">Start date</td><td style="padding:4px 0;"><t t-out="object.x_psm_start_date or '-'"/></td></tr>
+                                                            <tr><td width="150" style="padding:4px 0;color:#7b7269;">End date</td><td style="padding:4px 0;"><t t-out="object.x_psm_end_date or '-'"/></td></tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 30px 32px;">
+                                            <p style="margin:0;font-size:15px;line-height:1.8;">Regards,<br/><strong>HR Department</strong><br/>McDonald's Vietnam</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f7f2e8" style="padding:16px 32px;background-color:#f7f2e8;border-top:1px solid #eadfce;">
+                                            <p style="margin:0;font-size:12px;line-height:1.6;color:#7b7269;">This is an automated email from the 0215 discipline workflow. Please do not reply unless necessary.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="email_template_psm_discipline_notified" model="mail.template">
+            <field name="name">Discipline: Decision Notified</field>
+            <field name="model_id" ref="model_x_psm_hr_discipline_record"/>
+            <field name="subject">Disciplinary decision issued - {{ object.name }}</field>
+            <field name="email_from">{{ user.email_formatted }}</field>
+            <field name="email_to">{{ object.x_psm_employee_email }}</field>
+            <field name="partner_to"></field>
+            <field name="use_default_to" eval="False"/>
+            <field name="body_html" type="html">
+                <div style="margin:0;padding:24px 0;background-color:#f4f1ea;font-family:'Segoe UI',Arial,sans-serif;color:#2f2a26;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f4f1ea" style="border-collapse:collapse;background-color:#f4f1ea;">
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="640" bgcolor="#fffdf9" style="width:640px;max-width:640px;background-color:#fffdf9;border:1px solid #eadfce;border-radius:20px;overflow:hidden;">
+                                    <tr>
+                                        <td bgcolor="#b5121b" style="padding:28px 32px 22px 32px;background-color:#b5121b;">
+                                            <div style="font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#ffe7a3;font-weight:700;margin-bottom:10px;">0215 Discipline Process</div>
+                                            <h1 style="margin:0;font-size:28px;line-height:1.25;color:#ffffff;font-weight:800;">Decision issued</h1>
+                                            <p style="margin:10px 0 0 0;font-size:14px;line-height:1.6;color:#fff4da;">A disciplinary decision has been issued and requires your acknowledgement on the portal.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:30px 32px 8px 32px;">
+                                            <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;">Dear <strong><t t-out="object.x_psm_employee_name"/></strong>,</p>
+                                            <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">Discipline record <strong><t t-out="object.name"/></strong> has been issued. Please review the information and confirm your acknowledgement on the portal.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 18px 32px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff7e8" style="border-collapse:separate;border-spacing:0;background-color:#fff7e8;border:1px solid #f2d39a;border-radius:16px;">
+                                                <tr>
+                                                    <td style="padding:18px 20px;">
+                                                        <div style="font-size:13px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:#8d5a00;margin-bottom:12px;">Decision summary</div>
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-size:14px;line-height:1.7;color:#3d3833;">
+                                                            <tr><td width="150" style="padding:4px 0;color:#7b7269;">Action</td><td style="padding:4px 0;font-weight:700;color:#2f2a26;"><t t-out="object.x_psm_action_id.name or '-'"/></td></tr>
+                                                            <tr><td width="150" style="padding:4px 0;color:#7b7269;">Issued date</td><td style="padding:4px 0;"><t t-out="object.x_psm_issued_date or '-'"/></td></tr>
+                                                            <tr><td width="150" style="padding:4px 0;color:#7b7269;">Violation</td><td style="padding:4px 0;"><t t-out="object.x_psm_violation_category_id.name or object.x_psm_violation_type or '-'"/></td></tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="padding:8px 32px 26px 32px;">
+                                            <a t-att-href="object.get_base_url() + object._get_portal_url()" style="background-color:#da291c;color:#ffffff;text-decoration:none;padding:15px 34px;border-radius:999px;font-size:15px;font-weight:700;display:inline-block;">Open discipline record</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 30px 32px;">
+                                            <p style="margin:0;font-size:15px;line-height:1.8;">Regards,<br/><strong>HR Department</strong><br/>McDonald's Vietnam</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f7f2e8" style="padding:16px 32px;background-color:#f7f2e8;border-top:1px solid #eadfce;">
+                                            <p style="margin:0;font-size:12px;line-height:1.6;color:#7b7269;">This is an automated email from the 0215 discipline workflow. Please do not reply unless necessary.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="email_template_psm_discipline_active_notified" model="mail.template">
+            <field name="name">Discipline: Active Notified</field>
+            <field name="model_id" ref="model_x_psm_hr_discipline_record"/>
+            <field name="subject">Disciplinary action is now active - {{ object.name }}</field>
+            <field name="email_from">{{ user.email_formatted }}</field>
+            <field name="email_to">{{ object.x_psm_employee_email }}</field>
+            <field name="partner_to"></field>
+            <field name="use_default_to" eval="False"/>
+            <field name="body_html" type="html">
+                <div style="margin:0;padding:24px 0;background-color:#f4f1ea;font-family:'Segoe UI',Arial,sans-serif;color:#2f2a26;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f4f1ea" style="border-collapse:collapse;background-color:#f4f1ea;">
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="640" bgcolor="#fffdf9" style="width:640px;max-width:640px;background-color:#fffdf9;border:1px solid #eadfce;border-radius:20px;overflow:hidden;">
+                                    <tr>
+                                        <td bgcolor="#b5121b" style="padding:28px 32px 22px 32px;background-color:#b5121b;">
+                                            <div style="font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#ffe7a3;font-weight:700;margin-bottom:10px;">0215 Discipline Process</div>
+                                            <h1 style="margin:0;font-size:28px;line-height:1.25;color:#ffffff;font-weight:800;">Action is active</h1>
+                                            <p style="margin:10px 0 0 0;font-size:14px;line-height:1.6;color:#fff4da;">The disciplinary action has been acknowledged and is now effective.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:30px 32px 8px 32px;">
+                                            <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;">Dear <strong><t t-out="object.x_psm_employee_name"/></strong>,</p>
+                                            <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">Discipline record <strong><t t-out="object.name"/></strong> has been acknowledged and is now active.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 18px 32px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff7e8" style="border-collapse:separate;border-spacing:0;background-color:#fff7e8;border:1px solid #f2d39a;border-radius:16px;">
+                                                <tr>
+                                                    <td style="padding:18px 20px;">
+                                                        <div style="font-size:13px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;color:#8d5a00;margin-bottom:12px;">Effective period</div>
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-size:14px;line-height:1.7;color:#3d3833;">
+                                                            <tr><td width="160" style="padding:4px 0;color:#7b7269;">Action</td><td style="padding:4px 0;font-weight:700;color:#2f2a26;"><t t-out="object.x_psm_action_id.name or '-'"/></td></tr>
+                                                            <tr><td width="160" style="padding:4px 0;color:#7b7269;">Issued date</td><td style="padding:4px 0;"><t t-out="object.x_psm_issued_date or '-'"/></td></tr>
+                                                            <tr><td width="160" style="padding:4px 0;color:#7b7269;">Start date</td><td style="padding:4px 0;"><t t-out="object.x_psm_start_date or '-'"/></td></tr>
+                                                            <tr><td width="160" style="padding:4px 0;color:#7b7269;">End date</td><td style="padding:4px 0;"><t t-out="object.x_psm_end_date or '-'"/></td></tr>
+                                                            <tr><td width="160" style="padding:4px 0;color:#7b7269;">Violation</td><td style="padding:4px 0;"><t t-out="object.x_psm_violation_category_id.name or object.x_psm_violation_type or '-'"/></td></tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="padding:8px 32px 26px 32px;">
+                                            <a t-att-href="object.get_base_url() + object._get_portal_url()" style="background-color:#da291c;color:#ffffff;text-decoration:none;padding:15px 34px;border-radius:999px;font-size:15px;font-weight:700;display:inline-block;">View record</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0 32px 30px 32px;">
+                                            <p style="margin:0;font-size:15px;line-height:1.8;">Regards,<br/><strong>HR Department</strong><br/>McDonald's Vietnam</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f7f2e8" style="padding:16px 32px;background-color:#f7f2e8;border-top:1px solid #eadfce;">
+                                            <p style="margin:0;font-size:12px;line-height:1.6;color:#7b7269;">This is an automated email from the 0215 discipline workflow. Please do not reply unless necessary.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

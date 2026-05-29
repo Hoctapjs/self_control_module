@@ -1,0 +1,46 @@
+{
+  "file": "data/mail_template.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "2 functions/rules",
+  "records": [
+    {
+      "id": "email_template_psm_ask_explanation",
+      "model": "mail.template",
+      "fields": {
+        "name": "Discipline: Request Explanation",
+        "model_id": {
+          "ref": "model_x_psm_hr_discipline_record"
+        },
+        "subject": "Action Required: Explanation for {{ object.name }}",
+        "email_from": "{{ user.email_formatted }}",
+        "email_to": "{{ object.x_psm_employee_email }}",
+        "partner_to": "",
+        "use_default_to": {
+          "eval": "False"
+        },
+        "body_html": ""
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [
+    {
+      "kind": "function",
+      "model": "ir.model.data",
+      "name": "write"
+    },
+    {
+      "kind": "function",
+      "model": "ir.model.data",
+      "name": "write"
+    }
+  ],
+  "referenced_models": [
+    "ir.model.data",
+    "mail.template"
+  ]
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+            Bat paf_can_use=True cho 3 thanh pham hien co cua M08_P0801_demo,
+            de chung xuat hien trong domain cua mkt_paf.template /
+            mkt_paf.request (do M09_0901 dat domain [('paf_can_use', '=', True)]).
+        -->
+        <function name="write" model="product.template">
+            <value
+                model="product.template"
+                search="[('id', 'in', [
+                    ref('M08_P0801_demo.demo_tmpl_spicy_mcdouble'),
+                    ref('M08_P0801_demo.demo_tmpl_bbq_chicken_burger'),
+                    ref('M08_P0801_demo.demo_tmpl_mccrispy'),
+                ])]"
+            />
+            <value eval="{'paf_can_use': True}"/>
+        </function>
+
+        <!-- Bat paf_can_use=True cho 3 BOM tuong ung -->
+        <function name="write" model="mrp.bom">
+            <value
+                model="mrp.bom"
+                search="[('id', 'in', [
+                    ref('M08_P0801_demo.demo_bom_spicy_mcdouble'),
+                    ref('M08_P0801_demo.demo_bom_bbq_chicken'),
+                    ref('M08_P0801_demo.demo_bom_mccrispy'),
+                ])]"
+            />
+            <value eval="{'paf_can_use': True}"/>
+        </function>
+    </data>
+</odoo>

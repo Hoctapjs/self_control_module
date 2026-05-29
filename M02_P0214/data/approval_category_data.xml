@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="approval_category_resignation" model="approval.category">
+            <field name="name">RST Offboarding Request</field>
+            <field name="description">Employee resignation and offboarding request for the RST business flow, including manager approval, exit survey, checklist follow-up, social insurance communication, and final account deactivation.</field>
+            <field name="manager_approval">required</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_hr_employee_form_inherit_job_grade_level" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.job.grade.level</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <!-- 1. Thêm Job Level vào tab Work (sau Job Title) -->
+            <xpath expr="//field[@name='job_title']" position="after">
+                <field name="job_level_id" options="{'no_create': True}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="first_working_day"/>
+            </xpath>
+
+            <!-- 2. Thêm Job Grade vào tab Payroll (sau cụm ngày hợp đồng) -->
+            <xpath expr="//page[@name='payroll_information']//div[@name='contract_dates']" position="after">
+                <field name="job_grade_id" options="{'no_create': True}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='contract_type_id']" position="after">
+                <field name="contract_kind_id" 
+                       domain="[('contract_type_id', '=', contract_type_id)]"
+                       options="{'no_create': True}"/>
+            </xpath>
+
+            <!-- 3. Đảm bảo contract_date_start hiển thị (nếu có module nào ẩn nó) -->
+            <xpath expr="//field[@name='contract_date_start']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='payroll_information']//group[@name='payroll_group']" position="inside">
+                <group name="benefit" groups="hr.group_hr_user" style="padding-top: 20px;">
+                    <div colspan="2" class="row">
+                        <span class="col-8 text-uppercase fw-bolder small"> benefit </span>
+                        <div class="w-100 border-top border-1 border-secondary mt-0 mb-3"></div>
+                    </div>
+                    <field name="allowance_responsibility"/>
+                    <field name="allowance_transportation"/>
+                    <field name="allowance_other"/>
+                    <field name="x_psm_monthly_allowance"/>
+                    <field name="x_psm_attendance_allowance"/>
+                    <field name="x_psm_housing_allowance"/>
+                    <field name="x_psm_hardshift_allowance"/>
+                    <field name="x_psm_attraction_allowance"/>
+                    <field name="x_psm_0200_is_non_packing"/>
+                </group>
+            </xpath>
+
+            <!-- 4. Thêm Tổng số người phụ thuộc vào tab Personal > Family -->
+            <xpath expr="//group[@name='hr_family_group']//field[@name='children']" position="after">
+                <field name="dependents_count"/>
+            </xpath>
+
+            <!-- 5. Thêm Mã nhân viên vào tab HR Settings -->
+            <xpath expr="//page[@name='hr_settings']//group" position="inside">
+                <group name="mcd_employee_code" string="MCD Identification">
+                    <field name="x_psm_employee_code"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

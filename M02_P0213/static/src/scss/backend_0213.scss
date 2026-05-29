@@ -1,0 +1,73 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/M02_P0213/static/src/fonts/Roboto-Regular.woff2") format("woff2");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("/M02_P0213/static/src/fonts/Roboto-Medium.woff2") format("woff2");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("/M02_P0213/static/src/fonts/Roboto-Medium.woff2") format("woff2");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("/M02_P0213/static/src/fonts/Roboto-Bold.woff2") format("woff2");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("/M02_P0213/static/src/fonts/Roboto-Bold.woff2") format("woff2");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.o_psm_0213_backend_view {
+    font-family: "Roboto", Arial, sans-serif !important;
+}
+
+.o_psm_0213_backend_view :not(.fa):not(.oi):not(.o_icon):not([class*="fa-"]):not([class*="oi-"]) {
+    font-family: "Roboto", Arial, sans-serif;
+}
+
+.o_psm_0213_backend_view .fa,
+.o_psm_0213_backend_view [class*="fa-"] {
+    font-family: FontAwesome !important;
+}
+
+.o_psm_0213_backend_view .oi,
+.o_psm_0213_backend_view [class*="oi-"],
+.o_psm_0213_backend_view .o_icon {
+    font-family: "odoo_ui_icons" !important;
+}
+
+.o_psm_0213_backend_view h1,
+.o_psm_0213_backend_view h2,
+.o_psm_0213_backend_view h3,
+.o_psm_0213_backend_view h4,
+.o_psm_0213_backend_view h5,
+.o_psm_0213_backend_view h6,
+.o_psm_0213_backend_view .o_horizontal_separator {
+    font-weight: 700;
+}
+
+.o_psm_0213_backend_action {
+    font-family: "Roboto", Arial, sans-serif !important;
+    font-weight: 600;
+}

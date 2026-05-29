@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Record Rules: approval.request -->
+    <!-- Tất cả rules cần field/data từ module con (P0205, P0213, P0214) -->
+    <!-- Sẽ được thêm khi tinh chỉnh dependencies -->
+
+</odoo>

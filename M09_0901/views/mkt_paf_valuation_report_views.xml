@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Valuation Report Tree/List View -->
+    <record id="mkt_0901_view_paf_valuation_report_tree" model="ir.ui.view">
+        <field name="name">mkt_paf.valuation.report.list</field>
+        <field name="model">mkt_paf.valuation.report</field>
+        <field name="arch" type="xml">
+            <list string="Báo cáo Valuation PAF">
+                <field name="paf_request_id"/>
+                <field name="report_date"/>
+                <field name="actual_revenue" sum="Tổng doanh thu thực tế"/>
+                <field name="actual_cost" sum="Tổng chi phí thực tế"/>
+                <field name="actual_roi_percent" widget="float"/>
+                <field name="variance_vs_forecast" widget="float"/>
+                <field name="status" widget="badge" decoration-info="status == 'draft'" decoration-success="status == 'published'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Valuation Report Form View -->
+    <record id="mkt_0901_view_paf_valuation_report_form" model="ir.ui.view">
+        <field name="name">mkt_paf.valuation.report.form</field>
+        <field name="model">mkt_paf.valuation.report</field>
+        <field name="arch" type="xml">
+            <form string="Báo cáo Valuation PAF">
+                <header>
+                    <button name="action_publish" string="Công bố báo cáo" type="object" class="oe_highlight" invisible="status != 'draft'"/>
+                    <button name="%(mkt_0901_action_report_paf_valuation)d" string="In báo cáo (PDF)" type="action" class="btn-secondary" invisible="status != 'published'"/>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,published"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            Báo cáo Valuation: <field name="paf_request_id" options="{'no_create': True, 'no_open': False}" readonly="status != 'draft'" class="oe_inline"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="meta" string="Thông tin chung">
+                            <field name="report_date" readonly="status != 'draft'"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group name="financials" string="Kế toán so sánh">
+                            <field name="actual_revenue" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="status != 'draft'"/>
+                            <field name="actual_cost" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="status != 'draft'"/>
+                            <field name="actual_roi_percent" widget="float"/>
+                            <field name="variance_vs_forecast" widget="float"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Tóm tắt &amp; Đánh giá" name="summary">
+                            <field name="summary_html" widget="html" options="{'safe': True}" readonly="status != 'draft'" placeholder="Nhập tóm tắt đánh giá chi tiết dự án sau triển khai..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Valuation Report Search View -->
+    <record id="mkt_0901_view_paf_valuation_report_search" model="ir.ui.view">
+        <field name="name">mkt_paf.valuation.report.search</field>
+        <field name="model">mkt_paf.valuation.report</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm Báo cáo Valuation">
+                <field name="paf_request_id"/>
+                <filter string="Nháp" name="draft" domain="[('status', '=', 'draft')]"/>
+                <filter string="Đã công bố" name="published" domain="[('status', '=', 'published')]"/>
+                <filter string="Trạng thái" name="group_by_status" context="{'group_by': 'status'}"/>
+                <filter string="Ngày báo cáo" name="group_by_date" context="{'group_by': 'report_date'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Valuation Report Window Action -->
+    <record id="mkt_0901_action_paf_valuation_report" model="ir.actions.act_window">
+        <field name="name">Báo cáo Valuation PAF</field>
+        <field name="res_model">mkt_paf.valuation.report</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="mkt_0901_view_paf_valuation_report_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chưa có báo cáo Valuation nào
+            </p>
+            <p>
+                Sau khi một dự án hoặc chương trình khuyến mãi kết thúc, phòng S&amp;I tiến hành lập báo cáo so sánh doanh số thực tế so với dự báo để đo lường hiệu quả (ROI).
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu for Valuation Reports -->
+    <menuitem id="mkt_0901_menu_paf_valuation_report" name="Báo cáo Valuation" parent="mkt_0901_menu_root" action="mkt_0901_action_paf_valuation_report" sequence="52"/>
+</odoo>

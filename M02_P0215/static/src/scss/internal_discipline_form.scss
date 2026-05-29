@@ -1,0 +1,16 @@
+.x_psm_summary_value,
+.x_psm_summary_value .o_field_widget,
+.x_psm_summary_value .o_field_many2one,
+.x_psm_summary_value a,
+.x_psm_summary_value span {
+    display: block;
+    max-width: 100%;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.35;
+    color: #007c89;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+}

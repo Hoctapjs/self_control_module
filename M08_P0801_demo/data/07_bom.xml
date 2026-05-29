@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============================================================ -->
+        <!-- BOM 1: Spicy McDouble - danh cho PIF-DEMO-001                -->
+        <!-- ============================================================ -->
+        <record id="demo_bom_spicy_mcdouble" model="mrp.bom">
+            <field name="product_tmpl_id" ref="demo_tmpl_spicy_mcdouble"/>
+            <field name="product_qty">1.0</field>
+            <field name="x_psm_0801_pif_status">completed</field>
+        </record>
+
+        <record id="demo_bom_line_spicy_beef_patty" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_spicy_mcdouble"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_beef_patty'))]"/>
+            <field name="product_qty">2.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="demo_bom_line_spicy_sesame_bun" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_spicy_mcdouble"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_sesame_bun'))]"/>
+            <field name="product_qty">1.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="demo_bom_line_spicy_cheddar_cheese" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_spicy_mcdouble"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_cheddar_cheese'))]"/>
+            <field name="product_qty">2.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="demo_bom_line_spicy_lettuce" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_spicy_mcdouble"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_lettuce'))]"/>
+            <field name="product_qty">5.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_gram"/>
+        </record>
+
+        <record id="demo_bom_line_spicy_special_sauce" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_spicy_mcdouble"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_special_sauce'))]"/>
+            <field name="product_qty">15.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_gram"/>
+        </record>
+
+        <record id="demo_bom_line_spicy_onion_dehydrated" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_spicy_mcdouble"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_onion_dehydrated'))]"/>
+            <field name="product_qty">3.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_gram"/>
+        </record>
+
+        <record id="demo_bom_line_spicy_pickle" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_spicy_mcdouble"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_pickle'))]"/>
+            <field name="product_qty">2.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- BOM 2: BBQ Chicken Burger - danh cho PIF-DEMO-002            -->
+        <!-- ============================================================ -->
+        <record id="demo_bom_bbq_chicken" model="mrp.bom">
+            <field name="product_tmpl_id" ref="demo_tmpl_bbq_chicken_burger"/>
+            <field name="product_qty">1.0</field>
+            <field name="x_psm_0801_pif_status">completed</field>
+        </record>
+
+        <record id="demo_bom_line_bbq_chicken_fillet" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_bbq_chicken"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_chicken_fillet'))]"/>
+            <field name="product_qty">1.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="demo_bom_line_bbq_sesame_bun" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_bbq_chicken"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_sesame_bun'))]"/>
+            <field name="product_qty">1.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="demo_bom_line_bbq_cheddar_cheese" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_bbq_chicken"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_cheddar_cheese'))]"/>
+            <field name="product_qty">1.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="demo_bom_line_bbq_lettuce" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_bbq_chicken"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_lettuce'))]"/>
+            <field name="product_qty">10.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_gram"/>
+        </record>
+
+        <record id="demo_bom_line_bbq_sauce" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_bbq_chicken"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_bbq_sauce'))]"/>
+            <field name="product_qty">20.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_gram"/>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- BOM 3: McChicken Crispy - danh cho PIF-DEMO-003 (completed)  -->
+        <!-- ============================================================ -->
+        <record id="demo_bom_mccrispy" model="mrp.bom">
+            <field name="product_tmpl_id" ref="demo_tmpl_mccrispy"/>
+            <field name="product_qty">1.0</field>
+            <field name="x_psm_0801_pif_status">completed</field>
+        </record>
+
+        <record id="demo_bom_line_mccrispy_chicken_fillet" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_mccrispy"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_chicken_fillet'))]"/>
+            <field name="product_qty">1.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="demo_bom_line_mccrispy_sesame_bun" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_mccrispy"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_sesame_bun'))]"/>
+            <field name="product_qty">1.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="demo_bom_line_mccrispy_lettuce" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_mccrispy"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_lettuce'))]"/>
+            <field name="product_qty">10.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_gram"/>
+        </record>
+
+        <record id="demo_bom_line_mccrispy_special_sauce" model="mrp.bom.line">
+            <field name="bom_id" ref="demo_bom_mccrispy"/>
+            <field name="product_id" model="product.product" search="[('product_tmpl_id', '=', ref('demo_tmpl_special_sauce'))]"/>
+            <field name="product_qty">10.0</field>
+            <field name="product_uom_id" ref="uom.product_uom_gram"/>
+        </record>
+
+    </data>
+</odoo>

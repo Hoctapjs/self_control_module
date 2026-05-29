@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_country_state_tree_inherit_region" model="ir.ui.view">
+        <field name="name">res.country.state.list.inherit.region</field>
+        <field name="model">res.country.state</field>
+        <field name="inherit_id" ref="base.view_country_state_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="x_psm_region" optional="show"/>
+                <field name="x_psm_0200_salary_region_id" optional="show" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_country_state_form_inherit_region" model="ir.ui.view">
+        <field name="name">res.country.state.form.inherit.region</field>
+        <field name="model">res.country.state</field>
+        <field name="inherit_id" ref="base.view_country_state_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="x_psm_region"/>
+                <field name="x_psm_0200_salary_region_id" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

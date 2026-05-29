@@ -1,0 +1,564 @@
+{
+  "file": "controllers/portal.py",
+  "type": "python",
+  "bucket": "controllers",
+  "summary": "1 classes; 0 fields",
+  "classes": [
+    {
+      "python_class": "CustomPortal",
+      "description": "Python helper class CustomPortal.",
+      "model": null,
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "home",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my",
+                  "/my/home"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "Override home to add blog posts for news feed and manager approval data "
+        },
+        {
+          "name": "post_news",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/news/post"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "methods": [
+                  "POST"
+                ],
+                "website": true
+              }
+            }
+          ],
+          "summary": "Handle news posting from portal (HR or Admin only) "
+        },
+        {
+          "name": "delete_news",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/news/post/delete/<int:post_id>"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "Handle post deletion "
+        },
+        {
+          "name": "portal_leaves",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/leaves"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "portal_personal_information",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/personal-information"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "portal_rocks",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/rocks"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "portal_performance",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/performance"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "portal_team_accountabilities",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/team-accountabilities"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "approve_day_timesheet",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/team-accountabilities/approve_day"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "methods": [
+                  "POST"
+                ],
+                "website": true
+              }
+            }
+          ],
+          "summary": "Approve all attendances for a specific day for subordinates"
+        },
+        {
+          "name": "portal_appraisals",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/appraisals"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "portal_employee_engagement",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/employee-engagement"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "portal_expenses",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/expenses"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "portal_cond",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/cond"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "portal_payslips",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/payslips"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "portal_knowledge_hub",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/knowledge-hub"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "portal_settings",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/settings"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        }
+      ],
+      "kind": "python_class"
+    }
+  ],
+  "routes": [
+    {
+      "method": "home",
+      "route": [
+        [
+          "/my",
+          "/my/home"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "post_news",
+      "route": [
+        [
+          "/my/news/post"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "methods": [
+          "POST"
+        ],
+        "website": true
+      }
+    },
+    {
+      "method": "delete_news",
+      "route": [
+        [
+          "/my/news/post/delete/<int:post_id>"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_leaves",
+      "route": [
+        [
+          "/my/leaves"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_personal_information",
+      "route": [
+        [
+          "/my/personal-information"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_rocks",
+      "route": [
+        [
+          "/my/rocks"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_performance",
+      "route": [
+        [
+          "/my/performance"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_team_accountabilities",
+      "route": [
+        [
+          "/my/team-accountabilities"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "approve_day_timesheet",
+      "route": [
+        [
+          "/my/team-accountabilities/approve_day"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "methods": [
+          "POST"
+        ],
+        "website": true
+      }
+    },
+    {
+      "method": "portal_appraisals",
+      "route": [
+        [
+          "/my/appraisals"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_employee_engagement",
+      "route": [
+        [
+          "/my/employee-engagement"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_expenses",
+      "route": [
+        [
+          "/my/expenses"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_cond",
+      "route": [
+        [
+          "/my/cond"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_payslips",
+      "route": [
+        [
+          "/my/payslips"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_knowledge_hub",
+      "route": [
+        [
+          "/my/knowledge-hub"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_settings",
+      "route": [
+        [
+          "/my/settings"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    }
+  ]
+}

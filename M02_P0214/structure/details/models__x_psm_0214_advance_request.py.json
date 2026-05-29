@@ -1,0 +1,111 @@
+{
+  "file": "models/x_psm_0214_advance_request.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: x_psm_0214_advance_request; 1 classes; 6 fields",
+  "classes": [
+    {
+      "python_class": "Xpsm0214AdvanceRequest",
+      "description": "RST Advance Request",
+      "model": "x_psm_0214_advance_request",
+      "inherit": null,
+      "order": "date desc, id desc",
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "name",
+          "type": "Char",
+          "string": "Reference No.",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "employee_id",
+          "type": "Many2one",
+          "string": "Employee",
+          "comodel": "hr.employee",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "amount",
+          "type": "Monetary",
+          "string": "Amount",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "currency_id",
+          "type": "Many2one",
+          "string": "Currency",
+          "comodel": "res.currency",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "lambda",
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "date",
+          "type": "Date",
+          "string": "Advance Date",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "fields.Date.context_today",
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "state",
+          "type": "Selection",
+          "string": "Status",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": "[[\"draft\", \"Draft\"], [\"open\", \"Open\"], [\"settled\", \"Settled\"]]",
+          "default": "draft",
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

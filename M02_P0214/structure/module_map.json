@@ -1,0 +1,2582 @@
+{
+  "module_name": "M02_P0214",
+  "module_path": "D:\\odoo-19.0+e.20250918\\addons\\M02_P0214",
+  "manifest": {
+    "name": "M02_P0214_QUY_TRINH_OFFBOARDING_RST",
+    "version": "19.0.1.0.12",
+    "category": "Human Resources",
+    "summary": "Quy trình nghỉ việc RST",
+    "description": "\n        Module cho phép nhân viên gửi yêu cầu nghỉ việc từ Portal.\n        - Form đơn giản với họ tên, line manager, lý do nghỉ việc\n        - Tích hợp với Approvals để duyệt yêu cầu\n    ",
+    "author": "PSM",
+    "depends": [
+      "base",
+      "mail",
+      "approvals",
+      "hr",
+      "portal",
+      "survey",
+      "hr_holidays",
+      "hr_expense",
+      "M02_P0200",
+      "M02_P0213",
+      "M00_P9990"
+    ],
+    "data": [
+      "data/departure_reason_data.xml",
+      "data/survey_exit_interview_data.xml",
+      "security/security.xml",
+      "security/ir.model.access.csv",
+      "security/acl_cleanup.xml",
+      "wizards/finance_override_wizard_views.xml",
+      "data/approval_category_data.xml",
+      "security/offboarding_request_rules.xml",
+      "data/email_template_exit_survey.xml",
+      "data/email_template_adecco_notification.xml",
+      "data/email_template_social_insurance.xml",
+      "data/email_template_offboarding_completion.xml",
+      "data/email_template_offboarding_reminder.xml",
+      "data/email_template_dept_offboarding_reminder.xml",
+      "data/email_template_manager_approval_reminder.xml",
+      "data/email_template_employee_approved_notification.xml",
+      "data/email_template_dept_offboarding_assignment.xml",
+      "data/email_template_dept_confirm_done.xml",
+      "data/email_template_salary_settlement.xml",
+      "data/ir_cron_data.xml",
+      "data/config_ui_cleanup.xml",
+      "views/resignation_portal_template.xml",
+      "views/offboarding_activities_portal_template.xml",
+      "views/resignation_request_views.xml",
+      "views/hr_employee_views.xml",
+      "views/offboarding_report_views.xml",
+      "views/finance_check_report_views.xml",
+      "views/exit_interview_dashboard_views.xml",
+      "views/res_company_views.xml",
+      "views/config_menu_views.xml",
+      "data/rst_demo_data.xml",
+      "data/test_security_users.xml",
+      "data/offboarding_plan_rst.xml"
+    ],
+    "assets": {
+      "web.assets_backend": [
+        "M02_P0214/static/src/scss/backend_0214.scss"
+      ],
+      "web.assets_frontend": [
+        "M02_P0214/static/src/scss/portal_resignation_0214.scss",
+        "M02_P0214/static/src/js/portal_resignation_0214.js"
+      ]
+    },
+    "installable": true,
+    "application": false,
+    "license": "LGPL-3"
+  },
+  "counts": {
+    "python": 1,
+    "manifest": 1,
+    "docs": 8,
+    "controllers": 3,
+    "convention": 2,
+    "data": 21,
+    "root": 1,
+    "models": 16,
+    "notes": 13,
+    "security": 5,
+    "static": 3,
+    "tests": 3,
+    "views": 11,
+    "wizards": 3
+  },
+  "structure": {
+    "controllers": [
+      "controllers/__init__.py",
+      "controllers/desktop.ini",
+      "controllers/main.py"
+    ],
+    "convention": [
+      "convention/QUY_UOC_DAT_TEN_VA_RULE.md",
+      "convention/desktop.ini"
+    ],
+    "data": [
+      "data/approval_category_data.xml",
+      "data/config_ui_cleanup.xml",
+      "data/departure_reason_data.xml",
+      "data/desktop.ini",
+      "data/email_template_adecco_notification.xml",
+      "data/email_template_dept_confirm_done.xml",
+      "data/email_template_dept_offboarding_assignment.xml",
+      "data/email_template_dept_offboarding_reminder.xml",
+      "data/email_template_employee_approved_notification.xml",
+      "data/email_template_exit_survey.xml",
+      "data/email_template_manager_approval_reminder.xml",
+      "data/email_template_offboarding_completion.xml",
+      "data/email_template_offboarding_reminder.xml",
+      "data/email_template_salary_settlement.xml",
+      "data/email_template_social_insurance.xml",
+      "data/ir_cron_data.xml",
+      "data/offboarding_activity_plan_data.xml",
+      "data/offboarding_plan_rst.xml",
+      "data/rst_demo_data.xml",
+      "data/survey_exit_interview_data.xml",
+      "data/test_security_users.xml"
+    ],
+    "docs": [
+      "BAO_CAO_RAA_SOAT_BAO_MAT_P0214.md",
+      "BEFORE_AFTER_THAY_DOI_QUYEN_0214.md",
+      "DANH_SACH_TEXT_CAN_DICH_0214.md",
+      "GHD_HR_0214_BANG_QUY_TRINH.md",
+      "GHD_HR_0214_BO_SUNG_BANG_TRANG_THAI.md",
+      "GHI_CHU_BEFORE_AFTER_2026-04-17.md",
+      "KE_HOACH_TRIEN_KHAI_QUYEN_0214_THEO_GROUP_0200.md",
+      "docs/BO_CAU_HOI_NGHIEP_VU_EMAIL_XAC_NHAN_OFFBOARDING_0214.txt"
+    ],
+    "manifest": [
+      "__manifest__.py"
+    ],
+    "models": [
+      "models/__init__.py",
+      "models/approval_request_rst_approval.py",
+      "models/approval_request_rst_fields.py",
+      "models/approval_request_rst_finance.py",
+      "models/approval_request_rst_offboarding.py",
+      "models/approval_request_rst_reminder.py",
+      "models/approval_request_rst_survey.py",
+      "models/desktop.ini",
+      "models/exit_interview_report.py",
+      "models/hr_employee_extension.py",
+      "models/mail_activity.py",
+      "models/res_company.py",
+      "models/res_config_settings.py",
+      "models/survey_user_input.py",
+      "models/x_psm_0214_advance_request.py",
+      "models/x_psm_resignation_type.py"
+    ],
+    "notes": [
+      "notes/BEFORE_AFTER_CONFIG_PATCH_0214.md",
+      "notes/CHECKLIST_NGHIEM_THU_R1_R6_0214.md",
+      "notes/CHECKLIST_TEST_PHASE_5_0214.md",
+      "notes/CHECKLIST_TEST_PHASE_6_0214.md",
+      "notes/PHASE_0_CHOT_MA_TRAN_QUYEN_EXPECTED_0214.md",
+      "notes/PHASE_1_DOI_CHIEU_EXPECTED_VS_ACTUAL_0214.md",
+      "notes/PHASE_4_REVIEW_QUYEN_WORKFLOW_0214_20260514.md",
+      "notes/PHASE_PLAN_TRIEN_KHAI_KHOA_CHAT_DU_LIEU_0214.md",
+      "notes/PLAN_IMPLEMENTATION_KHOA_CHAT_DU_LIEU_0214.md",
+      "notes/PORTAL_UI_PLAN_0214.md",
+      "notes/RA_SOAT_VA_PLAN_UI_0214_TU_0213_20250514.md",
+      "notes/backups/resignation_portal_template.step1.20260514.bak",
+      "notes/desktop.ini"
+    ],
+    "python": [
+      "__init__.py"
+    ],
+    "root": [
+      "desktop.ini"
+    ],
+    "security": [
+      "security/acl_cleanup.xml",
+      "security/desktop.ini",
+      "security/ir.model.access.csv",
+      "security/offboarding_request_rules.xml",
+      "security/security.xml"
+    ],
+    "static": [
+      "static/src/js/portal_resignation_0214.js",
+      "static/src/scss/backend_0214.scss",
+      "static/src/scss/portal_resignation_0214.scss"
+    ],
+    "tests": [
+      "tests/__init__.py",
+      "tests/test_offboarding_r1_r6.py",
+      "tests/test_security_hardening.py"
+    ],
+    "views": [
+      "views/config_menu_views.xml",
+      "views/desktop.ini",
+      "views/exit_interview_dashboard_views.xml",
+      "views/finance_check_report_views.xml",
+      "views/hr_employee_views.xml",
+      "views/offboarding_activities_portal_template.xml",
+      "views/offboarding_report_views.xml",
+      "views/res_company_views.xml",
+      "views/res_config_settings_views.xml",
+      "views/resignation_portal_template.xml",
+      "views/resignation_request_views.xml"
+    ],
+    "wizards": [
+      "wizards/__init__.py",
+      "wizards/finance_override_wizard.py",
+      "wizards/finance_override_wizard_views.xml"
+    ]
+  },
+  "models": [
+    {
+      "file": "models/approval_request_rst_approval.py",
+      "python_class": "ResignationRequest",
+      "model": null,
+      "inherit": "approval.request",
+      "kind": "inherit_only",
+      "description": "Extends approval.request in models/approval_request_rst_approval.py.",
+      "field_count": 0,
+      "method_count": 6,
+      "important_fields": [],
+      "actions": [
+        "action_confirm",
+        "action_done",
+        "action_approve"
+      ]
+    },
+    {
+      "file": "models/approval_request_rst_fields.py",
+      "python_class": "ResignationRequest",
+      "model": null,
+      "inherit": "approval.request",
+      "kind": "inherit_only",
+      "description": "Extends approval.request in models/approval_request_rst_fields.py.",
+      "field_count": 71,
+      "method_count": 55,
+      "important_fields": [
+        "request_status",
+        "employee_id",
+        "x_psm_0214_employee_id",
+        "resignation_employee_name",
+        "x_psm_0214_resignation_employee_name",
+        "resignation_manager_name",
+        "x_psm_0214_resignation_manager_name",
+        "resignation_department",
+        "x_psm_0214_resignation_department",
+        "job_id",
+        "x_psm_0214_job_id",
+        "type_contract"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/approval_request_rst_finance.py",
+      "python_class": "ResignationRequest",
+      "model": null,
+      "inherit": "approval.request",
+      "kind": "inherit_only",
+      "description": "Extends approval.request in models/approval_request_rst_finance.py.",
+      "field_count": 0,
+      "method_count": 6,
+      "important_fields": [],
+      "actions": [
+        "action_push_to_accounting",
+        "action_settle_advance_al",
+        "action_open_finance_override_wizard"
+      ]
+    },
+    {
+      "file": "models/approval_request_rst_offboarding.py",
+      "python_class": "ResignationRequest",
+      "model": null,
+      "inherit": "approval.request",
+      "kind": "inherit_only",
+      "description": "Extends approval.request in models/approval_request_rst_offboarding.py.",
+      "field_count": 0,
+      "method_count": 16,
+      "important_fields": [],
+      "actions": [
+        "action_checklist_completed",
+        "action_view_my_activities",
+        "action_pending_offboarding_subordinates"
+      ]
+    },
+    {
+      "file": "models/approval_request_rst_reminder.py",
+      "python_class": "ResignationRequest",
+      "model": null,
+      "inherit": "approval.request",
+      "kind": "inherit_only",
+      "description": "Extends approval.request in models/approval_request_rst_reminder.py.",
+      "field_count": 0,
+      "method_count": 6,
+      "important_fields": [],
+      "actions": [
+        "action_manual_reminder_extension"
+      ]
+    },
+    {
+      "file": "models/approval_request_rst_survey.py",
+      "python_class": "ResignationRequest",
+      "model": null,
+      "inherit": "approval.request",
+      "kind": "inherit_only",
+      "description": "Extends approval.request in models/approval_request_rst_survey.py.",
+      "field_count": 0,
+      "method_count": 5,
+      "important_fields": [],
+      "actions": [
+        "action_send_adecco_notification",
+        "action_send_social_insurance",
+        "action_view_survey_results",
+        "action_send_exit_survey"
+      ]
+    },
+    {
+      "file": "models/exit_interview_report.py",
+      "python_class": "ExitInterviewReport",
+      "model": "x_psm_0214_exit_interview_report",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "Exit Interview Report",
+      "field_count": 9,
+      "method_count": 1,
+      "important_fields": [
+        "request_id",
+        "employee_id",
+        "department_id",
+        "job_id",
+        "resignation_reason_id",
+        "resignation_date",
+        "satisfaction_score",
+        "is_completed",
+        "request_count"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/hr_employee_extension.py",
+      "python_class": "HrEmployeeRSTExtension",
+      "model": null,
+      "inherit": "hr.employee",
+      "kind": "inherit_only",
+      "description": "Extends hr.employee in models/hr_employee_extension.py.",
+      "field_count": 2,
+      "method_count": 0,
+      "important_fields": [
+        "is_rst_employee",
+        "x_psm_0214_is_rst_employee"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/mail_activity.py",
+      "python_class": "MailActivity",
+      "model": null,
+      "inherit": "mail.activity",
+      "kind": "inherit_only",
+      "description": "Extends mail.activity in models/mail_activity.py.",
+      "field_count": 4,
+      "method_count": 9,
+      "important_fields": [
+        "active",
+        "rst_display_state",
+        "x_psm_0214_rst_display_state",
+        "x_psm_0214_reminder_count"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/res_company.py",
+      "python_class": "ResCompany",
+      "model": null,
+      "inherit": "res.company",
+      "kind": "inherit_only",
+      "description": "Extends res.company in models/res_company.py.",
+      "field_count": 16,
+      "method_count": 0,
+      "important_fields": [
+        "x_psm_0214_exit_survey_template_id",
+        "x_psm_0214_adecco_template_id",
+        "x_psm_0214_social_insurance_template_id",
+        "x_psm_0214_offboarding_completion_template_id",
+        "x_psm_0214_employee_reminder_template_id",
+        "x_psm_0214_department_reminder_template_id",
+        "x_psm_0214_manager_approval_reminder_template_id",
+        "x_psm_0214_employee_approved_template_id",
+        "x_psm_0214_dept_assignment_template_id",
+        "x_psm_0214_salary_settlement_template_id",
+        "x_psm_0214_adecco_notification_email",
+        "x_psm_0214_default_it_user_id"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/res_config_settings.py",
+      "python_class": "ResConfigSettings",
+      "model": null,
+      "inherit": "res.config.settings",
+      "kind": "inherit_only",
+      "description": "Extends res.config.settings in models/res_config_settings.py.",
+      "field_count": 16,
+      "method_count": 0,
+      "important_fields": [
+        "x_psm_0214_exit_survey_template_id",
+        "x_psm_0214_adecco_template_id",
+        "x_psm_0214_social_insurance_template_id",
+        "x_psm_0214_offboarding_completion_template_id",
+        "x_psm_0214_employee_reminder_template_id",
+        "x_psm_0214_department_reminder_template_id",
+        "x_psm_0214_manager_approval_reminder_template_id",
+        "x_psm_0214_employee_approved_template_id",
+        "x_psm_0214_dept_assignment_template_id",
+        "x_psm_0214_salary_settlement_template_id",
+        "x_psm_0214_adecco_notification_email",
+        "x_psm_0214_default_it_user_id"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/survey_user_input.py",
+      "python_class": "SurveyUserInput",
+      "model": null,
+      "inherit": "survey.user_input",
+      "kind": "inherit_only",
+      "description": "Extends survey.user_input in models/survey_user_input.py.",
+      "field_count": 0,
+      "method_count": 4,
+      "important_fields": [],
+      "actions": []
+    },
+    {
+      "file": "models/x_psm_0214_advance_request.py",
+      "python_class": "Xpsm0214AdvanceRequest",
+      "model": "x_psm_0214_advance_request",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "RST Advance Request",
+      "field_count": 6,
+      "method_count": 0,
+      "important_fields": [
+        "name",
+        "employee_id",
+        "amount",
+        "currency_id",
+        "date",
+        "state"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/x_psm_resignation_type.py",
+      "python_class": "ResignationType",
+      "model": "x_psm_resignation_type",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "Resignation Type",
+      "field_count": 3,
+      "method_count": 0,
+      "important_fields": [
+        "name",
+        "sequence",
+        "active"
+      ],
+      "actions": []
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_exit_interview_report_graph",
+      "model": "x_psm_0214_exit_interview_report",
+      "name": "x_psm_0214.exit.interview.report.graph",
+      "inherit_id": null,
+      "file": "views/exit_interview_dashboard_views.xml"
+    },
+    {
+      "id": "view_psm_exit_interview_report_pivot",
+      "model": "x_psm_0214_exit_interview_report",
+      "name": "x_psm_0214.exit.interview.report.pivot",
+      "inherit_id": null,
+      "file": "views/exit_interview_dashboard_views.xml"
+    },
+    {
+      "id": "view_psm_exit_interview_report_tree",
+      "model": "x_psm_0214_exit_interview_report",
+      "name": "x_psm_0214.exit.interview.report.tree",
+      "inherit_id": null,
+      "file": "views/exit_interview_dashboard_views.xml"
+    },
+    {
+      "id": "view_psm_exit_interview_report_search",
+      "model": "x_psm_0214_exit_interview_report",
+      "name": "x_psm_0214.exit.interview.report.search",
+      "inherit_id": null,
+      "file": "views/exit_interview_dashboard_views.xml"
+    },
+    {
+      "id": "view_psm_finance_check_report_tree",
+      "model": "approval.request",
+      "name": "approval.request.finance.check.report.tree",
+      "inherit_id": null,
+      "file": "views/finance_check_report_views.xml"
+    },
+    {
+      "id": "view_psm_finance_check_report_search",
+      "model": "approval.request",
+      "name": "approval.request.finance.check.report.search",
+      "inherit_id": null,
+      "file": "views/finance_check_report_views.xml"
+    },
+    {
+      "id": "view_psm_employee_form_rst_extension",
+      "model": "hr.employee",
+      "name": "hr.employee.form.rst.extension",
+      "inherit_id": "hr.view_employee_form",
+      "file": "views/hr_employee_views.xml"
+    },
+    {
+      "id": "view_psm_offboarding_report_tree",
+      "model": "approval.request",
+      "name": "approval.request.offboarding.report.tree",
+      "inherit_id": null,
+      "file": "views/offboarding_report_views.xml"
+    },
+    {
+      "id": "view_psm_offboarding_report_search",
+      "model": "approval.request",
+      "name": "approval.request.offboarding.report.search",
+      "inherit_id": null,
+      "file": "views/offboarding_report_views.xml"
+    },
+    {
+      "id": "view_psm_0214_company_offboarding_config_form",
+      "model": "res.company",
+      "name": "res.company.psm.0214.offboarding.config.form",
+      "inherit_id": null,
+      "file": "views/res_company_views.xml"
+    },
+    {
+      "id": "view_psm_0214_res_config_settings_form",
+      "model": "res.config.settings",
+      "name": "res.config.settings.psm.0214.offboarding.form",
+      "inherit_id": null,
+      "file": "views/res_config_settings_views.xml"
+    },
+    {
+      "id": "view_psm_approval_request_resignation_form",
+      "model": "approval.request",
+      "name": "approval.request.resignation.form",
+      "inherit_id": "approvals.approval_request_view_form",
+      "file": "views/resignation_request_views.xml"
+    },
+    {
+      "id": "view_psm_approval_request_resignation_tree",
+      "model": "approval.request",
+      "name": "approval.request.resignation.tree",
+      "inherit_id": "approvals.approval_request_view_tree",
+      "file": "views/resignation_request_views.xml"
+    },
+    {
+      "id": "view_psm_resignation_type_tree",
+      "model": "x_psm_resignation_type",
+      "name": "resignation.type.tree",
+      "inherit_id": null,
+      "file": "views/resignation_request_views.xml"
+    }
+  ],
+  "security": [
+    {
+      "file": "security/acl_cleanup.xml",
+      "summary": "XML data file.",
+      "record_rules": []
+    },
+    {
+      "file": "security/ir.model.access.csv",
+      "summary": "31 access rules",
+      "access_rules": [
+        {
+          "id": "access_approval_request_portal_user",
+          "name": "approval.request.portal.user",
+          "model_id": "approvals.model_approval_request",
+          "group_id": "base.group_portal",
+          "model": "approvals.model_approval_request",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_mail_activity_portal_user",
+          "name": "mail.activity.portal.user",
+          "model_id": "mail.model_mail_activity",
+          "group_id": "base.group_portal",
+          "model": "mail.model_mail_activity",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_hr_employee_portal_user",
+          "name": "hr.employee.portal.user",
+          "model_id": "hr.model_hr_employee",
+          "group_id": "base.group_portal",
+          "model": "hr.model_hr_employee",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_hr_employee_internal_user",
+          "name": "hr.employee.internal.user",
+          "model_id": "hr.model_hr_employee",
+          "group_id": "base.group_user",
+          "model": "hr.model_hr_employee",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_survey_survey_portal_user",
+          "name": "survey.survey.portal.user",
+          "model_id": "survey.model_survey_survey",
+          "group_id": "base.group_portal",
+          "model": "survey.model_survey_survey",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_survey_survey_internal_user",
+          "name": "survey.survey.internal.user",
+          "model_id": "survey.model_survey_survey",
+          "group_id": "base.group_user",
+          "model": "survey.model_survey_survey",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_survey_user_input_portal_user",
+          "name": "survey.user_input.portal.user",
+          "model_id": "survey.model_survey_user_input",
+          "group_id": "base.group_portal",
+          "model": "survey.model_survey_user_input",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_survey_user_input_internal_user",
+          "name": "survey.user_input.internal.user",
+          "model_id": "survey.model_survey_user_input",
+          "group_id": "base.group_user",
+          "model": "survey.model_survey_user_input",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_survey_user_input_line_portal_user",
+          "name": "survey.user_input.line.portal.user",
+          "model_id": "survey.model_survey_user_input_line",
+          "group_id": "base.group_portal",
+          "model": "survey.model_survey_user_input_line",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_survey_user_input_line_internal_user",
+          "name": "survey.user_input.line.internal.user",
+          "model_id": "survey.model_survey_user_input_line",
+          "group_id": "base.group_user",
+          "model": "survey.model_survey_user_input_line",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_survey_question_portal_user",
+          "name": "survey.question.portal.user",
+          "model_id": "survey.model_survey_question",
+          "group_id": "base.group_portal",
+          "model": "survey.model_survey_question",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_survey_question_internal_user",
+          "name": "survey.question.internal.user",
+          "model_id": "survey.model_survey_question",
+          "group_id": "base.group_user",
+          "model": "survey.model_survey_question",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_survey_question_answer_portal_user",
+          "name": "survey.question.answer.portal.user",
+          "model_id": "survey.model_survey_question_answer",
+          "group_id": "base.group_portal",
+          "model": "survey.model_survey_question_answer",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_survey_question_answer_internal_user",
+          "name": "survey.question.answer.internal.user",
+          "model_id": "survey.model_survey_question_answer",
+          "group_id": "base.group_user",
+          "model": "survey.model_survey_question_answer",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_hr_contract_type_portal_user",
+          "name": "hr.contract.type.portal.user",
+          "model_id": "hr.model_hr_contract_type",
+          "group_id": "base.group_portal",
+          "model": "hr.model_hr_contract_type",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_hr_contract_type_internal_user",
+          "name": "hr.contract.type.internal.user",
+          "model_id": "hr.model_hr_contract_type",
+          "group_id": "base.group_user",
+          "model": "hr.model_hr_contract_type",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_resignation_type_portal_user",
+          "name": "resignation.type.portal.user",
+          "model_id": "model_x_psm_resignation_type",
+          "group_id": "base.group_portal",
+          "model": "x_psm_resignation_type",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_resignation_type_internal_user",
+          "name": "resignation.type.internal.user",
+          "model_id": "model_x_psm_resignation_type",
+          "group_id": "base.group_user",
+          "model": "x_psm_resignation_type",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_resignation_type_hr_admin_manager",
+          "name": "resignation.type.hr.admin.manager",
+          "model_id": "model_x_psm_resignation_type",
+          "group_id": "M02_P0200.GDH_RST_HR_ADMIN_M",
+          "model": "x_psm_resignation_type",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_resignation_type_hr_head",
+          "name": "resignation.type.hr.head",
+          "model_id": "model_x_psm_resignation_type",
+          "group_id": "M02_P0200.GDH_RST_HR_HEAD_M",
+          "model": "x_psm_resignation_type",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_resignation_type_system_manager",
+          "name": "resignation.type.system.manager",
+          "model_id": "model_x_psm_resignation_type",
+          "group_id": "M02_P0200.GDH_RST_SYSTEM_ST_M",
+          "model": "x_psm_resignation_type",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_hr_departure_reason_portal_user",
+          "name": "hr.departure.reason.portal.user",
+          "model_id": "hr.model_hr_departure_reason",
+          "group_id": "base.group_portal",
+          "model": "hr.model_hr_departure_reason",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_hr_departure_reason_internal_user",
+          "name": "hr.departure.reason.internal.user",
+          "model_id": "hr.model_hr_departure_reason",
+          "group_id": "base.group_user",
+          "model": "hr.model_hr_departure_reason",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_x_psm_0214_advance_request_hr_admin",
+          "name": "x_psm_0214.advance.request.hr.admin",
+          "model_id": "model_x_psm_0214_advance_request",
+          "group_id": "M02_P0200.GDH_RST_HR_ADMIN_M",
+          "model": "x_psm_0214_advance_request",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_x_psm_0214_advance_request_hr_head",
+          "name": "x_psm_0214.advance.request.hr.head",
+          "model_id": "model_x_psm_0214_advance_request",
+          "group_id": "M02_P0200.GDH_RST_HR_HEAD_M",
+          "model": "x_psm_0214_advance_request",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_x_psm_0214_advance_request_system",
+          "name": "x_psm_0214.advance.request.system",
+          "model_id": "model_x_psm_0214_advance_request",
+          "group_id": "M02_P0200.GDH_RST_SYSTEM_ST_M",
+          "model": "x_psm_0214_advance_request",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_x_psm_0214_finance_override_wizard_hr_head",
+          "name": "x_psm_0214.finance.override.wizard.hr.head",
+          "model_id": "model_x_psm_0214_finance_override_wizard",
+          "group_id": "M02_P0200.GDH_RST_HR_HEAD_M",
+          "model": "x_psm_0214_finance_override_wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_x_psm_0214_finance_override_wizard_system",
+          "name": "x_psm_0214.finance.override.wizard.system",
+          "model_id": "model_x_psm_0214_finance_override_wizard",
+          "group_id": "M02_P0200.GDH_RST_SYSTEM_ST_M",
+          "model": "x_psm_0214_finance_override_wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_x_psm_0214_exit_interview_report_hrbp",
+          "name": "x_psm_0214.exit.interview.report.hrbp",
+          "model_id": "model_x_psm_0214_exit_interview_report",
+          "group_id": "M02_P0200.GDH_RST_HR_HRBP_M",
+          "model": "x_psm_0214_exit_interview_report",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_x_psm_0214_exit_interview_report_hr_head",
+          "name": "x_psm_0214.exit.interview.report.hr.head",
+          "model_id": "model_x_psm_0214_exit_interview_report",
+          "group_id": "M02_P0200.GDH_RST_HR_HEAD_M",
+          "model": "x_psm_0214_exit_interview_report",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_x_psm_0214_exit_interview_report_system",
+          "name": "x_psm_0214.exit.interview.report.system",
+          "model_id": "model_x_psm_0214_exit_interview_report",
+          "group_id": "M02_P0200.GDH_RST_SYSTEM_ST_M",
+          "model": "x_psm_0214_exit_interview_report",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        }
+      ]
+    },
+    {
+      "file": "security/offboarding_request_rules.xml",
+      "summary": "4 functions/rules",
+      "record_rules": [
+        {
+          "kind": "record_rule",
+          "id": "rule_0214_approval_request_rst_read",
+          "name": "0214 approval.request RST read scope",
+          "model_ref": {
+            "ref": "approvals.model_approval_request"
+          },
+          "domain": "[('category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_0214_approval_request_rst_manage",
+          "name": "0214 approval.request RST manage scope",
+          "model_ref": {
+            "ref": "approvals.model_approval_request"
+          },
+          "domain": "[('category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_0214_approval_request_direct_manager_manage",
+          "name": "0214 approval.request direct manager manage scope",
+          "model_ref": {
+            "ref": "approvals.model_approval_request"
+          },
+          "domain": "[\n                ('category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id),\n                ('x_psm_0214_employee_id.parent_id.user_id', '=', user.id)\n            ]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_0214_approval_approver_rst_read",
+          "name": "0214 approval.approver RST read scope",
+          "model_ref": {
+            "ref": "approvals.model_approval_approver"
+          },
+          "domain": "[('request_id.category_id', '=', user.env.ref('M02_P0214.approval_category_resignation').id)]"
+        }
+      ]
+    },
+    {
+      "file": "security/security.xml",
+      "summary": "6 functions/rules",
+      "record_rules": [
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0214_survey_user_input_portal_own",
+          "name": "0214 portal chi xem survey.user_input cua chinh minh",
+          "model_ref": {
+            "ref": "survey.model_survey_user_input"
+          },
+          "domain": "['|', ('partner_id', '=', user.partner_id.id), ('email', '=', user.email)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0214_survey_internal_read",
+          "name": "0214 internal chi doc survey exit interview",
+          "model_ref": {
+            "ref": "survey.model_survey_survey"
+          },
+          "domain": {
+            "eval": "[('id', '=', ref('M02_P0214.survey_exit_interview'))]"
+          }
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0214_survey_question_internal_read",
+          "name": "0214 internal chi doc cau hoi survey exit interview",
+          "model_ref": {
+            "ref": "survey.model_survey_question"
+          },
+          "domain": {
+            "eval": "[('survey_id', '=', ref('M02_P0214.survey_exit_interview'))]"
+          }
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0214_survey_question_answer_internal_read",
+          "name": "0214 internal chi doc dap an survey exit interview",
+          "model_ref": {
+            "ref": "survey.model_survey_question_answer"
+          },
+          "domain": {
+            "eval": "[('question_id.survey_id', '=', ref('M02_P0214.survey_exit_interview'))]"
+          }
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0214_survey_user_input_internal_read",
+          "name": "0214 internal chi doc ket qua survey exit interview",
+          "model_ref": {
+            "ref": "survey.model_survey_user_input"
+          },
+          "domain": {
+            "eval": "[('survey_id', '=', ref('M02_P0214.survey_exit_interview')), ('state', '=', 'done')]"
+          }
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0214_survey_user_input_line_internal_read",
+          "name": "0214 internal chi doc dong cau tra loi survey exit interview",
+          "model_ref": {
+            "ref": "survey.model_survey_user_input_line"
+          },
+          "domain": {
+            "eval": "[('user_input_id.survey_id', '=', ref('M02_P0214.survey_exit_interview')), ('user_input_id.state', '=', 'done')]"
+          }
+        }
+      ]
+    }
+  ],
+  "controllers": [
+    {
+      "file": "controllers/__init__.py",
+      "summary": "Python source file.",
+      "routes": []
+    },
+    {
+      "file": "controllers/main.py",
+      "summary": "1 classes; 0 fields",
+      "routes": [
+        {
+          "method": "portal_resignation_unified",
+          "route": [
+            [
+              "/my/resignation"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "website": true
+          }
+        },
+        {
+          "method": "portal_resignation_form",
+          "route": [
+            [
+              "/my/resignation/rst"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "website": true
+          }
+        },
+        {
+          "method": "portal_activity_done",
+          "route": [
+            [
+              "/my/resignation/rst/activity/done"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "methods": [
+              "POST"
+            ],
+            "website": true,
+            "csrf": true
+          }
+        },
+        {
+          "method": "portal_offboarding_activities",
+          "route": [
+            [
+              "/my/offboarding"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "website": true
+          }
+        },
+        {
+          "method": "portal_offboarding_activity_done",
+          "route": [
+            [
+              "/my/offboarding/activity/done"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "methods": [
+              "POST"
+            ],
+            "website": true,
+            "csrf": true
+          }
+        },
+        {
+          "method": "portal_settlement_download",
+          "route": [
+            [
+              "/my/resignation/rst/settlement/download/<int:request_id>"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "website": true
+          }
+        },
+        {
+          "method": "portal_settlement_upload",
+          "route": [
+            [
+              "/my/resignation/rst/settlement/upload"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "methods": [
+              "POST"
+            ],
+            "website": true,
+            "csrf": true
+          }
+        },
+        {
+          "method": "portal_resignation_submit",
+          "route": [
+            [
+              "/my/resignation/rst/submit"
+            ]
+          ],
+          "options": {
+            "type": "http",
+            "auth": "user",
+            "methods": [
+              "POST"
+            ],
+            "website": true,
+            "csrf": true
+          }
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "file": "data/approval_category_data.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/config_ui_cleanup.xml",
+      "summary": "XML data file.",
+      "record_count": 0,
+      "function_count": 0
+    },
+    {
+      "file": "data/departure_reason_data.xml",
+      "summary": "XML data file.",
+      "record_count": 7,
+      "function_count": 0
+    },
+    {
+      "file": "data/email_template_adecco_notification.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/email_template_dept_confirm_done.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/email_template_dept_offboarding_assignment.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/email_template_dept_offboarding_reminder.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/email_template_employee_approved_notification.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/email_template_exit_survey.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/email_template_manager_approval_reminder.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/email_template_offboarding_completion.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/email_template_offboarding_reminder.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/email_template_salary_settlement.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/email_template_social_insurance.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/ir_cron_data.xml",
+      "summary": "XML data file.",
+      "record_count": 3,
+      "function_count": 0
+    },
+    {
+      "file": "data/offboarding_activity_plan_data.xml",
+      "summary": "XML data file.",
+      "record_count": 12,
+      "function_count": 0
+    },
+    {
+      "file": "data/offboarding_plan_rst.xml",
+      "summary": "XML data file.",
+      "record_count": 6,
+      "function_count": 0
+    },
+    {
+      "file": "data/rst_demo_data.xml",
+      "summary": "XML data file.",
+      "record_count": 23,
+      "function_count": 0
+    },
+    {
+      "file": "data/survey_exit_interview_data.xml",
+      "summary": "XML data file.",
+      "record_count": 95,
+      "function_count": 0
+    },
+    {
+      "file": "data/test_security_users.xml",
+      "summary": "XML data file.",
+      "record_count": 19,
+      "function_count": 0
+    }
+  ],
+  "relations": [
+    {
+      "from": "models/approval_request_rst_approval.py",
+      "to_model": "approval.request",
+      "type": "inherits_model",
+      "model": "approval.request"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "approval.request",
+      "type": "inherits_model",
+      "model": "approval.request"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "hr.employee",
+      "type": "field_relation",
+      "field": "employee_id"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "hr.employee",
+      "type": "field_relation",
+      "field": "x_psm_0214_employee_id"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "res.currency",
+      "type": "field_relation",
+      "field": "x_psm_0214_al_deduction_currency_id"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0214_finance_override_user_id"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "survey.user_input",
+      "type": "field_relation",
+      "field": "exit_survey_user_input_id"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "survey.user_input",
+      "type": "field_relation",
+      "field": "x_psm_0214_exit_survey_user_input_id"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "hr.departure.reason",
+      "type": "field_relation",
+      "field": "resignation_reason_id"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "hr.departure.reason",
+      "type": "field_relation",
+      "field": "x_psm_0214_resignation_reason_id"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "mail.activity",
+      "type": "field_relation",
+      "field": "owner_related_activity_ids"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "mail.activity",
+      "type": "field_relation",
+      "field": "x_psm_0214_owner_related_activity_ids"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "mail.activity",
+      "type": "field_relation",
+      "field": "rst_checklist_activity_ids"
+    },
+    {
+      "from": "models/approval_request_rst_fields.py",
+      "to_model": "mail.activity",
+      "type": "field_relation",
+      "field": "x_psm_0214_rst_checklist_activity_ids"
+    },
+    {
+      "from": "models/approval_request_rst_finance.py",
+      "to_model": "approval.request",
+      "type": "inherits_model",
+      "model": "approval.request"
+    },
+    {
+      "from": "models/approval_request_rst_offboarding.py",
+      "to_model": "approval.request",
+      "type": "inherits_model",
+      "model": "approval.request"
+    },
+    {
+      "from": "models/approval_request_rst_reminder.py",
+      "to_model": "approval.request",
+      "type": "inherits_model",
+      "model": "approval.request"
+    },
+    {
+      "from": "models/approval_request_rst_survey.py",
+      "to_model": "approval.request",
+      "type": "inherits_model",
+      "model": "approval.request"
+    },
+    {
+      "from": "models/exit_interview_report.py",
+      "to_model": "approval.request",
+      "type": "field_relation",
+      "field": "request_id"
+    },
+    {
+      "from": "models/exit_interview_report.py",
+      "to_model": "hr.employee",
+      "type": "field_relation",
+      "field": "employee_id"
+    },
+    {
+      "from": "models/exit_interview_report.py",
+      "to_model": "hr.department",
+      "type": "field_relation",
+      "field": "department_id"
+    },
+    {
+      "from": "models/exit_interview_report.py",
+      "to_model": "hr.job",
+      "type": "field_relation",
+      "field": "job_id"
+    },
+    {
+      "from": "models/exit_interview_report.py",
+      "to_model": "hr.departure.reason",
+      "type": "field_relation",
+      "field": "resignation_reason_id"
+    },
+    {
+      "from": "models/hr_employee_extension.py",
+      "to_model": "hr.employee",
+      "type": "inherits_model",
+      "model": "hr.employee"
+    },
+    {
+      "from": "models/mail_activity.py",
+      "to_model": "mail.activity",
+      "type": "inherits_model",
+      "model": "mail.activity"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "res.company",
+      "type": "inherits_model",
+      "model": "res.company"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "mail.template",
+      "type": "field_relation",
+      "field": "x_psm_0214_exit_survey_template_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "mail.template",
+      "type": "field_relation",
+      "field": "x_psm_0214_adecco_template_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "mail.template",
+      "type": "field_relation",
+      "field": "x_psm_0214_social_insurance_template_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "mail.template",
+      "type": "field_relation",
+      "field": "x_psm_0214_offboarding_completion_template_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "mail.template",
+      "type": "field_relation",
+      "field": "x_psm_0214_employee_reminder_template_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "mail.template",
+      "type": "field_relation",
+      "field": "x_psm_0214_department_reminder_template_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "mail.template",
+      "type": "field_relation",
+      "field": "x_psm_0214_manager_approval_reminder_template_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "mail.template",
+      "type": "field_relation",
+      "field": "x_psm_0214_employee_approved_template_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "mail.template",
+      "type": "field_relation",
+      "field": "x_psm_0214_dept_assignment_template_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "mail.template",
+      "type": "field_relation",
+      "field": "x_psm_0214_salary_settlement_template_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0214_default_it_user_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0214_default_admin_user_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0214_default_hr_user_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0214_default_finance_user_id"
+    },
+    {
+      "from": "models/res_company.py",
+      "to_model": "hr.leave.type",
+      "type": "field_relation",
+      "field": "x_psm_0214_al_leave_type_ids"
+    },
+    {
+      "from": "models/res_config_settings.py",
+      "to_model": "res.config.settings",
+      "type": "inherits_model",
+      "model": "res.config.settings"
+    },
+    {
+      "from": "models/survey_user_input.py",
+      "to_model": "survey.user_input",
+      "type": "inherits_model",
+      "model": "survey.user_input"
+    },
+    {
+      "from": "models/x_psm_0214_advance_request.py",
+      "to_model": "hr.employee",
+      "type": "field_relation",
+      "field": "employee_id"
+    },
+    {
+      "from": "models/x_psm_0214_advance_request.py",
+      "to_model": "res.currency",
+      "type": "field_relation",
+      "field": "currency_id"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "approvals.model_approval_request",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "mail.model_mail_activity",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "hr.model_hr_employee",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "hr.model_hr_employee",
+      "type": "grants_access",
+      "group": "base.group_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "survey.model_survey_survey",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "survey.model_survey_survey",
+      "type": "grants_access",
+      "group": "base.group_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "survey.model_survey_user_input",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "survey.model_survey_user_input",
+      "type": "grants_access",
+      "group": "base.group_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "survey.model_survey_user_input_line",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "survey.model_survey_user_input_line",
+      "type": "grants_access",
+      "group": "base.group_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "survey.model_survey_question",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "survey.model_survey_question",
+      "type": "grants_access",
+      "group": "base.group_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "survey.model_survey_question_answer",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "survey.model_survey_question_answer",
+      "type": "grants_access",
+      "group": "base.group_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "hr.model_hr_contract_type",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "hr.model_hr_contract_type",
+      "type": "grants_access",
+      "group": "base.group_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_resignation_type.py",
+      "to_model": "x_psm_resignation_type",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_resignation_type.py",
+      "to_model": "x_psm_resignation_type",
+      "type": "grants_access",
+      "group": "base.group_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_resignation_type.py",
+      "to_model": "x_psm_resignation_type",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_ADMIN_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_resignation_type.py",
+      "to_model": "x_psm_resignation_type",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_HEAD_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_resignation_type.py",
+      "to_model": "x_psm_resignation_type",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_SYSTEM_ST_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "hr.model_hr_departure_reason",
+      "type": "grants_access",
+      "group": "base.group_portal"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": null,
+      "to_model": "hr.model_hr_departure_reason",
+      "type": "grants_access",
+      "group": "base.group_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_0214_advance_request.py",
+      "to_model": "x_psm_0214_advance_request",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_ADMIN_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_0214_advance_request.py",
+      "to_model": "x_psm_0214_advance_request",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_HEAD_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/x_psm_0214_advance_request.py",
+      "to_model": "x_psm_0214_advance_request",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_SYSTEM_ST_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/finance_override_wizard.py",
+      "to_model": "x_psm_0214_finance_override_wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_HEAD_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/finance_override_wizard.py",
+      "to_model": "x_psm_0214_finance_override_wizard",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_SYSTEM_ST_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/exit_interview_report.py",
+      "to_model": "x_psm_0214_exit_interview_report",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_HRBP_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/exit_interview_report.py",
+      "to_model": "x_psm_0214_exit_interview_report",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_HR_HEAD_M"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/exit_interview_report.py",
+      "to_model": "x_psm_0214_exit_interview_report",
+      "type": "grants_access",
+      "group": "M02_P0200.GDH_RST_SYSTEM_ST_M"
+    },
+    {
+      "from": "views/config_menu_views.xml",
+      "to_action": "action_psm_0214_offboarding_settings_server",
+      "type": "menu_action",
+      "menu_id": "menu_psm_0214_offboarding_settings"
+    },
+    {
+      "from": "views/exit_interview_dashboard_views.xml",
+      "to": "models/exit_interview_report.py",
+      "to_model": "x_psm_0214_exit_interview_report",
+      "type": "uses_model",
+      "view_id": "view_psm_exit_interview_report_graph"
+    },
+    {
+      "from": "views/exit_interview_dashboard_views.xml",
+      "to": "models/exit_interview_report.py",
+      "to_model": "x_psm_0214_exit_interview_report",
+      "type": "uses_model",
+      "view_id": "view_psm_exit_interview_report_pivot"
+    },
+    {
+      "from": "views/exit_interview_dashboard_views.xml",
+      "to": "models/exit_interview_report.py",
+      "to_model": "x_psm_0214_exit_interview_report",
+      "type": "uses_model",
+      "view_id": "view_psm_exit_interview_report_tree"
+    },
+    {
+      "from": "views/exit_interview_dashboard_views.xml",
+      "to": "models/exit_interview_report.py",
+      "to_model": "x_psm_0214_exit_interview_report",
+      "type": "uses_model",
+      "view_id": "view_psm_exit_interview_report_search"
+    },
+    {
+      "from": "views/exit_interview_dashboard_views.xml",
+      "to": "models/exit_interview_report.py",
+      "to_model": "x_psm_0214_exit_interview_report",
+      "type": "opens_model",
+      "action_id": "action_psm_exit_interview_dashboard"
+    },
+    {
+      "from": "views/exit_interview_dashboard_views.xml",
+      "to_action": "action_psm_exit_interview_dashboard",
+      "type": "menu_action",
+      "menu_id": "menu_psm_exit_interview_dashboard"
+    },
+    {
+      "from": "views/finance_check_report_views.xml",
+      "to": "models/approval_request_rst_approval.py",
+      "to_model": "approval.request",
+      "type": "uses_model",
+      "view_id": "view_psm_finance_check_report_tree"
+    },
+    {
+      "from": "views/finance_check_report_views.xml",
+      "to": "models/approval_request_rst_approval.py",
+      "to_model": "approval.request",
+      "type": "uses_model",
+      "view_id": "view_psm_finance_check_report_search"
+    },
+    {
+      "from": "views/finance_check_report_views.xml",
+      "to": "models/approval_request_rst_approval.py",
+      "to_model": "approval.request",
+      "type": "opens_model",
+      "action_id": "action_psm_finance_check_report"
+    },
+    {
+      "from": "views/finance_check_report_views.xml",
+      "to_action": "action_psm_finance_check_report",
+      "type": "menu_action",
+      "menu_id": "menu_psm_finance_check_report"
+    },
+    {
+      "from": "views/hr_employee_views.xml",
+      "to": "models/hr_employee_extension.py",
+      "to_model": "hr.employee",
+      "type": "uses_model",
+      "view_id": "view_psm_employee_form_rst_extension"
+    },
+    {
+      "from": "views/offboarding_report_views.xml",
+      "to": "models/approval_request_rst_approval.py",
+      "to_model": "approval.request",
+      "type": "uses_model",
+      "view_id": "view_psm_offboarding_report_tree"
+    },
+    {
+      "from": "views/offboarding_report_views.xml",
+      "to": "models/approval_request_rst_approval.py",
+      "to_model": "approval.request",
+      "type": "uses_model",
+      "view_id": "view_psm_offboarding_report_search"
+    },
+    {
+      "from": "views/offboarding_report_views.xml",
+      "to_action": "action_psm_pending_offboarding_activities",
+      "type": "menu_action",
+      "menu_id": "menu_psm_pending_offboarding_activities"
+    },
+    {
+      "from": "views/res_company_views.xml",
+      "to": "models/res_company.py",
+      "to_model": "res.company",
+      "type": "uses_model",
+      "view_id": "view_psm_0214_company_offboarding_config_form"
+    },
+    {
+      "from": "views/res_config_settings_views.xml",
+      "to": "models/res_config_settings.py",
+      "to_model": "res.config.settings",
+      "type": "uses_model",
+      "view_id": "view_psm_0214_res_config_settings_form"
+    },
+    {
+      "from": "views/resignation_request_views.xml",
+      "to": "models/approval_request_rst_approval.py",
+      "to_model": "approval.request",
+      "type": "uses_model",
+      "view_id": "view_psm_approval_request_resignation_form"
+    },
+    {
+      "from": "views/resignation_request_views.xml",
+      "to": "models/approval_request_rst_approval.py",
+      "to_model": "approval.request",
+      "type": "uses_model",
+      "view_id": "view_psm_approval_request_resignation_tree"
+    },
+    {
+      "from": "views/resignation_request_views.xml",
+      "to": "models/x_psm_resignation_type.py",
+      "to_model": "x_psm_resignation_type",
+      "type": "uses_model",
+      "view_id": "view_psm_resignation_type_tree"
+    },
+    {
+      "from": "views/resignation_request_views.xml",
+      "to": "models/x_psm_resignation_type.py",
+      "to_model": "x_psm_resignation_type",
+      "type": "opens_model",
+      "action_id": "action_psm_resignation_type"
+    },
+    {
+      "from": "views/resignation_request_views.xml",
+      "to_action": "action_psm_resignation_type",
+      "type": "menu_action",
+      "menu_id": "menu_psm_resignation_type_config"
+    },
+    {
+      "from": "wizards/finance_override_wizard.py",
+      "to_model": "approval.request",
+      "type": "field_relation",
+      "field": "request_id"
+    },
+    {
+      "from": "wizards/finance_override_wizard_views.xml",
+      "to": "wizards/finance_override_wizard.py",
+      "to_model": "x_psm_0214_finance_override_wizard",
+      "type": "uses_model",
+      "view_id": "view_psm_0214_finance_override_wizard_form"
+    }
+  ],
+  "feature_summary": [
+    "Portal and website controllers for recruitment pages and application flow.",
+    "Dedicated recruitment groups, access rules, and security bridges.",
+    "Seed data for sequences, stages, approval categories, mail templates, cron jobs, and surveys."
+  ],
+  "detail_index": [
+    {
+      "file": "__init__.py",
+      "detail_json": "details/__init__.py.json",
+      "type": "python",
+      "bucket": "python",
+      "summary": "Python source file."
+    },
+    {
+      "file": "__manifest__.py",
+      "detail_json": "details/__manifest__.py.json",
+      "type": "file",
+      "bucket": "manifest",
+      "summary": "# -*- coding: utf-8 -*- { 'name': 'M02_P0214_QUY_TRINH_OFFBOARDING_RST', 'version': '19.0.1.0.12', 'category': 'Human Resources', 'summary': 'Quy trình nghỉ ..."
+    },
+    {
+      "file": "BAO_CAO_RAA_SOAT_BAO_MAT_P0214.md",
+      "detail_json": "details/BAO_CAO_RAA_SOAT_BAO_MAT_P0214.md.json",
+      "type": "document",
+      "bucket": "docs",
+      "summary": "# Báo Cáo Rà Soát Bảo Mật Module M02_P0214 ## Quy Trình Cấp Xin Thôi Việc (RST - Resignation & Turnover Support) **Phiên bản:** 1.0 **Ngày rà soát:** 2026-05..."
+    },
+    {
+      "file": "BEFORE_AFTER_THAY_DOI_QUYEN_0214.md",
+      "detail_json": "details/BEFORE_AFTER_THAY_DOI_QUYEN_0214.md.json",
+      "type": "document",
+      "bucket": "docs",
+      "summary": "# Before And After Thay Doi Quyen 0214 Tai lieu nay tong hop trang thai `truoc` va `sau` khi trien khai phan quyen cho module `M02_P0214_00`. Module nay la q..."
+    },
+    {
+      "file": "controllers/__init__.py",
+      "detail_json": "details/controllers____init__.py.json",
+      "type": "python",
+      "bucket": "controllers",
+      "summary": "Python source file."
+    },
+    {
+      "file": "controllers/desktop.ini",
+      "detail_json": "details/controllers__desktop.ini.json",
+      "type": "file",
+      "bucket": "controllers",
+      "summary": ".ini file"
+    },
+    {
+      "file": "controllers/main.py",
+      "detail_json": "details/controllers__main.py.json",
+      "type": "python",
+      "bucket": "controllers",
+      "summary": "1 classes; 0 fields"
+    },
+    {
+      "file": "convention/desktop.ini",
+      "detail_json": "details/convention__desktop.ini.json",
+      "type": "file",
+      "bucket": "convention",
+      "summary": ".ini file"
+    },
+    {
+      "file": "convention/QUY_UOC_DAT_TEN_VA_RULE.md",
+      "detail_json": "details/convention__QUY_UOC_DAT_TEN_VA_RULE.md.json",
+      "type": "document",
+      "bucket": "convention",
+      "summary": "# Quy Uoc Dat Ten Va Rule - M02_P0214 Tai lieu nay ke thua convention tu `addons/M02_P0213/convention/QUY_UOC_DAT_TEN_VA_RULE.md` va ap dung cho module `M02_..."
+    },
+    {
+      "file": "DANH_SACH_TEXT_CAN_DICH_0214.md",
+      "detail_json": "details/DANH_SACH_TEXT_CAN_DICH_0214.md.json",
+      "type": "document",
+      "bucket": "docs",
+      "summary": "# DANH SÁCH TEXT / LABEL / EMAIL TEMPLATE CẦN CHUYỂN NGỮ — Module M02_P0214 > **Mục đích:** Liệt kê đầy đủ các chuỗi text/label tiếng Việt trong module 0214 ..."
+    },
+    {
+      "file": "data/approval_category_data.xml",
+      "detail_json": "details/data__approval_category_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/config_ui_cleanup.xml",
+      "detail_json": "details/data__config_ui_cleanup.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/departure_reason_data.xml",
+      "detail_json": "details/data__departure_reason_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/desktop.ini",
+      "detail_json": "details/data__desktop.ini.json",
+      "type": "file",
+      "bucket": "data",
+      "summary": ".ini file"
+    },
+    {
+      "file": "data/email_template_adecco_notification.xml",
+      "detail_json": "details/data__email_template_adecco_notification.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/email_template_dept_confirm_done.xml",
+      "detail_json": "details/data__email_template_dept_confirm_done.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/email_template_dept_offboarding_assignment.xml",
+      "detail_json": "details/data__email_template_dept_offboarding_assignment.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/email_template_dept_offboarding_reminder.xml",
+      "detail_json": "details/data__email_template_dept_offboarding_reminder.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/email_template_employee_approved_notification.xml",
+      "detail_json": "details/data__email_template_employee_approved_notification.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/email_template_exit_survey.xml",
+      "detail_json": "details/data__email_template_exit_survey.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/email_template_manager_approval_reminder.xml",
+      "detail_json": "details/data__email_template_manager_approval_reminder.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/email_template_offboarding_completion.xml",
+      "detail_json": "details/data__email_template_offboarding_completion.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/email_template_offboarding_reminder.xml",
+      "detail_json": "details/data__email_template_offboarding_reminder.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/email_template_salary_settlement.xml",
+      "detail_json": "details/data__email_template_salary_settlement.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/email_template_social_insurance.xml",
+      "detail_json": "details/data__email_template_social_insurance.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/ir_cron_data.xml",
+      "detail_json": "details/data__ir_cron_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/offboarding_activity_plan_data.xml",
+      "detail_json": "details/data__offboarding_activity_plan_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/offboarding_plan_rst.xml",
+      "detail_json": "details/data__offboarding_plan_rst.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/rst_demo_data.xml",
+      "detail_json": "details/data__rst_demo_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/survey_exit_interview_data.xml",
+      "detail_json": "details/data__survey_exit_interview_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/test_security_users.xml",
+      "detail_json": "details/data__test_security_users.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "desktop.ini",
+      "detail_json": "details/desktop.ini.json",
+      "type": "file",
+      "bucket": "root",
+      "summary": ".ini file"
+    },
+    {
+      "file": "docs/BO_CAU_HOI_NGHIEP_VU_EMAIL_XAC_NHAN_OFFBOARDING_0214.txt",
+      "detail_json": "details/docs__BO_CAU_HOI_NGHIEP_VU_EMAIL_XAC_NHAN_OFFBOARDING_0214.txt.json",
+      "type": "document",
+      "bucket": "docs",
+      "summary": "BO CAU HOI NGHIEP VU - EMAIL KEM LINK XAC NHAN CONG VIEC OFFBOARDING 0214 Yeu cau dau vao: \"Trong quy trinh 0214, khi quy trinh nghi viec duoc khoi tao, tu d..."
+    },
+    {
+      "file": "GHD_HR_0214_BANG_QUY_TRINH.md",
+      "detail_json": "details/GHD_HR_0214_BANG_QUY_TRINH.md.json",
+      "type": "document",
+      "bucket": "docs",
+      "summary": "# Bảng Quy Trình GHD_HR_0214 | Mã quy trình | Bước | Actors | Mô tả bước | Model | Approval | Mail | Rule | ACL | | --- | --- | --- | --- | --- | --- | --- |..."
+    },
+    {
+      "file": "GHD_HR_0214_BO_SUNG_BANG_TRANG_THAI.md",
+      "detail_json": "details/GHD_HR_0214_BO_SUNG_BANG_TRANG_THAI.md.json",
+      "type": "document",
+      "bucket": "docs",
+      "summary": "# Bổ sung thông tin còn thiếu cho bảng quy trình GHD_HR_0214 ## Mục đích Tài liệu này bổ sung các thông tin còn thiếu trong bảng quy trình `GHD_HR_0214` ở ản..."
+    },
+    {
+      "file": "GHI_CHU_BEFORE_AFTER_2026-04-17.md",
+      "detail_json": "details/GHI_CHU_BEFORE_AFTER_2026-04-17.md.json",
+      "type": "document",
+      "bucket": "docs",
+      "summary": "# Ghi chú Before/After - 2026-04-17 ## Phạm vi thay đổi Thay đổi này áp dụng cho module `M02_P0214`, tập trung vào phần cấu hình email template trong màn cấu..."
+    },
+    {
+      "file": "KE_HOACH_TRIEN_KHAI_QUYEN_0214_THEO_GROUP_0200.md",
+      "detail_json": "details/KE_HOACH_TRIEN_KHAI_QUYEN_0214_THEO_GROUP_0200.md.json",
+      "type": "document",
+      "bucket": "docs",
+      "summary": "# Kế Hoạch Triển Khai Quyền 0214 Theo Group 0200 Tài liệu này là note triển khai quyền cho module `M02_P0214_00` theo các group chuẩn đã có trong `M02_P0200_..."
+    },
+    {
+      "file": "models/__init__.py",
+      "detail_json": "details/models____init__.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "Python source file."
+    },
+    {
+      "file": "models/approval_request_rst_approval.py",
+      "detail_json": "details/models__approval_request_rst_approval.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: approval.request; 1 classes; 0 fields; 3 actions"
+    },
+    {
+      "file": "models/approval_request_rst_fields.py",
+      "detail_json": "details/models__approval_request_rst_fields.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: approval.request; 1 classes; 71 fields"
+    },
+    {
+      "file": "models/approval_request_rst_finance.py",
+      "detail_json": "details/models__approval_request_rst_finance.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: approval.request; 1 classes; 0 fields; 3 actions"
+    },
+    {
+      "file": "models/approval_request_rst_offboarding.py",
+      "detail_json": "details/models__approval_request_rst_offboarding.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: approval.request; 1 classes; 0 fields; 3 actions"
+    },
+    {
+      "file": "models/approval_request_rst_reminder.py",
+      "detail_json": "details/models__approval_request_rst_reminder.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: approval.request; 1 classes; 0 fields; 1 actions"
+    },
+    {
+      "file": "models/approval_request_rst_survey.py",
+      "detail_json": "details/models__approval_request_rst_survey.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: approval.request; 1 classes; 0 fields; 4 actions"
+    },
+    {
+      "file": "models/desktop.ini",
+      "detail_json": "details/models__desktop.ini.json",
+      "type": "file",
+      "bucket": "models",
+      "summary": ".ini file"
+    },
+    {
+      "file": "models/exit_interview_report.py",
+      "detail_json": "details/models__exit_interview_report.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm_0214_exit_interview_report; 1 classes; 9 fields"
+    },
+    {
+      "file": "models/hr_employee_extension.py",
+      "detail_json": "details/models__hr_employee_extension.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: hr.employee; 1 classes; 2 fields"
+    },
+    {
+      "file": "models/mail_activity.py",
+      "detail_json": "details/models__mail_activity.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: mail.activity; 1 classes; 4 fields"
+    },
+    {
+      "file": "models/res_company.py",
+      "detail_json": "details/models__res_company.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: res.company; 1 classes; 16 fields"
+    },
+    {
+      "file": "models/res_config_settings.py",
+      "detail_json": "details/models__res_config_settings.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: res.config.settings; 1 classes; 16 fields"
+    },
+    {
+      "file": "models/survey_user_input.py",
+      "detail_json": "details/models__survey_user_input.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: survey.user_input; 1 classes; 0 fields"
+    },
+    {
+      "file": "models/x_psm_0214_advance_request.py",
+      "detail_json": "details/models__x_psm_0214_advance_request.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm_0214_advance_request; 1 classes; 6 fields"
+    },
+    {
+      "file": "models/x_psm_resignation_type.py",
+      "detail_json": "details/models__x_psm_resignation_type.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm_resignation_type; 1 classes; 3 fields"
+    },
+    {
+      "file": "notes/backups/resignation_portal_template.step1.20260514.bak",
+      "detail_json": "details/notes__backups__resignation_portal_template.step1.20260514.bak.json",
+      "type": "file",
+      "bucket": "notes",
+      "summary": ".bak file"
+    },
+    {
+      "file": "notes/BEFORE_AFTER_CONFIG_PATCH_0214.md",
+      "detail_json": "details/notes__BEFORE_AFTER_CONFIG_PATCH_0214.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Before / After cho patch config module 0214 ## Pham vi Patch nay tap trung vao cac diem hard-code nghiep vu trong `M02_P0214_00` co kha nang thay doi theo ..."
+    },
+    {
+      "file": "notes/CHECKLIST_NGHIEM_THU_R1_R6_0214.md",
+      "detail_json": "details/notes__CHECKLIST_NGHIEM_THU_R1_R6_0214.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Checklist Nghiem Thu R1-R6 - M02_P0214 Tai lieu nay dung de test thu cong sau khi trien khai Phase 0-7 cho module `M02_P0214_QUY_TRINH_OFFBOARDING_RST`. ##..."
+    },
+    {
+      "file": "notes/CHECKLIST_TEST_PHASE_5_0214.md",
+      "detail_json": "details/notes__CHECKLIST_TEST_PHASE_5_0214.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Checklist Test Phase 5 - 0214 ## 1. Mục tiêu Checklist này dùng để xác nhận các thay đổi bảo mật sau giai đoạn 1-4 không phá vỡ luồng nghiệp vụ chính của m..."
+    },
+    {
+      "file": "notes/CHECKLIST_TEST_PHASE_6_0214.md",
+      "detail_json": "details/notes__CHECKLIST_TEST_PHASE_6_0214.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Checklist Test Phase 6 - 0214 ## 1. Mục tiêu Tài liệu này là checklist test cho `M02_P0214` sau các phase siết quyền đã triển khai. Mục tiêu: - verify happ..."
+    },
+    {
+      "file": "notes/desktop.ini",
+      "detail_json": "details/notes__desktop.ini.json",
+      "type": "file",
+      "bucket": "notes",
+      "summary": ".ini file"
+    },
+    {
+      "file": "notes/PHASE_0_CHOT_MA_TRAN_QUYEN_EXPECTED_0214.md",
+      "detail_json": "details/notes__PHASE_0_CHOT_MA_TRAN_QUYEN_EXPECTED_0214.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 0 - Chốt Ma Trận Quyền Expected 0214 ## 1. Mục tiêu Tài liệu này chốt baseline quyền expected cho module `M02_P0214` trước khi triển khai các phase s..."
+    },
+    {
+      "file": "notes/PHASE_1_DOI_CHIEU_EXPECTED_VS_ACTUAL_0214.md",
+      "detail_json": "details/notes__PHASE_1_DOI_CHIEU_EXPECTED_VS_ACTUAL_0214.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Đối Chiếu Expected Vs Actual 0214 ## 1. Mục tiêu Tài liệu này đối chiếu giữa: - trạng thái expected đã chốt ở Phase 0 - trạng thái actual của sou..."
+    },
+    {
+      "file": "notes/PHASE_4_REVIEW_QUYEN_WORKFLOW_0214_20260514.md",
+      "detail_json": "details/notes__PHASE_4_REVIEW_QUYEN_WORKFLOW_0214_20260514.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 4 Review Quyen Va Workflow 0214 Ngay lap: 2026-05-14 ## 1. Pham vi Phase 4 theo `RA_SOAT_VA_PLAN_UI_0214_TU_0213_20250514.md` la phase kiem tra: - gr..."
+    },
+    {
+      "file": "notes/PHASE_PLAN_TRIEN_KHAI_KHOA_CHAT_DU_LIEU_0214.md",
+      "detail_json": "details/notes__PHASE_PLAN_TRIEN_KHAI_KHOA_CHAT_DU_LIEU_0214.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase Plan Triển Khai Khóa Chặt Dữ Liệu 0214 ## 1. Mục tiêu Chia quá trình siết quyền của `M02_P0214` thành nhiều phase nhỏ để có thể triển khai theo từng ..."
+    },
+    {
+      "file": "notes/PLAN_IMPLEMENTATION_KHOA_CHAT_DU_LIEU_0214.md",
+      "detail_json": "details/notes__PLAN_IMPLEMENTATION_KHOA_CHAT_DU_LIEU_0214.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Plan Implementation Khóa Chặt Dữ Liệu 0214 ## 1. Mục tiêu Tài liệu này chốt kế hoạch triển khai để siết quyền và khóa chặt phạm vi dữ liệu cho module `M02_..."
+    },
+    {
+      "file": "notes/PORTAL_UI_PLAN_0214.md",
+      "detail_json": "details/notes__PORTAL_UI_PLAN_0214.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Portal UI Plan 0214 Ngay lap: 2026-05-14 ## 1. Muc tieu Tai lieu nay la gate cua Phase 1 cho viec ap dung pattern UI tu `M02_P0213` sang `M02_P0214`. Pham ..."
+    },
+    {
+      "file": "notes/RA_SOAT_VA_PLAN_UI_0214_TU_0213_20250514.md",
+      "detail_json": "details/notes__RA_SOAT_VA_PLAN_UI_0214_TU_0213_20250514.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Rà Soát UI 0213 và Lập Plan Áp Dụng cho 0214 Ngày: 2026-05-14 --- ## 1. PHẠM VI RÀ SOÁT ### Module nguồn M02_P0213 — Quy Trình OFFBOARDING OPS (Khối Cửa Hà..."
+    },
+    {
+      "file": "security/acl_cleanup.xml",
+      "detail_json": "details/security__acl_cleanup.xml.json",
+      "type": "xml",
+      "bucket": "security",
+      "summary": "XML data file."
+    },
+    {
+      "file": "security/desktop.ini",
+      "detail_json": "details/security__desktop.ini.json",
+      "type": "file",
+      "bucket": "security",
+      "summary": ".ini file"
+    },
+    {
+      "file": "security/ir.model.access.csv",
+      "detail_json": "details/security__ir.model.access.csv.json",
+      "type": "security_csv",
+      "bucket": "security",
+      "summary": "31 access rules"
+    },
+    {
+      "file": "security/offboarding_request_rules.xml",
+      "detail_json": "details/security__offboarding_request_rules.xml.json",
+      "type": "xml",
+      "bucket": "security",
+      "summary": "4 functions/rules"
+    },
+    {
+      "file": "security/security.xml",
+      "detail_json": "details/security__security.xml.json",
+      "type": "xml",
+      "bucket": "security",
+      "summary": "6 functions/rules"
+    },
+    {
+      "file": "static/src/js/portal_resignation_0214.js",
+      "detail_json": "details/static__src__js__portal_resignation_0214.js.json",
+      "type": "file",
+      "bucket": "static",
+      "summary": ".js file"
+    },
+    {
+      "file": "static/src/scss/backend_0214.scss",
+      "detail_json": "details/static__src__scss__backend_0214.scss.json",
+      "type": "file",
+      "bucket": "static",
+      "summary": ".scss file"
+    },
+    {
+      "file": "static/src/scss/portal_resignation_0214.scss",
+      "detail_json": "details/static__src__scss__portal_resignation_0214.scss.json",
+      "type": "file",
+      "bucket": "static",
+      "summary": ".scss file"
+    },
+    {
+      "file": "tests/__init__.py",
+      "detail_json": "details/tests____init__.py.json",
+      "type": "python",
+      "bucket": "tests",
+      "summary": "Python source file."
+    },
+    {
+      "file": "tests/test_offboarding_r1_r6.py",
+      "detail_json": "details/tests__test_offboarding_r1_r6.py.json",
+      "type": "python",
+      "bucket": "tests",
+      "summary": "1 classes; 0 fields"
+    },
+    {
+      "file": "tests/test_security_hardening.py",
+      "detail_json": "details/tests__test_security_hardening.py.json",
+      "type": "python",
+      "bucket": "tests",
+      "summary": "1 classes; 0 fields"
+    },
+    {
+      "file": "views/config_menu_views.xml",
+      "detail_json": "details/views__config_menu_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "1 menus"
+    },
+    {
+      "file": "views/desktop.ini",
+      "detail_json": "details/views__desktop.ini.json",
+      "type": "file",
+      "bucket": "views",
+      "summary": ".ini file"
+    },
+    {
+      "file": "views/exit_interview_dashboard_views.xml",
+      "detail_json": "details/views__exit_interview_dashboard_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "4 views, 1 actions, 1 menus"
+    },
+    {
+      "file": "views/finance_check_report_views.xml",
+      "detail_json": "details/views__finance_check_report_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "2 views, 1 actions, 1 menus"
+    },
+    {
+      "file": "views/hr_employee_views.xml",
+      "detail_json": "details/views__hr_employee_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "1 views"
+    },
+    {
+      "file": "views/offboarding_activities_portal_template.xml",
+      "detail_json": "details/views__offboarding_activities_portal_template.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "1 templates"
+    },
+    {
+      "file": "views/offboarding_report_views.xml",
+      "detail_json": "details/views__offboarding_report_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "2 views, 2 menus"
+    },
+    {
+      "file": "views/res_company_views.xml",
+      "detail_json": "details/views__res_company_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "1 views"
+    },
+    {
+      "file": "views/res_config_settings_views.xml",
+      "detail_json": "details/views__res_config_settings_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "1 views"
+    },
+    {
+      "file": "views/resignation_portal_template.xml",
+      "detail_json": "details/views__resignation_portal_template.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "1 templates"
+    },
+    {
+      "file": "views/resignation_request_views.xml",
+      "detail_json": "details/views__resignation_request_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "3 views, 1 actions, 1 menus"
+    },
+    {
+      "file": "wizards/__init__.py",
+      "detail_json": "details/wizards____init__.py.json",
+      "type": "python",
+      "bucket": "wizards",
+      "summary": "Python source file."
+    },
+    {
+      "file": "wizards/finance_override_wizard.py",
+      "detail_json": "details/wizards__finance_override_wizard.py.json",
+      "type": "python",
+      "bucket": "wizards",
+      "summary": "models: x_psm_0214_finance_override_wizard; 1 classes; 2 fields; 1 actions"
+    },
+    {
+      "file": "wizards/finance_override_wizard_views.xml",
+      "detail_json": "details/wizards__finance_override_wizard_views.xml.json",
+      "type": "xml",
+      "bucket": "wizards",
+      "summary": "1 views"
+    }
+  ]
+}

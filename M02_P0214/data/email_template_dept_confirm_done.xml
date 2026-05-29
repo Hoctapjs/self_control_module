@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="email_template_dept_confirm_done" model="mail.template">
+            <field name="name">RST - Bộ phận xác nhận xong offboarding</field>
+            <field name="model_id" ref="approvals.model_approval_request"/>
+            <field name="subject">[RST] Một bộ phận đã hoàn tất công việc offboarding</field>
+            <field name="email_from">{{ (user.email or user.company_id.email) }}</field>
+            <field name="body_html" type="html">
+                <div style="margin:0;padding:24px 0;background-color:#f5f2ea;font-family:'Segoe UI',Arial,sans-serif;color:#2f2a26;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f5f2ea" style="border-collapse:collapse;background-color:#f5f2ea;">
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="640" bgcolor="#fffdf9" style="width:640px;max-width:640px;background-color:#fffdf9;border:1px solid #eadfce;border-radius:16px;overflow:hidden;">
+                                    <tr>
+                                        <td bgcolor="#24624a" style="padding:26px 32px;background-color:#24624a;">
+                                            <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#d8f3dc;font-weight:700;margin-bottom:8px;">RST Update</div>
+                                            <h1 style="margin:0;font-size:26px;line-height:1.25;color:#ffffff;font-weight:800;">Đã xác nhận xong một đầu việc</h1>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:28px 32px 18px 32px;">
+                                            <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;">Chào bạn,</p>
+                                            <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">Đầu việc offboarding <strong><t t-out="ctx.get('activity_summary') or 'N/A'"/></strong> đã được <strong><t t-out="ctx.get('activity_user') or 'bộ phận phụ trách'"/></strong> xác nhận hoàn tất.</p>
+                                            <p style="margin:0;font-size:15px;line-height:1.7;">Nhân viên liên quan: <strong><t t-out="object.employee_id.name"/></strong> (Mã NV: <t t-out="object.employee_id.barcode or 'N/A'"/>).</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f7f2e8" style="padding:16px 32px;background-color:#f7f2e8;border-top:1px solid #eadfce;">
+                                            <p style="margin:0;font-size:12px;line-height:1.6;color:#7b7269;">Email này được gửi tự động từ quy trình offboarding RST.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

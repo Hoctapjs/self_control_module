@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Record Rules: approval.approver | Từ: P0204 -->
+
+    <!-- [P0204] Override default multi-company rule -->
+    <!-- <record model="ir.rule" id="approvals.approval_approver_rule">
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record> -->
+
+</odoo>

@@ -1,0 +1,96 @@
+{
+  "file": "models/x_psm_hr_discipline_violation.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: x_psm.hr.discipline.violation.type; 1 classes; 5 fields",
+  "classes": [
+    {
+      "python_class": "HrDisciplineViolationType",
+      "description": "Discipline Violation Type",
+      "model": "x_psm.hr.discipline.violation.type",
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "name",
+          "type": "Char",
+          "string": "Violation Name",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_category_id",
+          "type": "Many2one",
+          "string": "Category",
+          "comodel": "x_psm.hr.discipline.violation.category",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_severity",
+          "type": "Selection",
+          "string": "Mức độ hành vi",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": "[[\"minor\", \"Store Level (Nhẹ)\"], [\"major\", \"Company Level (Nặng)\"]]",
+          "default": "minor",
+          "tracking": null,
+          "help": "Phân loại mức độ vi phạm để xác định cấp xử lý và quy trình."
+        },
+        {
+          "name": "x_psm_improvement_period",
+          "type": "Integer",
+          "string": "Improvement Period (Days)",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": 30,
+          "tracking": null,
+          "help": "Period to check for repeat offenses."
+        },
+        {
+          "name": "x_psm_max_repeats",
+          "type": "Integer",
+          "string": "Max Repeats",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": 3,
+          "tracking": null,
+          "help": "Maximum number of allowed repeats within the period before escalation."
+        }
+      ],
+      "methods": [],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

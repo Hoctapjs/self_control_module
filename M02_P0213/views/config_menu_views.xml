@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_psm_0213_offboarding_settings_server" model="ir.actions.server">
+            <field name="name">OPS Offboarding Configuration</field>
+            <field name="model_id" ref="base.model_res_company"/>
+            <field name="state">code</field>
+            <field name="code"><![CDATA[
+action = {
+    "type": "ir.actions.act_window",
+    "name": "OPS Offboarding Configuration",
+    "res_model": "res.company",
+    "res_id": env.company.id,
+    "view_mode": "form",
+    "views": [(env.ref("M02_P0213.view_psm_0213_company_offboarding_config_form").id, "form")],
+    "target": "current",
+}
+            ]]></field>
+        </record>
+
+        <menuitem id="menu_psm_0213_offboarding_settings"
+            name="Offboarding OPS"
+            parent="approvals.approvals_menu_config"
+            action="action_psm_0213_offboarding_settings_server"
+            groups="approvals.group_approval_manager,M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+            sequence="30" />
+    </data>
+</odoo>

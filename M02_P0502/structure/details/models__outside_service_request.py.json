@@ -1,0 +1,388 @@
+{
+  "file": "models/outside_service_request.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: x_psm_outside_service_request; 1 classes; 16 fields; 8 actions",
+  "classes": [
+    {
+      "python_class": "X0502OutsideServiceRequest",
+      "description": "0502 Outside Service Request",
+      "model": "x_psm_outside_service_request",
+      "inherit": [
+        "mail.thread",
+        "mail.activity.mixin"
+      ],
+      "order": "id desc",
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "name",
+          "type": "Char",
+          "string": "Outside Service No.",
+          "comodel": null,
+          "required": true,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "New",
+          "tracking": null,
+          "help": "Sequence number for the 0502 outside service request."
+        },
+        {
+          "name": "x_psm_request_id",
+          "type": "Many2one",
+          "string": "Maintenance Request",
+          "comodel": "maintenance.request",
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "0502 maintenance request that requires outside service."
+        },
+        {
+          "name": "x_psm_department_id",
+          "type": "Many2one",
+          "string": "Store Department",
+          "comodel": "hr.department",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_request_id.x_psm_0502_department_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Store department inherited from the linked 0502 maintenance request."
+        },
+        {
+          "name": "x_psm_equipment_id",
+          "type": "Many2one",
+          "string": "Equipment",
+          "comodel": "maintenance.equipment",
+          "required": false,
+          "readonly": true,
+          "store": true,
+          "related": "x_psm_request_id.equipment_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Equipment inherited from the linked 0502 maintenance request."
+        },
+        {
+          "name": "x_psm_vendor_id",
+          "type": "Many2one",
+          "string": "Vendor",
+          "comodel": "res.partner",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Vendor proposed to perform the outside service."
+        },
+        {
+          "name": "x_psm_quotation_received",
+          "type": "Boolean",
+          "string": "Quotation Received",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Indicates whether a quotation has been received from the vendor."
+        },
+        {
+          "name": "x_psm_vendor_quote_amount",
+          "type": "Monetary",
+          "string": "Vendor Quote Amount",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Quoted amount received from the outside service vendor."
+        },
+        {
+          "name": "x_psm_vendor_quote_currency_id",
+          "type": "Many2one",
+          "string": "Quote Currency",
+          "comodel": "res.currency",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": "lambda",
+          "tracking": null,
+          "help": "Currency used for the outside service vendor quotation."
+        },
+        {
+          "name": "x_psm_vendor_lead_time_days",
+          "type": "Integer",
+          "string": "Vendor Lead Time (Days)",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Estimated lead time proposed by the vendor."
+        },
+        {
+          "name": "x_psm_expected_complete_date",
+          "type": "Date",
+          "string": "Expected Complete Date",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Expected completion date for the outside service."
+        },
+        {
+          "name": "x_psm_scope_of_work",
+          "type": "Text",
+          "string": "Scope of Work",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Scope of work that should be sent to the outside service vendor."
+        },
+        {
+          "name": "x_psm_service_type",
+          "type": "Selection",
+          "string": "Service Type",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "repair",
+              "Repair"
+            ],
+            [
+              "inspection",
+              "Inspection"
+            ],
+            [
+              "calibration",
+              "Calibration"
+            ],
+            [
+              "warranty",
+              "Warranty"
+            ],
+            [
+              "other",
+              "Other"
+            ]
+          ],
+          "default": "repair",
+          "tracking": true,
+          "help": "Type of outside service required for this request."
+        },
+        {
+          "name": "x_psm_state",
+          "type": "Selection",
+          "string": "Status",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "draft",
+              "Draft"
+            ],
+            [
+              "sent_to_vendor",
+              "Sent to Vendor"
+            ],
+            [
+              "quoted",
+              "Quoted"
+            ],
+            [
+              "approved",
+              "Approved"
+            ],
+            [
+              "in_progress",
+              "In Progress"
+            ],
+            [
+              "completed",
+              "Completed"
+            ],
+            [
+              "accepted",
+              "Accepted"
+            ],
+            [
+              "cancelled",
+              "Cancelled"
+            ]
+          ],
+          "default": "draft",
+          "tracking": true,
+          "help": "Operational status of the 0502 outside service flow."
+        },
+        {
+          "name": "x_psm_purchase_order_id",
+          "type": "Many2one",
+          "string": "Purchase Order",
+          "comodel": "purchase.order",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Purchase order created for the approved outside service vendor quote."
+        },
+        {
+          "name": "x_psm_acceptance_result",
+          "type": "Selection",
+          "string": "Vendor Service Acceptance Result",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": [
+            [
+              "accepted",
+              "Accepted"
+            ],
+            [
+              "rejected",
+              "Rejected"
+            ],
+            [
+              "partial",
+              "Partial"
+            ]
+          ],
+          "default": null,
+          "tracking": true,
+          "help": "Acceptance result after the vendor completes the outside service."
+        },
+        {
+          "name": "x_psm_acceptance_note",
+          "type": "Text",
+          "string": "Acceptance Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": true,
+          "help": "Acceptance note for the outside service result."
+        }
+      ],
+      "methods": [
+        {
+          "name": "create",
+          "type": "override",
+          "decorators": [
+            "api.model_create_multi"
+          ],
+          "summary": "override"
+        },
+        {
+          "name": "action_psm_send_to_vendor",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_record_quote",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_approve_vendor",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_create_purchase_order",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_open_purchase_order",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_mark_completed",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_acceptance_review",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_psm_cancel",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        }
+      ],
+      "kind": "new_model_with_inherit"
+    }
+  ],
+  "routes": []
+}

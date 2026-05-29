@@ -1,0 +1,34 @@
+/* Notification styling for OPS 0213 */
+.o_0213_success {
+    background-color: #e8f5e9; /* light green */
+    border-left: 4px solid #4caf50; /* green */
+    padding: 8px 12px;
+    margin: 4px 0;
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+.o_0213_warning {
+    background-color: #fff8e1; /* light yellow */
+    border-left: 4px solid #ffb300; /* amber */
+    padding: 8px 12px;
+    margin: 4px 0;
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+.o_0213_error {
+    background-color: #ffebee; /* light red */
+    border-left: 4px solid #e53935; /* red */
+    padding: 8px 12px;
+    margin: 4px 0;
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+/* Icon spacing */
+.o_0213_success i,
+.o_0213_warning i,
+.o_0213_error i {
+    margin-right: 6px;
+}

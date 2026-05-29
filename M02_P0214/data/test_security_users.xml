@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="dept_psm_0214_security_test" model="hr.department">
+            <field name="name">0214 Security Test Department</field>
+        </record>
+
+        <record id="user_psm_0214_regular" model="res.users">
+            <field name="name">0214 Regular User</field>
+            <field name="login">0214_regular</field>
+            <field name="password">123</field>
+            <field name="email">0214_regular@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <record id="user_psm_0214_hr_admin_staff" model="res.users">
+            <field name="name">0214 HR Admin Staff</field>
+            <field name="login">0214_hr_admin_s</field>
+            <field name="password">123</field>
+            <field name="email">0214_hr_admin_s@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [
+                ref('base.group_user'),
+                ref('approvals.group_approval_user'),
+                ref('M02_P0200.GDH_RST_HR_ADMIN_S')
+            ])]"/>
+        </record>
+
+        <record id="user_psm_0214_hr_admin_manager" model="res.users">
+            <field name="name">0214 HR Admin Manager</field>
+            <field name="login">0214_hr_admin_m</field>
+            <field name="password">123</field>
+            <field name="email">0214_hr_admin_m@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [
+                ref('base.group_user'),
+                ref('approvals.group_approval_manager'),
+                ref('M02_P0200.GDH_RST_HR_ADMIN_M')
+            ])]"/>
+        </record>
+
+        <record id="user_psm_0214_hr_hrbp_staff" model="res.users">
+            <field name="name">0214 HR HRBP Staff</field>
+            <field name="login">0214_hr_hrbp_s</field>
+            <field name="password">123</field>
+            <field name="email">0214_hr_hrbp_s@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [
+                ref('base.group_user'),
+                ref('approvals.group_approval_user'),
+                ref('M02_P0200.GDH_RST_HR_HRBP_S')
+            ])]"/>
+        </record>
+
+        <record id="user_psm_0214_hr_hrbp_manager" model="res.users">
+            <field name="name">0214 HR HRBP Manager</field>
+            <field name="login">0214_hr_hrbp_m</field>
+            <field name="password">123</field>
+            <field name="email">0214_hr_hrbp_m@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [
+                ref('base.group_user'),
+                ref('approvals.group_approval_manager'),
+                ref('M02_P0200.GDH_RST_HR_HRBP_M')
+            ])]"/>
+        </record>
+
+        <record id="user_psm_0214_hr_head" model="res.users">
+            <field name="name">0214 HR Head</field>
+            <field name="login">0214_hr_head</field>
+            <field name="password">123</field>
+            <field name="email">0214_hr_head@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [
+                ref('base.group_user'),
+                ref('hr.group_hr_manager'),
+                ref('approvals.group_approval_manager'),
+                ref('M02_P0200.GDH_RST_HR_HEAD_M')
+            ])]"/>
+        </record>
+
+        <record id="user_psm_0214_system_manager" model="res.users">
+            <field name="name">0214 System Manager</field>
+            <field name="login">0214_system_manager</field>
+            <field name="password">123</field>
+            <field name="email">0214_system_manager@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [
+                ref('base.group_user'),
+                ref('hr.group_hr_manager'),
+                ref('approvals.group_approval_manager'),
+                ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+            ])]"/>
+        </record>
+
+        <record id="user_psm_0214_store_manager" model="res.users">
+            <field name="name">0214 Store Manager</field>
+            <field name="login">0214_store_manager</field>
+            <field name="password">123</field>
+            <field name="email">0214_store_manager@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [
+                ref('base.group_user'),
+                ref('approvals.group_approval_user'),
+                ref('M02_P0200.GDH_OPS_STORE_RGM_M')
+            ])]"/>
+        </record>
+
+        <record id="user_psm_0214_portal" model="res.users">
+            <field name="name">0214 Portal User</field>
+            <field name="login">0214_portal</field>
+            <field name="password">123</field>
+            <field name="email">0214_portal@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_portal')])]"/>
+        </record>
+
+        <record id="emp_psm_0214_store_manager" model="hr.employee">
+            <field name="name">0214 Store Manager</field>
+            <field name="user_id" ref="user_psm_0214_store_manager"/>
+            <field name="department_id" ref="dept_psm_0214_security_test"/>
+            <field name="work_email">0214_store_manager@example.com</field>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+
+        <record id="emp_psm_0214_regular" model="hr.employee">
+            <field name="name">0214 Regular Employee</field>
+            <field name="user_id" ref="user_psm_0214_regular"/>
+            <field name="department_id" ref="dept_psm_0214_security_test"/>
+            <field name="parent_id" ref="emp_psm_0214_store_manager"/>
+            <field name="work_email">0214_regular@example.com</field>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+
+        <record id="emp_psm_0214_portal" model="hr.employee">
+            <field name="name">0214 Portal Employee</field>
+            <field name="user_id" ref="user_psm_0214_portal"/>
+            <field name="department_id" ref="dept_psm_0214_security_test"/>
+            <field name="parent_id" ref="emp_psm_0214_store_manager"/>
+            <field name="work_email">0214_portal@example.com</field>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+
+        <record id="emp_psm_0214_hr_admin_staff" model="hr.employee">
+            <field name="name">0214 HR Admin Staff</field>
+            <field name="user_id" ref="user_psm_0214_hr_admin_staff"/>
+            <field name="department_id" ref="dept_psm_0214_security_test"/>
+            <field name="work_email">0214_hr_admin_s@example.com</field>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+
+        <record id="emp_psm_0214_hr_admin_manager" model="hr.employee">
+            <field name="name">0214 HR Admin Manager</field>
+            <field name="user_id" ref="user_psm_0214_hr_admin_manager"/>
+            <field name="department_id" ref="dept_psm_0214_security_test"/>
+            <field name="work_email">0214_hr_admin_m@example.com</field>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+
+        <record id="emp_psm_0214_hr_hrbp_staff" model="hr.employee">
+            <field name="name">0214 HR HRBP Staff</field>
+            <field name="user_id" ref="user_psm_0214_hr_hrbp_staff"/>
+            <field name="department_id" ref="dept_psm_0214_security_test"/>
+            <field name="work_email">0214_hr_hrbp_s@example.com</field>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+
+        <record id="emp_psm_0214_hr_hrbp_manager" model="hr.employee">
+            <field name="name">0214 HR HRBP Manager</field>
+            <field name="user_id" ref="user_psm_0214_hr_hrbp_manager"/>
+            <field name="department_id" ref="dept_psm_0214_security_test"/>
+            <field name="work_email">0214_hr_hrbp_m@example.com</field>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+
+        <record id="emp_psm_0214_hr_head" model="hr.employee">
+            <field name="name">0214 HR Head</field>
+            <field name="user_id" ref="user_psm_0214_hr_head"/>
+            <field name="department_id" ref="dept_psm_0214_security_test"/>
+            <field name="work_email">0214_hr_head@example.com</field>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+
+        <record id="emp_psm_0214_system_manager" model="hr.employee">
+            <field name="name">0214 System Manager</field>
+            <field name="user_id" ref="user_psm_0214_system_manager"/>
+            <field name="department_id" ref="dept_psm_0214_security_test"/>
+            <field name="work_email">0214_system_manager@example.com</field>
+            <field name="x_psm_0214_is_rst_employee">True</field>
+        </record>
+    </data>
+</odoo>

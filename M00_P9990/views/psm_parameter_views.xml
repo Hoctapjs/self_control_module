@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Search View -->
+    <record model="ir.ui.view" id="view_psm_parameter_search">
+        <field name="model">x_psm_parameter</field>
+        <field name="arch" type="xml">
+            <search string="PSM Parameters">
+                <field name="x_psm_key" string="Key"/>
+                <field name="x_psm_value"/>
+                <field name="x_psm_description"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record model="ir.ui.view" id="view_psm_parameter_list">
+        <field name="model">x_psm_parameter</field>
+        <field name="arch" type="xml">
+            <list string="PSM Parameters" editable="bottom">
+                <field name="x_psm_key"/>
+                <field name="x_psm_value"/>
+                <field name="x_psm_description" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="view_psm_parameter_form">
+        <field name="model">x_psm_parameter</field>
+        <field name="arch" type="xml">
+            <form string="PSM Parameters">
+                <sheet>
+                    <group>
+                        <field name="x_psm_key"/>
+                        <field name="x_psm_value"/>
+                    </group>
+                    <group>
+                        <field name="x_psm_description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_psm_parameter_list" model="ir.actions.act_window">
+        <field name="name">PSM Parameters</field>
+        <field name="res_model">x_psm_parameter</field>
+        <field name="view_mode">list,form</field>
+        <field name="path">psm-parameters</field>
+    </record>
+
+    <!-- Menu: Settings > Technical > Parameters > PSM Parameters -->
+    <menuitem
+        id="menu_psm_parameter"
+        name="PSM Parameters"
+        parent="base.menu_ir_property"
+        action="action_psm_parameter_list"
+        sequence="30"/>
+</odoo>

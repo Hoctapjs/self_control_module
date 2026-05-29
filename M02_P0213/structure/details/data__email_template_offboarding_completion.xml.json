@@ -1,0 +1,32 @@
+{
+  "file": "data/email_template_offboarding_completion.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "psm_0213_email_template_offboarding_completion",
+      "model": "mail.template",
+      "fields": {
+        "name": "RST 0213 - Cảm ơn bạn đã đồng hành",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "subject": "Cảm ơn bạn đã đồng hành cùng McDonald's Việt Nam",
+        "email_from": "{{ (object.company_id.email or user.email) }}",
+        "email_to": "{{ object.request_owner_id.partner_id.email or object.request_owner_id.email }}",
+        "body_html": "",
+        "lang": "{{ object.request_owner_id.lang }}",
+        "auto_delete": "True"
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "mail.template"
+  ]
+}

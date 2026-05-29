@@ -1,0 +1,40 @@
+{
+  "file": "data/blog_config.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "1 views",
+  "records": [
+    {
+      "id": "website_blog.opt_blog_post_comment",
+      "model": "ir.ui.view",
+      "fields": {
+        "active": "True"
+      }
+    },
+    {
+      "id": "portal_custom_blog",
+      "model": "blog.blog",
+      "fields": {
+        "name": "Bảng tin Công ty",
+        "subtitle": "Tin tức và thông báo nội bộ"
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "website_blog.opt_blog_post_comment",
+      "model": null,
+      "name": null,
+      "inherit_id": null,
+      "file": "data/blog_config.xml"
+    }
+  ],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "blog.blog",
+    "ir.ui.view"
+  ]
+}

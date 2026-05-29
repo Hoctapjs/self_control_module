@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- RSG -->
+        <record id="job_rsg_analyst" model="hr.job">
+            <field name="name">RSG Analyst</field>
+            <field name="department_id" ref="dept_rsg"/>
+        </record>
+        <record id="job_rsg_head" model="hr.job">
+            <field name="name">RSG Department Head</field>
+            <field name="department_id" ref="dept_rsg"/>
+        </record>
+
+        <!-- IT -->
+        <record id="job_it_engineer" model="hr.job">
+            <field name="name">IT Engineer</field>
+            <field name="department_id" ref="dept_it"/>
+        </record>
+        <record id="job_it_head" model="hr.job">
+            <field name="name">IT Department Head</field>
+            <field name="department_id" ref="dept_it"/>
+        </record>
+
+        <!-- MENU -->
+        <record id="job_menu_dev" model="hr.job">
+            <field name="name">Menu Developer</field>
+            <field name="department_id" ref="dept_menu"/>
+        </record>
+        <record id="job_menu_head" model="hr.job">
+            <field name="name">Menu Department Head</field>
+            <field name="department_id" ref="dept_menu"/>
+        </record>
+
+        <!-- DIGITAL -->
+        <record id="job_digital_specialist" model="hr.job">
+            <field name="name">Digital Specialist</field>
+            <field name="department_id" ref="dept_digital"/>
+        </record>
+        <record id="job_digital_head" model="hr.job">
+            <field name="name">Digital Department Head</field>
+            <field name="department_id" ref="dept_digital"/>
+        </record>
+
+        <!-- MKT -->
+        <record id="job_mkt_specialist" model="hr.job">
+            <field name="name">Marketing Specialist</field>
+            <field name="department_id" ref="dept_mkt"/>
+        </record>
+        <record id="job_mkt_head" model="hr.job">
+            <field name="name">Marketing Department Head</field>
+            <field name="department_id" ref="dept_mkt"/>
+        </record>
+
+        <!-- S&I -->
+        <record id="job_si_analyst" model="hr.job">
+            <field name="name">Data Analyst</field>
+            <field name="department_id" ref="dept_si"/>
+        </record>
+        <record id="job_si_head" model="hr.job">
+            <field name="name">S&amp;I Department Head</field>
+            <field name="department_id" ref="dept_si"/>
+        </record>
+
+        <!-- SC -->
+        <record id="job_sc_coordinator" model="hr.job">
+            <field name="name">Supply Chain Coordinator</field>
+            <field name="department_id" ref="dept_sc"/>
+        </record>
+        <record id="job_sc_head" model="hr.job">
+            <field name="name">Supply Chain Department Head</field>
+            <field name="department_id" ref="dept_sc"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- du lieu chi duoc tao khi install lan dau, khong bi update lai khi upgrade module -->
+<odoo noupdate="1">
+
+    <!-- tao mot ban ghi nguon request tu cua hang -->
+    <record id="psm_request_source_store_request" model="x_psm_request_source">
+        
+        <!-- ten hien thi tren UI -->
+        <field name="name">Store Request</field>
+        
+        <!-- code ky thuat, dung de xu ly logic -->
+        <field name="code">store_request</field>
+
+        <!-- thu tu sap xep -->
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- tao nguon request tu lich bao tri dinh ky -->
+    <record id="psm_request_source_preventive_schedule" model="x_psm_request_source">
+        <field name="name">Preventive Schedule</field>
+        <field name="code">preventive_schedule</field>
+        <field name="sequence">20</field>
+    </record>
+</odoo>

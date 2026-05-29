@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ========================================================= -->
+        <!-- PRODUCT VIEWS (Inheritance for PIF Status)                -->
+        <!-- ========================================================= -->
+        <record id="product_template_form_view_pif" model="ir.ui.view">
+            <field name="name">product.template.form.pif</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <group name="pif_info" string="PIF Info">
+                        <group>
+                            <field name="x_psm_0801_pif_product_type" widget="radio" options="{'horizontal': true}" />
+                        </group>
+                        <group>
+                            <field name="x_psm_0801_pif_bom_id" invisible="x_psm_0801_pif_product_type == 'raw'" />
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        <!-- ACTION for "PIF Products" (Projects) -->
+        <record id="action_pif_product_template" model="ir.actions.act_window">
+            <field name="name">Approved Products (Projects)</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{'default_x_psm_0801_pif_status': 'draft'}</field>
+        </record>
+        <!-- Standalone menu -->
+        <menuitem id="menu_pif_root" name="PIF Implementation" sequence="50" web_icon="M08_P0801,static/description/icon.png" />
+        <menuitem id="menu_pif_project" name="Projects (Products)" parent="menu_pif_root" action="action_pif_product_template" sequence="2" />
+
+        <!-- ========================================================= -->
+        <!-- PIF OBJECT VIEWS                                          -->
+        <!-- ========================================================= -->
+        <record id="view_pif_object_form" model="ir.ui.view">
+            <field name="name">x_psm_pif_object.form</field>
+            <field name="model">x_psm_pif_object</field>
+            <field name="arch" type="xml">
+                <form string="PIF Execution" class="o_pif_form_view">
+                    <header>
+                        <button name="action_rsg_create" string="Done (RSG)" type="object" class="oe_highlight" invisible="state != 'rsg_create' or not x_psm_user_can_process_step" />
+                        <button name="action_it_config" string="Done (IT)" type="object" class="oe_highlight" invisible="state != 'it_config' or not x_psm_user_can_process_step" />
+                        <button name="action_master_setup" string="Done (RSG)" type="object" class="oe_highlight" invisible="state != 'master_data' or not x_psm_user_can_process_step" />
+                        <button name="action_finish_lab_test" string="Done (RSG)" type="object" class="oe_highlight" invisible="state != 'lab_test' or not x_psm_user_can_process_step" />
+                        <button name="action_pilot_deploy" string="Done (IT)" type="object" class="oe_highlight" invisible="state != 'pilot' or not x_psm_user_can_process_step" />
+                        <button name="action_valuation_report" string="Done (RSG)" type="object" class="oe_highlight" invisible="state != 'valuation' or not x_psm_user_can_process_step" />
+                        <button name="action_push_to_ssbi" string="Push SSBI" type="object" invisible="state not in ('pilot', 'valuation', 'completed')" />
+                        <button name="%(action_report_pif_valuation)d" string="Print Valuation Report" type="action" invisible="state not in ('valuation', 'completed')" />
+                        <field name="state" widget="statusbar" statusbar_visible="rsg_create,it_config,master_data,lab_test,pilot,valuation,completed" />
+                    </header>
+                    <sheet>
+                        <field name="x_psm_is_request_owner" invisible="1" />
+                        <field name="x_psm_user_can_process_step" invisible="1" />
+                        <!-- Smart Button -->
+                        <div class="oe_button_box" name="button_box">
+                            <button name="%(mrp.action_report_mrp_bom)d"
+                                    type="action"
+                                    class="oe_stat_button"
+                                    icon="fa-bars"
+                                    string="BoM Overview"
+                                    context="{'search_default_id': x_psm_pif_bom_id}"
+                                    invisible="not x_psm_pif_bom_id"/>
+                        </div>
+                        <div class="oe_title">
+                            <h1><field name="name" /></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="x_psm_request_owner_id" />
+                                <field name="x_psm_request_owner_department_id" />
+                            </group>
+                            <group>
+                                <field name="x_psm_pif_bom_id" context="{'default_x_psm_0801_pif_status': 'completed'}" readonly="state != 'rsg_create'" />
+                                <field name="x_psm_pif_bom_status" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Product Information">
+                                <group>
+                                    <group string="Initiator &amp; Program">
+                                        <field name="x_psm_program" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_initiator_dept" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_new_code_seq" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_target_effective_date" readonly="state != 'rsg_create'" />
+                                    </group>
+                                    <group string="Product Identity">
+                                        <field name="x_psm_menu_item_code" readonly="state != 'it_config'" />
+                                        <field name="x_psm_pmix_code" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_product_name_en" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_product_name_vi" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_product_form" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_menu_type" readonly="state != 'rsg_create'" />
+                                    </group>
+                                </group>
+                                <group>
+                                    <group string="Category">
+                                        <field name="x_psm_cat_lv1" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_cat_lv2" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_cat_lv3" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_cat_lv4" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_cat_lv5" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_cat_lv6" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_cat_lv7" readonly="state != 'rsg_create'" />
+                                    </group>
+                                    <group string="Platforms &amp; Pricing">
+                                        <field name="x_psm_currency_id" invisible="1" />
+                                        <field name="x_psm_platform_ids" widget="many2many_tags" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_price_instore" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_price_delivery" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_price_tsn" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_price_other" readonly="state != 'rsg_create'" />
+                                    </group>
+                                </group>
+                                <group string="PIF Sizing &amp; SLA">
+                                    <group>
+                                        <field name="x_psm_pif_size" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_submit_date" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_effective_date_calc" />
+                                        <field name="x_psm_total_working_days" />
+                                    </group>
+                                    <group>
+                                        <field name="x_psm_price_tier" />
+                                        <field name="x_psm_week_number" />
+                                        <field name="x_psm_menu_code_count" />
+                                        <field name="x_psm_system_code_count" />
+                                        <field name="x_psm_days_build_rfm" />
+                                        <field name="x_psm_days_test_lab" />
+                                        <field name="x_psm_days_backup" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Menu Components">
+                                <group>
+                                    <field name="x_psm_insert_ketchup_chili" readonly="state != 'rsg_create'" />
+                                </group>
+                                <field name="x_psm_component_line_ids" readonly="state != 'rsg_create'" context="{'default_x_psm_component_type': 'other'}">
+                                    <list editable="bottom">
+                                        <field name="x_psm_component_type" />
+                                        <field name="x_psm_product_id" />
+                                        <field name="x_psm_recipe_text" />
+                                        <field name="x_psm_qty" />
+                                        <field name="x_psm_price_vnm" />
+                                        <field name="x_psm_price_delivery" />
+                                        <field name="x_psm_price_tsn" />
+                                        <field name="x_psm_is_default" />
+                                        <field name="x_psm_default_size" />
+                                        <field name="x_psm_allow_upsize" />
+                                        <field name="x_psm_allow_upgrade" />
+                                        <field name="x_psm_choice_group" />
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Tracking" invisible="not x_psm_is_request_owner">
+                                <field name="x_psm_process_tracking_ids" readonly="1">
+                                    <list>
+                                        <field name="x_psm_process_name" />
+                                        <field name="x_psm_status" widget="badge" />
+                                        <field name="x_psm_department_ref" />
+                                        <field name="x_psm_execution_date" />
+                                        <field name="x_psm_user_id" />
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="SSBI">
+                                <group>
+                                    <field name="x_psm_file_ssbi_html" widget="html" readonly="state != 'rsg_create'" />
+                                </group>
+                            </page>
+                            <page string="RFM">
+                                <group>
+                                    <field name="x_psm_file_rfm_html" widget="html" readonly="state != 'rsg_create'" />
+                                </group>
+                            </page>
+                            <page string="POS">
+                                <group>
+                                    <field name="x_psm_file_pos_html" widget="html" readonly="state != 'rsg_create'" />
+                                </group>
+                            </page>
+                            <page string="Marketing Images" invisible="x_psm_pif_request_type != 'marketing'">
+                                <group>
+                                    <group>
+                                        <field name="x_psm_img_pos" filename="x_psm_img_pos_filename" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_img_pos_filename" invisible="1" />
+                                        <field name="x_psm_img_sok" filename="x_psm_img_sok_filename" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_img_sok_filename" invisible="1" />
+                                    </group>
+                                    <group>
+                                        <field name="x_psm_img_dmb" filename="x_psm_img_dmb_filename" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_img_dmb_filename" invisible="1" />
+                                        <field name="x_psm_img_mop" filename="x_psm_img_mop_filename" readonly="state != 'rsg_create'" />
+                                        <field name="x_psm_img_mop_filename" invisible="1" />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Master Setup">
+                                <group string="B9 Setup Checklist">
+                                    <field name="x_psm_setup_code_price_store" readonly="state != 'master_data'" />
+                                    <field name="x_psm_setup_udp" readonly="state != 'master_data'" />
+                                    <field name="x_psm_setup_recipe_ssbi" readonly="state != 'master_data'" />
+                                    <field name="x_psm_setup_rawitem" readonly="state != 'master_data'" />
+                                </group>
+                            </page>
+                            <page string="Display Check">
+                                <field name="x_psm_display_check_ids" readonly="state not in ('master_data', 'lab_test')">
+                                    <list editable="bottom">
+                                        <field name="x_psm_department" />
+                                        <field name="x_psm_checked_by" />
+                                        <field name="x_psm_check_date" />
+                                        <field name="x_psm_status" widget="badge" decoration-success="x_psm_status == 'pass'" decoration-danger="x_psm_status == 'fail'" />
+                                        <field name="x_psm_note" />
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="SSBI Integration">
+                                <group>
+                                    <field name="x_psm_ssbi_status" />
+                                    <field name="x_psm_ssbi_pushed_date" />
+                                </group>
+                                <field name="x_psm_ssbi_payload_json" readonly="1" />
+                            </page>
+                            <page string="Lab Test" invisible="state in ('rsg_create', 'it_config', 'master_data')">
+                                <group string="Lab Sign-off">
+                                    <group>
+                                        <button name="action_lab_initiator_signoff" string="Initiator Sign-off" type="object" class="oe_highlight" invisible="state != 'lab_test' or x_psm_lab_initiator_signoff" />
+                                        <field name="x_psm_lab_initiator_signoff" readonly="1" />
+                                        <field name="x_psm_lab_initiator_user" readonly="1" />
+                                        <field name="x_psm_lab_initiator_date" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <button name="action_lab_rsg_signoff" string="RSG Sign-off" type="object" class="oe_highlight" invisible="state != 'lab_test' or x_psm_lab_rsg_signoff" />
+                                        <field name="x_psm_lab_rsg_signoff" readonly="1" />
+                                        <field name="x_psm_lab_rsg_user" readonly="1" />
+                                        <field name="x_psm_lab_rsg_date" readonly="1" />
+                                    </group>
+                                </group>
+                                <group string="Current Test Input">
+                                    <field name="x_psm_lab_test_result" readonly="state != 'lab_test'" />
+                                    <field name="x_psm_lab_test_proof" filename="x_psm_lab_test_proof_filename" readonly="state != 'lab_test'" />
+                                    <field name="x_psm_lab_test_proof_filename" invisible="1" />
+                                    <field name="x_psm_lab_test_note" readonly="state != 'lab_test'" />
+                                </group>
+                                <separator string="Historical Tests" />
+                                <field name="x_psm_lab_history_ids" readonly="1">
+                                    <list>
+                                        <field name="x_psm_test_date" />
+                                        <field name="x_psm_tester_id" />
+                                        <field name="x_psm_result" widget="badge" decoration-success="x_psm_result == 'pass'" decoration-danger="x_psm_result == 'fail'" />
+                                        <field name="x_psm_note" />
+                                        <field name="x_psm_proof_file" filename="x_psm_proof_filename" widget="binary" />
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter />
+                </form>
+            </field>
+        </record>
+
+        <record id="view_pif_object_tree" model="ir.ui.view">
+            <field name="name">x_psm_pif_object.list</field>
+            <field name="model">x_psm_pif_object</field>
+            <field name="arch" type="xml">
+                <list string="PIF Execution">
+                    <field name="name" />
+                    <field name="x_psm_pif_request_type" />
+                    <field name="x_psm_pif_product_id" />
+                    <field name="state" widget="badge" />
+                </list>
+            </field>
+        </record>
+
+        <record id="action_pif_object" model="ir.actions.act_window">
+            <field name="name">PIF Executions</field>
+            <field name="res_model">x_psm_pif_object</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="menu_pif_object" name="PIF Creation" parent="menu_pif_root" action="action_pif_object" sequence="1" />
+
+        <!-- ========================================================= -->
+        <!-- PIF DATA LINE VIEWS (System Data)                         -->
+        <!-- ========================================================= -->
+        <record id="view_pif_data_line_list_v3" model="ir.ui.view">
+            <field name="name">x_psm_pif_data_line.list</field>
+            <field name="model">x_psm_pif_data_line</field>
+            <field name="arch" type="xml">
+                <list string="System Data" editable="bottom">
+                    <field name="x_psm_pif_object_id" optional="show" />
+                    <field name="x_psm_category" />
+                    <field name="x_psm_key" />
+                    <field name="x_psm_value" />
+                </list>
+            </field>
+        </record>
+
+        <record id="action_pif_data_line" model="ir.actions.act_window">
+            <field name="name">System Data List</field>
+            <field name="res_model">x_psm_pif_data_line</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="menu_pif_data_line" name="System Data List" parent="menu_pif_root" action="action_pif_data_line" sequence="5" />
+
+        <!-- ========================================================= -->
+        <!-- APPROVAL REQUEST INHERITANCE                               -->
+        <!-- ========================================================= -->
+        <record id="approval_request_view_form_pif" model="ir.ui.view">
+            <field name="name">approval.request.view.form.pif</field>
+            <field name="model">approval.request</field>
+            <field name="inherit_id" ref="approvals.approval_request_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="x_psm_0801_is_pif_category" invisible="1" />
+                </xpath>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_open_pif" type="object" class="oe_stat_button" icon="fa-list-alt" invisible="x_psm_0801_pif_object_count == 0">
+                        <field name="x_psm_0801_pif_object_count" string="PIF" widget="statinfo" />
+                    </button>
+                </xpath>
+                <xpath expr="//group[@name='request_main']" position="before">
+                    <group name="pif_header_top" invisible="not x_psm_0801_is_pif_category">
+                        <group>
+                            <field name="request_owner_id" readonly="1" options="{'no_open': True}" />
+                        </group>
+                        <group>
+                            <field name="x_psm_0801_request_owner_job_id" readonly="1" />
+                        </group>
+                    </group>
+                    <group name="pif_header_type" invisible="not x_psm_0801_is_pif_category">
+                        <field name="x_psm_0801_pif_request_type" widget="radio" options="{'horizontal': true}" readonly="request_status != 'new'" />
+                    </group>
+                </xpath>
+                <field position="attributes" name="request_owner_id">
+                    <attribute name="invisible">x_psm_0801_is_pif_category</attribute>
+                </field>
+                <field position="attributes" name="category_id">
+                    <attribute name="invisible">x_psm_0801_is_pif_category</attribute>
+                </field>
+                <field position="attributes" name="date">
+                    <attribute name="invisible">x_psm_0801_is_pif_category</attribute>
+                </field>
+                <field position="attributes" name="date_confirmed">
+                    <attribute name="invisible">x_psm_0801_is_pif_category</attribute>
+                </field>
+                <field position="attributes" name="location">
+                    <attribute name="invisible">x_psm_0801_is_pif_category</attribute>
+                </field>
+                <field position="attributes" name="amount">
+                    <attribute name="invisible">x_psm_0801_is_pif_category</attribute>
+                </field>
+                <field position="attributes" name="reference">
+                    <attribute name="invisible">x_psm_0801_is_pif_category</attribute>
+                </field>
+                <field position="attributes" name="partner_id">
+                    <attribute name="invisible">x_psm_0801_is_pif_category</attribute>
+                </field>
+                <xpath expr="//label[@for='date']" position="attributes">
+                    <attribute name="invisible">x_psm_0801_is_pif_category</attribute>
+                </xpath>
+                <xpath expr="//label[@for='date_start']" position="attributes">
+                    <attribute name="invisible">x_psm_0801_is_pif_category</attribute>
+                </xpath>
+                <xpath expr="//page[@name='products']" position="attributes">
+                    <attribute name="invisible">x_psm_0801_is_pif_category</attribute>
+                </xpath>
+                <xpath expr="//page[@name='approvers']" position="attributes">
+                    <attribute name="invisible">x_psm_0801_is_pif_category</attribute>
+                </xpath>
+                <field position="attributes" name="name">
+                    <attribute name="readonly">x_psm_0801_is_pif_category</attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+                <xpath expr="//page[@name='description']" position="after">
+                    <page name="pif_details" string="Request Details" invisible="not x_psm_0801_is_pif_category">
+                        <group>
+                            <field name="x_psm_0801_pif_product_id" string="Select Approved Product" options="{'no_create': True, 'no_open': True}" readonly="request_status != 'new'" />
+                        </group>
+                        <group invisible="not x_psm_0801_pif_product_id">
+                            <group>
+                                <field name="x_psm_0801_pif_product_name" string="Product Name" />
+                                <field name="x_psm_0801_pif_bom_id" />
+                            </group>
+                            <group>
+                                <field name="x_psm_0801_pif_vendor_id" />
+                            </group>
+                        </group>
+                        <div class="o_horizontal_separator" invisible="not x_psm_0801_pif_product_id">Raw Item Detail</div>
+                        <field name="x_psm_0801_raw_item_ids" invisible="not x_psm_0801_pif_product_id">
+                            <list editable="bottom" create="0" delete="0">
+                                <field name="x_psm_gri_code" readonly="1" force_save="1" />
+                                <field name="x_psm_wrin_code" readonly="1" force_save="1" />
+                                <field name="x_psm_product_id" readonly="1" force_save="1" />
+                                <field name="x_psm_quantity" />
+                                <field name="x_psm_uom_id" readonly="1" force_save="1" />
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- CATEGORY CONFIG -->
+        <record id="approval_category_view_form_pif" model="ir.ui.view">
+            <field name="name">approval.category.view.form.pif</field>
+            <field name="model">approval.category</field>
+            <field name="inherit_id" ref="approvals.approval_category_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                    <group string="PIF Configuration">
+                        <field name="x_psm_0801_is_pif" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

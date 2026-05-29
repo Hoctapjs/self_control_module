@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Define a shared category for Marketing PAF groups -->
+    <record id="module_category_marketing_paf" model="ir.module.category">
+        <field name="name">Marketing PAF</field>
+        <field name="description">Quyền truy cập quy trình PAF (Project / Promotion Approval Form)</field>
+        <field name="sequence">120</field>
+    </record>
+
+    <!-- Define a Privilege to link groups to Category -->
+    <record id="res_groups_privilege_paf" model="res.groups.privilege">
+        <field name="name">Marketing PAF Access</field>
+        <field name="category_id" ref="module_category_marketing_paf"/>
+        <field name="sequence">20</field>
+    </record>
+    
+    <record id="MKT_0901_creator" model="res.groups">
+        <field name="name">PAF Creator (MKT)</field>
+        <field name="privilege_id" ref="res_groups_privilege_paf"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="MKT_0901_si_analyst" model="res.groups">
+        <field name="name">PAF S&amp;I Analyst</field>
+        <field name="privilege_id" ref="res_groups_privilege_paf"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="MKT_0901_ops_evaluator" model="res.groups">
+        <field name="name">PAF OPS Evaluator</field>
+        <field name="privilege_id" ref="res_groups_privilege_paf"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="MKT_0901_finance_evaluator" model="res.groups">
+        <field name="name">PAF Finance Evaluator</field>
+        <field name="privilege_id" ref="res_groups_privilege_paf"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="MKT_0901_sc_evaluator" model="res.groups">
+        <field name="name">PAF SC Evaluator</field>
+        <field name="privilege_id" ref="res_groups_privilege_paf"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="MKT_0901_legal_evaluator" model="res.groups">
+        <field name="name">PAF Legal Evaluator</field>
+        <field name="privilege_id" ref="res_groups_privilege_paf"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="MKT_0901_approver_head" model="res.groups">
+        <field name="name">PAF Head Approver</field>
+        <field name="privilege_id" ref="res_groups_privilege_paf"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="MKT_0901_clevel_approver" model="res.groups">
+        <field name="name">PAF C-Level Approver</field>
+        <field name="privilege_id" ref="res_groups_privilege_paf"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="MKT_0901_brand_reviewer" model="res.groups">
+        <field name="name">PAF Brand Reviewer</field>
+        <field name="privilege_id" ref="res_groups_privilege_paf"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="MKT_0901_admin" model="res.groups">
+        <field name="name">PAF Admin</field>
+        <field name="privilege_id" ref="res_groups_privilege_paf"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="implied_ids" eval="[
+            (4, ref('MKT_0901_creator')),
+            (4, ref('MKT_0901_si_analyst')),
+            (4, ref('MKT_0901_ops_evaluator')),
+            (4, ref('MKT_0901_finance_evaluator')),
+            (4, ref('MKT_0901_sc_evaluator')),
+            (4, ref('MKT_0901_legal_evaluator')),
+            (4, ref('MKT_0901_approver_head')),
+            (4, ref('MKT_0901_clevel_approver')),
+            (4, ref('MKT_0901_brand_reviewer'))
+        ]"/>
+    </record>
+</odoo>

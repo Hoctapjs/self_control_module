@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="mkt_0901_cron_pspd_refresh" model="ir.cron">
+            <field name="name">MKT 0901: PSPD Refresh</field>
+            <field name="model_id" ref="model_mkt_paf_pspd_line"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_pspd_refresh()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="mkt_0901_cron_sla_reminder" model="ir.cron">
+            <field name="name">MKT 0901: SLA Reminder</field>
+            <field name="model_id" ref="model_mkt_paf_pspd_line"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_sla_reminder()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

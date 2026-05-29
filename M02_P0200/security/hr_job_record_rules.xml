@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Record Rules: hr.job | Từ: P0200 -->
+
+    <!-- [P0200] PM: own department -->
+    <record id="rule_hr_job_pm_own_dept" model="ir.rule">
+        <field name="name">Job Position: PM sees own department</field>
+        <field name="model_id" ref="hr.model_hr_job"/>
+        <field name="domain_force">['|', ('department_id', '=', False), ('department_id', 'child_of', user.employee_id.department_id.id)]</field>
+        <field name="groups" eval="[(4, ref('GDH_OPS_STORE_PM_M')), (4, ref('hr_recruitment.group_hr_recruitment_user')), (4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- [P0200] HR Staff: all -->
+    <record id="rule_hr_job_hr_staff_all" model="ir.rule">
+        <field name="name">Job Position: HR Staff sees all</field>
+        <field name="model_id" ref="hr.model_hr_job"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('GDH_RST_HR_RECRUITMENT_S')), (4, ref('GDH_RST_HR_CNB_S')), (4, ref('GDH_RST_HR_HRBP_S')), (4, ref('GDH_RST_HR_ADMIN_S'))]"/>
+    </record>
+
+
+    <!-- Store Job: recruitment staff scope by own department. -->
+    <!-- <record id="rule_hr_job_store_department_manager" model="ir.rule">
+        <field name="name">HR Job: Store HR by Department</field>
+        <field name="model_id" ref="hr.model_hr_job"/>
+        <field name="groups" eval="[(6, 0, [ref('M02_P0200.GDH_RST_HR_RECRUITMENT_S')])]"/>
+        <field name="domain_force">[('recruitment_type', '=', 'store'), ('department_id', 'in', user.employee_ids.mapped('department_id').ids)]</field>
+        <field name="perm_read">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">0</field>
+    </record> -->
+    <record id="rule_hr_job_global_department" model="ir.rule">
+        <field name="name">Legacy HR Job Global Rule (Disabled)</field>
+        <field name="model_id" ref="hr.model_hr_job"/>
+        <field name="global" eval="True"/>
+        <field name="active" eval="False"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">0</field>
+    </record>
+    <!-- RGM: Job Position — read-only, own department only.
+         NOTE: recruitment_type filter removed — many store departments lack block_id=OPS
+         so their jobs are computed as 'office' type, making them invisible to RGM.
+         Department scope alone is sufficient to restrict visibility.
+         Bug: tma@gmail.com RGM cannot see hr.job (2026-05-12) -->
+    <record id="rule_hr_job_rgm_department" model="ir.rule">
+        <field name="name">HR Job: RGM read-only by Department</field>
+        <field name="model_id" ref="hr.model_hr_job"/>
+        <field name="groups" eval="[(6, 0, [ref('M02_P0200.GDH_OPS_STORE_RGM_M')])]"/>
+        <field name="domain_force">[('department_id', 'in', user.employee_ids.mapped('department_id').ids)]</field>
+        <field name="perm_read">1</field>
+        <field name="perm_write">0</field>
+        <field name="perm_create">0</field>
+        <field name="perm_unlink">0</field>
+    </record>
+</odoo>

@@ -1,0 +1,34 @@
+{
+  "file": "wizards/finance_override_wizard_views.xml",
+  "type": "xml",
+  "bucket": "wizards",
+  "summary": "1 views",
+  "records": [
+    {
+      "id": "view_psm_0214_finance_override_wizard_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "x_psm_0214.finance.override.wizard.form",
+        "model": "x_psm_0214_finance_override_wizard",
+        "arch": ""
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_0214_finance_override_wizard_form",
+      "model": "x_psm_0214_finance_override_wizard",
+      "name": "x_psm_0214.finance.override.wizard.form",
+      "inherit_id": null,
+      "file": "wizards/finance_override_wizard_views.xml"
+    }
+  ],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.ui.view",
+    "x_psm_0214_finance_override_wizard"
+  ]
+}

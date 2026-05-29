@@ -1,0 +1,65 @@
+{
+  "file": "tests/test_security_hardening.py",
+  "type": "python",
+  "bucket": "tests",
+  "summary": "1 classes; 0 fields",
+  "classes": [
+    {
+      "python_class": "TestM02P0214SecurityHardening",
+      "description": "Python helper class TestM02P0214SecurityHardening.",
+      "model": null,
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "setUpClass",
+          "type": "method",
+          "decorators": [
+            "classmethod"
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "_access_record",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "test_phase_1_acl_normalization",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_phase_2_direct_manager_rule_groups",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_phase_3_group_check_empty_recordset",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_phase_3_mail_activity_does_not_override_unlink",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_phase_4_report_views_and_employee_flag_groups",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        }
+      ],
+      "kind": "python_class"
+    }
+  ],
+  "routes": []
+}

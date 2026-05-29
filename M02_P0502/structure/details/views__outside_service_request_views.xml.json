@@ -1,0 +1,98 @@
+{
+  "file": "views/outside_service_request_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "3 views, 1 actions, 1 menus",
+  "records": [
+    {
+      "id": "view_psm_outside_service_request_list",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.outside.service.request.list",
+        "model": "x_psm_outside_service_request",
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_outside_service_request_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.outside.service.request.form",
+        "model": "x_psm_outside_service_request",
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_outside_service_request_search",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "psm.outside.service.request.search",
+        "model": "x_psm_outside_service_request",
+        "arch": ""
+      }
+    },
+    {
+      "id": "action_psm_0502_outside_service_requests",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "0502 Outside Services",
+        "res_model": "x_psm_outside_service_request",
+        "view_mode": "list,form",
+        "search_view_id": {
+          "ref": "view_psm_outside_service_request_search"
+        },
+        "context": "{'search_default_group_psm_os_state': 1}"
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_outside_service_request_list",
+      "model": "x_psm_outside_service_request",
+      "name": "psm.outside.service.request.list",
+      "inherit_id": null,
+      "file": "views/outside_service_request_views.xml"
+    },
+    {
+      "id": "view_psm_outside_service_request_form",
+      "model": "x_psm_outside_service_request",
+      "name": "psm.outside.service.request.form",
+      "inherit_id": null,
+      "file": "views/outside_service_request_views.xml"
+    },
+    {
+      "id": "view_psm_outside_service_request_search",
+      "model": "x_psm_outside_service_request",
+      "name": "psm.outside.service.request.search",
+      "inherit_id": null,
+      "file": "views/outside_service_request_views.xml"
+    }
+  ],
+  "actions": [
+    {
+      "id": "action_psm_0502_outside_service_requests",
+      "name": "0502 Outside Services",
+      "res_model": "x_psm_outside_service_request",
+      "view_mode": "list,form",
+      "domain": null,
+      "file": "views/outside_service_request_views.xml"
+    }
+  ],
+  "menus": [
+    {
+      "id": "menu_psm_0502_outside_service_requests",
+      "name": "0502 Outside Services",
+      "parent": "maintenance.menu_m_request",
+      "action": "action_psm_0502_outside_service_requests",
+      "groups": "M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager",
+      "file": "views/outside_service_request_views.xml"
+    }
+  ],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.actions.act_window",
+    "ir.ui.view",
+    "x_psm_outside_service_request"
+  ]
+}

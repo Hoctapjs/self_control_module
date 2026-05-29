@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_psm_maintenance_equipment_form" model="ir.ui.view">
+        <field name="name">psm.maintenance.equipment.form</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Chen phong ban cua thiet bi sau category de giam rui ro xpath bi gay giua cac moi truong -->
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="x_psm_0502_department_id"/>
+            </xpath>
+            <!-- Chen cac truong cau hinh bao tri dinh ky sau truong ky thuat vien -->
+            <xpath expr="//field[@name='technician_user_id']" position="after">
+                <field name="x_psm_0502_enable_preventive_schedule"/>
+                <field name="x_psm_0502_preventive_interval_days" invisible="not x_psm_0502_enable_preventive_schedule"/>
+                <field name="x_psm_0502_next_preventive_date" invisible="not x_psm_0502_enable_preventive_schedule"/>
+                <field name="x_psm_0502_preventive_status" readonly="1" invisible="not x_psm_0502_enable_preventive_schedule"/>
+                <field name="x_psm_0502_preventive_exception_status" readonly="1" invisible="not x_psm_0502_enable_preventive_schedule"/>
+                <field name="x_psm_0502_preventive_delay_days" readonly="1" invisible="not x_psm_0502_enable_preventive_schedule"/>
+                <field name="x_psm_0502_preventive_pending_cycle_count" readonly="1" invisible="not x_psm_0502_enable_preventive_schedule"/>
+                <field name="x_psm_0502_has_open_preventive_request" readonly="1" invisible="1"/>
+                <field name="x_psm_0502_last_preventive_request_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_psm_maintenance_equipment_list" model="ir.ui.view">
+        <field name="name">psm.maintenance.equipment.list</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_tree"/>
+        <field name="arch" type="xml">
+            <!-- Hien thi them thong tin phong ban va lich bao tri tren danh sach -->
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="x_psm_0502_department_id" optional="show"/>
+                <field name="x_psm_0502_enable_preventive_schedule" optional="hide"/>
+                <field name="x_psm_0502_preventive_status" optional="show"/>
+                <field name="x_psm_0502_preventive_exception_status" optional="show"/>
+                <field name="x_psm_0502_preventive_delay_days" optional="hide"/>
+                <field name="x_psm_0502_preventive_pending_cycle_count" optional="hide"/>
+                <field name="x_psm_0502_next_preventive_date" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_psm_maintenance_equipment_search" model="ir.ui.view">
+        <field name="name">psm.maintenance.equipment.search</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_search"/>
+        <field name="arch" type="xml">
+            <!-- Cho phep tim kiem theo phong ban va ngay bao tri tiep theo -->
+            <xpath expr="//search/field[@name='owner_user_id']" position="after">
+                <field name="x_psm_0502_department_id"/>
+                <field name="x_psm_0502_next_preventive_date"/>
+                <field name="x_psm_0502_preventive_status"/>
+                <field name="x_psm_0502_preventive_exception_status"/>
+            </xpath>
+            <!-- Bo loc thiet bi da bat bao tri dinh ky va thiet bi sap toi han -->
+            <xpath expr="//search/filter[@name='under_maintenance']" position="after">
+                <separator/>
+                <filter
+                    name="filter_psm_preventive_enabled"
+                    string="Preventive Enabled"
+                    domain="[('x_psm_0502_enable_preventive_schedule', '=', True)]"
+                />
+                <filter
+                    name="filter_psm_preventive_due"
+                    string="Preventive Due"
+                    domain="[('x_psm_0502_enable_preventive_schedule', '=', True), ('x_psm_0502_next_preventive_date', '&lt;=', context_today())]"
+                />
+                <filter
+                    name="filter_psm_preventive_open_request"
+                    string="Preventive Open Request"
+                    domain="[('x_psm_0502_preventive_status', '=', 'open_request')]"
+                />
+                <filter
+                    name="filter_psm_preventive_missing_next_date"
+                    string="Preventive Missing Next Date"
+                    domain="[('x_psm_0502_preventive_status', '=', 'no_next_date')]"
+                />
+                <filter
+                    name="filter_psm_preventive_due_now"
+                    string="Preventive Due Now"
+                    domain="[('x_psm_0502_preventive_exception_status', '=', 'due_now')]"
+                />
+                <filter
+                    name="filter_psm_preventive_multi_cycle_overdue"
+                    string="Preventive Multi-cycle Overdue"
+                    domain="[('x_psm_0502_preventive_exception_status', '=', 'multi_cycle_overdue')]"
+                />
+                <filter
+                    name="filter_psm_preventive_open_request_stalled"
+                    string="Preventive Open Request Stalled"
+                    domain="[('x_psm_0502_preventive_exception_status', '=', 'open_request_stalled')]"
+                />
+            </xpath>
+            <xpath expr="//search/group" position="inside">
+                <filter
+                    name="group_psm_preventive_status"
+                    string="Preventive Status"
+                    domain="[]"
+                    context="{'group_by': 'x_psm_0502_preventive_status'}"
+                />
+                <filter
+                    name="group_psm_preventive_exception_status"
+                    string="Preventive Exception Status"
+                    domain="[]"
+                    context="{'group_by': 'x_psm_0502_preventive_exception_status'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_psm_maintenance_equipment_category_form" model="ir.ui.view">
+        <field name="name">psm.maintenance.equipment.category.form</field>
+        <field name="model">maintenance.equipment.category</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_category_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="x_psm_0502_inspection_checklist_template" placeholder="Record the standard phase 3 initial inspection checklist for this equipment category..."/>
+                <field name="x_psm_0502_inspection_worksheet_template" placeholder="Record the standard phase 3 initial inspection worksheet for this equipment category..."/>
+                <field name="x_psm_0502_fsm_task_template" placeholder="Record the standard phase 3 FSM task instruction template for this equipment category..."/>
+                <field name="x_psm_0502_fsm_checklist_template" placeholder="Record the standard phase 3 FSM execution checklist template for this equipment category..."/>
+                <field name="x_psm_0502_fsm_material_template" placeholder="Record the standard phase 3 FSM material preparation template for this equipment category..."/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_psm_maintenance_equipment_category_list" model="ir.ui.view">
+        <field name="name">psm.maintenance.equipment.category.list</field>
+        <field name="model">maintenance.equipment.category</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_category_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="x_psm_0502_inspection_checklist_template" optional="hide"/>
+                <field name="x_psm_0502_inspection_worksheet_template" optional="hide"/>
+                <field name="x_psm_0502_fsm_task_template" optional="hide"/>
+                <field name="x_psm_0502_fsm_checklist_template" optional="hide"/>
+                <field name="x_psm_0502_fsm_material_template" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,150 @@
+Module M02_P0213 - ACL Audit Fixes
+Date: 2026-05-14
+Reviewer: Codex / Odoo security implementation pass
+
+Scope:
+- Source review and implementation for phases 0-6 from RÀ_SOÁT_PHÂN_QUYỀN_MODULE_0213_CHI_TIẾT.md.
+- Runtime database upgrade/UAT is not included in this source-only pass.
+
+Reference documents used:
+- addons/M02_P0213/convention/QUY_UOC_DAT_TEN_VA_RULE.md
+- addons/M02_P0213/structure/module_map.json
+- addons/M02_P0213/RÀ_SOÁT_PHÂN_QUYỀN_MODULE_0213_CHI_TIẾT.md
+- addons/M02_P0200/convention/QUY_UOC_DAT_TEN_VA_RULE.md
+- addons/M02_P0200/structure/module_map.json
+
+Source files confirmed:
+- addons/M02_P0200/security/security.xml
+- addons/M02_P0213/security/ir.model.access.csv
+- addons/M02_P0213/security/security.xml
+- addons/M02_P0213/security/offboarding_request_rules.xml
+- addons/M02_P0213/models/resignation_request.py
+- addons/M02_P0213/models/survey_user_input.py
+- addons/M02_P0213/data/survey_exit_interview_data.xml
+- addons/M02_P0213/data/ir_cron_data.xml
+- addons/M02_P0213/data/approval_category_data.xml
+- addons/M02_P0213/views/resignation_request_views.xml
+
+FIXES APPLIED:
+
+0. Module 0200 implied_ids dependency
+   - Updated addons/M02_P0200/security/security.xml.
+   - Added implied_ids to GDH_RST_ALL_BASE_S for:
+     - GDH_RST_HR_CNB_S
+     - GDH_RST_HR_HRBP_S
+     - GDH_RST_OPS_OC_S
+   - Manager groups inherit this through existing staff group chains:
+     - GDH_RST_HR_CNB_M
+     - GDH_RST_HR_HRBP_M
+     - GDH_RST_OPS_OM_M
+   - Regenerated addons/M02_P0200/structure/module_map.json.
+
+1. security/ir.model.access.csv
+   - Removed ACL rows with 0/0/0/0:
+     - access_mail_activity_internal_user
+     - access_approval_request_internal_user
+   - Changed base.group_user ACLs:
+     - hr.employee: 1/1/0/0 -> 1/0/0/0
+     - hr.contract.type: 1/1/0/0 -> 1/0/0/0
+     - survey.user_input: read-only for base.group_user
+   - Added write ACL for hr.employee:
+     - M02_P0200.GDH_RST_HR_ADMIN_M: 1/1/0/0
+     - M02_P0200.GDH_RST_HR_HRBP_M: 1/1/0/0
+   - Added scoped survey.user_input create/write ACL for:
+     - M02_P0200.GDH_RST_HR_ADMIN_S
+     - M02_P0200.GDH_RST_HR_ADMIN_M
+     - M02_P0200.GDH_RST_HR_HRBP_M
+     - M02_P0200.GDH_RST_SYSTEM_ST_M
+
+2. security/security.xml
+   - Scoped internal survey read rules to base.group_user and specific 0200 groups.
+   - Added/updated portal rule for survey.user_input:
+     - only exit interview survey
+     - only own record by partner_id or email
+     - no unlink
+   - Added HR/System write rule for survey.user_input:
+     - rule_0213_survey_user_input_internal_write
+   - Renamed survey rule XML ids from rule_psm_0213_* to rule_0213_*:
+     - rule_0213_survey_internal_read
+     - rule_0213_survey_question_internal_read
+     - rule_0213_survey_question_answer_internal_read
+     - rule_0213_survey_user_input_portal_own
+     - rule_0213_survey_user_input_internal_write
+     - rule_0213_survey_user_input_internal_results_read
+
+3. models/survey_user_input.py and data/survey_exit_interview_data.xml
+   - Added survey.survey field:
+     - x_psm_0213_is_exit_survey
+   - Marked M02_P0213.psm_0213_survey_exit_interview with x_psm_0213_is_exit_survey=True.
+
+4. models/resignation_request.py
+   - Added sudo execution path in _cron_send_offboarding_reminders():
+     - cron_self = self.sudo()
+     - cron_self._get_0213_resignation_category()
+     - cron_self.search(...)
+     - cron_self._get_overdue_activities_by_request(...)
+   - Protected approval.category.x_psm_0213_is_offboarding:
+     - field groups: approvals.group_approval_manager,base.group_system
+     - backend guard in create()/write()
+     - superuser/module data remains allowed
+
+5. Convention
+   - Updated addons/M02_P0213/convention/QUY_UOC_DAT_TEN_VA_RULE.md.
+   - Added ACL & Record Rule Standards covering:
+     - rule naming
+     - scope limiting
+     - implied_ids dependency on 0200
+     - protected fields
+     - portal vs internal access split
+
+6. Audit notes created
+   - notes/PHASE_0_TRIEN_KHAI_IMPLIED_IDS_20260514.md
+   - notes/PHASE_1_TRIEN_KHAI_FIX_ACL_SURVEY_20260514.md
+   - notes/PHASE_2_TRIEN_KHAI_FIX_HR_EMPLOYEE_ACL_20260514.md
+   - notes/PHASE_3_TRIEN_KHAI_FIX_CRON_SUDO_20260514.md
+   - notes/PHASE_4_TRIEN_KHAI_STANDARDIZE_RULE_NAMING_20260514.md
+   - notes/PHASE_5_TRIEN_KHAI_PROTECT_OFFBOARDING_FLAG_20260514.md
+
+TESTING RESULTS:
+- Parsed XML OK:
+  - M02_P0213/security/security.xml
+  - M02_P0213/security/offboarding_request_rules.xml
+  - M02_P0213/data/survey_exit_interview_data.xml
+  - M02_P0213/data/ir_cron_data.xml
+  - M02_P0213/data/approval_category_data.xml
+  - M02_P0213/views/resignation_request_views.xml
+- Python compile OK:
+  - M02_P0213/models/resignation_request.py
+  - M02_P0213/models/survey_user_input.py
+- CSV parse OK:
+  - M02_P0213/security/ir.model.access.csv
+- Structure maps regenerated:
+  - M02_P0200/structure/module_map.json
+  - M02_P0213/structure/module_map.json
+
+PENDING RUNTIME VALIDATION:
+- Upgrade M02_P0200 and M02_P0213 in database.
+- Verify no duplicate ir.rule records remain from old rule_psm_0213_* external ids.
+- Execute full Phase 7 test matrix/UAT:
+  - base.group_user survey read-only behavior
+  - portal own exit survey write behavior
+  - portal cannot write non-exit survey/user_input of others
+  - HR Admin/HRBP employee write behavior
+  - OPS read-only employee behavior
+  - cron reminder sudo behavior
+  - protected offboarding flag behavior
+
+ISSUES RESOLVED:
+- 0200 OPS/HRBP/CNB groups missing base.group_user implied chain.
+- 0213 useless 0/0/0/0 ACL rows.
+- base.group_user write on hr.employee.
+- base.group_user write/create on survey.user_input.
+- portal survey.user_input access not scoped to exit interview.
+- internal survey read rules not applied to base.group_user.
+- inconsistent survey rule XML id prefix.
+- cron search path not explicitly sudo.
+- approval.category.x_psm_0213_is_offboarding not backend-protected.
+
+KNOWN FOLLOW-UP:
+- Database upgrade is required before runtime behavior changes are active.
+- After DB upgrade, inspect ir.model.data/ir.rule for legacy rule_psm_0213_* leftovers.

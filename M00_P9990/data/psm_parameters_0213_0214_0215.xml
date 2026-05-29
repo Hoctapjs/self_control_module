@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Module 0213 (Offboarding OPS) Parameters -->
+        <record id="param_0213_reminder_overdue_days" model="x_psm_parameter">
+            <field name="x_psm_key">x_psm_0213_reminder_overdue_days</field>
+            <field name="x_psm_value">0</field>
+            <field name="x_psm_description">Module 0213 (Offboarding OPS): Số ngày tối thiểu quá hạn trước khi gửi nhắc nhở (0 = ngay lập tức)</field>
+        </record>
+        <record id="param_0213_reminder_extension_days" model="x_psm_parameter">
+            <field name="x_psm_key">x_psm_0213_reminder_extension_days</field>
+            <field name="x_psm_value">4</field>
+            <field name="x_psm_description">Module 0213 (Offboarding OPS): Số ngày được cộng thêm vào deadline khi gửi nhắc nhở</field>
+        </record>
+
+        <!-- Module 0214 (Offboarding RST) Parameters -->
+        <record id="param_0214_reminder_interval_days" model="x_psm_parameter">
+            <field name="x_psm_key">x_psm_0214_reminder_interval_days</field>
+            <field name="x_psm_value">3</field>
+            <field name="x_psm_description">Module 0214 (Offboarding RST): Khoảng cách giữa 2 lần nhắc nhở (ngày)</field>
+        </record>
+        <record id="param_0214_reminder_max_count" model="x_psm_parameter">
+            <field name="x_psm_key">x_psm_0214_reminder_max_count</field>
+            <field name="x_psm_value">2</field>
+            <field name="x_psm_description">Module 0214 (Offboarding RST): Số lần nhắc nhở tối đa cho một hoạt động</field>
+        </record>
+        <record id="param_0214_activity_deadline_days" model="x_psm_parameter">
+            <field name="x_psm_key">x_psm_0214_activity_deadline_days</field>
+            <field name="x_psm_value">7</field>
+            <field name="x_psm_description">Module 0214 (Offboarding RST): Số ngày deadline mặc định cho activity bộ phận</field>
+        </record>
+        <record id="param_0214_reminder_overdue_days" model="x_psm_parameter">
+            <field name="x_psm_key">x_psm_0214_reminder_overdue_days</field>
+            <field name="x_psm_value">0</field>
+            <field name="x_psm_description">Module 0214 (Offboarding RST): Số ngày tối thiểu quá hạn trước khi nhắc nhở</field>
+        </record>
+        <record id="param_0214_reminder_extension_days" model="x_psm_parameter">
+            <field name="x_psm_key">x_psm_0214_reminder_extension_days</field>
+            <field name="x_psm_value">4</field>
+            <field name="x_psm_description">Module 0214 (Offboarding RST): Số ngày được cộng thêm vào deadline sau nhắc nhở</field>
+        </record>
+        <record id="param_0214_portal_block_codes" model="x_psm_parameter">
+            <field name="x_psm_key">x_psm_0214_portal_block_codes</field>
+            <field name="x_psm_value">RST</field>
+            <field name="x_psm_description">Module 0214 (Offboarding RST): Mã block xem xét để chỉ định nhân viên RST portal không thấy các resignation của block này</field>
+        </record>
+        <record id="param_0214_portal_block_names" model="x_psm_parameter">
+            <field name="x_psm_key">x_psm_0214_portal_block_names</field>
+            <field name="x_psm_value">HEAD OFFICE</field>
+            <field name="x_psm_description">Module 0214 (Offboarding RST): Tên block xem xét để chỉ định nhân viên RST portal không thấy các resignation</field>
+        </record>
+    </data>
+</odoo>

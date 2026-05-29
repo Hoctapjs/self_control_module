@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+            Template PAF: dinh nghia san pham mac dinh + danh sach 5 phong ban
+            can danh gia. M9 dung field required_dept_evaluation
+            de tao mkt_paf.evaluation.line khi MKT bam Submit to Evaluation.
+        -->
+        <record id="demo_paf_template_lto" model="mkt_paf.template">
+            <field name="name">LTO Promotion — Mẫu chuẩn 5 phòng ban</field>
+            <field name="code">PAF-TPL-LTO-01</field>
+            <field name="description_html"><![CDATA[<h3>Template LTO Promotion</h3>
+<p>Template chuẩn cho LTO (Limited Time Offer) — yêu cầu đánh giá đầy đủ 5 phòng ban: S&amp;I, OPS, Finance, SC, Legal.</p>
+<p><b>Áp dụng:</b> các chương trình khuyến mãi có thời hạn, ra mắt sản phẩm theo mùa, combo digital.</p>]]></field>
+            <field name="default_product_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_tmpl_bbq_chicken_burger'),
+            ])]"/>
+            <field name="required_dept_evaluation" eval="[(6, 0, [
+                ref('M08_P0801_demo.dept_si'),
+                ref('M09_0901_demo.dept_ops'),
+                ref('M09_0901_demo.dept_finance'),
+                ref('M08_P0801_demo.dept_sc'),
+                ref('M09_0901_demo.dept_legal'),
+            ])]"/>
+            <field name="default_promotion_type">gift_attached</field>
+            <field name="default_promotion_legal_form">notification</field>
+            <field name="default_eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="default_max_uses_per_customer">2</field>
+            <field name="default_time_window_start">10.0</field>
+            <field name="default_time_window_end">22.0</field>
+            <field name="default_food_safety_responsible_dept_id" ref="M08_P0801_demo.dept_sc"/>
+            <field name="default_description_legal_html"><![CDATA[<h4>Khung pháp lý</h4><p>Mua combo tặng nước ngọt. Legal kiểm tra ngưỡng quà tặng 50% và thông báo Sở Công Thương nếu cần.</p>]]></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="demo_paf_template_core" model="mkt_paf.template">
+            <field name="name">Core Product Launch — Mẫu rút gọn 3 phòng ban</field>
+            <field name="code">PAF-TPL-CORE-01</field>
+            <field name="description_html"><![CDATA[<h3>Template Core Product Launch</h3>
+<p>Template rút gọn cho ra mắt sản phẩm Core Menu — chỉ yêu cầu S&amp;I, Finance, SC.</p>
+<p><b>Áp dụng:</b> sản phẩm vào Core Menu lâu dài, không có yếu tố pháp lý đặc biệt, không ảnh hưởng vận hành lớn.</p>]]></field>
+            <field name="default_product_ids" eval="[(6, 0, [
+                ref('M08_P0801_demo.demo_tmpl_spicy_mcdouble'),
+            ])]"/>
+            <field name="required_dept_evaluation" eval="[(6, 0, [
+                ref('M08_P0801_demo.dept_si'),
+                ref('M09_0901_demo.dept_finance'),
+                ref('M08_P0801_demo.dept_sc'),
+            ])]"/>
+            <field name="default_promotion_type">discount_direct</field>
+            <field name="default_promotion_legal_form">notification</field>
+            <field name="default_eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_dt'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="default_max_uses_per_customer">0</field>
+            <field name="default_time_window_start">0.0</field>
+            <field name="default_time_window_end">24.0</field>
+            <field name="default_food_safety_responsible_dept_id" ref="M08_P0801_demo.dept_sc"/>
+            <field name="default_description_legal_html"><![CDATA[<h4>Khung pháp lý</h4><p>Giảm giá trực tiếp, khai báo tổng giá trị khuyến mãi dự kiến theo ngân sách campaign.</p>]]></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="demo_paf_template_lucky_draw" model="mkt_paf.template">
+            <field name="name">Lucky Draw — Mẫu đăng ký Legal</field>
+            <field name="code">PAF-TPL-LUCKY-01</field>
+            <field name="description_html"><![CDATA[<h3>Template Lucky Draw</h3>
+<p>Template cho chương trình bốc thăm trúng thưởng, cần hồ sơ đăng ký Legal trước khi triển khai.</p>]]></field>
+            <field name="default_product_ids" eval="[(6, 0, [ref('M08_P0801_demo.demo_tmpl_spicy_mcdouble')])]"/>
+            <field name="required_dept_evaluation" eval="[(6, 0, [
+                ref('M08_P0801_demo.dept_si'),
+                ref('M09_0901_demo.dept_finance'),
+                ref('M08_P0801_demo.dept_sc'),
+                ref('M09_0901_demo.dept_legal'),
+            ])]"/>
+            <field name="default_promotion_type">lucky_draw</field>
+            <field name="default_promotion_legal_form">registration</field>
+            <field name="default_eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="default_max_uses_per_customer">1</field>
+            <field name="default_time_window_start">10.0</field>
+            <field name="default_time_window_end">22.0</field>
+            <field name="default_food_safety_responsible_dept_id" ref="M08_P0801_demo.dept_sc"/>
+            <field name="default_description_legal_html"><![CDATA[<h4>Khung pháp lý</h4><p>Bốc thăm trúng thưởng cần đăng ký, SLA Legal tối thiểu 30 ngày và mã văn bản phê duyệt trước khi rời Nháp.</p>]]></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="demo_paf_template_holiday" model="mkt_paf.template">
+            <field name="name">Holiday Gift — Mẫu mùa lễ</field>
+            <field name="code">PAF-TPL-HOLIDAY-01</field>
+            <field name="description_html"><![CDATA[<h3>Template Holiday Gift</h3>
+<p>Template cho mùa lễ, có thể dùng cờ cho phép quà 100% khi được duyệt ngoại lệ.</p>]]></field>
+            <field name="default_product_ids" eval="[(6, 0, [ref('M08_P0801_demo.demo_tmpl_bbq_chicken_burger')])]"/>
+            <field name="required_dept_evaluation" eval="[(6, 0, [
+                ref('M08_P0801_demo.dept_si'),
+                ref('M09_0901_demo.dept_ops'),
+                ref('M09_0901_demo.dept_finance'),
+                ref('M08_P0801_demo.dept_sc'),
+                ref('M09_0901_demo.dept_legal'),
+            ])]"/>
+            <field name="default_promotion_type">gift_attached</field>
+            <field name="default_promotion_legal_form">notification</field>
+            <field name="default_eligible_channel_ids" eval="[(6, 0, [ref('M08_P0801.pif_platform_fc'), ref('M08_P0801.pif_platform_sok'), ref('M08_P0801.pif_platform_digital')])]"/>
+            <field name="default_max_uses_per_customer">2</field>
+            <field name="default_time_window_start">9.0</field>
+            <field name="default_time_window_end">23.0</field>
+            <field name="default_food_safety_responsible_dept_id" ref="M08_P0801_demo.dept_sc"/>
+            <field name="default_description_legal_html"><![CDATA[<h4>Khung pháp lý</h4><p>Chương trình mùa lễ cần ghi rõ ngoại lệ quà tặng và phê duyệt BoD nếu vượt ngưỡng 50%.</p>]]></field>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

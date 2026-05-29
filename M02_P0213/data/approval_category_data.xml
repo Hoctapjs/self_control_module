@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="psm_0213_approval_category_resignation" model="approval.category">
+            <field name="name">OPS Resignation Request</field>
+            <field name="description">Employee resignation request for the OPS business flow, including manager approval, exit survey, offboarding task follow-up, Adecco notification, and social insurance handling where applicable.</field>
+            <field name="manager_approval">required</field>
+            <field name="x_psm_0213_is_offboarding" eval="True"/>
+        </record>
+    </data>
+</odoo>

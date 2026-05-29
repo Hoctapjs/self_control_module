@@ -1,0 +1,3 @@
+from . import x_psm_hr_discipline_reject_wizard
+from . import x_psm_hr_discipline_manual_confirm_wizard
+from . import x_psm_hr_discipline_violation_report_wizard

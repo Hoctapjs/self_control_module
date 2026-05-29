@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_psm_finance_check_report_tree" model="ir.ui.view">
+        <field name="name">approval.request.finance.check.report.tree</field>
+        <field name="model">approval.request</field>
+        <field name="group_ids" eval="[(6, 0, [
+            ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+            ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+        ])]"/>
+        <field name="arch" type="xml">
+            <list string="Accounting Check Report" create="0" delete="0" edit="0"
+                  default_order="x_psm_0214_finance_checked_date desc">
+                <field name="name" string="Request Name"/>
+                <field name="x_psm_0214_employee_id" string="Employee" widget="many2one_avatar"/>
+                <field name="x_psm_0214_resignation_date" string="Resignation Date"/>
+                <field name="x_psm_0214_finance_check_state" string="Status" widget="badge"
+                       decoration-danger="x_psm_0214_finance_check_state == 'blocked'"
+                       decoration-warning="x_psm_0214_finance_check_state == 'overridden'"
+                       decoration-success="x_psm_0214_finance_check_state == 'passed'"/>
+                <field name="x_psm_0214_al_advance_days" string="Advance AL" optional="show"/>
+                <field name="x_psm_0214_al_deduction_amount" string="AL Deduction" optional="show"/>
+                <field name="x_psm_0214_al_settled" string="AL Settled" optional="hide"/>
+                <field name="x_psm_0214_finance_checked_date" string="Check Date"/>
+                <field name="x_psm_0214_finance_override_user_id" string="Override By" widget="many2one_avatar_user"/>
+                <field name="x_psm_0214_finance_override_reason" string="Override Reason"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_psm_finance_check_report_search" model="ir.ui.view">
+        <field name="name">approval.request.finance.check.report.search</field>
+        <field name="model">approval.request</field>
+        <field name="group_ids" eval="[(6, 0, [
+            ref('M02_P0200.GDH_RST_HR_HEAD_M'),
+            ref('M02_P0200.GDH_RST_SYSTEM_ST_M')
+        ])]"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="x_psm_0214_employee_id"/>
+                <field name="x_psm_0214_finance_check_state"/>
+                <filter name="blocked" string="Blocked"
+                        domain="[('x_psm_0214_finance_check_state', '=', 'blocked')]"/>
+                <filter name="overridden" string="Overridden"
+                        domain="[('x_psm_0214_finance_check_state', '=', 'overridden')]"/>
+                <filter name="groupby_state" string="Group by Status"
+                        context="{'group_by': 'x_psm_0214_finance_check_state'}"/>
+                <filter name="groupby_employee" string="Group by Employee"
+                        context="{'group_by': 'x_psm_0214_employee_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_psm_finance_check_report" model="ir.actions.act_window">
+        <field name="name">Accounting Check Report</field>
+        <field name="res_model">approval.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="views" eval="[(ref('view_psm_finance_check_report_tree'), 'list'), (False, 'form')]"/>
+        <field name="search_view_id" ref="view_psm_finance_check_report_search"/>
+        <field name="domain">[('x_psm_0214_finance_check_state', 'in', ['blocked', 'overridden'])]</field>
+        <field name="context">{'create': False}</field>
+    </record>
+
+    <menuitem id="menu_psm_finance_check_report"
+              name="Accounting Check Report"
+              parent="menu_psm_rst_reports"
+              action="action_psm_finance_check_report"
+              groups="M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M"
+              sequence="20"/>
+</odoo>

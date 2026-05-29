@@ -1,0 +1,3049 @@
+{
+  "module_name": "M02_P0502",
+  "module_path": "D:\\odoo-19.0+e.20250918\\addons\\M02_P0502",
+  "manifest": {
+    "name": "M02_P0502_QUAN_LY_BAO_TRI",
+    "version": "19.0.5.0.0",
+    "summary": "Phase 1 foundation for process 0502 maintenance flow",
+    "depends": [
+      "maintenance",
+      "hr",
+      "industry_fsm",
+      "stock",
+      "purchase",
+      "purchase_stock"
+    ],
+    "data": [
+      "security/0502_security.xml",
+      "security/ir.model.access.csv",
+      "data/ir_cron_data.xml",
+      "data/outside_service_sequence_data.xml",
+      "data/document_sequence_data.xml",
+      "data/maintenance_stage_data.xml",
+      "data/request_source_data.xml",
+      "data/request_type_data.xml",
+      "views/maintenance_equipment_views.xml",
+      "views/maintenance_team_views.xml",
+      "views/hr_department_views.xml",
+      "views/maintenance_request_views.xml",
+      "views/outside_service_request_views.xml",
+      "views/project_task_views.xml",
+      "views/stock_picking_views.xml",
+      "views/purchase_order_views.xml",
+      "wizards/document_pack_wizard_views.xml",
+      "reports/maintenance_request_reports.xml",
+      "reports/outside_service_report.xml"
+    ],
+    "demo": [
+      "demo/psm_0502_demo_data.xml"
+    ],
+    "post_init_hook": "post_init_hook",
+    "installable": true,
+    "application": false,
+    "license": "LGPL-3"
+  },
+  "counts": {
+    "python": 1,
+    "manifest": 1,
+    "convention": 1,
+    "data": 6,
+    "demo": 1,
+    "migrations": 2,
+    "models": 15,
+    "notes": 75,
+    "reports": 2,
+    "security": 2,
+    "tests": 2,
+    "views": 8,
+    "wizards": 3
+  },
+  "structure": {
+    "convention": [
+      "convention/QUY_UOC_DAT_TEN_VA_RULE.md"
+    ],
+    "data": [
+      "data/document_sequence_data.xml",
+      "data/ir_cron_data.xml",
+      "data/maintenance_stage_data.xml",
+      "data/outside_service_sequence_data.xml",
+      "data/request_source_data.xml",
+      "data/request_type_data.xml"
+    ],
+    "demo": [
+      "demo/psm_0502_demo_data.xml"
+    ],
+    "manifest": [
+      "__manifest__.py"
+    ],
+    "migrations": [
+      "migrations/19.0.2.1.0/post-migrate.py",
+      "migrations/19.0.3.0.0/post-migrate.py"
+    ],
+    "models": [
+      "models/__init__.py",
+      "models/hr_department.py",
+      "models/maintenance_equipment.py",
+      "models/maintenance_request.py",
+      "models/maintenance_team.py",
+      "models/outside_service_request.py",
+      "models/project_task.py",
+      "models/purchase_order.py",
+      "models/request_material_line.py",
+      "models/request_planning_history.py",
+      "models/request_proposal_history.py",
+      "models/request_rework_history.py",
+      "models/request_source.py",
+      "models/request_type.py",
+      "models/stock_picking.py"
+    ],
+    "notes": [
+      "notes/PROMPT_RASOAT_UI_UX_0502_CHO_CODEX.md",
+      "notes/bang_doi_chieu_cau_hoi_0502_voi_module_chuan_odoo.md",
+      "notes/cau_hoi_can_tra_loi_de_chot_module_ke_thua_0502.md",
+      "notes/cau_hoi_can_tra_loi_de_chot_module_ke_thua_0502_bansao.md",
+      "notes/checklist_uat_0502_phase3.md",
+      "notes/dac_ta_nghiep_vu_0502_bao_tri_sua_chua_may_moc.md",
+      "notes/daily_report_2026_04_28.md",
+      "notes/daily_report_2026_04_29.md",
+      "notes/daily_report_2026_05_04.md",
+      "notes/daily_report_2026_05_05.md",
+      "notes/daily_report_2026_05_06.md",
+      "notes/danh_sach_request_mau_theo_buoc_1_16.md",
+      "notes/doi_chieu_naming_module_0502_voi_convention.md",
+      "notes/huong_dan_su_dung_module_du_lieu_mau_M02_P0502_1.md",
+      "notes/ma_tran_uoc_luong_theo_buoc_0502.md",
+      "notes/phase_1_buoc_10_da_trien_khai.md",
+      "notes/phase_1_buoc_11_da_trien_khai.md",
+      "notes/phase_1_buoc_12_da_trien_khai.md",
+      "notes/phase_1_buoc_13_da_trien_khai.md",
+      "notes/phase_1_buoc_14_da_trien_khai.md",
+      "notes/phase_1_buoc_15_da_trien_khai.md",
+      "notes/phase_1_buoc_16_da_trien_khai.md",
+      "notes/phase_1_buoc_17_da_trien_khai.md",
+      "notes/phase_1_buoc_18_da_trien_khai.md",
+      "notes/phase_1_buoc_19_da_trien_khai.md",
+      "notes/phase_1_buoc_1_da_trien_khai.md",
+      "notes/phase_1_buoc_20_da_trien_khai.md",
+      "notes/phase_1_buoc_21_da_trien_khai.md",
+      "notes/phase_1_buoc_2_da_trien_khai.md",
+      "notes/phase_1_buoc_3_da_trien_khai.md",
+      "notes/phase_1_buoc_4_da_trien_khai.md",
+      "notes/phase_1_buoc_5_da_trien_khai.md",
+      "notes/phase_1_buoc_6_da_trien_khai.md",
+      "notes/phase_1_buoc_7_da_trien_khai.md",
+      "notes/phase_1_buoc_8_da_trien_khai.md",
+      "notes/phase_1_buoc_9_da_trien_khai.md",
+      "notes/phase_1_da_trien_khai.md",
+      "notes/phase_1_ke_hoach_chi_tiet_theo_tung_buoc.md",
+      "notes/phase_2_buoc_10_da_trien_khai.md",
+      "notes/phase_2_buoc_11_da_trien_khai.md",
+      "notes/phase_2_buoc_12_da_trien_khai.md",
+      "notes/phase_2_buoc_13_da_trien_khai.md",
+      "notes/phase_2_buoc_14_da_trien_khai.md",
+      "notes/phase_2_buoc_15_da_trien_khai.md",
+      "notes/phase_2_buoc_16_da_trien_khai.md",
+      "notes/phase_2_buoc_17_da_trien_khai.md",
+      "notes/phase_2_buoc_1_da_trien_khai.md",
+      "notes/phase_2_buoc_2_da_trien_khai.md",
+      "notes/phase_2_buoc_3_da_trien_khai.md",
+      "notes/phase_2_buoc_4_da_trien_khai.md",
+      "notes/phase_2_buoc_5_da_trien_khai.md",
+      "notes/phase_2_buoc_6_da_trien_khai.md",
+      "notes/phase_2_buoc_7_da_trien_khai.md",
+      "notes/phase_2_buoc_8_da_trien_khai.md",
+      "notes/phase_2_buoc_9_da_trien_khai.md",
+      "notes/phase_2_da_trien_khai.md",
+      "notes/phase_2_ke_hoach_chi_tiet_theo_tung_buoc.md",
+      "notes/phase_3_buoc_10_da_trien_khai.md",
+      "notes/phase_3_buoc_11_da_trien_khai.md",
+      "notes/phase_3_buoc_12_da_trien_khai.md",
+      "notes/phase_3_buoc_1_da_trien_khai.md",
+      "notes/phase_3_buoc_2_da_trien_khai.md",
+      "notes/phase_3_buoc_3_da_trien_khai.md",
+      "notes/phase_3_buoc_4_da_trien_khai.md",
+      "notes/phase_3_buoc_5_da_trien_khai.md",
+      "notes/phase_3_buoc_6_da_trien_khai.md",
+      "notes/phase_3_buoc_7_da_trien_khai.md",
+      "notes/phase_3_buoc_8_da_trien_khai.md",
+      "notes/phase_3_buoc_9_da_trien_khai.md",
+      "notes/phase_3_ke_hoach_chi_tiet_theo_tung_buoc.md",
+      "notes/phase_estimate_0502_theo_muc_do_custom.md",
+      "notes/plan_phase3H_ket_qua_ra_soat_va_sua_loi.md",
+      "notes/plan_phase3_0502_cho_codex.md",
+      "notes/plan_trien_khai_0502_theo_phase.md",
+      "notes/tong_hop_module_lien_quan_0502.md"
+    ],
+    "python": [
+      "__init__.py"
+    ],
+    "reports": [
+      "reports/maintenance_request_reports.xml",
+      "reports/outside_service_report.xml"
+    ],
+    "security": [
+      "security/0502_security.xml",
+      "security/ir.model.access.csv"
+    ],
+    "tests": [
+      "tests/__init__.py",
+      "tests/test_0502_flow.py"
+    ],
+    "views": [
+      "views/hr_department_views.xml",
+      "views/maintenance_equipment_views.xml",
+      "views/maintenance_request_views.xml",
+      "views/maintenance_team_views.xml",
+      "views/outside_service_request_views.xml",
+      "views/project_task_views.xml",
+      "views/purchase_order_views.xml",
+      "views/stock_picking_views.xml"
+    ],
+    "wizards": [
+      "wizards/__init__.py",
+      "wizards/document_pack_wizard.py",
+      "wizards/document_pack_wizard_views.xml"
+    ]
+  },
+  "models": [
+    {
+      "file": "models/hr_department.py",
+      "python_class": "HrDepartment",
+      "model": null,
+      "inherit": "hr.department",
+      "kind": "inherit_only",
+      "description": "Extends hr.department in models/hr_department.py.",
+      "field_count": 3,
+      "method_count": 0,
+      "important_fields": [
+        "x_psm_0502_partner_id",
+        "x_psm_0502_proposal_approver_id",
+        "x_psm_0502_proposal_final_approver_id"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/maintenance_equipment.py",
+      "python_class": "MaintenanceEquipmentCategory",
+      "model": null,
+      "inherit": "maintenance.equipment.category",
+      "kind": "inherit_only",
+      "description": "Extends maintenance.equipment.category in models/maintenance_equipment.py.",
+      "field_count": 5,
+      "method_count": 0,
+      "important_fields": [
+        "x_psm_0502_inspection_checklist_template",
+        "x_psm_0502_inspection_worksheet_template",
+        "x_psm_0502_fsm_task_template",
+        "x_psm_0502_fsm_checklist_template",
+        "x_psm_0502_fsm_material_template"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/maintenance_equipment.py",
+      "python_class": "MaintenanceEquipment",
+      "model": null,
+      "inherit": "maintenance.equipment",
+      "kind": "inherit_only",
+      "description": "Extends maintenance.equipment in models/maintenance_equipment.py.",
+      "field_count": 10,
+      "method_count": 8,
+      "important_fields": [
+        "x_psm_0502_department_id",
+        "x_psm_0502_enable_preventive_schedule",
+        "x_psm_0502_preventive_interval_days",
+        "x_psm_0502_next_preventive_date",
+        "x_psm_0502_last_preventive_request_id",
+        "x_psm_0502_has_open_preventive_request",
+        "x_psm_0502_preventive_status",
+        "x_psm_0502_preventive_delay_days",
+        "x_psm_0502_preventive_pending_cycle_count",
+        "x_psm_0502_preventive_exception_status"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/maintenance_request.py",
+      "python_class": "MaintenanceRequest",
+      "model": null,
+      "inherit": "maintenance.request",
+      "kind": "inherit_only",
+      "description": "Extends maintenance.request in models/maintenance_request.py.",
+      "field_count": 153,
+      "method_count": 99,
+      "important_fields": [
+        "x_psm_0502_request_source_id",
+        "x_psm_0502_request_source_code",
+        "x_psm_0502_source_system",
+        "x_psm_0502_request_origin_group",
+        "x_psm_0502_source_reference",
+        "x_psm_0502_source_note",
+        "x_psm_0502_intake_minimum_ready",
+        "x_psm_0502_intake_minimum_gap_reason",
+        "x_psm_0502_intake_template_guide",
+        "x_psm_0502_intake_example_note",
+        "x_psm_0502_proposal_template_guide",
+        "x_psm_0502_intake_detail_ready"
+      ],
+      "actions": [
+        "action_psm_open_document_pack_wizard",
+        "action_psm_print_request_document",
+        "action_psm_print_inspection_report",
+        "action_psm_print_treatment_proposal",
+        "action_psm_print_material_issue_request",
+        "action_psm_print_acceptance_record",
+        "action_psm_receive_request",
+        "action_psm_mark_inspected",
+        "action_psm_notify_lead",
+        "action_psm_acknowledge_lead_assignment",
+        "action_psm_mark_planned",
+        "action_psm_create_fsm_task"
+      ]
+    },
+    {
+      "file": "models/maintenance_team.py",
+      "python_class": "MaintenanceTeam",
+      "model": null,
+      "inherit": "maintenance.team",
+      "kind": "inherit_only",
+      "description": "Extends maintenance.team in models/maintenance_team.py.",
+      "field_count": 11,
+      "method_count": 0,
+      "important_fields": [
+        "x_psm_0502_lead_user_id",
+        "x_psm_0502_proposal_approver_id",
+        "x_psm_0502_currency_id",
+        "x_psm_0502_proposal_auto_approve_limit",
+        "x_psm_0502_material_approver_id",
+        "x_psm_0502_material_auto_approve_limit",
+        "x_psm_0502_default_vendor_id",
+        "x_psm_0502_material_picking_type_id",
+        "x_psm_0502_material_source_location_id",
+        "x_psm_0502_material_destination_location_id",
+        "x_psm_0502_intake_sla_hours"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/outside_service_request.py",
+      "python_class": "X0502OutsideServiceRequest",
+      "model": "x_psm_outside_service_request",
+      "inherit": [
+        "mail.thread",
+        "mail.activity.mixin"
+      ],
+      "kind": "new_model_with_inherit",
+      "description": "0502 Outside Service Request",
+      "field_count": 16,
+      "method_count": 9,
+      "important_fields": [
+        "name",
+        "x_psm_request_id",
+        "x_psm_department_id",
+        "x_psm_equipment_id",
+        "x_psm_vendor_id",
+        "x_psm_quotation_received",
+        "x_psm_vendor_quote_amount",
+        "x_psm_vendor_quote_currency_id",
+        "x_psm_vendor_lead_time_days",
+        "x_psm_expected_complete_date",
+        "x_psm_scope_of_work",
+        "x_psm_service_type"
+      ],
+      "actions": [
+        "action_psm_send_to_vendor",
+        "action_psm_record_quote",
+        "action_psm_approve_vendor",
+        "action_psm_create_purchase_order",
+        "action_psm_open_purchase_order",
+        "action_psm_mark_completed",
+        "action_psm_acceptance_review",
+        "action_psm_cancel"
+      ]
+    },
+    {
+      "file": "models/project_task.py",
+      "python_class": "ProjectTask",
+      "model": null,
+      "inherit": "project.task",
+      "kind": "inherit_only",
+      "description": "Extends project.task in models/project_task.py.",
+      "field_count": 16,
+      "method_count": 0,
+      "important_fields": [
+        "x_psm_0502_request_id",
+        "x_psm_0502_department_id",
+        "x_psm_0502_request_type_id",
+        "x_psm_0502_request_source_id",
+        "x_psm_0502_source_system",
+        "x_psm_0502_inspection_result",
+        "x_psm_0502_proposal_summary",
+        "x_psm_0502_task_template_note",
+        "x_psm_0502_execution_checklist_template",
+        "x_psm_0502_material_package_template",
+        "x_psm_0502_execution_result",
+        "x_psm_0502_execution_checklist_note"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/purchase_order.py",
+      "python_class": "PurchaseOrder",
+      "model": null,
+      "inherit": "purchase.order",
+      "kind": "inherit_only",
+      "description": "Extends purchase.order in models/purchase_order.py.",
+      "field_count": 5,
+      "method_count": 0,
+      "important_fields": [
+        "x_psm_0502_request_id",
+        "x_psm_0502_fsm_task_id",
+        "x_psm_0502_department_id",
+        "x_psm_0502_source_system",
+        "x_psm_0502_outside_service_request_id"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/request_material_line.py",
+      "python_class": "X0502RequestMaterialLine",
+      "model": "x_psm_request_material_line",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "0502 Request Material Line",
+      "field_count": 10,
+      "method_count": 3,
+      "important_fields": [
+        "x_psm_sequence",
+        "x_psm_request_id",
+        "x_psm_product_id",
+        "x_psm_estimated_qty",
+        "x_psm_uom_id",
+        "x_psm_currency_id",
+        "x_psm_estimated_unit_price",
+        "x_psm_estimated_subtotal",
+        "x_psm_source_type",
+        "x_psm_note"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/request_planning_history.py",
+      "python_class": "X0502RequestPlanningHistory",
+      "model": "x_psm_request_planning_history",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "0502 Request Planning History",
+      "field_count": 10,
+      "method_count": 0,
+      "important_fields": [
+        "x_psm_request_id",
+        "x_psm_revision",
+        "x_psm_change_type",
+        "x_psm_schedule_date",
+        "x_psm_schedule_end",
+        "x_psm_responsible_user_id",
+        "x_psm_plan_note",
+        "x_psm_change_reason",
+        "x_psm_changed_by_id",
+        "x_psm_changed_at"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/request_proposal_history.py",
+      "python_class": "X0502RequestProposalHistory",
+      "model": "x_psm_request_proposal_history",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "0502 Request Proposal History",
+      "field_count": 15,
+      "method_count": 0,
+      "important_fields": [
+        "x_psm_request_id",
+        "x_psm_revision",
+        "x_psm_change_type",
+        "x_psm_root_cause_analysis",
+        "x_psm_technical_solution",
+        "x_psm_estimated_cost",
+        "x_psm_currency_id",
+        "x_psm_estimated_timeline",
+        "x_psm_cost_note",
+        "x_psm_timeline_note",
+        "x_psm_proposal_summary",
+        "x_psm_proposal_document"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/request_rework_history.py",
+      "python_class": "X0502RequestReworkHistory",
+      "model": "x_psm_request_rework_history",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "0502 Request Rework History",
+      "field_count": 7,
+      "method_count": 0,
+      "important_fields": [
+        "x_psm_request_id",
+        "x_psm_round_number",
+        "x_psm_previous_acceptance_result",
+        "x_psm_rework_reason",
+        "x_psm_created_by_id",
+        "x_psm_created_at",
+        "x_psm_linked_fsm_task_id"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/request_source.py",
+      "python_class": "X0502RequestSource",
+      "model": "x_psm_request_source",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "0502 Request Source",
+      "field_count": 4,
+      "method_count": 0,
+      "important_fields": [
+        "name",
+        "code",
+        "sequence",
+        "active"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/request_type.py",
+      "python_class": "X0502RequestType",
+      "model": "x_psm_request_type",
+      "inherit": null,
+      "kind": "new_model",
+      "description": "0502 Request Type",
+      "field_count": 10,
+      "method_count": 0,
+      "important_fields": [
+        "name",
+        "code",
+        "sequence",
+        "active",
+        "x_psm_0502_intake_question_template",
+        "x_psm_0502_intake_example_note",
+        "x_psm_0502_proposal_template",
+        "x_psm_0502_fsm_task_template",
+        "x_psm_0502_fsm_checklist_template",
+        "x_psm_0502_fsm_material_template"
+      ],
+      "actions": []
+    },
+    {
+      "file": "models/stock_picking.py",
+      "python_class": "StockPicking",
+      "model": null,
+      "inherit": "stock.picking",
+      "kind": "inherit_only",
+      "description": "Extends stock.picking in models/stock_picking.py.",
+      "field_count": 2,
+      "method_count": 0,
+      "important_fields": [
+        "x_psm_0502_request_id",
+        "x_psm_0502_fsm_task_id"
+      ],
+      "actions": []
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_hr_department_form",
+      "model": "hr.department",
+      "name": "psm.hr.department.form",
+      "inherit_id": "hr.view_department_form",
+      "file": "views/hr_department_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_equipment_form",
+      "model": "maintenance.equipment",
+      "name": "psm.maintenance.equipment.form",
+      "inherit_id": "maintenance.hr_equipment_view_form",
+      "file": "views/maintenance_equipment_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_equipment_list",
+      "model": "maintenance.equipment",
+      "name": "psm.maintenance.equipment.list",
+      "inherit_id": "maintenance.hr_equipment_view_tree",
+      "file": "views/maintenance_equipment_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_equipment_search",
+      "model": "maintenance.equipment",
+      "name": "psm.maintenance.equipment.search",
+      "inherit_id": "maintenance.hr_equipment_view_search",
+      "file": "views/maintenance_equipment_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_equipment_category_form",
+      "model": "maintenance.equipment.category",
+      "name": "psm.maintenance.equipment.category.form",
+      "inherit_id": "maintenance.hr_equipment_category_view_form",
+      "file": "views/maintenance_equipment_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_equipment_category_list",
+      "model": "maintenance.equipment.category",
+      "name": "psm.maintenance.equipment.category.list",
+      "inherit_id": "maintenance.hr_equipment_category_view_tree",
+      "file": "views/maintenance_equipment_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_request_form",
+      "model": "maintenance.request",
+      "name": "psm.maintenance.request.form",
+      "inherit_id": "maintenance.hr_equipment_request_view_form",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_request_list",
+      "model": "maintenance.request",
+      "name": "psm.maintenance.request.list",
+      "inherit_id": "maintenance.hr_equipment_request_view_tree",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_request_search",
+      "model": "maintenance.request",
+      "name": "psm.maintenance.request.search",
+      "inherit_id": "maintenance.hr_equipment_request_view_search",
+      "file": "views/maintenance_request_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_team_form",
+      "model": "maintenance.team",
+      "name": "psm.maintenance.team.form",
+      "inherit_id": "maintenance.maintenance_team_view_form",
+      "file": "views/maintenance_team_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_team_list",
+      "model": "maintenance.team",
+      "name": "psm.maintenance.team.list",
+      "inherit_id": "maintenance.maintenance_team_view_tree",
+      "file": "views/maintenance_team_views.xml"
+    },
+    {
+      "id": "view_psm_maintenance_team_search",
+      "model": "maintenance.team",
+      "name": "psm.maintenance.team.search",
+      "inherit_id": "maintenance.maintenance_team_view_search",
+      "file": "views/maintenance_team_views.xml"
+    },
+    {
+      "id": "view_psm_outside_service_request_list",
+      "model": "x_psm_outside_service_request",
+      "name": "psm.outside.service.request.list",
+      "inherit_id": null,
+      "file": "views/outside_service_request_views.xml"
+    },
+    {
+      "id": "view_psm_outside_service_request_form",
+      "model": "x_psm_outside_service_request",
+      "name": "psm.outside.service.request.form",
+      "inherit_id": null,
+      "file": "views/outside_service_request_views.xml"
+    },
+    {
+      "id": "view_psm_outside_service_request_search",
+      "model": "x_psm_outside_service_request",
+      "name": "psm.outside.service.request.search",
+      "inherit_id": null,
+      "file": "views/outside_service_request_views.xml"
+    },
+    {
+      "id": "view_psm_project_task_search",
+      "model": "project.task",
+      "name": "psm.project.task.search",
+      "inherit_id": "project.view_task_search_form",
+      "file": "views/project_task_views.xml"
+    },
+    {
+      "id": "view_psm_project_task_list",
+      "model": "project.task",
+      "name": "psm.project.task.list",
+      "inherit_id": "project.view_task_tree2",
+      "file": "views/project_task_views.xml"
+    },
+    {
+      "id": "view_psm_project_task_form",
+      "model": "project.task",
+      "name": "psm.project.task.form",
+      "inherit_id": "industry_fsm.view_task_form2_inherit",
+      "file": "views/project_task_views.xml"
+    },
+    {
+      "id": "view_psm_purchase_order_form",
+      "model": "purchase.order",
+      "name": "psm.purchase.order.form",
+      "inherit_id": "purchase.purchase_order_form",
+      "file": "views/purchase_order_views.xml"
+    },
+    {
+      "id": "view_psm_purchase_order_list",
+      "model": "purchase.order",
+      "name": "psm.purchase.order.list",
+      "inherit_id": "purchase.purchase_order_tree",
+      "file": "views/purchase_order_views.xml"
+    },
+    {
+      "id": "view_psm_purchase_order_search",
+      "model": "purchase.order",
+      "name": "psm.purchase.order.search",
+      "inherit_id": "purchase.view_purchase_order_filter",
+      "file": "views/purchase_order_views.xml"
+    },
+    {
+      "id": "view_psm_stock_picking_form",
+      "model": "stock.picking",
+      "name": "psm.stock.picking.form",
+      "inherit_id": "stock.view_picking_form",
+      "file": "views/stock_picking_views.xml"
+    },
+    {
+      "id": "view_psm_stock_picking_list",
+      "model": "stock.picking",
+      "name": "psm.stock.picking.list",
+      "inherit_id": "stock.vpicktree",
+      "file": "views/stock_picking_views.xml"
+    }
+  ],
+  "security": [
+    {
+      "file": "security/0502_security.xml",
+      "summary": "24 functions/rules",
+      "record_rules": [
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_request_store_department",
+          "name": "0502 Store user own department requests",
+          "model_ref": {
+            "ref": "maintenance.model_maintenance_request"
+          },
+          "domain": "[('x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_request_cmt_team_member",
+          "name": "0502 CMT user team requests",
+          "model_ref": {
+            "ref": "maintenance.model_maintenance_request"
+          },
+          "domain": "[('maintenance_team_id.member_ids', 'in', [user.id])]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_request_cmt_lead",
+          "name": "0502 CMT lead requests",
+          "model_ref": {
+            "ref": "maintenance.model_maintenance_request"
+          },
+          "domain": "[('maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_request_manager_all",
+          "name": "0502 manager all requests",
+          "model_ref": {
+            "ref": "maintenance.model_maintenance_request"
+          },
+          "domain": "[(1, '=', 1)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_material_line_store_department",
+          "name": "0502 material lines store department",
+          "model_ref": {
+            "ref": "model_x_psm_request_material_line"
+          },
+          "domain": "[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_material_line_cmt_team",
+          "name": "0502 material lines CMT team",
+          "model_ref": {
+            "ref": "model_x_psm_request_material_line"
+          },
+          "domain": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_material_line_cmt_lead",
+          "name": "0502 material lines CMT lead",
+          "model_ref": {
+            "ref": "model_x_psm_request_material_line"
+          },
+          "domain": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_material_line_manager_all",
+          "name": "0502 material lines manager all",
+          "model_ref": {
+            "ref": "model_x_psm_request_material_line"
+          },
+          "domain": "[(1, '=', 1)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_planning_history_store_department",
+          "name": "0502 planning history store department",
+          "model_ref": {
+            "ref": "model_x_psm_request_planning_history"
+          },
+          "domain": "[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_planning_history_cmt_team",
+          "name": "0502 planning history CMT team",
+          "model_ref": {
+            "ref": "model_x_psm_request_planning_history"
+          },
+          "domain": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_planning_history_cmt_lead",
+          "name": "0502 planning history CMT lead",
+          "model_ref": {
+            "ref": "model_x_psm_request_planning_history"
+          },
+          "domain": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_planning_history_manager_all",
+          "name": "0502 planning history manager all",
+          "model_ref": {
+            "ref": "model_x_psm_request_planning_history"
+          },
+          "domain": "[(1, '=', 1)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_proposal_history_store_department",
+          "name": "0502 proposal history store department",
+          "model_ref": {
+            "ref": "model_x_psm_request_proposal_history"
+          },
+          "domain": "[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_proposal_history_cmt_team",
+          "name": "0502 proposal history CMT team",
+          "model_ref": {
+            "ref": "model_x_psm_request_proposal_history"
+          },
+          "domain": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_proposal_history_cmt_lead",
+          "name": "0502 proposal history CMT lead",
+          "model_ref": {
+            "ref": "model_x_psm_request_proposal_history"
+          },
+          "domain": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_proposal_history_manager_all",
+          "name": "0502 proposal history manager all",
+          "model_ref": {
+            "ref": "model_x_psm_request_proposal_history"
+          },
+          "domain": "[(1, '=', 1)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_rework_history_store_department",
+          "name": "0502 rework history store department",
+          "model_ref": {
+            "ref": "model_x_psm_request_rework_history"
+          },
+          "domain": "[('x_psm_request_id.x_psm_0502_department_id', 'in', user.employee_ids.department_id.ids)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_rework_history_cmt_team",
+          "name": "0502 rework history CMT team",
+          "model_ref": {
+            "ref": "model_x_psm_request_rework_history"
+          },
+          "domain": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_rework_history_cmt_lead",
+          "name": "0502 rework history CMT lead",
+          "model_ref": {
+            "ref": "model_x_psm_request_rework_history"
+          },
+          "domain": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_rework_history_manager_all",
+          "name": "0502 rework history manager all",
+          "model_ref": {
+            "ref": "model_x_psm_request_rework_history"
+          },
+          "domain": "[(1, '=', 1)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_outside_service_store_department",
+          "name": "0502 outside service store department",
+          "model_ref": {
+            "ref": "model_x_psm_outside_service_request"
+          },
+          "domain": "[('x_psm_department_id', 'in', user.employee_ids.department_id.ids)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_outside_service_cmt_team",
+          "name": "0502 outside service CMT team",
+          "model_ref": {
+            "ref": "model_x_psm_outside_service_request"
+          },
+          "domain": "[('x_psm_request_id.maintenance_team_id.member_ids', 'in', [user.id])]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_outside_service_cmt_lead",
+          "name": "0502 outside service CMT lead",
+          "model_ref": {
+            "ref": "model_x_psm_outside_service_request"
+          },
+          "domain": "[('x_psm_request_id.maintenance_team_id.x_psm_0502_lead_user_id', '=', user.id)]"
+        },
+        {
+          "kind": "record_rule",
+          "id": "rule_psm_0502_aux_manager_all",
+          "name": "0502 manager all outside service",
+          "model_ref": {
+            "ref": "model_x_psm_outside_service_request"
+          },
+          "domain": "[(1, '=', 1)]"
+        }
+      ]
+    },
+    {
+      "file": "security/ir.model.access.csv",
+      "summary": "20 access rules",
+      "access_rules": [
+        {
+          "id": "access_psm_request_source_user_read",
+          "name": "access.psm.request.source.user.read",
+          "model_id": "model_x_psm_request_source",
+          "group_id": "base.group_user",
+          "model": "x_psm_request_source",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_request_source_manager",
+          "name": "access.psm.request.source.manager",
+          "model_id": "model_x_psm_request_source",
+          "group_id": "group_psm_0502_manager",
+          "model": "x_psm_request_source",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_request_type_user_read",
+          "name": "access.psm.request.type.user.read",
+          "model_id": "model_x_psm_request_type",
+          "group_id": "base.group_user",
+          "model": "x_psm_request_type",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_request_type_manager",
+          "name": "access.psm.request.type.manager",
+          "model_id": "model_x_psm_request_type",
+          "group_id": "group_psm_0502_manager",
+          "model": "x_psm_request_type",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_request_material_line_store_read",
+          "name": "access.psm.request.material.line.store.read",
+          "model_id": "model_x_psm_request_material_line",
+          "group_id": "group_psm_0502_store_user",
+          "model": "x_psm_request_material_line",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_request_material_line_cmt_user",
+          "name": "access.psm.request.material.line.cmt.user",
+          "model_id": "model_x_psm_request_material_line",
+          "group_id": "group_psm_0502_cmt_user",
+          "model": "x_psm_request_material_line",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_request_material_line_manager",
+          "name": "access.psm.request.material.line.manager",
+          "model_id": "model_x_psm_request_material_line",
+          "group_id": "group_psm_0502_manager",
+          "model": "x_psm_request_material_line",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_request_planning_history_store_read",
+          "name": "access.psm.request.planning.history.store.read",
+          "model_id": "model_x_psm_request_planning_history",
+          "group_id": "group_psm_0502_store_user",
+          "model": "x_psm_request_planning_history",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_request_planning_history_cmt_user",
+          "name": "access.psm.request.planning.history.cmt.user",
+          "model_id": "model_x_psm_request_planning_history",
+          "group_id": "group_psm_0502_cmt_user",
+          "model": "x_psm_request_planning_history",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_request_planning_history_manager",
+          "name": "access.psm.request.planning.history.manager",
+          "model_id": "model_x_psm_request_planning_history",
+          "group_id": "group_psm_0502_manager",
+          "model": "x_psm_request_planning_history",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_request_proposal_history_store_read",
+          "name": "access.psm.request.proposal.history.store.read",
+          "model_id": "model_x_psm_request_proposal_history",
+          "group_id": "group_psm_0502_store_user",
+          "model": "x_psm_request_proposal_history",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_request_proposal_history_cmt_user",
+          "name": "access.psm.request.proposal.history.cmt.user",
+          "model_id": "model_x_psm_request_proposal_history",
+          "group_id": "group_psm_0502_cmt_user",
+          "model": "x_psm_request_proposal_history",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_request_proposal_history_manager",
+          "name": "access.psm.request.proposal.history.manager",
+          "model_id": "model_x_psm_request_proposal_history",
+          "group_id": "group_psm_0502_manager",
+          "model": "x_psm_request_proposal_history",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_request_rework_history_store_read",
+          "name": "access.psm.request.rework.history.store.read",
+          "model_id": "model_x_psm_request_rework_history",
+          "group_id": "group_psm_0502_store_user",
+          "model": "x_psm_request_rework_history",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_request_rework_history_cmt_user",
+          "name": "access.psm.request.rework.history.cmt.user",
+          "model_id": "model_x_psm_request_rework_history",
+          "group_id": "group_psm_0502_cmt_user",
+          "model": "x_psm_request_rework_history",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_request_rework_history_manager",
+          "name": "access.psm.request.rework.history.manager",
+          "model_id": "model_x_psm_request_rework_history",
+          "group_id": "group_psm_0502_manager",
+          "model": "x_psm_request_rework_history",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_outside_service_request_store_read",
+          "name": "access.psm.outside.service.request.store.read",
+          "model_id": "model_x_psm_outside_service_request",
+          "group_id": "group_psm_0502_store_user",
+          "model": "x_psm_outside_service_request",
+          "perm_read": true,
+          "perm_write": false,
+          "perm_create": false,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_outside_service_request_cmt_user",
+          "name": "access.psm.outside.service.request.cmt.user",
+          "model_id": "model_x_psm_outside_service_request",
+          "group_id": "group_psm_0502_cmt_user",
+          "model": "x_psm_outside_service_request",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": false
+        },
+        {
+          "id": "access_psm_outside_service_request_manager",
+          "name": "access.psm.outside.service.request.manager",
+          "model_id": "model_x_psm_outside_service_request",
+          "group_id": "group_psm_0502_manager",
+          "model": "x_psm_outside_service_request",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        },
+        {
+          "id": "access_psm_0502_document_pack_wizard_user",
+          "name": "access.psm.0502.document.pack.wizard.user",
+          "model_id": "model_x_psm_0502_document_pack_wizard",
+          "group_id": "base.group_user",
+          "model": "x_psm_0502_document_pack_wizard",
+          "perm_read": true,
+          "perm_write": true,
+          "perm_create": true,
+          "perm_unlink": true
+        }
+      ]
+    }
+  ],
+  "controllers": [],
+  "data": [
+    {
+      "file": "data/document_sequence_data.xml",
+      "summary": "XML data file.",
+      "record_count": 5,
+      "function_count": 0
+    },
+    {
+      "file": "data/ir_cron_data.xml",
+      "summary": "XML data file.",
+      "record_count": 2,
+      "function_count": 0
+    },
+    {
+      "file": "data/maintenance_stage_data.xml",
+      "summary": "XML data file.",
+      "record_count": 11,
+      "function_count": 0
+    },
+    {
+      "file": "data/outside_service_sequence_data.xml",
+      "summary": "XML data file.",
+      "record_count": 1,
+      "function_count": 0
+    },
+    {
+      "file": "data/request_source_data.xml",
+      "summary": "XML data file.",
+      "record_count": 2,
+      "function_count": 0
+    },
+    {
+      "file": "data/request_type_data.xml",
+      "summary": "XML data file.",
+      "record_count": 3,
+      "function_count": 0
+    }
+  ],
+  "relations": [
+    {
+      "from": "models/hr_department.py",
+      "to_model": "hr.department",
+      "type": "inherits_model",
+      "model": "hr.department"
+    },
+    {
+      "from": "models/hr_department.py",
+      "to_model": "res.partner",
+      "type": "field_relation",
+      "field": "x_psm_0502_partner_id"
+    },
+    {
+      "from": "models/hr_department.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_proposal_approver_id"
+    },
+    {
+      "from": "models/hr_department.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_proposal_final_approver_id"
+    },
+    {
+      "from": "models/maintenance_equipment.py",
+      "to_model": "maintenance.equipment.category",
+      "type": "inherits_model",
+      "model": "maintenance.equipment.category"
+    },
+    {
+      "from": "models/maintenance_equipment.py",
+      "to_model": "maintenance.equipment",
+      "type": "inherits_model",
+      "model": "maintenance.equipment"
+    },
+    {
+      "from": "models/maintenance_equipment.py",
+      "to_model": "hr.department",
+      "type": "field_relation",
+      "field": "x_psm_0502_department_id"
+    },
+    {
+      "from": "models/maintenance_equipment.py",
+      "to_model": "maintenance.request",
+      "type": "field_relation",
+      "field": "x_psm_0502_last_preventive_request_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "inherits_model",
+      "model": "maintenance.request"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "hr.department",
+      "type": "field_relation",
+      "field": "x_psm_0502_department_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_received_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_intake_owner_user_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_inspected_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_lead_notified_user_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_lead_acknowledged_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_planned_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_last_planning_changed_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "project.task",
+      "type": "field_relation",
+      "field": "x_psm_0502_fsm_task_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.currency",
+      "type": "field_relation",
+      "field": "x_psm_0502_currency_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_proposed_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_last_proposal_changed_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_approval_user_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_approval_decided_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_approval_initial_user_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_approval_final_user_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_approval_first_decided_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_service_assessed_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_material_checked_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "stock.picking",
+      "type": "field_relation",
+      "field": "x_psm_0502_stock_picking_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_stock_checked_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_material_approval_user_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_material_approval_decided_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_stock_issued_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "project.task.type",
+      "type": "field_relation",
+      "field": "x_psm_0502_fsm_stage_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_execution_started_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_execution_completed_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_acceptance_reviewed_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_last_rework_by_id"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "purchase.order",
+      "type": "field_relation",
+      "field": "x_psm_0502_purchase_order_ids"
+    },
+    {
+      "from": "models/maintenance_request.py",
+      "to_model": "purchase.order",
+      "type": "field_relation",
+      "field": "x_psm_0502_purchase_order_id"
+    },
+    {
+      "from": "models/maintenance_team.py",
+      "to_model": "maintenance.team",
+      "type": "inherits_model",
+      "model": "maintenance.team"
+    },
+    {
+      "from": "models/maintenance_team.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_lead_user_id"
+    },
+    {
+      "from": "models/maintenance_team.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_proposal_approver_id"
+    },
+    {
+      "from": "models/maintenance_team.py",
+      "to_model": "res.currency",
+      "type": "field_relation",
+      "field": "x_psm_0502_currency_id"
+    },
+    {
+      "from": "models/maintenance_team.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_0502_material_approver_id"
+    },
+    {
+      "from": "models/maintenance_team.py",
+      "to_model": "res.partner",
+      "type": "field_relation",
+      "field": "x_psm_0502_default_vendor_id"
+    },
+    {
+      "from": "models/maintenance_team.py",
+      "to_model": "stock.picking.type",
+      "type": "field_relation",
+      "field": "x_psm_0502_material_picking_type_id"
+    },
+    {
+      "from": "models/maintenance_team.py",
+      "to_model": "stock.location",
+      "type": "field_relation",
+      "field": "x_psm_0502_material_source_location_id"
+    },
+    {
+      "from": "models/maintenance_team.py",
+      "to_model": "stock.location",
+      "type": "field_relation",
+      "field": "x_psm_0502_material_destination_location_id"
+    },
+    {
+      "from": "models/outside_service_request.py",
+      "to_model": "mail.thread",
+      "type": "inherits_model",
+      "model": "x_psm_outside_service_request"
+    },
+    {
+      "from": "models/outside_service_request.py",
+      "to_model": "mail.activity.mixin",
+      "type": "inherits_model",
+      "model": "x_psm_outside_service_request"
+    },
+    {
+      "from": "models/outside_service_request.py",
+      "to_model": "maintenance.request",
+      "type": "field_relation",
+      "field": "x_psm_request_id"
+    },
+    {
+      "from": "models/outside_service_request.py",
+      "to_model": "hr.department",
+      "type": "field_relation",
+      "field": "x_psm_department_id"
+    },
+    {
+      "from": "models/outside_service_request.py",
+      "to_model": "maintenance.equipment",
+      "type": "field_relation",
+      "field": "x_psm_equipment_id"
+    },
+    {
+      "from": "models/outside_service_request.py",
+      "to_model": "res.partner",
+      "type": "field_relation",
+      "field": "x_psm_vendor_id"
+    },
+    {
+      "from": "models/outside_service_request.py",
+      "to_model": "res.currency",
+      "type": "field_relation",
+      "field": "x_psm_vendor_quote_currency_id"
+    },
+    {
+      "from": "models/outside_service_request.py",
+      "to_model": "purchase.order",
+      "type": "field_relation",
+      "field": "x_psm_purchase_order_id"
+    },
+    {
+      "from": "models/project_task.py",
+      "to_model": "project.task",
+      "type": "inherits_model",
+      "model": "project.task"
+    },
+    {
+      "from": "models/project_task.py",
+      "to_model": "maintenance.request",
+      "type": "field_relation",
+      "field": "x_psm_0502_request_id"
+    },
+    {
+      "from": "models/project_task.py",
+      "to_model": "hr.department",
+      "type": "field_relation",
+      "field": "x_psm_0502_department_id"
+    },
+    {
+      "from": "models/purchase_order.py",
+      "to_model": "purchase.order",
+      "type": "inherits_model",
+      "model": "purchase.order"
+    },
+    {
+      "from": "models/purchase_order.py",
+      "to_model": "maintenance.request",
+      "type": "field_relation",
+      "field": "x_psm_0502_request_id"
+    },
+    {
+      "from": "models/purchase_order.py",
+      "to_model": "project.task",
+      "type": "field_relation",
+      "field": "x_psm_0502_fsm_task_id"
+    },
+    {
+      "from": "models/purchase_order.py",
+      "to_model": "hr.department",
+      "type": "field_relation",
+      "field": "x_psm_0502_department_id"
+    },
+    {
+      "from": "models/request_material_line.py",
+      "to_model": "maintenance.request",
+      "type": "field_relation",
+      "field": "x_psm_request_id"
+    },
+    {
+      "from": "models/request_material_line.py",
+      "to_model": "product.product",
+      "type": "field_relation",
+      "field": "x_psm_product_id"
+    },
+    {
+      "from": "models/request_material_line.py",
+      "to_model": "uom.uom",
+      "type": "field_relation",
+      "field": "x_psm_uom_id"
+    },
+    {
+      "from": "models/request_material_line.py",
+      "to_model": "res.currency",
+      "type": "field_relation",
+      "field": "x_psm_currency_id"
+    },
+    {
+      "from": "models/request_planning_history.py",
+      "to_model": "maintenance.request",
+      "type": "field_relation",
+      "field": "x_psm_request_id"
+    },
+    {
+      "from": "models/request_planning_history.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_responsible_user_id"
+    },
+    {
+      "from": "models/request_planning_history.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_changed_by_id"
+    },
+    {
+      "from": "models/request_proposal_history.py",
+      "to_model": "maintenance.request",
+      "type": "field_relation",
+      "field": "x_psm_request_id"
+    },
+    {
+      "from": "models/request_proposal_history.py",
+      "to_model": "res.currency",
+      "type": "field_relation",
+      "field": "x_psm_currency_id"
+    },
+    {
+      "from": "models/request_proposal_history.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_changed_by_id"
+    },
+    {
+      "from": "models/request_rework_history.py",
+      "to_model": "maintenance.request",
+      "type": "field_relation",
+      "field": "x_psm_request_id"
+    },
+    {
+      "from": "models/request_rework_history.py",
+      "to_model": "res.users",
+      "type": "field_relation",
+      "field": "x_psm_created_by_id"
+    },
+    {
+      "from": "models/request_rework_history.py",
+      "to_model": "project.task",
+      "type": "field_relation",
+      "field": "x_psm_linked_fsm_task_id"
+    },
+    {
+      "from": "models/stock_picking.py",
+      "to_model": "stock.picking",
+      "type": "inherits_model",
+      "model": "stock.picking"
+    },
+    {
+      "from": "models/stock_picking.py",
+      "to_model": "maintenance.request",
+      "type": "field_relation",
+      "field": "x_psm_0502_request_id"
+    },
+    {
+      "from": "models/stock_picking.py",
+      "to_model": "project.task",
+      "type": "field_relation",
+      "field": "x_psm_0502_fsm_task_id"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_source.py",
+      "to_model": "x_psm_request_source",
+      "type": "grants_access",
+      "group": "base.group_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_source.py",
+      "to_model": "x_psm_request_source",
+      "type": "grants_access",
+      "group": "group_psm_0502_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_type.py",
+      "to_model": "x_psm_request_type",
+      "type": "grants_access",
+      "group": "base.group_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_type.py",
+      "to_model": "x_psm_request_type",
+      "type": "grants_access",
+      "group": "group_psm_0502_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_material_line.py",
+      "to_model": "x_psm_request_material_line",
+      "type": "grants_access",
+      "group": "group_psm_0502_store_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_material_line.py",
+      "to_model": "x_psm_request_material_line",
+      "type": "grants_access",
+      "group": "group_psm_0502_cmt_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_material_line.py",
+      "to_model": "x_psm_request_material_line",
+      "type": "grants_access",
+      "group": "group_psm_0502_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_planning_history.py",
+      "to_model": "x_psm_request_planning_history",
+      "type": "grants_access",
+      "group": "group_psm_0502_store_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_planning_history.py",
+      "to_model": "x_psm_request_planning_history",
+      "type": "grants_access",
+      "group": "group_psm_0502_cmt_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_planning_history.py",
+      "to_model": "x_psm_request_planning_history",
+      "type": "grants_access",
+      "group": "group_psm_0502_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_proposal_history.py",
+      "to_model": "x_psm_request_proposal_history",
+      "type": "grants_access",
+      "group": "group_psm_0502_store_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_proposal_history.py",
+      "to_model": "x_psm_request_proposal_history",
+      "type": "grants_access",
+      "group": "group_psm_0502_cmt_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_proposal_history.py",
+      "to_model": "x_psm_request_proposal_history",
+      "type": "grants_access",
+      "group": "group_psm_0502_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_rework_history.py",
+      "to_model": "x_psm_request_rework_history",
+      "type": "grants_access",
+      "group": "group_psm_0502_store_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_rework_history.py",
+      "to_model": "x_psm_request_rework_history",
+      "type": "grants_access",
+      "group": "group_psm_0502_cmt_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/request_rework_history.py",
+      "to_model": "x_psm_request_rework_history",
+      "type": "grants_access",
+      "group": "group_psm_0502_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/outside_service_request.py",
+      "to_model": "x_psm_outside_service_request",
+      "type": "grants_access",
+      "group": "group_psm_0502_store_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/outside_service_request.py",
+      "to_model": "x_psm_outside_service_request",
+      "type": "grants_access",
+      "group": "group_psm_0502_cmt_user"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "models/outside_service_request.py",
+      "to_model": "x_psm_outside_service_request",
+      "type": "grants_access",
+      "group": "group_psm_0502_manager"
+    },
+    {
+      "from": "security/ir.model.access.csv",
+      "to": "wizards/document_pack_wizard.py",
+      "to_model": "x_psm_0502_document_pack_wizard",
+      "type": "grants_access",
+      "group": "base.group_user"
+    },
+    {
+      "from": "views/hr_department_views.xml",
+      "to": "models/hr_department.py",
+      "to_model": "hr.department",
+      "type": "uses_model",
+      "view_id": "view_psm_hr_department_form"
+    },
+    {
+      "from": "views/maintenance_equipment_views.xml",
+      "to": "models/maintenance_equipment.py",
+      "to_model": "maintenance.equipment",
+      "type": "uses_model",
+      "view_id": "view_psm_maintenance_equipment_form"
+    },
+    {
+      "from": "views/maintenance_equipment_views.xml",
+      "to": "models/maintenance_equipment.py",
+      "to_model": "maintenance.equipment",
+      "type": "uses_model",
+      "view_id": "view_psm_maintenance_equipment_list"
+    },
+    {
+      "from": "views/maintenance_equipment_views.xml",
+      "to": "models/maintenance_equipment.py",
+      "to_model": "maintenance.equipment",
+      "type": "uses_model",
+      "view_id": "view_psm_maintenance_equipment_search"
+    },
+    {
+      "from": "views/maintenance_equipment_views.xml",
+      "to": "models/maintenance_equipment.py",
+      "to_model": "maintenance.equipment.category",
+      "type": "uses_model",
+      "view_id": "view_psm_maintenance_equipment_category_form"
+    },
+    {
+      "from": "views/maintenance_equipment_views.xml",
+      "to": "models/maintenance_equipment.py",
+      "to_model": "maintenance.equipment.category",
+      "type": "uses_model",
+      "view_id": "view_psm_maintenance_equipment_category_list"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "uses_model",
+      "view_id": "view_psm_maintenance_request_form"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "uses_model",
+      "view_id": "view_psm_maintenance_request_list"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "uses_model",
+      "view_id": "view_psm_maintenance_request_search"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_requests_to_plan"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_preventive_queue"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_store_action_needed_queue"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_overdue_queue"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_ready_to_plan_queue"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_critical_queue"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_lead_assigned_queue"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_0502_request_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_0502_progress_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_0502_overdue_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_0502_supply_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_0502_preventive_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_0502_intake_sla_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to": "models/maintenance_request.py",
+      "to_model": "maintenance.request",
+      "type": "opens_model",
+      "action_id": "action_psm_0502_follow_up_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_requests_to_plan",
+      "type": "menu_action",
+      "menu_id": "menu_psm_requests_to_plan"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_preventive_queue",
+      "type": "menu_action",
+      "menu_id": "menu_psm_preventive_queue"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_store_action_needed_queue",
+      "type": "menu_action",
+      "menu_id": "menu_psm_store_action_needed"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_overdue_queue",
+      "type": "menu_action",
+      "menu_id": "menu_psm_overdue_queue"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_ready_to_plan_queue",
+      "type": "menu_action",
+      "menu_id": "menu_psm_ready_to_plan_queue"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_critical_queue",
+      "type": "menu_action",
+      "menu_id": "menu_psm_critical_queue"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_lead_assigned_queue",
+      "type": "menu_action",
+      "menu_id": "menu_psm_lead_assigned_queue"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_0502_request_monitoring",
+      "type": "menu_action",
+      "menu_id": "menu_psm_0502_request_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_0502_progress_monitoring",
+      "type": "menu_action",
+      "menu_id": "menu_psm_0502_progress_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_0502_preventive_monitoring",
+      "type": "menu_action",
+      "menu_id": "menu_psm_0502_preventive_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_0502_supply_monitoring",
+      "type": "menu_action",
+      "menu_id": "menu_psm_0502_supply_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_0502_overdue_monitoring",
+      "type": "menu_action",
+      "menu_id": "menu_psm_0502_overdue_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_0502_intake_sla_monitoring",
+      "type": "menu_action",
+      "menu_id": "menu_psm_0502_intake_sla_monitoring"
+    },
+    {
+      "from": "views/maintenance_request_views.xml",
+      "to_action": "action_psm_0502_follow_up_monitoring",
+      "type": "menu_action",
+      "menu_id": "menu_psm_0502_follow_up_monitoring"
+    },
+    {
+      "from": "views/maintenance_team_views.xml",
+      "to": "models/maintenance_team.py",
+      "to_model": "maintenance.team",
+      "type": "uses_model",
+      "view_id": "view_psm_maintenance_team_form"
+    },
+    {
+      "from": "views/maintenance_team_views.xml",
+      "to": "models/maintenance_team.py",
+      "to_model": "maintenance.team",
+      "type": "uses_model",
+      "view_id": "view_psm_maintenance_team_list"
+    },
+    {
+      "from": "views/maintenance_team_views.xml",
+      "to": "models/maintenance_team.py",
+      "to_model": "maintenance.team",
+      "type": "uses_model",
+      "view_id": "view_psm_maintenance_team_search"
+    },
+    {
+      "from": "views/outside_service_request_views.xml",
+      "to": "models/outside_service_request.py",
+      "to_model": "x_psm_outside_service_request",
+      "type": "uses_model",
+      "view_id": "view_psm_outside_service_request_list"
+    },
+    {
+      "from": "views/outside_service_request_views.xml",
+      "to": "models/outside_service_request.py",
+      "to_model": "x_psm_outside_service_request",
+      "type": "uses_model",
+      "view_id": "view_psm_outside_service_request_form"
+    },
+    {
+      "from": "views/outside_service_request_views.xml",
+      "to": "models/outside_service_request.py",
+      "to_model": "x_psm_outside_service_request",
+      "type": "uses_model",
+      "view_id": "view_psm_outside_service_request_search"
+    },
+    {
+      "from": "views/outside_service_request_views.xml",
+      "to": "models/outside_service_request.py",
+      "to_model": "x_psm_outside_service_request",
+      "type": "opens_model",
+      "action_id": "action_psm_0502_outside_service_requests"
+    },
+    {
+      "from": "views/outside_service_request_views.xml",
+      "to_action": "action_psm_0502_outside_service_requests",
+      "type": "menu_action",
+      "menu_id": "menu_psm_0502_outside_service_requests"
+    },
+    {
+      "from": "views/project_task_views.xml",
+      "to": "models/project_task.py",
+      "to_model": "project.task",
+      "type": "uses_model",
+      "view_id": "view_psm_project_task_search"
+    },
+    {
+      "from": "views/project_task_views.xml",
+      "to": "models/project_task.py",
+      "to_model": "project.task",
+      "type": "uses_model",
+      "view_id": "view_psm_project_task_list"
+    },
+    {
+      "from": "views/project_task_views.xml",
+      "to": "models/project_task.py",
+      "to_model": "project.task",
+      "type": "uses_model",
+      "view_id": "view_psm_project_task_form"
+    },
+    {
+      "from": "views/project_task_views.xml",
+      "to": "models/project_task.py",
+      "to_model": "project.task",
+      "type": "opens_model",
+      "action_id": "action_psm_0502_execution_monitoring"
+    },
+    {
+      "from": "views/project_task_views.xml",
+      "to_action": "action_psm_0502_execution_monitoring",
+      "type": "menu_action",
+      "menu_id": "menu_psm_0502_execution_monitoring"
+    },
+    {
+      "from": "views/purchase_order_views.xml",
+      "to": "models/purchase_order.py",
+      "to_model": "purchase.order",
+      "type": "uses_model",
+      "view_id": "view_psm_purchase_order_form"
+    },
+    {
+      "from": "views/purchase_order_views.xml",
+      "to": "models/purchase_order.py",
+      "to_model": "purchase.order",
+      "type": "uses_model",
+      "view_id": "view_psm_purchase_order_list"
+    },
+    {
+      "from": "views/purchase_order_views.xml",
+      "to": "models/purchase_order.py",
+      "to_model": "purchase.order",
+      "type": "uses_model",
+      "view_id": "view_psm_purchase_order_search"
+    },
+    {
+      "from": "views/stock_picking_views.xml",
+      "to": "models/stock_picking.py",
+      "to_model": "stock.picking",
+      "type": "uses_model",
+      "view_id": "view_psm_stock_picking_form"
+    },
+    {
+      "from": "views/stock_picking_views.xml",
+      "to": "models/stock_picking.py",
+      "to_model": "stock.picking",
+      "type": "uses_model",
+      "view_id": "view_psm_stock_picking_list"
+    },
+    {
+      "from": "wizards/document_pack_wizard.py",
+      "to_model": "maintenance.request",
+      "type": "field_relation",
+      "field": "x_psm_request_id"
+    },
+    {
+      "from": "wizards/document_pack_wizard_views.xml",
+      "to": "wizards/document_pack_wizard.py",
+      "to_model": "x_psm_0502_document_pack_wizard",
+      "type": "uses_model",
+      "view_id": "view_psm_0502_document_pack_wizard_form"
+    }
+  ],
+  "feature_summary": [
+    "Dedicated recruitment groups, access rules, and security bridges.",
+    "Seed data for sequences, stages, approval categories, mail templates, cron jobs, and surveys."
+  ],
+  "detail_index": [
+    {
+      "file": "__init__.py",
+      "detail_json": "details/__init__.py.json",
+      "type": "python",
+      "bucket": "python",
+      "summary": "Python source file."
+    },
+    {
+      "file": "__manifest__.py",
+      "detail_json": "details/__manifest__.py.json",
+      "type": "file",
+      "bucket": "manifest",
+      "summary": "# Khai bao ma hoa file Python # -*- coding: utf-8 -*- # Khai bao thong tin module Odoo nay { # Ten hien thi cua module \"name\": \"M02_P0502_QUAN_LY_BAO_TRI\", #..."
+    },
+    {
+      "file": "convention/QUY_UOC_DAT_TEN_VA_RULE.md",
+      "detail_json": "details/convention__QUY_UOC_DAT_TEN_VA_RULE.md.json",
+      "type": "document",
+      "bucket": "convention",
+      "summary": "# Quy Ước Đặt Tên Và Rule Tài liệu này tổng hợp các quy ước cần lưu ý khi phát triển module. ## 1. Quy ước đặt tên ### 1.1. Manifest - Cấu trúc tên module tr..."
+    },
+    {
+      "file": "data/document_sequence_data.xml",
+      "detail_json": "details/data__document_sequence_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/ir_cron_data.xml",
+      "detail_json": "details/data__ir_cron_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/maintenance_stage_data.xml",
+      "detail_json": "details/data__maintenance_stage_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/outside_service_sequence_data.xml",
+      "detail_json": "details/data__outside_service_sequence_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/request_source_data.xml",
+      "detail_json": "details/data__request_source_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "data/request_type_data.xml",
+      "detail_json": "details/data__request_type_data.xml.json",
+      "type": "xml",
+      "bucket": "data",
+      "summary": "XML data file."
+    },
+    {
+      "file": "demo/psm_0502_demo_data.xml",
+      "detail_json": "details/demo__psm_0502_demo_data.xml.json",
+      "type": "xml",
+      "bucket": "demo",
+      "summary": "XML data file."
+    },
+    {
+      "file": "migrations/19.0.2.1.0/post-migrate.py",
+      "detail_json": "details/migrations__19.0.2.1.0__post-migrate.py.json",
+      "type": "python",
+      "bucket": "migrations",
+      "summary": "Python source file."
+    },
+    {
+      "file": "migrations/19.0.3.0.0/post-migrate.py",
+      "detail_json": "details/migrations__19.0.3.0.0__post-migrate.py.json",
+      "type": "python",
+      "bucket": "migrations",
+      "summary": "Python source file."
+    },
+    {
+      "file": "models/__init__.py",
+      "detail_json": "details/models____init__.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "Python source file."
+    },
+    {
+      "file": "models/hr_department.py",
+      "detail_json": "details/models__hr_department.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: hr.department; 1 classes; 3 fields"
+    },
+    {
+      "file": "models/maintenance_equipment.py",
+      "detail_json": "details/models__maintenance_equipment.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: maintenance.equipment.category, maintenance.equipment; 2 classes; 15 fields"
+    },
+    {
+      "file": "models/maintenance_request.py",
+      "detail_json": "details/models__maintenance_request.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: maintenance.request; 1 classes; 153 fields; 35 actions"
+    },
+    {
+      "file": "models/maintenance_team.py",
+      "detail_json": "details/models__maintenance_team.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: maintenance.team; 1 classes; 11 fields"
+    },
+    {
+      "file": "models/outside_service_request.py",
+      "detail_json": "details/models__outside_service_request.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm_outside_service_request; 1 classes; 16 fields; 8 actions"
+    },
+    {
+      "file": "models/project_task.py",
+      "detail_json": "details/models__project_task.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: project.task; 1 classes; 16 fields"
+    },
+    {
+      "file": "models/purchase_order.py",
+      "detail_json": "details/models__purchase_order.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: purchase.order; 1 classes; 5 fields"
+    },
+    {
+      "file": "models/request_material_line.py",
+      "detail_json": "details/models__request_material_line.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm_request_material_line; 1 classes; 10 fields"
+    },
+    {
+      "file": "models/request_planning_history.py",
+      "detail_json": "details/models__request_planning_history.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm_request_planning_history; 1 classes; 10 fields"
+    },
+    {
+      "file": "models/request_proposal_history.py",
+      "detail_json": "details/models__request_proposal_history.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm_request_proposal_history; 1 classes; 15 fields"
+    },
+    {
+      "file": "models/request_rework_history.py",
+      "detail_json": "details/models__request_rework_history.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm_request_rework_history; 1 classes; 7 fields"
+    },
+    {
+      "file": "models/request_source.py",
+      "detail_json": "details/models__request_source.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm_request_source; 1 classes; 4 fields"
+    },
+    {
+      "file": "models/request_type.py",
+      "detail_json": "details/models__request_type.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: x_psm_request_type; 1 classes; 10 fields"
+    },
+    {
+      "file": "models/stock_picking.py",
+      "detail_json": "details/models__stock_picking.py.json",
+      "type": "python",
+      "bucket": "models",
+      "summary": "models: stock.picking; 1 classes; 2 fields"
+    },
+    {
+      "file": "notes/bang_doi_chieu_cau_hoi_0502_voi_module_chuan_odoo.md",
+      "detail_json": "details/notes__bang_doi_chieu_cau_hoi_0502_voi_module_chuan_odoo.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Bảng đối chiếu câu hỏi 0502 với module chuẩn Odoo ## 1. Mục đích File này tổng hợp các câu hỏi và câu trả lời quan trọng trong quá trình chốt module kế thừ..."
+    },
+    {
+      "file": "notes/cau_hoi_can_tra_loi_de_chot_module_ke_thua_0502.md",
+      "detail_json": "details/notes__cau_hoi_can_tra_loi_de_chot_module_ke_thua_0502.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Các câu hỏi cần trả lời để chốt danh sách module kế thừa cho 0502 ## 1. Mục đích của note File này dùng để liệt kê các câu hỏi nghiệp vụ và kỹ thuật cần đư..."
+    },
+    {
+      "file": "notes/cau_hoi_can_tra_loi_de_chot_module_ke_thua_0502_bansao.md",
+      "detail_json": "details/notes__cau_hoi_can_tra_loi_de_chot_module_ke_thua_0502_bansao.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Các câu hỏi cần trả lời để chốt danh sách module kế thừa cho 0502 ## 1. Mục đích của note File này dùng để liệt kê các câu hỏi nghiệp vụ và kỹ thuật cần đư..."
+    },
+    {
+      "file": "notes/checklist_uat_0502_phase3.md",
+      "detail_json": "details/notes__checklist_uat_0502_phase3.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Checklist UAT 0502 Phase 3 ## 1. Chuan bi - Cai dat/cap nhat module `M02_P0502` voi demo data neu can test nhanh. - Kiem tra user test da co group phu hop:..."
+    },
+    {
+      "file": "notes/dac_ta_nghiep_vu_0502_bao_tri_sua_chua_may_moc.md",
+      "detail_json": "details/notes__dac_ta_nghiep_vu_0502_bao_tri_sua_chua_may_moc.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Đặc tả nghiệp vụ 0502 - Bảo trì và sửa chữa máy móc ## Liên kết nhanh tới các module gốc liên quan - Helpdesk: [helpdesk](/d:/odoo-19.0+e.20250918/odoo/add..."
+    },
+    {
+      "file": "notes/daily_report_2026_04_28.md",
+      "detail_json": "details/notes__daily_report_2026_04_28.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Daily Report - 2026-04-28 ## 1. Phạm vi làm việc trong ngày Hôm nay tập trung tiếp tục triển khai `Phase 1` của quy trình `0502 - Quản lý bảo trì`, chủ yếu..."
+    },
+    {
+      "file": "notes/daily_report_2026_04_29.md",
+      "detail_json": "details/notes__daily_report_2026_04_29.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Daily Report - 2026-04-29 ## 1. Phạm vi làm việc trong ngày Hôm nay tập trung hoàn tất phần cuối của `Phase 1` cho quy trình `0502 - Quản lý bảo trì`, chủ ..."
+    },
+    {
+      "file": "notes/daily_report_2026_05_04.md",
+      "detail_json": "details/notes__daily_report_2026_05_04.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Daily Report - 2026-05-04 ## 1. Phạm vi làm việc trong ngày Hôm qua tập trung triển khai `Phase 2` của quy trình `0502 - Quản lý bảo trì`, chủ yếu từ: - `B..."
+    },
+    {
+      "file": "notes/daily_report_2026_05_05.md",
+      "detail_json": "details/notes__daily_report_2026_05_05.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Daily Report - 2026-05-05 ## 1. Phạm vi làm việc trong ngày Hôm nay tập trung triển khai `Phase 2` của quy trình `0502 - Quản lý bảo trì`, từ lớp chuẩn hóa..."
+    },
+    {
+      "file": "notes/daily_report_2026_05_06.md",
+      "detail_json": "details/notes__daily_report_2026_05_06.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Daily Report - 2026-05-06 ## 1. Phạm vi làm việc trong ngày Hôm nay tập trung triển khai `Phase 3` của quy trình `0502 - Quản lý bảo trì`, bám theo lưu đồ ..."
+    },
+    {
+      "file": "notes/danh_sach_request_mau_theo_buoc_1_16.md",
+      "detail_json": "details/notes__danh_sach_request_mau_theo_buoc_1_16.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Danh Sách Request Mẫu Theo Bước 1-16 ## 1. Mục đích File này dùng để tra rất nhanh: - bước nào dùng request mẫu nào - bước nào có FSM task mẫu - bước nào c..."
+    },
+    {
+      "file": "notes/doi_chieu_naming_module_0502_voi_convention.md",
+      "detail_json": "details/notes__doi_chieu_naming_module_0502_voi_convention.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Đối Chiếu Naming Module 0502 Với Convention ## 1. Mục tiêu Tài liệu này dùng để đối chiếu: - thành phần hiện tại trong module `M02_P0502` - tên đang dùng t..."
+    },
+    {
+      "file": "notes/huong_dan_su_dung_module_du_lieu_mau_M02_P0502_1.md",
+      "detail_json": "details/notes__huong_dan_su_dung_module_du_lieu_mau_M02_P0502_1.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Hướng Dẫn Sử Dụng Module Dữ Liệu Mẫu `M02_P0502_1` ## 1. Mục đích `M02_P0502_1` là module phụ dùng để nạp dữ liệu mẫu phục vụ test nhanh cho quy trình `050..."
+    },
+    {
+      "file": "notes/ma_tran_uoc_luong_theo_buoc_0502.md",
+      "detail_json": "details/notes__ma_tran_uoc_luong_theo_buoc_0502.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Ma trận ước lượng theo bước cho quy trình 0502 ## 1. Mục đích File này dùng để hỗ trợ phase estimate cho quy trình 0502 bằng cách gom theo từng bước: - bướ..."
+    },
+    {
+      "file": "notes/phase_1_buoc_10_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_10_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 10 Đã Triển Khai ## 1. Mục tiêu của bước 10 `Bước 10` trong quy trình `0502` là: - Xuất báo cáo theo dõi tình trạng Trong `Phase 1`, mục tiê..."
+    },
+    {
+      "file": "notes/phase_1_buoc_11_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_11_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 11 đã triển khai ## 1. Mục tiêu của bước 11 Bước 11 trong quy trình 0502 là: - CMT kiểm tra thực tế chi tiết hơn - ghi nhận đề xuất phương á..."
+    },
+    {
+      "file": "notes/phase_1_buoc_12_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_12_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 12 đã triển khai ## 1. Mục tiêu của bước 12 Bước 12 trong quy trình 0502 là: - cửa hàng duyệt timeline - cửa hàng duyệt chi phí - nếu không ..."
+    },
+    {
+      "file": "notes/phase_1_buoc_13_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_13_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 13 đã triển khai ## 1. Mục tiêu của bước 13 Bước 13 trong quy trình 0502 là: - thẩm định máy móc sau khi cửa hàng đã duyệt proposal - xác đị..."
+    },
+    {
+      "file": "notes/phase_1_buoc_14_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_14_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 14 đã triển khai ## 1. Mục tiêu của bước 14 Bước 14 trong quy trình 0502 là: - kiểm tra xem trong quá trình xử lý có phát sinh nhu cầu vật t..."
+    },
+    {
+      "file": "notes/phase_1_buoc_15_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_15_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 15 đã triển khai ## 1. Mục tiêu của bước 15 Bước 15 trong quy trình 0502 là: - CMT thực hiện yêu cầu xuất kho vật tư - tạo được hành động ho..."
+    },
+    {
+      "file": "notes/phase_1_buoc_16_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_16_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 16 đã triển khai ## 1. Mục tiêu của bước 16 Bước 16 trong quy trình 0502 là: - kiểm tra xem kho có đủ vật tư để xử lý hay không - xác định r..."
+    },
+    {
+      "file": "notes/phase_1_buoc_17_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_17_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 17 đã triển khai ## 1. Mục tiêu của bước 17 Bước 17 trong quy trình 0502 là: - duyệt yêu cầu vật tư nội bộ - xác nhận request có thể đi tiếp..."
+    },
+    {
+      "file": "notes/phase_1_buoc_18_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_18_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 18 đã triển khai ## 1. Mục tiêu của bước 18 Bước 18 trong quy trình 0502 là: - thực hiện xuất kho vật tư thực tế - ghi nhận rằng request đã ..."
+    },
+    {
+      "file": "notes/phase_1_buoc_19_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_19_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 19 đã triển khai ## 1. Mục tiêu của bước 19 Bước 19 trong quy trình 0502 là: - nếu tồn kho vật tư không đủ đáp ứng - tiến hành chuyển sang n..."
+    },
+    {
+      "file": "notes/phase_1_buoc_1_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_1_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 1 Đã Triển Khai ## 1. Mục tiêu của bước 1 Trong `Phase 1`, bước 1 được triển khai theo đúng định hướng đã chốt trong plan: - Chọn một điểm b..."
+    },
+    {
+      "file": "notes/phase_1_buoc_20_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_20_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 20 đã triển khai ## 1. Mục tiêu của bước 20 Bước 20 trong quy trình 0502 là: - CMT tiến hành sửa chữa máy móc - có nơi theo dõi việc thực th..."
+    },
+    {
+      "file": "notes/phase_1_buoc_21_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_21_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 21 đã triển khai ## 1. Mục tiêu của bước 21 Bước 21 trong quy trình 0502 là: - cửa hàng nghiệm thu - đánh giá sau bảo trì - có bước xác nhận..."
+    },
+    {
+      "file": "notes/phase_1_buoc_2_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_2_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 2 Đã Triển Khai ## 1. Mục tiêu của bước 2 Trong kế hoạch `Phase 1`, bước 2 là: - Tạo phiếu yêu cầu bảo trì Mục tiêu của bước này là: - Có ch..."
+    },
+    {
+      "file": "notes/phase_1_buoc_3_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_3_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 3 Đã Triển Khai ## 1. Mục tiêu của bước 3 Trong kế hoạch `Phase 1`, bước 3 là: - CMT tiếp nhận yêu cầu bảo trì Mục tiêu của bước này là: - T..."
+    },
+    {
+      "file": "notes/phase_1_buoc_4_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_4_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 4 Đã Triển Khai ## 1. Mục tiêu của bước 4 Trong kế hoạch `Phase 1`, bước 4 là: - Thực hiện kiểm tra thực tế tình trạng Mục tiêu của bước này..."
+    },
+    {
+      "file": "notes/phase_1_buoc_5_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_5_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 5 Đã Triển Khai ## 1. Mục tiêu của bước 5 Trong kế hoạch `Phase 1`, bước 5 là: - Hệ thống tự động kiểm tra lịch bảo trì máy móc Mục tiêu của..."
+    },
+    {
+      "file": "notes/phase_1_buoc_6_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_6_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 6 Đã Triển Khai ## 1. Mục tiêu của bước 6 `Bước 6` trong quy trình `0502` là: - Hệ thống gửi lịch bảo trì cho CMT Lead Trong `Phase 1`, mục ..."
+    },
+    {
+      "file": "notes/phase_1_buoc_7_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_7_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 7 Đã Triển Khai ## 1. Mục tiêu của bước 7 `Bước 7` trong quy trình `0502` là: - CMT Lead tiếp nhận lịch và tổng hợp yêu cầu bảo trì Trong `P..."
+    },
+    {
+      "file": "notes/phase_1_buoc_8_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_8_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 8 đã triển khai ## 1. Mục tiêu của bước 8 Bước 8 trong quy trình `0502` là: - `CMT Lead lập kế hoạch bảo trì máy móc` Trong `Phase 1`, mục t..."
+    },
+    {
+      "file": "notes/phase_1_buoc_9_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_buoc_9_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Bước 9 Đã Triển Khai ## 1. Mục tiêu của bước 9 `Bước 9` trong quy trình `0502` là: - Điều phối nhân viên bảo trì Trong `Phase 1`, mục tiêu của bư..."
+    },
+    {
+      "file": "notes/phase_1_da_trien_khai.md",
+      "detail_json": "details/notes__phase_1_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "## 1. Mục đích File này tổng hợp các file đã được triển khai để hoàn thành `Phase 1` của quy trình `0502`, từ `Bước 1` đến `Bước 21`. Tài liệu này dùng để: -..."
+    },
+    {
+      "file": "notes/phase_1_ke_hoach_chi_tiet_theo_tung_buoc.md",
+      "detail_json": "details/notes__phase_1_ke_hoach_chi_tiet_theo_tung_buoc.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 1 - Kế Hoạch Chi Tiết Theo Từng Bước ## 1. Mục tiêu của Phase 1 Phase 1 không nhằm hoàn thiện toàn bộ quy trình `0502` theo đúng lưu đồ chi tiết ngay..."
+    },
+    {
+      "file": "notes/phase_2_buoc_10_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_10_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 10 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 10` tập trung vào việc nâng phần theo dõi tình trạng xử lý từ mức: - monitoring..."
+    },
+    {
+      "file": "notes/phase_2_buoc_11_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_11_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 11 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 11` tập trung vào việc chuẩn hóa bước: - đề xuất phương án xử lý - báo giá sơ b..."
+    },
+    {
+      "file": "notes/phase_2_buoc_12_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_12_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 12 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 12` tập trung vào việc chuẩn hóa bước: - duyệt timeline - duyệt cost Mục tiêu c..."
+    },
+    {
+      "file": "notes/phase_2_buoc_13_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_13_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 13 đã triển khai ## 1. Mục tiêu của bước 13 `Bước 13` trong quy trình `0502` là: - thẩm định request sẽ xử lý nội bộ - hay phải chuyển sang ..."
+    },
+    {
+      "file": "notes/phase_2_buoc_14_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_14_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 14 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 14` tập trung vào việc nâng bước: - kiểm tra phát sinh vật tư từ mức: - chỉ đán..."
+    },
+    {
+      "file": "notes/phase_2_buoc_15_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_15_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 15 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 15` tập trung vào việc nâng bước: - yêu cầu xuất kho vật tư từ mức: - chỉ tạo đ..."
+    },
+    {
+      "file": "notes/phase_2_buoc_16_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_16_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 16 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 16` tập trung vào việc nâng bước: - kiểm tra tồn kho theo 2 hướng chính: - làm ..."
+    },
+    {
+      "file": "notes/phase_2_buoc_17_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_17_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 17 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 17` tập trung vào việc nâng bước: - duyệt yêu cầu vật tư từ mức: - chỉ có điểm ..."
+    },
+    {
+      "file": "notes/phase_2_buoc_1_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_1_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 1 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 1` tập trung chuẩn hóa thông tin về **nguồn phát sinh kỹ thuật / upstream** của ..."
+    },
+    {
+      "file": "notes/phase_2_buoc_2_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_2_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 2 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 2` tập trung vào việc chuẩn hóa dữ liệu đầu vào khi tạo `maintenance.request`, đ..."
+    },
+    {
+      "file": "notes/phase_2_buoc_3_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_3_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 3 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 3` tập trung vào việc làm rõ cách `CMT` tiếp nhận `maintenance.request`, đồng th..."
+    },
+    {
+      "file": "notes/phase_2_buoc_4_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_4_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 4 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 4` tập trung vào việc chuẩn hóa phần kiểm tra thực tế ban đầu trên `maintenance...."
+    },
+    {
+      "file": "notes/phase_2_buoc_5_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_5_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 5 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 5` tập trung vào việc làm chắc logic preventive trong nhánh bảo trì định kỳ, đặc..."
+    },
+    {
+      "file": "notes/phase_2_buoc_6_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_6_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 6 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 6` tập trung vào việc chuẩn hóa người nhận notify cho `CMT Lead` trong nhánh pre..."
+    },
+    {
+      "file": "notes/phase_2_buoc_7_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_7_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 7 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 7` tập trung vào việc chuyển từ queue cơ bản sang queue usable theo vai trò `CMT..."
+    },
+    {
+      "file": "notes/phase_2_buoc_8_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_8_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 8 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 8` tập trung vào việc chuẩn hóa điều kiện để một `maintenance.request` được xem ..."
+    },
+    {
+      "file": "notes/phase_2_buoc_9_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_buoc_9_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 2 - Bước 9 đã triển khai ## 1. Mục tiêu của bước này `Phase 2 - Bước 9` tập trung vào việc làm mượt bước: - điều phối nhân viên bảo trì - tạo `FSM Ta..."
+    },
+    {
+      "file": "notes/phase_2_da_trien_khai.md",
+      "detail_json": "details/notes__phase_2_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "## 1. Mục đích File này tổng hợp những gì đã được triển khai trong `Phase 2` của quy trình `0502`, dựa trên: - các note triển khai theo từng bước của `Phase ..."
+    },
+    {
+      "file": "notes/phase_2_ke_hoach_chi_tiet_theo_tung_buoc.md",
+      "detail_json": "details/notes__phase_2_ke_hoach_chi_tiet_theo_tung_buoc.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "## 1. Mục tiêu của Phase 2 `Phase 2` không còn tập trung vào việc “làm cho luồng chạy được” như `Phase 1`. Mục tiêu của phase này là: - làm mượt các điểm đứt..."
+    },
+    {
+      "file": "notes/phase_3_buoc_10_da_trien_khai.md",
+      "detail_json": "details/notes__phase_3_buoc_10_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Bước 10 đã triển khai ## 1. Mục tiêu của bước này `Bước 10` trong `Phase 3` tập trung vào việc nâng phần monitoring từ mức: - có các màn hình the..."
+    },
+    {
+      "file": "notes/phase_3_buoc_11_da_trien_khai.md",
+      "detail_json": "details/notes__phase_3_buoc_11_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Bước 11 đã triển khai ## 1. Mục tiêu của bước này `Bước 11` trong `Phase 3` tập trung vào việc nâng phần `Treatment Proposal` từ mức: - có propos..."
+    },
+    {
+      "file": "notes/phase_3_buoc_12_da_trien_khai.md",
+      "detail_json": "details/notes__phase_3_buoc_12_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Bước 12 đã triển khai ## Mục tiêu Hoàn thiện `Bước 12 - Duyệt timeline và cost` theo hướng tối thiểu của `Phase 3`: - giữ tương thích với flow du..."
+    },
+    {
+      "file": "notes/phase_3_buoc_1_da_trien_khai.md",
+      "detail_json": "details/notes__phase_3_buoc_1_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Bước 1 đã triển khai ## 1. Mục tiêu của bước này `Phase 3 - Bước 1` tập trung vào việc làm rõ: - nhu cầu bảo trì này phát sinh từ đâu - dữ liệu đ..."
+    },
+    {
+      "file": "notes/phase_3_buoc_2_da_trien_khai.md",
+      "detail_json": "details/notes__phase_3_buoc_2_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Bước 2 đã triển khai ## 1. Mục tiêu của bước này `Phase 3 - Bước 2` tập trung vào việc: - chốt mẫu intake hoàn chỉnh hơn theo đúng loại request -..."
+    },
+    {
+      "file": "notes/phase_3_buoc_3_da_trien_khai.md",
+      "detail_json": "details/notes__phase_3_buoc_3_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Bước 3 đã triển khai ## 1. Mục tiêu của bước này `Phase 3 - Bước 3` tập trung vào việc: - biến việc tiếp nhận thành một checkpoint có ownership r..."
+    },
+    {
+      "file": "notes/phase_3_buoc_4_da_trien_khai.md",
+      "detail_json": "details/notes__phase_3_buoc_4_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Bước 4 đã triển khai ## 1. Mục tiêu của bước này `Phase 3 - Bước 4` tập trung vào việc: - nâng phần kiểm tra ban đầu từ mức field structured chun..."
+    },
+    {
+      "file": "notes/phase_3_buoc_5_da_trien_khai.md",
+      "detail_json": "details/notes__phase_3_buoc_5_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Bước 5 đã triển khai ## 1. Mục tiêu của bước này `Phase 3 - Bước 5` tập trung vào việc: - nâng phần preventive từ mức chỉ sinh request đúng hạn -..."
+    },
+    {
+      "file": "notes/phase_3_buoc_6_da_trien_khai.md",
+      "detail_json": "details/notes__phase_3_buoc_6_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Bước 6 đã triển khai ## 1. Mục tiêu của bước này `Phase 3 - Bước 6` tập trung vào việc: - biến `Notify CMT Lead` từ dấu vết notify đơn thuần - sa..."
+    },
+    {
+      "file": "notes/phase_3_buoc_7_da_trien_khai.md",
+      "detail_json": "details/notes__phase_3_buoc_7_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Bước 7 đã triển khai ## 1. Mục tiêu của bước này `Bước 7` trong `Phase 3` tập trung vào việc nâng các queue hiện có từ mức “usable” lên mức “điều..."
+    },
+    {
+      "file": "notes/phase_3_buoc_8_da_trien_khai.md",
+      "detail_json": "details/notes__phase_3_buoc_8_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Bước 8 đã triển khai ## 1. Mục tiêu của bước này `Bước 8` trong `Phase 3` tập trung vào việc nâng phần lập kế hoạch từ mức: - chỉ có validation `..."
+    },
+    {
+      "file": "notes/phase_3_buoc_9_da_trien_khai.md",
+      "detail_json": "details/notes__phase_3_buoc_9_da_trien_khai.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Bước 9 đã triển khai ## 1. Mục tiêu của bước này `Bước 9` trong `Phase 3` tập trung vào việc nâng `FSM task` từ mức: - có context từ request lên ..."
+    },
+    {
+      "file": "notes/phase_3_ke_hoach_chi_tiet_theo_tung_buoc.md",
+      "detail_json": "details/notes__phase_3_ke_hoach_chi_tiet_theo_tung_buoc.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 - Kế Hoạch Chi Tiết Theo Từng Bước ## 1. Mục đích Tài liệu này dùng để lập kế hoạch chi tiết cho `Phase 3` của quy trình: - `0502 - Quản lý bảo trì..."
+    },
+    {
+      "file": "notes/phase_estimate_0502_theo_muc_do_custom.md",
+      "detail_json": "details/notes__phase_estimate_0502_theo_muc_do_custom.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase Estimate 0502 Theo Mức Độ Custom ## 1. Mục đích Tài liệu này gom các hạng mục triển khai quy trình `0502 - Quản lý bảo trì` theo 4 nhóm để thuận tiện..."
+    },
+    {
+      "file": "notes/plan_phase3_0502_cho_codex.md",
+      "detail_json": "details/notes__plan_phase3_0502_cho_codex.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Plan Phase 3 0502 cho Codex – Kiểm tra trạng thái và danh mục cần làm > Tài liệu này tổng hợp: > 1. Trạng thái triển khai hiện tại của module `M02_P0502` s..."
+    },
+    {
+      "file": "notes/plan_phase3H_ket_qua_ra_soat_va_sua_loi.md",
+      "detail_json": "details/notes__plan_phase3H_ket_qua_ra_soat_va_sua_loi.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Phase 3 – Kết quả rà soát sau khi Codex triển khai + Phase 3H sửa lỗi > Tài liệu này ghi lại kết quả kiểm tra việc Codex đã triển khai Phase 3 (các phase c..."
+    },
+    {
+      "file": "notes/plan_trien_khai_0502_theo_phase.md",
+      "detail_json": "details/notes__plan_trien_khai_0502_theo_phase.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Plan Triển Khai Quy Trình 0502 Theo Phase ## 1. Mục đích Tài liệu này dùng để định hướng cách triển khai quy trình `0502 - Quản lý bảo trì` theo hướng: - T..."
+    },
+    {
+      "file": "notes/PROMPT_RASOAT_UI_UX_0502_CHO_CODEX.md",
+      "detail_json": "details/notes__PROMPT_RASOAT_UI_UX_0502_CHO_CODEX.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Prompt Rà Soát Và Triển Khai UI/UX Module 0502 Cho Codex ## Mục Đích Tài liệu này là prompt tiếng Việt có dấu để Codex dùng khi thực hiện rà soát, chỉ ra l..."
+    },
+    {
+      "file": "notes/tong_hop_module_lien_quan_0502.md",
+      "detail_json": "details/notes__tong_hop_module_lien_quan_0502.md.json",
+      "type": "document",
+      "bucket": "notes",
+      "summary": "# Tổng hợp module liên quan đến quy trình 0502 ## 1. Phạm vi ghi chú File này tổng hợp những thông tin đã tìm hiểu từ manifest của các nhóm module liên quan ..."
+    },
+    {
+      "file": "reports/maintenance_request_reports.xml",
+      "detail_json": "details/reports__maintenance_request_reports.xml.json",
+      "type": "xml",
+      "bucket": "reports",
+      "summary": "13 templates"
+    },
+    {
+      "file": "reports/outside_service_report.xml",
+      "detail_json": "details/reports__outside_service_report.xml.json",
+      "type": "xml",
+      "bucket": "reports",
+      "summary": "1 templates"
+    },
+    {
+      "file": "security/0502_security.xml",
+      "detail_json": "details/security__0502_security.xml.json",
+      "type": "xml",
+      "bucket": "security",
+      "summary": "24 functions/rules"
+    },
+    {
+      "file": "security/ir.model.access.csv",
+      "detail_json": "details/security__ir.model.access.csv.json",
+      "type": "security_csv",
+      "bucket": "security",
+      "summary": "20 access rules"
+    },
+    {
+      "file": "tests/__init__.py",
+      "detail_json": "details/tests____init__.py.json",
+      "type": "python",
+      "bucket": "tests",
+      "summary": "Python source file."
+    },
+    {
+      "file": "tests/test_0502_flow.py",
+      "detail_json": "details/tests__test_0502_flow.py.json",
+      "type": "python",
+      "bucket": "tests",
+      "summary": "1 classes; 0 fields"
+    },
+    {
+      "file": "views/hr_department_views.xml",
+      "detail_json": "details/views__hr_department_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "1 views"
+    },
+    {
+      "file": "views/maintenance_equipment_views.xml",
+      "detail_json": "details/views__maintenance_equipment_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "5 views"
+    },
+    {
+      "file": "views/maintenance_request_views.xml",
+      "detail_json": "details/views__maintenance_request_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "3 views, 14 actions, 14 menus"
+    },
+    {
+      "file": "views/maintenance_team_views.xml",
+      "detail_json": "details/views__maintenance_team_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "3 views"
+    },
+    {
+      "file": "views/outside_service_request_views.xml",
+      "detail_json": "details/views__outside_service_request_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "3 views, 1 actions, 1 menus"
+    },
+    {
+      "file": "views/project_task_views.xml",
+      "detail_json": "details/views__project_task_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "3 views, 1 actions, 1 menus"
+    },
+    {
+      "file": "views/purchase_order_views.xml",
+      "detail_json": "details/views__purchase_order_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "3 views"
+    },
+    {
+      "file": "views/stock_picking_views.xml",
+      "detail_json": "details/views__stock_picking_views.xml.json",
+      "type": "xml",
+      "bucket": "views",
+      "summary": "2 views"
+    },
+    {
+      "file": "wizards/__init__.py",
+      "detail_json": "details/wizards____init__.py.json",
+      "type": "python",
+      "bucket": "wizards",
+      "summary": "Python source file."
+    },
+    {
+      "file": "wizards/document_pack_wizard.py",
+      "detail_json": "details/wizards__document_pack_wizard.py.json",
+      "type": "python",
+      "bucket": "wizards",
+      "summary": "models: x_psm_0502_document_pack_wizard; 1 classes; 6 fields; 1 actions"
+    },
+    {
+      "file": "wizards/document_pack_wizard_views.xml",
+      "detail_json": "details/wizards__document_pack_wizard_views.xml.json",
+      "type": "xml",
+      "bucket": "wizards",
+      "summary": "1 views"
+    }
+  ]
+}

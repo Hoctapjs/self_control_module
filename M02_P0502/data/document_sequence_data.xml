@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- sequence rieng cho ma request 0502 -->
+    <record id="psm_0502_request_sequence" model="ir.sequence">
+        <field name="name">0502 Maintenance Request</field>
+        <field name="code">psm.maintenance.request</field>
+        <field name="prefix">0502/REQ/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <record id="psm_0502_inspection_sequence" model="ir.sequence">
+        <field name="name">0502 Inspection Report</field>
+        <field name="code">psm.inspection.report</field>
+        <field name="prefix">0502/INS/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <record id="psm_0502_proposal_sequence" model="ir.sequence">
+        <field name="name">0502 Treatment Proposal</field>
+        <field name="code">psm.proposal.document</field>
+        <field name="prefix">0502/PRO/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <record id="psm_0502_material_issue_sequence" model="ir.sequence">
+        <field name="name">0502 Material Issue Request</field>
+        <field name="code">psm.material.issue.request</field>
+        <field name="prefix">0502/MAT/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <record id="psm_0502_acceptance_sequence" model="ir.sequence">
+        <field name="name">0502 Acceptance Record</field>
+        <field name="code">psm.acceptance.record</field>
+        <field name="prefix">0502/ACC/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+</odoo>

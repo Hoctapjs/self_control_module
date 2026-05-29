@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Map existing GDH roles to the PAF roles that are safely derivable from M02_P0200. -->
+    <record id="M02_P0200.GDH_RST_OPS_OC_S" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('M09_0901.MKT_0901_ops_evaluator'))]"/>
+    </record>
+
+    <record id="M02_P0200.GDH_RST_OPS_OM_M" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('M09_0901.MKT_0901_approver_head'))]"/>
+    </record>
+
+    <record id="M02_P0200.GDH_RST_MGMT_MANAGER_M" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('M09_0901.MKT_0901_clevel_approver'))]"/>
+    </record>
+
+    <record id="M02_P0200.GDH_RST_SYSTEM_ST_M" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('M09_0901.MKT_0901_admin'))]"/>
+    </record>
+</odoo>

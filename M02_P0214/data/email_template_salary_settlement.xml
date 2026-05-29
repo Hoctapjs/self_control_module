@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="email_template_salary_settlement" model="mail.template">
+            <field name="name">RST - Quyết toán lương</field>
+            <field name="model_id" ref="approvals.model_approval_request"/>
+            <field name="subject">[RST] {{ 'Nhắc nộp bản ký quyết toán lương' if ctx.get('is_reminder') else 'File quyết toán lương của bạn' }}</field>
+            <field name="email_from">{{ (user.email or user.company_id.email) }}</field>
+            <field name="body_html" type="html">
+                <div style="margin:0;padding:24px 0;background-color:#f5f2ea;font-family:'Segoe UI',Arial,sans-serif;color:#2f2a26;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f5f2ea" style="border-collapse:collapse;background-color:#f5f2ea;">
+                        <tr>
+                            <td align="center">
+                                <table border="0" cellpadding="0" cellspacing="0" width="640" bgcolor="#fffdf9" style="width:640px;max-width:640px;background-color:#fffdf9;border:1px solid #eadfce;border-radius:16px;overflow:hidden;">
+                                    <tr>
+                                        <td bgcolor="#8f2635" style="padding:26px 32px;background-color:#8f2635;">
+                                            <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#ffe6a8;font-weight:700;margin-bottom:8px;">RST Salary Settlement</div>
+                                            <h1 style="margin:0;font-size:26px;line-height:1.25;color:#ffffff;font-weight:800;">
+                                                <t t-if="ctx.get('is_reminder')">Nhắc nộp bản ký quyết toán</t>
+                                                <t t-else="">Quyết toán lương</t>
+                                            </h1>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:28px 32px 18px 32px;">
+                                            <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;">Chào <strong><t t-out="object.employee_id.name"/></strong>,</p>
+                                            <t t-if="ctx.get('is_reminder')">
+                                                <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">Hệ thống ghi nhận bạn chưa upload bản quyết toán lương đã ký trên Portal.</p>
+                                            </t>
+                                            <t t-else="">
+                                                <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">Phòng Nhân sự gửi bạn file quyết toán lương đính kèm trong email này.</p>
+                                            </t>
+                                            <p style="margin:0;font-size:15px;line-height:1.7;">Vui lòng tải file, in và ký, sau đó scan/upload bản đã ký tại Portal.</p>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="object.x_psm_0214_al_has_advance">
+                                        <td style="padding:0 32px 18px 32px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;background-color:#fff6ed;border:1px solid #f0c9a8;border-radius:12px;">
+                                                <tr>
+                                                    <td style="padding:16px 18px;">
+                                                        <div style="font-size:14px;font-weight:800;color:#8f2635;margin-bottom:8px;">Kh&#7845;u tr&#7915; ph&#233;p n&#259;m &#7913;ng tr&#432;&#7899;c</div>
+                                                        <p style="margin:0 0 6px 0;font-size:14px;line-height:1.6;color:#2f2a26;">S&#7889; ng&#224;y &#7913;ng tr&#432;&#7899;c: <strong><t t-out="'%.2f' % object.x_psm_0214_al_advance_days"/></strong> ng&#224;y</p>
+                                                        <p style="margin:0;font-size:14px;line-height:1.6;color:#2f2a26;">S&#7889; ti&#7873;n kh&#7845;u tr&#7915;:
+                                                            <strong>
+                                                                <t t-out="object.x_psm_0214_al_deduction_amount" t-options="{'widget': 'monetary', 'display_currency': object.x_psm_0214_al_deduction_currency_id}"/>
+                                                            </strong>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="padding:4px 32px 30px 32px;">
+                                            <a t-att-href="ctx.get('portal_url') or object._get_0214_portal_resignation_url()" style="display:inline-block;background-color:#8f2635;color:#ffffff;text-decoration:none;border-radius:999px;padding:13px 22px;font-size:14px;font-weight:800;">Mở trang nghỉ việc</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f7f2e8" style="padding:16px 32px;background-color:#f7f2e8;border-top:1px solid #eadfce;">
+                                            <p style="margin:0;font-size:12px;line-height:1.6;color:#7b7269;">Email này được gửi tự động từ quy trình offboarding RST.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

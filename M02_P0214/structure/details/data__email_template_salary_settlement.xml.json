@@ -1,0 +1,29 @@
+{
+  "file": "data/email_template_salary_settlement.xml",
+  "type": "xml",
+  "bucket": "data",
+  "summary": "XML data file.",
+  "records": [
+    {
+      "id": "email_template_salary_settlement",
+      "model": "mail.template",
+      "fields": {
+        "name": "RST - Quyết toán lương",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "subject": "[RST] {{ 'Nhắc nộp bản ký quyết toán lương' if ctx.get('is_reminder') else 'File quyết toán lương của bạn' }}",
+        "email_from": "{{ (user.email or user.company_id.email) }}",
+        "body_html": ""
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "mail.template"
+  ]
+}

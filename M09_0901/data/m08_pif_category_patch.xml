@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <function name="write" model="approval.category">
+        <value model="approval.category" search="[('id', '=', ref('M08_P0801.approval_category_data_pif'))]"/>
+        <value eval="{'x_psm_0801_is_pif': True}"/>
+    </function>
+</odoo>

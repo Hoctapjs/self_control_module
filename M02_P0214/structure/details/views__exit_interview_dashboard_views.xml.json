@@ -1,0 +1,117 @@
+{
+  "file": "views/exit_interview_dashboard_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "4 views, 1 actions, 1 menus",
+  "records": [
+    {
+      "id": "view_psm_exit_interview_report_graph",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "x_psm_0214.exit.interview.report.graph",
+        "model": "x_psm_0214_exit_interview_report",
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_exit_interview_report_pivot",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "x_psm_0214.exit.interview.report.pivot",
+        "model": "x_psm_0214_exit_interview_report",
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_exit_interview_report_tree",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "x_psm_0214.exit.interview.report.tree",
+        "model": "x_psm_0214_exit_interview_report",
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_exit_interview_report_search",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "x_psm_0214.exit.interview.report.search",
+        "model": "x_psm_0214_exit_interview_report",
+        "arch": ""
+      }
+    },
+    {
+      "id": "action_psm_exit_interview_dashboard",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "Exit Interview Dashboard",
+        "res_model": "x_psm_0214_exit_interview_report",
+        "view_mode": "graph,pivot,list",
+        "views": {
+          "eval": "[             (ref('view_psm_exit_interview_report_graph'), 'graph'),             (ref('view_psm_exit_interview_report_pivot'), 'pivot'),             (ref('view_psm_exit_interview_report_tree'), 'list')         ]"
+        },
+        "search_view_id": {
+          "ref": "view_psm_exit_interview_report_search"
+        },
+        "context": "{'search_default_groupby_reason': 1}"
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_exit_interview_report_graph",
+      "model": "x_psm_0214_exit_interview_report",
+      "name": "x_psm_0214.exit.interview.report.graph",
+      "inherit_id": null,
+      "file": "views/exit_interview_dashboard_views.xml"
+    },
+    {
+      "id": "view_psm_exit_interview_report_pivot",
+      "model": "x_psm_0214_exit_interview_report",
+      "name": "x_psm_0214.exit.interview.report.pivot",
+      "inherit_id": null,
+      "file": "views/exit_interview_dashboard_views.xml"
+    },
+    {
+      "id": "view_psm_exit_interview_report_tree",
+      "model": "x_psm_0214_exit_interview_report",
+      "name": "x_psm_0214.exit.interview.report.tree",
+      "inherit_id": null,
+      "file": "views/exit_interview_dashboard_views.xml"
+    },
+    {
+      "id": "view_psm_exit_interview_report_search",
+      "model": "x_psm_0214_exit_interview_report",
+      "name": "x_psm_0214.exit.interview.report.search",
+      "inherit_id": null,
+      "file": "views/exit_interview_dashboard_views.xml"
+    }
+  ],
+  "actions": [
+    {
+      "id": "action_psm_exit_interview_dashboard",
+      "name": "Exit Interview Dashboard",
+      "res_model": "x_psm_0214_exit_interview_report",
+      "view_mode": "graph,pivot,list",
+      "domain": null,
+      "file": "views/exit_interview_dashboard_views.xml"
+    }
+  ],
+  "menus": [
+    {
+      "id": "menu_psm_exit_interview_dashboard",
+      "name": "Exit Interview Dashboard",
+      "parent": "menu_psm_rst_reports",
+      "action": "action_psm_exit_interview_dashboard",
+      "groups": "M02_P0200.GDH_RST_HR_HRBP_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M",
+      "file": "views/exit_interview_dashboard_views.xml"
+    }
+  ],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.actions.act_window",
+    "ir.ui.view",
+    "x_psm_0214_exit_interview_report"
+  ]
+}

@@ -1,0 +1,989 @@
+{
+  "file": "models/resignation_request.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: approval.category, approval.request; 2 classes; 31 fields; 13 actions",
+  "classes": [
+    {
+      "python_class": "ApprovalCategory",
+      "description": "Extends approval.category in models/resignation_request.py.",
+      "model": null,
+      "inherit": "approval.category",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_0213_is_offboarding",
+          "type": "Boolean",
+          "string": "Is Offboarding",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": "Đánh dấu category này là yêu cầu nghỉ việc (offboarding)"
+        }
+      ],
+      "methods": [
+        {
+          "name": "_check_0213_offboarding_flag_access",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "create",
+          "type": "override",
+          "decorators": [
+            "api.model_create_multi"
+          ],
+          "summary": "override"
+        },
+        {
+          "name": "write",
+          "type": "override",
+          "decorators": [],
+          "summary": "override"
+        }
+      ],
+      "kind": "inherit_only"
+    },
+    {
+      "python_class": "ResignationRequest",
+      "description": "Extends approval.request in models/resignation_request.py.",
+      "model": null,
+      "inherit": "approval.request",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_0213_resignation_reason",
+          "type": "Text",
+          "string": "Lý do nghỉ việc",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_resignation_reason_id",
+          "type": "Many2one",
+          "string": "Loại nghỉ việc",
+          "comodel": "hr.departure.reason",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_resignation_date",
+          "type": "Date",
+          "string": "Ngày nghỉ dự kiến",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_official_resignation_date",
+          "type": "Date",
+          "string": "Ngày nghỉ việc chính thức",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_0213_official_resignation_date",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Ngày làm việc cuối cùng chính thức. Mặc định = 'Ngày nghỉ dự kiến', HR sửa được. Khi duyệt đơn sẽ ghi vào contract_date_end của nhân viên để chấm công (work entry) tự dừng."
+        },
+        {
+          "name": "request_status",
+          "type": "Selection",
+          "string": null,
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_is_rehire",
+          "type": "Boolean",
+          "string": "Tái tuyển",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_is_blacklisted",
+          "type": "Boolean",
+          "string": "Blacklist",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_employee_id",
+          "type": "Many2one",
+          "string": "Nhân viên yêu cầu nghỉ việc",
+          "comodel": "hr.employee",
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_employee_id",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_resignation_employee_name",
+          "type": "Char",
+          "string": "Họ tên nhân viên",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "x_psm_0213_employee_id.name",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_resignation_manager_name",
+          "type": "Char",
+          "string": "Line Manager",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "x_psm_0213_employee_id.parent_id.name",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_resignation_department",
+          "type": "Char",
+          "string": "Phòng ban",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "x_psm_0213_employee_id.department_id.name",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_job_id",
+          "type": "Many2one",
+          "string": "Chức vụ",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "x_psm_0213_employee_id.job_id",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_employee_activity_ids",
+          "type": "Many2many",
+          "string": "Quá trình nghỉ việc",
+          "comodel": "mail.activity",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": "_compute_employee_activity_ids",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_exit_survey_completed",
+          "type": "Boolean",
+          "string": "Đã làm khảo sát",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": false,
+          "related": null,
+          "compute": "_compute_0213_exit_survey_completed",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_all_activities_completed",
+          "type": "Boolean",
+          "string": "Đã hoàn thành mọi công việc",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": false,
+          "related": null,
+          "compute": "_compute_all_activities_completed",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_type_contract",
+          "type": "Char",
+          "string": "Loại hợp đồng",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": false,
+          "related": null,
+          "compute": "_compute_type_contract",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_is_social_insurance_contract",
+          "type": "Boolean",
+          "string": "Di luong BHXH",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": false,
+          "related": null,
+          "compute": "_compute_is_social_insurance_contract",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_resignation_owner_email",
+          "type": "Char",
+          "string": "Email người yêu cầu",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "request_owner_id.email",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_is_plan_launched",
+          "type": "Boolean",
+          "string": "Đã Launch Plan",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_adecco_notification_sent",
+          "type": "Boolean",
+          "string": "Đã gửi Adecco",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_exit_survey_user_input_id",
+          "type": "Many2one",
+          "string": "Exit Survey User Input",
+          "comodel": "survey.user_input",
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Lưu user_input đã dùng để gửi email khảo sát nghỉ việc, portal sẽ dùng chính link này."
+        },
+        {
+          "name": "x_psm_0200_remaining_al_days",
+          "type": "Float",
+          "string": "Remaining Annual Leave Days",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "x_psm_0213_employee_id.x_psm_0200_remaining_al_days",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Số phép năm hiện tại của nhân viên (đọc từ hr.employee). Lưu ý: KHÔNG phải snapshot lịch sử của đơn — giá trị thay đổi theo trạng thái phép hiện tại của nhân viên."
+        },
+        {
+          "name": "x_psm_0213_al_advance_days",
+          "type": "Float",
+          "string": "Advance Annual Leave Days",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_0213_al_advance",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "So ngay phep nam da ung truoc (phan am cua so du phep). Se bi quy doi va tru vao luong quyet toan."
+        },
+        {
+          "name": "x_psm_0213_al_has_advance",
+          "type": "Boolean",
+          "string": "Has Advance Annual Leave",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_0213_al_advance",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_al_deduction_currency_id",
+          "type": "Many2one",
+          "string": "AL Deduction Currency",
+          "comodel": "res.currency",
+          "required": false,
+          "readonly": false,
+          "store": true,
+          "related": null,
+          "compute": "_compute_0213_al_deduction_currency",
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_al_deduction_rate",
+          "type": "Monetary",
+          "string": "AL Deduction Rate (per day)",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Don gia moi ngay phep am. Finance/HR nhap tay."
+        },
+        {
+          "name": "x_psm_0213_al_deduction_amount",
+          "type": "Monetary",
+          "string": "AL Deduction Amount",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": "Tong tien tru luong cho phep ung truoc. Goi y = so ngay am x don gia; cho phep sua tay."
+        },
+        {
+          "name": "x_psm_0213_al_deduction_note",
+          "type": "Text",
+          "string": "AL Deduction Note",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0213_al_settled",
+          "type": "Boolean",
+          "string": "Advance AL Settled",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": false,
+          "tracking": null,
+          "help": "Danh dau phan phep ung truoc da duoc Finance/HR chot quy doi."
+        },
+        {
+          "name": "x_psm_0213_owner_related_activity_ids",
+          "type": "Many2many",
+          "string": "Hoạt động liên quan (Res Name)",
+          "comodel": "mail.activity",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": "x_psm_0213_employee_activity_ids",
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [
+        {
+          "name": "_get_0213_company",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_social_insurance_contract_type_ids",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_al_leave_types",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_remaining_al",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_is_0213_social_insurance_contract",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_reminder_overdue_days",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_reminder_extension_days",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_exit_survey_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_adecco_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_social_insurance_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_employee_reminder_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_department_reminder_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_completion_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_employee_approved_template",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_activity_template_summaries",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_filter_0213_offboarding_activities",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_default_responsible_user",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_resignation_category",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_exit_survey",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_is_0213_offboarding_request",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_ensure_0213_offboarding_request",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_check_0213_official_resignation_date",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Chan duyet neu ngay nghi chinh thuc som hon ngay bat dau hop dong."
+        },
+        {
+          "name": "_push_0213_contract_end_date",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Ghi ngay nghi viec chinh thuc vao contract_date_end cua version hien tai."
+        },
+        {
+          "name": "_write_0213_contract_date_end",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_apply_0213_native_departure",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Ghi nhan nghi viec theo co che native va archive ho so nhan vien."
+        },
+        {
+          "name": "_get_0213_employee_email",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_is_matching_0213_survey_user_input",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_or_create_0213_survey_user_input",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_0213_exit_survey_user_inputs",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_check_0213_group_access",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_overdue_activities_by_request",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_group_activities_by_user",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "action_withdraw",
+          "type": "action",
+          "decorators": [],
+          "summary": "Override action_withdraw to prevent withdrawing Resignation requests\nafter they have been approved or refused."
+        },
+        {
+          "name": "action_cancel",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "action_send_adecco_notification",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_compute_type_contract",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0213_employee_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_is_social_insurance_contract",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0213_employee_id",
+                "x_psm_0213_type_contract"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_all_activities_completed",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0213_employee_id",
+                "x_psm_0213_employee_activity_ids",
+                "x_psm_0213_is_plan_launched"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "action_send_social_insurance",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_compute_0213_exit_survey_completed",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "request_owner_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "Check if request_owner has completed exit interview survey"
+        },
+        {
+          "name": "action_view_survey_results",
+          "type": "action",
+          "decorators": [],
+          "summary": "Open the survey.user_input form for the completed exit survey."
+        },
+        {
+          "name": "_compute_owner_related_activity_ids",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0213_employee_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_employee_activity_ids",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0213_employee_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "Compute activities (active + done) on approval.request and hr.employee"
+        },
+        {
+          "name": "_compute_employee_id",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "request_owner_id",
+                "partner_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_0213_official_resignation_date",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0213_resignation_date"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "Mac dinh = ngay nghi du kien, khong ghi de gia tri HR da sua."
+        },
+        {
+          "name": "_compute_0213_al_advance",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "x_psm_0213_employee_id.x_psm_0200_remaining_al_days"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_compute_0213_al_deduction_currency",
+          "type": "compute",
+          "decorators": [
+            {
+              "call": "api.depends",
+              "args": [
+                "company_id"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "compute"
+        },
+        {
+          "name": "_onchange_0213_al_deduction_amount",
+          "type": "onchange",
+          "decorators": [
+            {
+              "call": "api.onchange",
+              "args": [
+                "x_psm_0213_al_deduction_rate",
+                "x_psm_0213_al_advance_days"
+              ],
+              "keywords": {}
+            }
+          ],
+          "summary": "onchange"
+        },
+        {
+          "name": "write",
+          "type": "override",
+          "decorators": [],
+          "summary": "override"
+        },
+        {
+          "name": "action_approve",
+          "type": "action",
+          "decorators": [],
+          "summary": "Override: Xử lý khi duyệt yêu cầu nghỉ việc"
+        },
+        {
+          "name": "_schedule_offboarding_activities",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Tự động tạo activities từ offboarding plan khi Manager approve."
+        },
+        {
+          "name": "action_launch_plan",
+          "type": "action",
+          "decorators": [],
+          "summary": "Mở wizard Launch Plan với context là hr.employee"
+        },
+        {
+          "name": "action_send_exit_survey",
+          "type": "action",
+          "decorators": [],
+          "summary": "Override: Gửi email chứa link khảo sát Exit Interview (Template M14)"
+        },
+        {
+          "name": "action_done",
+          "type": "action",
+          "decorators": [],
+          "summary": "Hoàn tất quy trình nghỉ việc:\n- Kiểm tra exit_survey_completed và all_activities_completed\n- Chuyển trạng thái sang 'done'\n- Vô hiệu hóa tài khoản portal/internal của nhân viên"
+        },
+        {
+          "name": "action_rehire",
+          "type": "action",
+          "decorators": [],
+          "summary": "Đánh dấu nhân viên được tái tuyển dụng."
+        },
+        {
+          "name": "action_blacklist",
+          "type": "action",
+          "decorators": [],
+          "summary": "Đánh dấu nhân viên vào danh sách đen."
+        },
+        {
+          "name": "_action_settle_0213_advance_al",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "action_settle_advance_al",
+          "type": "action",
+          "decorators": [],
+          "summary": "action"
+        },
+        {
+          "name": "_cron_send_offboarding_reminders",
+          "type": "helper",
+          "decorators": [
+            "api.model"
+          ],
+          "summary": "RST Reminders & Automatic Deadline Extensions:\n1. Tìm các đơn RST trạng thái 'Approved'.\n2. Tìm các công việc (mail.activity) của đơn đó bị trễ hạn hơn 3 ngày.\n3. Phân loại người phụ trách:\n   - Nếu là Nhân viên (Owner): Gửi template Employee.\n   - Nếu là IT/Admin/HR/Manager: Gửi template Dept.\n4. Tự động cộng thêm 4 ngày vào Due Date cho các công việc này."
+        },
+        {
+          "name": "action_manual_reminder_extension",
+          "type": "action",
+          "decorators": [],
+          "summary": "Kích hoạt thủ công việc nhắc nhở và gia hạn cho ĐƠN NÀY"
+        }
+      ],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

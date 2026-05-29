@@ -1,0 +1,101 @@
+{
+  "file": "views/resignation_request_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "3 views, 1 actions, 1 menus",
+  "records": [
+    {
+      "id": "view_psm_approval_request_resignation_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "approval.request.resignation.form",
+        "model": "approval.request",
+        "inherit_id": {
+          "ref": "approvals.approval_request_view_form"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_approval_request_resignation_tree",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "approval.request.resignation.tree",
+        "model": "approval.request",
+        "inherit_id": {
+          "ref": "approvals.approval_request_view_tree"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_resignation_type_tree",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "resignation.type.tree",
+        "model": "x_psm_resignation_type",
+        "arch": ""
+      }
+    },
+    {
+      "id": "action_psm_resignation_type",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "Resignation Type",
+        "res_model": "x_psm_resignation_type",
+        "view_mode": "list,form"
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_approval_request_resignation_form",
+      "model": "approval.request",
+      "name": "approval.request.resignation.form",
+      "inherit_id": "approvals.approval_request_view_form",
+      "file": "views/resignation_request_views.xml"
+    },
+    {
+      "id": "view_psm_approval_request_resignation_tree",
+      "model": "approval.request",
+      "name": "approval.request.resignation.tree",
+      "inherit_id": "approvals.approval_request_view_tree",
+      "file": "views/resignation_request_views.xml"
+    },
+    {
+      "id": "view_psm_resignation_type_tree",
+      "model": "x_psm_resignation_type",
+      "name": "resignation.type.tree",
+      "inherit_id": null,
+      "file": "views/resignation_request_views.xml"
+    }
+  ],
+  "actions": [
+    {
+      "id": "action_psm_resignation_type",
+      "name": "Resignation Type",
+      "res_model": "x_psm_resignation_type",
+      "view_mode": "list,form",
+      "domain": null,
+      "file": "views/resignation_request_views.xml"
+    }
+  ],
+  "menus": [
+    {
+      "id": "menu_psm_resignation_type_config",
+      "name": "Resignation Type",
+      "parent": "approvals.approvals_menu_config",
+      "action": "action_psm_resignation_type",
+      "groups": "M02_P0200.GDH_RST_HR_ADMIN_M,M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M",
+      "file": "views/resignation_request_views.xml"
+    }
+  ],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "approval.request",
+    "ir.actions.act_window",
+    "ir.ui.view",
+    "x_psm_resignation_type"
+  ]
+}

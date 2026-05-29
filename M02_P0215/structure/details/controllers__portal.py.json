@@ -1,0 +1,414 @@
+{
+  "file": "controllers/portal.py",
+  "type": "python",
+  "bucket": "controllers",
+  "summary": "1 classes; 0 fields",
+  "classes": [
+    {
+      "python_class": "DisciplinePortal",
+      "description": "Python helper class DisciplinePortal.",
+      "model": null,
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "_x_psm_employee_model",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_record_model",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_empty_records",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_to_int",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_redirect_record",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_has_portal_signature",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_get_employee_from_user",
+          "type": "helper",
+          "decorators": [],
+          "summary": "Helper method to find the employee linked to the current user.\nPriority 1: Linked via user_id field in hr.employee\nPriority 2: Matched via work_email == user.login (or user.email)"
+        },
+        {
+          "name": "_x_psm_get_subordinates",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_get_employee_level",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_is_manager_employee",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_can_view_record",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_can_finalize_record",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_get_record_from_post",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_x_psm_portal_domain",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_prepare_portal_layout_values",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "home",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my",
+                  "/my/home"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "_prepare_home_portal_values",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "portal_psm_my_disciplines",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/disciplines",
+                  "/my/disciplines/page/<int:page>"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "portal_psm_discipline_create",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/discipline/create"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true,
+                "methods": [
+                  "GET",
+                  "POST"
+                ]
+              }
+            }
+          ],
+          "summary": "Manager creates a new Counseling Log from Portal"
+        },
+        {
+          "name": "portal_discipline_view",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/discipline/<int:x_psm_record_id>"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true
+              }
+            }
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "portal_discipline_submit_section_ii",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/discipline/submit_section_ii"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true,
+                "methods": [
+                  "POST"
+                ]
+              }
+            }
+          ],
+          "summary": "Legacy fallback: Employee submits Section II and Signature"
+        },
+        {
+          "name": "portal_discipline_manager_finalize",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/discipline/manager_finalize"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true,
+                "methods": [
+                  "POST"
+                ]
+              }
+            }
+          ],
+          "summary": "Legacy fallback: Manager submits Section III, IV and Signature"
+        },
+        {
+          "name": "portal_discipline_rgm_action",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                [
+                  "/my/discipline/rgm_action"
+                ]
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "website": true,
+                "methods": [
+                  "POST"
+                ]
+              }
+            }
+          ],
+          "summary": "RGM makes decisions on Portal"
+        },
+        {
+          "name": "portal_discipline_respond",
+          "type": "method",
+          "decorators": [
+            {
+              "call": "http.route",
+              "args": [
+                "/my/discipline/respond"
+              ],
+              "keywords": {
+                "type": "http",
+                "auth": "user",
+                "methods": [
+                  "POST"
+                ],
+                "website": true
+              }
+            }
+          ],
+          "summary": "Bước 9: Nhân viên Chấp nhận hoặc Từ chối hình thức kỷ luật"
+        }
+      ],
+      "kind": "python_class"
+    }
+  ],
+  "routes": [
+    {
+      "method": "home",
+      "route": [
+        [
+          "/my",
+          "/my/home"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_psm_my_disciplines",
+      "route": [
+        [
+          "/my/disciplines",
+          "/my/disciplines/page/<int:page>"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_psm_discipline_create",
+      "route": [
+        [
+          "/my/discipline/create"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true,
+        "methods": [
+          "GET",
+          "POST"
+        ]
+      }
+    },
+    {
+      "method": "portal_discipline_view",
+      "route": [
+        [
+          "/my/discipline/<int:x_psm_record_id>"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true
+      }
+    },
+    {
+      "method": "portal_discipline_submit_section_ii",
+      "route": [
+        [
+          "/my/discipline/submit_section_ii"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true,
+        "methods": [
+          "POST"
+        ]
+      }
+    },
+    {
+      "method": "portal_discipline_manager_finalize",
+      "route": [
+        [
+          "/my/discipline/manager_finalize"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true,
+        "methods": [
+          "POST"
+        ]
+      }
+    },
+    {
+      "method": "portal_discipline_rgm_action",
+      "route": [
+        [
+          "/my/discipline/rgm_action"
+        ]
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "website": true,
+        "methods": [
+          "POST"
+        ]
+      }
+    },
+    {
+      "method": "portal_discipline_respond",
+      "route": [
+        "/my/discipline/respond"
+      ],
+      "options": {
+        "type": "http",
+        "auth": "user",
+        "methods": [
+          "POST"
+        ],
+        "website": true
+      }
+    }
+  ]
+}

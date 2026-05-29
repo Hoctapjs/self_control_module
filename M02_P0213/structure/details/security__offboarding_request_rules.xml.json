@@ -1,0 +1,227 @@
+{
+  "file": "security/offboarding_request_rules.xml",
+  "type": "xml",
+  "bucket": "security",
+  "summary": "6 functions/rules",
+  "records": [
+    {
+      "id": "rule_0213_approval_request_ops_read",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0213 approval.request OPS read scope",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_OPS_OC_S'),                     ref('M02_P0200.GDH_RST_OPS_OM_M')                 ])             ]"
+        },
+        "domain_force": "[('category_id.x_psm_0213_is_offboarding', '=', True)]",
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_0213_approval_request_hr_read",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0213 approval.request HR read scope",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_HR_ADMIN_S'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_S'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": "[('category_id.x_psm_0213_is_offboarding', '=', True)]",
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_0213_approval_request_hr_write",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0213 approval.request HR write scope",
+        "model_id": {
+          "ref": "approvals.model_approval_request"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_HR_ADMIN_S'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": "[('category_id.x_psm_0213_is_offboarding', '=', True)]",
+        "perm_read": {
+          "eval": "False"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_0213_approval_approver_scope_read",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0213 approval.approver scope read",
+        "model_id": {
+          "ref": "approvals.model_approval_approver"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_OPS_OC_S'),                     ref('M02_P0200.GDH_RST_OPS_OM_M'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_S'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_S'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": "[('request_id.category_id.x_psm_0213_is_offboarding', '=', True)]",
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_0213_mail_activity_scope_read",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0213 mail.activity scope read",
+        "model_id": {
+          "ref": "mail.model_mail_activity"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_OPS_OC_S'),                     ref('M02_P0200.GDH_RST_OPS_OM_M'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_S'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HRBP_S'),                     ref('M02_P0200.GDH_RST_HR_HRBP_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": "[('x_psm_0213_is_offboarding_activity', '=', True)]",
+        "perm_read": {
+          "eval": "True"
+        },
+        "perm_write": {
+          "eval": "False"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    },
+    {
+      "id": "rule_0213_mail_activity_hr_write",
+      "model": "ir.rule",
+      "fields": {
+        "name": "0213 mail.activity HR write scope",
+        "model_id": {
+          "ref": "mail.model_mail_activity"
+        },
+        "groups": {
+          "eval": "[                 (6, 0, [                     ref('M02_P0200.GDH_RST_HR_ADMIN_S'),                     ref('M02_P0200.GDH_RST_HR_ADMIN_M'),                     ref('M02_P0200.GDH_RST_HR_HEAD_M'),                     ref('M02_P0200.GDH_RST_SYSTEM_ST_M')                 ])             ]"
+        },
+        "domain_force": "[('x_psm_0213_is_offboarding_activity', '=', True)]",
+        "perm_read": {
+          "eval": "False"
+        },
+        "perm_write": {
+          "eval": "True"
+        },
+        "perm_create": {
+          "eval": "False"
+        },
+        "perm_unlink": {
+          "eval": "False"
+        }
+      }
+    }
+  ],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "templates": [],
+  "functions": [
+    {
+      "kind": "record_rule",
+      "id": "rule_0213_approval_request_ops_read",
+      "name": "0213 approval.request OPS read scope",
+      "model_ref": {
+        "ref": "approvals.model_approval_request"
+      },
+      "domain": "[('category_id.x_psm_0213_is_offboarding', '=', True)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_0213_approval_request_hr_read",
+      "name": "0213 approval.request HR read scope",
+      "model_ref": {
+        "ref": "approvals.model_approval_request"
+      },
+      "domain": "[('category_id.x_psm_0213_is_offboarding', '=', True)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_0213_approval_request_hr_write",
+      "name": "0213 approval.request HR write scope",
+      "model_ref": {
+        "ref": "approvals.model_approval_request"
+      },
+      "domain": "[('category_id.x_psm_0213_is_offboarding', '=', True)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_0213_approval_approver_scope_read",
+      "name": "0213 approval.approver scope read",
+      "model_ref": {
+        "ref": "approvals.model_approval_approver"
+      },
+      "domain": "[('request_id.category_id.x_psm_0213_is_offboarding', '=', True)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_0213_mail_activity_scope_read",
+      "name": "0213 mail.activity scope read",
+      "model_ref": {
+        "ref": "mail.model_mail_activity"
+      },
+      "domain": "[('x_psm_0213_is_offboarding_activity', '=', True)]"
+    },
+    {
+      "kind": "record_rule",
+      "id": "rule_0213_mail_activity_hr_write",
+      "name": "0213 mail.activity HR write scope",
+      "model_ref": {
+        "ref": "mail.model_mail_activity"
+      },
+      "domain": "[('x_psm_0213_is_offboarding_activity', '=', True)]"
+    }
+  ],
+  "referenced_models": [
+    "ir.rule"
+  ]
+}

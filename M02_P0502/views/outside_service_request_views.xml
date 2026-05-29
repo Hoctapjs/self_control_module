@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_psm_outside_service_request_list" model="ir.ui.view">
+        <field name="name">psm.outside.service.request.list</field>
+        <field name="model">x_psm_outside_service_request</field>
+        <field name="arch" type="xml">
+            <list string="0502 Outside Service Requests">
+                <field name="name"/>
+                <field name="x_psm_request_id"/>
+                <field name="x_psm_department_id"/>
+                <field name="x_psm_equipment_id"/>
+                <field name="x_psm_vendor_id"/>
+                <field name="x_psm_service_type"/>
+                <field name="x_psm_vendor_quote_amount"/>
+                <field name="x_psm_expected_complete_date"/>
+                <field name="x_psm_state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_psm_outside_service_request_form" model="ir.ui.view">
+        <field name="name">psm.outside.service.request.form</field>
+        <field name="model">x_psm_outside_service_request</field>
+        <field name="arch" type="xml">
+            <form string="0502 Outside Service Request">
+                <header>
+                    <button
+                        name="action_psm_send_to_vendor"
+                        string="Send to Vendor"
+                        type="object"
+                        class="btn-primary"
+                        groups="M02_P0502.group_psm_0502_cmt_user"
+                        invisible="x_psm_state != 'draft'"
+                    />
+                    <button
+                        name="action_psm_record_quote"
+                        string="Record Quote"
+                        type="object"
+                        class="btn-secondary"
+                        groups="M02_P0502.group_psm_0502_cmt_user"
+                        invisible="x_psm_state not in ('draft', 'sent_to_vendor')"
+                    />
+                    <button
+                        name="action_psm_approve_vendor"
+                        string="Approve Vendor"
+                        type="object"
+                        class="btn-secondary"
+                        groups="M02_P0502.group_psm_0502_store_approver,M02_P0502.group_psm_0502_store_final_approver,M02_P0502.group_psm_0502_manager"
+                        invisible="x_psm_state != 'quoted'"
+                    />
+                    <button
+                        name="action_psm_create_purchase_order"
+                        string="Create Purchase Order"
+                        type="object"
+                        class="btn-secondary"
+                        groups="M02_P0502.group_psm_0502_cmt_lead"
+                        invisible="x_psm_state != 'approved'"
+                    />
+                    <button
+                        name="action_psm_open_purchase_order"
+                        string="Open Purchase Order"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="not x_psm_purchase_order_id"
+                    />
+                    <button
+                        name="action_psm_mark_completed"
+                        string="Mark Completed"
+                        type="object"
+                        class="btn-secondary"
+                        groups="M02_P0502.group_psm_0502_cmt_user"
+                        invisible="x_psm_state not in ('approved', 'in_progress')"
+                    />
+                    <button
+                        name="action_psm_acceptance_review"
+                        string="Acceptance Review"
+                        type="object"
+                        class="btn-secondary"
+                        groups="M02_P0502.group_psm_0502_store_user,M02_P0502.group_psm_0502_cmt_user"
+                        invisible="x_psm_state != 'completed' or not x_psm_acceptance_result"
+                    />
+                    <button
+                        name="action_psm_cancel"
+                        string="Cancel"
+                        type="object"
+                        class="btn-secondary"
+                        groups="M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+                        invisible="x_psm_state in ('accepted', 'cancelled')"
+                    />
+                    <field name="x_psm_state" widget="statusbar" statusbar_visible="draft,sent_to_vendor,quoted,approved,in_progress,completed,accepted"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Request Context">
+                            <field name="x_psm_request_id" readonly="1"/>
+                            <field name="x_psm_department_id" readonly="1"/>
+                            <field name="x_psm_equipment_id" readonly="1"/>
+                            <field name="x_psm_service_type"/>
+                        </group>
+                        <group string="Vendor">
+                            <field name="x_psm_vendor_id"/>
+                            <field name="x_psm_quotation_received" readonly="1"/>
+                            <field name="x_psm_vendor_quote_amount"/>
+                            <field name="x_psm_vendor_quote_currency_id"/>
+                            <field name="x_psm_vendor_lead_time_days"/>
+                            <field name="x_psm_expected_complete_date"/>
+                            <field name="x_psm_purchase_order_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Scope">
+                            <field name="x_psm_scope_of_work" placeholder="Describe the vendor scope of work..."/>
+                        </page>
+                        <page string="Acceptance">
+                            <group>
+                                <field name="x_psm_acceptance_result"/>
+                                <field name="x_psm_acceptance_note" placeholder="Record store/vendor service acceptance notes..."/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_psm_outside_service_request_search" model="ir.ui.view">
+        <field name="name">psm.outside.service.request.search</field>
+        <field name="model">x_psm_outside_service_request</field>
+        <field name="arch" type="xml">
+            <search string="0502 Outside Service Requests">
+                <field name="name"/>
+                <field name="x_psm_request_id"/>
+                <field name="x_psm_vendor_id"/>
+                <field name="x_psm_department_id"/>
+                <filter name="filter_psm_os_draft" string="Draft" domain="[('x_psm_state', '=', 'draft')]"/>
+                <filter name="filter_psm_os_sent" string="Sent to Vendor" domain="[('x_psm_state', '=', 'sent_to_vendor')]"/>
+                <filter name="filter_psm_os_quoted" string="Quoted" domain="[('x_psm_state', '=', 'quoted')]"/>
+                <filter name="filter_psm_os_in_progress" string="In Progress" domain="[('x_psm_state', '=', 'in_progress')]"/>
+                <filter name="filter_psm_os_completed" string="Completed" domain="[('x_psm_state', '=', 'completed')]"/>
+                <filter name="filter_psm_os_accepted" string="Accepted" domain="[('x_psm_state', '=', 'accepted')]"/>
+                <filter name="group_psm_os_state" string="Status" domain="[]" context="{'group_by': 'x_psm_state'}"/>
+                <filter name="group_psm_os_vendor" string="Vendor" domain="[]" context="{'group_by': 'x_psm_vendor_id'}"/>
+                <filter name="group_psm_os_department" string="Department" domain="[]" context="{'group_by': 'x_psm_department_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_psm_0502_outside_service_requests" model="ir.actions.act_window">
+        <field name="name">0502 Outside Services</field>
+        <field name="res_model">x_psm_outside_service_request</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_psm_outside_service_request_search"/>
+        <field name="context">{'search_default_group_psm_os_state': 1}</field>
+    </record>
+
+    <menuitem
+        id="menu_psm_0502_outside_service_requests"
+        name="0502 Outside Services"
+        parent="maintenance.menu_m_request"
+        action="action_psm_0502_outside_service_requests"
+        groups="M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="65"
+    />
+</odoo>

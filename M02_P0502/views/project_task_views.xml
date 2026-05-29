@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ke thua search view cua project.task de phuc vu theo doi tien do xu ly buoc 10 -->
+    <record id="view_psm_project_task_search" model="ir.ui.view">
+        <field name="name">psm.project.task.search</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/field[@name='project_id']" position="after">
+                <field name="x_psm_0502_request_id"/>
+                <field name="x_psm_0502_department_id"/>
+                <field name="x_psm_0502_request_type_id"/>
+                <field name="x_psm_0502_request_source_id"/>
+                <field name="x_psm_0502_source_system"/>
+                <field name="x_psm_0502_inspection_result"/>
+                <field name="x_psm_0502_execution_result"/>
+                <field name="x_psm_0502_time_spent_hours"/>
+                <field name="x_psm_0502_proposal_summary"/>
+            </xpath>
+
+            <xpath expr="//search/filter[@name='open_tasks']" position="after">
+                <separator/>
+                <filter
+                    name="filter_psm_0502_execution_tasks"
+                    string="0502 Execution"
+                    domain="[('x_psm_0502_request_id', '!=', False)]"
+                />
+                <filter
+                    name="filter_psm_0502_execution_open"
+                    string="0502 Open Execution"
+                    domain="[('x_psm_0502_request_id', '!=', False), ('is_closed', '=', False)]"
+                />
+                <filter
+                    name="filter_psm_0502_execution_done"
+                    string="0502 Done Execution"
+                    domain="[('x_psm_0502_request_id', '!=', False), ('is_closed', '=', True)]"
+                />
+                <filter
+                    name="filter_psm_0502_execution_overdue"
+                    string="0502 Overdue"
+                    domain="[('x_psm_0502_request_id', '!=', False), ('is_closed', '=', False), ('date_deadline', '&lt;', 'today')]"
+                />
+            </xpath>
+
+            <xpath expr="//search/group" position="inside">
+                <filter string="Store Department" name="group_psm_task_department" domain="[]" context="{'group_by': 'x_psm_0502_department_id'}"/>
+                <filter string="Request Type" name="group_psm_task_request_type" domain="[]" context="{'group_by': 'x_psm_0502_request_type_id'}"/>
+                <filter string="Request Source" name="group_psm_task_request_source" domain="[]" context="{'group_by': 'x_psm_0502_request_source_id'}"/>
+                <filter string="Source System" name="group_psm_task_source_system" domain="[]" context="{'group_by': 'x_psm_0502_source_system'}"/>
+                <filter string="Initial Inspection Result" name="group_psm_task_inspection_result" domain="[]" context="{'group_by': 'x_psm_0502_inspection_result'}"/>
+                <filter string="Execution Result" name="group_psm_task_execution_result" domain="[]" context="{'group_by': 'x_psm_0502_execution_result'}"/>
+                <filter string="0502 Request" name="group_psm_task_request" domain="[]" context="{'group_by': 'x_psm_0502_request_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ke thua list view de hien thi thong tin can theo doi nhanh -->
+    <record id="view_psm_project_task_list" model="ir.ui.view">
+        <field name="name">psm.project.task.list</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="x_psm_0502_request_id" optional="show"/>
+                <field name="x_psm_0502_department_id" optional="show"/>
+                <field name="x_psm_0502_request_type_id" optional="hide"/>
+                <field name="x_psm_0502_request_source_id" optional="hide"/>
+                <field name="x_psm_0502_source_system" optional="hide"/>
+                <field name="x_psm_0502_inspection_result" optional="hide"/>
+                <field name="x_psm_0502_execution_result" optional="hide"/>
+                <field name="x_psm_0502_time_spent_hours" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ke thua form view FSM task de hien thi nhanh du lieu nguon 0502 -->
+    <record id="view_psm_project_task_form" model="ir.ui.view">
+        <field name="name">psm.project.task.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="industry_fsm.view_task_form2_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='description_page']//field[@name='description']" position="after">
+                <group string="0502 Summary" invisible="not x_psm_0502_request_id">
+                    <field name="x_psm_0502_proposal_summary" readonly="1" widget="text" placeholder="No proposal summary was provided on the source request."/>
+                </group>
+            </xpath>
+
+            <xpath expr="//page[@name='description_page']" position="after">
+                <page string="0502 Context" name="psm_0502_context_page" invisible="not x_psm_0502_request_id">
+                    <group>
+                        <group>
+                            <field name="x_psm_0502_request_id" readonly="1"/>
+                            <field name="x_psm_0502_department_id" readonly="1"/>
+                            <field name="x_psm_0502_request_type_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="x_psm_0502_request_source_id" readonly="1"/>
+                            <field name="x_psm_0502_source_system" readonly="1"/>
+                            <field name="x_psm_0502_inspection_result" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="0502 Summary">
+                        <field name="x_psm_0502_proposal_summary" readonly="1" widget="text" placeholder="No proposal summary was provided on the source request."/>
+                    </group>
+                    <group string="0502 Task Package" invisible="not x_psm_0502_task_template_note and not x_psm_0502_execution_checklist_template and not x_psm_0502_material_package_template">
+                        <field name="x_psm_0502_task_template_note" readonly="1" widget="text" invisible="not x_psm_0502_task_template_note"/>
+                        <field name="x_psm_0502_execution_checklist_template" readonly="1" widget="text" invisible="not x_psm_0502_execution_checklist_template"/>
+                        <field name="x_psm_0502_material_package_template" readonly="1" widget="text" invisible="not x_psm_0502_material_package_template"/>
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//page[@name='psm_0502_context_page']" position="after">
+                <page string="0502 Execution" name="psm_0502_execution_page" invisible="not x_psm_0502_request_id">
+                    <group>
+                        <group>
+                            <field name="x_psm_0502_execution_result"/>
+                            <field name="x_psm_0502_time_spent_hours"/>
+                        </group>
+                        <group>
+                            <field name="x_psm_0502_material_used_note" widget="text" placeholder="Record actual material used during execution..."/>
+                            <field name="x_psm_0502_follow_up_action_note" widget="text" placeholder="Record follow-up actions if the current execution is not final..."/>
+                        </group>
+                    </group>
+                    <group string="Execution Checklist">
+                        <field name="x_psm_0502_execution_checklist_note" widget="text" placeholder="Record the execution steps performed on site..."/>
+                    </group>
+                    <group string="Technical Worksheet">
+                        <field name="x_psm_0502_execution_worksheet_note" widget="text" placeholder="Record technical diagnosis, actual handling, and observations during execution..."/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- action nhanh de theo doi tien do xu ly 0502 bang task fsm -->
+    <record id="action_psm_0502_execution_monitoring" model="ir.actions.act_window">
+        <field name="name">0502 Execution Monitoring</field>
+        <field name="res_model">project.task</field>
+        <field name="view_mode">list,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="domain">[('x_psm_0502_request_id', '!=', False)]</field>
+        <field name="search_view_id" ref="view_psm_project_task_search"/>
+        <field name="context">{
+            'fsm_mode': True,
+            'search_default_filter_psm_0502_execution_open': 1,
+            'search_default_group_psm_task_department': 1
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chua co FSM task nao duoc tao tu quy trinh 0502.
+            </p>
+            <p>
+                Man hinh nay dung de theo doi tien do xu ly cua cac cong viec thuc thi
+                duoc tao tu maintenance request trong quy trinh 0502.
+            </p>
+        </field>
+    </record>
+
+    <!-- menu nhanh trong reporting de xem tien do xu ly -->
+    <menuitem
+        id="menu_psm_0502_execution_monitoring"
+        name="0502 Execution Monitoring"
+        parent="maintenance.menu_m_reports"
+        action="action_psm_0502_execution_monitoring"
+        groups="M02_P0502.group_psm_0502_cmt_user,M02_P0502.group_psm_0502_cmt_lead,M02_P0502.group_psm_0502_manager"
+        sequence="10"
+    />
+</odoo>

@@ -1,0 +1,66 @@
+{
+  "file": "models/x_psm_resignation_type.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: x_psm_resignation_type; 1 classes; 3 fields",
+  "classes": [
+    {
+      "python_class": "ResignationType",
+      "description": "Resignation Type",
+      "model": "x_psm_resignation_type",
+      "inherit": null,
+      "order": "sequence, id",
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "name",
+          "type": "Char",
+          "string": "Resignation Type Name",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "sequence",
+          "type": "Integer",
+          "string": null,
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": 10,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "active",
+          "type": "Boolean",
+          "string": null,
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": true,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

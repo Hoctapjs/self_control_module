@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_psm_0213_department_form_inherit_it_user" model="ir.ui.view">
+        <field name="name">hr.department.form.inherit.psm.0213.it.user</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='store_info']" position="after">
+                <page string="Offboarding Store" name="psm_0213_offboarding_store">
+                    <div class="o_psm_0213_backend_view">
+                        <group string="Cấu Hình Offboarding" col="2">
+                            <group>
+                                <field name="x_psm_0213_it_user_id"
+                                       string="IT Phụ Trách"
+                                       options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

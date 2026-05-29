@@ -1,0 +1,63 @@
+{
+  "file": "views/x_psm_hr_discipline_violation_report_wizard_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "1 views, 1 actions, 1 menus",
+  "records": [
+    {
+      "id": "view_psm_hr_discipline_violation_report_wizard_form",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "hr.discipline.violation.report.wizard.form",
+        "model": "x_psm.hr.discipline.violation.report.wizard",
+        "arch": ""
+      }
+    },
+    {
+      "id": "action_psm_hr_discipline_violation_report",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "Violation Person Count Report",
+        "res_model": "x_psm.hr.discipline.violation.report.wizard",
+        "view_mode": "form",
+        "target": "new"
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_hr_discipline_violation_report_wizard_form",
+      "model": "x_psm.hr.discipline.violation.report.wizard",
+      "name": "hr.discipline.violation.report.wizard.form",
+      "inherit_id": null,
+      "file": "views/x_psm_hr_discipline_violation_report_wizard_views.xml"
+    }
+  ],
+  "actions": [
+    {
+      "id": "action_psm_hr_discipline_violation_report",
+      "name": "Violation Person Count Report",
+      "res_model": "x_psm.hr.discipline.violation.report.wizard",
+      "view_mode": "form",
+      "domain": null,
+      "file": "views/x_psm_hr_discipline_violation_report_wizard_views.xml"
+    }
+  ],
+  "menus": [
+    {
+      "id": "menu_psm_hr_discipline_violation_report",
+      "name": "Violation Person Count Report",
+      "parent": "menu_psm_hr_discipline_root",
+      "action": "action_psm_hr_discipline_violation_report",
+      "groups": "M02_P0200.GDH_OPS_STORE_SM_M,M02_P0200.GDH_OPS_STORE_RGM_M,M02_P0200.GDH_RST_HR_HRBP_S,M02_P0200.GDH_RST_OPS_OC_S,hr.group_hr_manager",
+      "file": "views/x_psm_hr_discipline_violation_report_wizard_views.xml"
+    }
+  ],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "ir.actions.act_window",
+    "ir.ui.view",
+    "x_psm.hr.discipline.violation.report.wizard"
+  ]
+}

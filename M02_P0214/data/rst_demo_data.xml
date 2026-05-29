@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- 1. DEPARTMENTS -->
+        <record id="dept_rst_sales" model="hr.department">
+            <field name="name">RST Sales Department</field>
+        </record>
+        <record id="dept_rst_it" model="hr.department">
+            <field name="name">RST IT Department</field>
+        </record>
+        <record id="dept_rst_admin" model="hr.department">
+            <field name="name">RST Admin Department</field>
+        </record>
+        <record id="dept_rst_hr" model="hr.department">
+            <field name="name">RST HR Department</field>
+        </record>
+
+        <!-- 2. USERS -->
+        <!-- Manager -->
+        <record id="user_rst_manager" model="res.users">
+            <field name="name">RST Manager</field>
+            <field name="login">manager_rst</field>
+            <field name="password">123</field>
+            <field name="email">manager_rst@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('hr.group_hr_manager'), ref('approvals.group_approval_manager')])]"/>
+        </record>
+
+        <!-- Employee -->
+        <record id="user_rst_employee" model="res.users">
+            <field name="name">RST Employee</field>
+            <field name="login">employee_rst</field>
+            <field name="password">123</field>
+            <field name="email">employee_rst@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <!-- Employee with advance annual leave balance -->
+        <record id="user_rst_employee_al_advance" model="res.users">
+            <field name="name">RST Employee Advance AL</field>
+            <field name="login">employee_rst_al_advance</field>
+            <field name="password">123</field>
+            <field name="email">employee_rst_al_advance@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <!-- IT Staff -->
+        <record id="user_rst_it" model="res.users">
+            <field name="name">RST IT Staff</field>
+            <field name="login">it_rst</field>
+            <field name="password">123</field>
+            <field name="email">it_rst@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <!-- Admin Staff -->
+        <record id="user_rst_admin" model="res.users">
+            <field name="name">RST Admin Staff</field>
+            <field name="login">admin_rst</field>
+            <field name="password">123</field>
+            <field name="email">admin_rst@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <!-- HR Staff -->
+        <record id="user_rst_hr" model="res.users">
+            <field name="name">RST HR Staff</field>
+            <field name="login">hr_rst</field>
+            <field name="password">123</field>
+            <field name="email">hr_rst@example.com</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('hr.group_hr_user'), ref('survey.group_survey_manager')])]"/>
+        </record>
+
+        <!-- 3. EMPLOYEES -->
+        <!-- Manager Employee -->
+        <record id="emp_rst_manager" model="hr.employee">
+            <field name="name">RST Manager</field>
+            <field name="user_id" ref="user_rst_manager"/>
+            <field name="department_id" ref="dept_rst_sales"/>
+            <field name="work_email">manager_rst@example.com</field>
+        </record>
+
+        <!-- Employee linked to Manager -->
+        <record id="emp_rst_employee" model="hr.employee">
+            <field name="name">RST Employee</field>
+            <field name="user_id" ref="user_rst_employee"/>
+            <field name="department_id" ref="dept_rst_sales"/>
+            <field name="parent_id" ref="emp_rst_manager"/>
+            <field name="work_email">employee_rst@example.com</field>
+        </record>
+
+        <record id="emp_rst_employee_al_advance" model="hr.employee">
+            <field name="name">RST Employee Advance AL</field>
+            <field name="user_id" ref="user_rst_employee_al_advance"/>
+            <field name="department_id" ref="dept_rst_sales"/>
+            <field name="parent_id" ref="emp_rst_manager"/>
+            <field name="work_email">employee_rst_al_advance@example.com</field>
+            <field name="x_psm_0200_remaining_al_days" eval="-7.0"/>
+        </record>
+
+        <!-- IT Employee -->
+        <record id="emp_rst_it" model="hr.employee">
+            <field name="name">RST IT Staff</field>
+            <field name="user_id" ref="user_rst_it"/>
+            <field name="department_id" ref="dept_rst_it"/>
+            <field name="work_email">it_rst@example.com</field>
+        </record>
+
+        <!-- Admin Employee -->
+        <record id="emp_rst_admin" model="hr.employee">
+            <field name="name">RST Admin Staff</field>
+            <field name="user_id" ref="user_rst_admin"/>
+            <field name="department_id" ref="dept_rst_admin"/>
+            <field name="work_email">admin_rst@example.com</field>
+        </record>
+
+        <!-- HR Employee -->
+        <record id="emp_rst_hr" model="hr.employee">
+            <field name="name">RST HR Staff</field>
+            <field name="user_id" ref="user_rst_hr"/>
+            <field name="department_id" ref="dept_rst_hr"/>
+            <field name="work_email">hr_rst@example.com</field>
+        </record>
+
+        <!-- 4. ANNUAL LEAVE DEMO DATA -->
+        <record id="leave_type_rst_annual_leave" model="hr.leave.type">
+            <field name="name">RST Annual Leave</field>
+            <field name="requires_allocation">1</field>
+            <field name="employee_requests">1</field>
+            <field name="allocation_validation_type">no_validation</field>
+            <field name="leave_validation_type">no_validation</field>
+            <field name="request_unit">day</field>
+            <field name="allows_negative">1</field>
+            <field name="max_allowed_negative" eval="20"/>
+        </record>
+
+        <record id="allocation_rst_employee_annual_leave" model="hr.leave.allocation">
+            <field name="name">RST Employee Annual Leave Balance</field>
+            <field name="holiday_status_id" ref="leave_type_rst_annual_leave"/>
+            <field name="employee_id" ref="emp_rst_employee"/>
+            <field name="number_of_days" eval="12.0"/>
+        </record>
+
+        <record id="allocation_rst_employee_al_advance" model="hr.leave.allocation">
+            <field name="name">RST Employee Advance AL Balance</field>
+            <field name="holiday_status_id" ref="leave_type_rst_annual_leave"/>
+            <field name="employee_id" ref="emp_rst_employee_al_advance"/>
+            <field name="number_of_days" eval="5.0"/>
+        </record>
+
+        <record id="request_rst_employee_al_advance" model="approval.request">
+            <field name="name">RST Demo Resignation - Advance AL</field>
+            <field name="category_id" ref="approval_category_resignation"/>
+            <field name="request_owner_id" ref="user_rst_employee_al_advance"/>
+            <field name="employee_id" ref="emp_rst_employee_al_advance"/>
+            <field name="x_psm_0214_employee_id" ref="emp_rst_employee_al_advance"/>
+            <field name="x_psm_0214_resignation_date" eval="time.strftime('%Y-%m-%d')"/>
+            <field name="x_psm_0214_al_deduction_rate" eval="100000.0"/>
+            <field name="x_psm_0214_al_deduction_amount" eval="700000.0"/>
+            <field name="x_psm_0214_al_deduction_note">Demo case: employee has used 7 annual leave days in advance.</field>
+        </record>
+
+        <!-- 5. FINANCE CHECK DEMO DATA -->
+        <record id="expense_rst_employee_draft" model="hr.expense">
+            <field name="name">RST draft expense</field>
+            <field name="employee_id" ref="emp_rst_employee"/>
+            <field name="product_id" ref="hr_expense.product_product_no_cost"/>
+            <field name="total_amount_currency" eval="350000.0"/>
+            <field name="date" eval="time.strftime('%Y-%m-%d')"/>
+        </record>
+
+        <record id="expense_rst_employee_submitted" model="hr.expense">
+            <field name="name">RST submitted expense</field>
+            <field name="employee_id" ref="emp_rst_employee"/>
+            <field name="product_id" ref="hr_expense.product_product_no_cost"/>
+            <field name="total_amount_currency" eval="780000.0"/>
+            <field name="date" eval="time.strftime('%Y-%m-%d')"/>
+            <field name="approval_state">submitted</field>
+        </record>
+
+        <record id="advance_rst_employee_open" model="x_psm_0214_advance_request">
+            <field name="name">ADV-RST-001</field>
+            <field name="employee_id" ref="emp_rst_employee"/>
+            <field name="amount" eval="1200000.0"/>
+            <field name="currency_id" ref="base.VND"/>
+            <field name="date" eval="time.strftime('%Y-%m-%d')"/>
+            <field name="state">open</field>
+        </record>
+    </data>
+</odoo>

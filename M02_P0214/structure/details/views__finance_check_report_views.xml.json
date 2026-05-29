@@ -1,0 +1,92 @@
+{
+  "file": "views/finance_check_report_views.xml",
+  "type": "xml",
+  "bucket": "views",
+  "summary": "2 views, 1 actions, 1 menus",
+  "records": [
+    {
+      "id": "view_psm_finance_check_report_tree",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "approval.request.finance.check.report.tree",
+        "model": "approval.request",
+        "group_ids": {
+          "eval": "[(6, 0, [             ref('M02_P0200.GDH_RST_HR_HEAD_M'),             ref('M02_P0200.GDH_RST_SYSTEM_ST_M')         ])]"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "view_psm_finance_check_report_search",
+      "model": "ir.ui.view",
+      "fields": {
+        "name": "approval.request.finance.check.report.search",
+        "model": "approval.request",
+        "group_ids": {
+          "eval": "[(6, 0, [             ref('M02_P0200.GDH_RST_HR_HEAD_M'),             ref('M02_P0200.GDH_RST_SYSTEM_ST_M')         ])]"
+        },
+        "arch": ""
+      }
+    },
+    {
+      "id": "action_psm_finance_check_report",
+      "model": "ir.actions.act_window",
+      "fields": {
+        "name": "Accounting Check Report",
+        "res_model": "approval.request",
+        "view_mode": "list,form",
+        "views": {
+          "eval": "[(ref('view_psm_finance_check_report_tree'), 'list'), (False, 'form')]"
+        },
+        "search_view_id": {
+          "ref": "view_psm_finance_check_report_search"
+        },
+        "domain": "[('x_psm_0214_finance_check_state', 'in', ['blocked', 'overridden'])]",
+        "context": "{'create': False}"
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "view_psm_finance_check_report_tree",
+      "model": "approval.request",
+      "name": "approval.request.finance.check.report.tree",
+      "inherit_id": null,
+      "file": "views/finance_check_report_views.xml"
+    },
+    {
+      "id": "view_psm_finance_check_report_search",
+      "model": "approval.request",
+      "name": "approval.request.finance.check.report.search",
+      "inherit_id": null,
+      "file": "views/finance_check_report_views.xml"
+    }
+  ],
+  "actions": [
+    {
+      "id": "action_psm_finance_check_report",
+      "name": "Accounting Check Report",
+      "res_model": "approval.request",
+      "view_mode": "list,form",
+      "domain": "[('x_psm_0214_finance_check_state', 'in', ['blocked', 'overridden'])]",
+      "file": "views/finance_check_report_views.xml"
+    }
+  ],
+  "menus": [
+    {
+      "id": "menu_psm_finance_check_report",
+      "name": "Accounting Check Report",
+      "parent": "menu_psm_rst_reports",
+      "action": "action_psm_finance_check_report",
+      "groups": "M02_P0200.GDH_RST_HR_HEAD_M,M02_P0200.GDH_RST_SYSTEM_ST_M",
+      "file": "views/finance_check_report_views.xml"
+    }
+  ],
+  "templates": [],
+  "functions": [],
+  "referenced_models": [
+    "approval.request",
+    "ir.actions.act_window",
+    "ir.ui.view"
+  ]
+}

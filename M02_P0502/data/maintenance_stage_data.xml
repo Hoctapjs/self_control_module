@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- stage chuan cho Kanban cua luong 0502 -->
+    <record id="stage_psm_0502_intake" model="maintenance.stage">
+        <field name="name">0502 Intake</field>
+        <field name="sequence">5</field>
+        <field name="fold">False</field>
+        <field name="done">False</field>
+    </record>
+
+    <record id="stage_psm_0502_inspected" model="maintenance.stage">
+        <field name="name">0502 Inspected</field>
+        <field name="sequence">10</field>
+        <field name="fold">False</field>
+        <field name="done">False</field>
+    </record>
+
+    <record id="stage_psm_0502_planned" model="maintenance.stage">
+        <field name="name">0502 Planned</field>
+        <field name="sequence">15</field>
+        <field name="fold">False</field>
+        <field name="done">False</field>
+    </record>
+
+    <record id="stage_psm_0502_proposed" model="maintenance.stage">
+        <field name="name">0502 Proposed</field>
+        <field name="sequence">20</field>
+        <field name="fold">False</field>
+        <field name="done">False</field>
+    </record>
+
+    <record id="stage_psm_0502_approved" model="maintenance.stage">
+        <field name="name">0502 Approved</field>
+        <field name="sequence">25</field>
+        <field name="fold">False</field>
+        <field name="done">False</field>
+    </record>
+
+    <record id="stage_psm_0502_service_assessed" model="maintenance.stage">
+        <field name="name">0502 Service Assessed</field>
+        <field name="sequence">30</field>
+        <field name="fold">False</field>
+        <field name="done">False</field>
+    </record>
+
+    <record id="stage_psm_0502_material_ready" model="maintenance.stage">
+        <field name="name">0502 Material Ready</field>
+        <field name="sequence">35</field>
+        <field name="fold">False</field>
+        <field name="done">False</field>
+    </record>
+
+    <record id="stage_psm_0502_in_execution" model="maintenance.stage">
+        <field name="name">0502 In Execution</field>
+        <field name="sequence">40</field>
+        <field name="fold">False</field>
+        <field name="done">False</field>
+    </record>
+
+    <record id="stage_psm_0502_acceptance_review" model="maintenance.stage">
+        <field name="name">0502 Acceptance Review</field>
+        <field name="sequence">45</field>
+        <field name="fold">False</field>
+        <field name="done">False</field>
+    </record>
+
+    <record id="stage_psm_0502_done" model="maintenance.stage">
+        <field name="name">0502 Done</field>
+        <field name="sequence">50</field>
+        <field name="fold">True</field>
+        <field name="done">True</field>
+    </record>
+
+    <record id="stage_psm_0502_cancelled" model="maintenance.stage">
+        <field name="name">0502 Cancelled</field>
+        <field name="sequence">55</field>
+        <field name="fold">True</field>
+        <field name="done">True</field>
+    </record>
+</odoo>

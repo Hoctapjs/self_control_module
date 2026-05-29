@@ -1,0 +1,51 @@
+{
+  "file": "models/x_psm_hr_discipline_violation_category.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: x_psm.hr.discipline.violation.category; 1 classes; 2 fields",
+  "classes": [
+    {
+      "python_class": "HrDisciplineViolationCategory",
+      "description": "Discipline Violation Category",
+      "model": "x_psm.hr.discipline.violation.category",
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "name",
+          "type": "Char",
+          "string": "Category Name",
+          "comodel": null,
+          "required": true,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_code",
+          "type": "Char",
+          "string": "Code",
+          "comodel": null,
+          "required": false,
+          "readonly": false,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [],
+      "kind": "new_model"
+    }
+  ],
+  "routes": []
+}

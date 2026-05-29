@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_psm_hr_discipline_reject_wizard_form" model="ir.ui.view">
+        <field name="name">hr.discipline.reject.wizard.form</field>
+        <field name="model">x_psm.hr.discipline.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Enter Reason">
+                <group>
+                    <field name="x_psm_record_id" invisible="1"/>
+                    <field name="x_psm_mode" invisible="1"/>
+                    <field name="x_psm_reason" widget="text" placeholder="Enter reason..."/>
+                </group>
+                <footer>
+                    <button name="action_psm_confirm_reject" string="Confirm Rejection" type="object" class="btn-primary" invisible="x_psm_mode != 'explanation'"/>
+                    <button name="action_psm_skip_hearing" string="Confirm Skip Hearing" type="object" class="btn-primary" invisible="x_psm_mode != 'skip_hearing'"/>
+                    <button name="action_psm_ceo_reject" string="Confirm CEO Rejection" type="object" class="btn-primary" invisible="x_psm_mode != 'ceo_reject'"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

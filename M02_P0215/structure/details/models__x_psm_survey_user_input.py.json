@@ -1,0 +1,58 @@
+{
+  "file": "models/x_psm_survey_user_input.py",
+  "type": "python",
+  "bucket": "models",
+  "summary": "models: survey.user_input; 1 classes; 2 fields",
+  "classes": [
+    {
+      "python_class": "SurveyUserInput",
+      "description": "Extends survey.user_input in models/x_psm_survey_user_input.py.",
+      "model": null,
+      "inherit": "survey.user_input",
+      "order": null,
+      "rec_name": null,
+      "fields": [
+        {
+          "name": "x_psm_0215_record_id",
+          "type": "Many2one",
+          "string": "0215 Discipline Record",
+          "comodel": "x_psm.hr.discipline.record",
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": null,
+          "default": null,
+          "tracking": null,
+          "help": null
+        },
+        {
+          "name": "x_psm_0215_flow_type",
+          "type": "Selection",
+          "string": "0215 Flow Type",
+          "comodel": null,
+          "required": false,
+          "readonly": true,
+          "store": null,
+          "related": null,
+          "compute": null,
+          "selection": "[[\"explanation\", \"Explanation\"], [\"feedback\", \"Feedback\"]]",
+          "default": null,
+          "tracking": null,
+          "help": null
+        }
+      ],
+      "methods": [
+        {
+          "name": "_mark_done",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        }
+      ],
+      "kind": "inherit_only"
+    }
+  ],
+  "routes": []
+}

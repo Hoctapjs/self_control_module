@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="demo_banner_draft_pos" model="mkt_paf.banner">
+            <field name="paf_request_id" ref="demo_paf_draft"/>
+            <field name="name">BBQ POS Draft Banner</field>
+            <field name="image" type="base64" file="M09_0901_demo/static/img/banner_bbq_pos_vi.png"/>
+            <field name="image_filename">banner_bbq_pos_vi.png</field>
+            <field name="purpose">pos_display</field>
+            <field name="platform_id" ref="M08_P0801.pif_platform_fc"/>
+            <field name="language">vi</field>
+            <field name="target_dimensions">1200x800</field>
+            <field name="target_dpi">300</field>
+            <field name="status">draft</field>
+            <field name="notes">MKT mới upload, chờ Brand duyệt.</field>
+        </record>
+
+        <record id="demo_banner_eval_pos" model="mkt_paf.banner">
+            <field name="paf_request_id" ref="demo_paf_eval"/>
+            <field name="name">BBQ POS Approved Banner</field>
+            <field name="image" type="base64" file="M09_0901_demo/static/img/banner_bbq_pos_vi.png"/>
+            <field name="image_filename">banner_bbq_pos_vi.png</field>
+            <field name="purpose">pos_display</field>
+            <field name="platform_id" ref="M08_P0801.pif_platform_fc"/>
+            <field name="language">vi</field>
+            <field name="target_dimensions">1200x800</field>
+            <field name="target_dpi">300</field>
+            <field name="status">brand_approved</field>
+            <field name="approver_id" ref="M08_P0801_demo.demo_user_mkt_head"/>
+            <field name="approval_date">2026-06-10 09:00:00</field>
+        </record>
+
+        <record id="demo_banner_eval_sok" model="mkt_paf.banner">
+            <field name="paf_request_id" ref="demo_paf_eval"/>
+            <field name="name">BBQ SOK Approved Banner</field>
+            <field name="image" type="base64" file="M09_0901_demo/static/img/banner_bbq_sok_vi.png"/>
+            <field name="image_filename">banner_bbq_sok_vi.png</field>
+            <field name="purpose">sok_display</field>
+            <field name="platform_id" ref="M08_P0801.pif_platform_sok"/>
+            <field name="language">vi</field>
+            <field name="target_dimensions">1080x1920</field>
+            <field name="target_dpi">72</field>
+            <field name="status">brand_approved</field>
+            <field name="approver_id" ref="M08_P0801_demo.demo_user_mkt_head"/>
+            <field name="approval_date">2026-06-10 09:10:00</field>
+        </record>
+
+        <record id="demo_banner_eval_dt_rejected" model="mkt_paf.banner">
+            <field name="paf_request_id" ref="demo_paf_eval"/>
+            <field name="name">BBQ DT Rejected Banner</field>
+            <field name="image" type="base64" file="M09_0901_demo/static/img/banner_bbq_dt_vi.png"/>
+            <field name="image_filename">banner_bbq_dt_vi.png</field>
+            <field name="purpose">dt_menu</field>
+            <field name="platform_id" ref="M08_P0801.pif_platform_dt"/>
+            <field name="language">vi</field>
+            <field name="target_dimensions">1920x1080</field>
+            <field name="target_dpi">72</field>
+            <field name="status">rejected</field>
+            <field name="approver_id" ref="M08_P0801_demo.demo_user_mkt_head"/>
+            <field name="approval_date">2026-06-10 09:20:00</field>
+            <field name="rejection_reason">Logo chưa đúng guideline.</field>
+        </record>
+
+        <record id="demo_banner_done_pos" model="mkt_paf.banner">
+            <field name="paf_request_id" ref="demo_paf_done"/>
+            <field name="name">BBQ POS Final Banner</field>
+            <field name="image" type="base64" file="M09_0901_demo/static/img/banner_bbq_pos_vi.png"/>
+            <field name="image_filename">banner_bbq_pos_vi.png</field>
+            <field name="purpose">pos_display</field>
+            <field name="platform_id" ref="M08_P0801.pif_platform_fc"/>
+            <field name="language">vi</field>
+            <field name="target_dimensions">1200x800</field>
+            <field name="target_dpi">300</field>
+            <field name="status">brand_approved</field>
+            <field name="approver_id" ref="M08_P0801_demo.demo_user_mkt_head"/>
+            <field name="approval_date">2025-05-20 09:00:00</field>
+        </record>
+
+        <record id="demo_banner_done_sok" model="mkt_paf.banner">
+            <field name="paf_request_id" ref="demo_paf_done"/>
+            <field name="name">BBQ SOK Final Banner</field>
+            <field name="image" type="base64" file="M09_0901_demo/static/img/banner_bbq_sok_vi.png"/>
+            <field name="image_filename">banner_bbq_sok_vi.png</field>
+            <field name="purpose">sok_display</field>
+            <field name="platform_id" ref="M08_P0801.pif_platform_sok"/>
+            <field name="language">vi</field>
+            <field name="target_dimensions">1080x1920</field>
+            <field name="target_dpi">72</field>
+            <field name="status">brand_approved</field>
+            <field name="approver_id" ref="M08_P0801_demo.demo_user_mkt_head"/>
+            <field name="approval_date">2025-05-20 09:10:00</field>
+        </record>
+
+        <record id="demo_banner_done_dt" model="mkt_paf.banner">
+            <field name="paf_request_id" ref="demo_paf_done"/>
+            <field name="name">BBQ DT Final Banner</field>
+            <field name="image" type="base64" file="M09_0901_demo/static/img/banner_bbq_dt_vi.png"/>
+            <field name="image_filename">banner_bbq_dt_vi.png</field>
+            <field name="purpose">dt_menu</field>
+            <field name="platform_id" ref="M08_P0801.pif_platform_dt"/>
+            <field name="language">vi</field>
+            <field name="target_dimensions">1920x1080</field>
+            <field name="target_dpi">72</field>
+            <field name="status">brand_approved</field>
+            <field name="approver_id" ref="M08_P0801_demo.demo_user_mkt_head"/>
+            <field name="approval_date">2025-05-20 09:20:00</field>
+        </record>
+
+        <record id="demo_banner_done_mop" model="mkt_paf.banner">
+            <field name="paf_request_id" ref="demo_paf_done"/>
+            <field name="name">BBQ MOP Final Banner</field>
+            <field name="image" type="base64" file="M09_0901_demo/static/img/banner_spicy_pos_vi.png"/>
+            <field name="image_filename">banner_spicy_pos_vi.png</field>
+            <field name="purpose">mop_app</field>
+            <field name="platform_id" ref="M08_P0801.pif_platform_digital"/>
+            <field name="language">vi</field>
+            <field name="target_dimensions">1200x800</field>
+            <field name="target_dpi">72</field>
+            <field name="status">brand_approved</field>
+            <field name="approver_id" ref="M08_P0801_demo.demo_user_mkt_head"/>
+            <field name="approval_date">2025-05-20 09:30:00</field>
+        </record>
+    </data>
+</odoo>

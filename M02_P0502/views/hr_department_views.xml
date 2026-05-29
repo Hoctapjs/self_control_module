@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ke thua form department de cau hinh partner map sang Customer tren FSM task -->
+     <!-- ke thua form department va hien thi field x_psm_0502_partner_id len giao dien -->
+      <!-- them field x_psm_0502_partner_id vao sau field color -->
+    <record id="view_psm_hr_department_form" model="ir.ui.view">
+        <!-- ten ky thuat cua view -->
+        <field name="name">psm.hr.department.form</field>
+        <!-- view nay ap dung cho model hr.department -->
+        <field name="model">hr.department</field>
+        <!-- ke thua tu view form cua hr.department -->
+         <!-- khong tao moi, chi sua form co san -->
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        
+        <!-- bat dau phan chinh sua kien truc giao dien -->
+         <!-- arch la phan kien truc giao dien -->
+          <!-- arch dung de chua xml mo ta giao dien, phan ben trong cua no chinh la layout cua giao dien -->
+        <!-- type="xml" : khai bao noi dung ben trong la xml hoan chinh -->
+        <field name="arch" type="xml">
+            <!-- tim field color trong form goc va them field x_psm_0502_partner_id sau no -->
+            <xpath expr="//field[@name='color']" position="after">
+                <!-- field custom da khai bao tren python -->
+                 <!-- no-open: khong cho phep mo form de chon gia tri -> false : cho phep mo form de chon gia tri -->
+                <field name="x_psm_0502_partner_id" options="{'no_open': False}" help="Customer/partner automatically mapped to FSM tasks created from 0502 maintenance requests."/>
+                <field name="x_psm_0502_proposal_approver_id"/>
+                <field name="x_psm_0502_proposal_final_approver_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

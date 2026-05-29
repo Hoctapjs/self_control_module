@@ -1,0 +1,121 @@
+{
+  "file": "tests/test_0502_flow.py",
+  "type": "python",
+  "bucket": "tests",
+  "summary": "1 classes; 0 fields",
+  "classes": [
+    {
+      "python_class": "Test0502Phase3Flow",
+      "description": "Python helper class Test0502Phase3Flow.",
+      "model": null,
+      "inherit": null,
+      "order": null,
+      "rec_name": null,
+      "fields": [],
+      "methods": [
+        {
+          "name": "setUpClass",
+          "type": "method",
+          "decorators": [
+            "classmethod"
+          ],
+          "summary": "method"
+        },
+        {
+          "name": "_ensure_fsm_project",
+          "type": "helper",
+          "decorators": [
+            "classmethod"
+          ],
+          "summary": "helper"
+        },
+        {
+          "name": "_create_base_request",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_inspect_plan_propose",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_inspect_plan_propose_approve",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "_complete_internal_execution",
+          "type": "helper",
+          "decorators": [],
+          "summary": "helper"
+        },
+        {
+          "name": "test_01_internal_flow_to_done",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_02_preventive_cron_generates_request",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_03_outside_service_flow",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_04_material_purchase_recheck_flow",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_05_rework_loop",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_06_two_level_approval_resolution",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_07_auto_approval_under_limit",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_09_fsm_task_does_not_force_in_execution_stage",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_10_store_user_without_department_sees_nothing",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        },
+        {
+          "name": "test_08_store_record_rule_own_department",
+          "type": "method",
+          "decorators": [],
+          "summary": "method"
+        }
+      ],
+      "kind": "python_class"
+    }
+  ],
+  "routes": []
+}

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ke thua form maintenance team de cau hinh ro CMT lead cho 0502 -->
+    <record id="view_psm_maintenance_team_form" model="ir.ui.view">
+        <field name="name">psm.maintenance.team.form</field>
+        <field name="model">maintenance.team</field>
+        <field name="inherit_id" ref="maintenance.maintenance_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='member_ids']" position="after">
+                <field name="x_psm_0502_lead_user_id"/>
+                <field name="x_psm_0502_intake_sla_hours"/>
+                <field name="x_psm_0502_proposal_approver_id"/>
+                <field name="x_psm_0502_proposal_auto_approve_limit"/>
+                <field name="x_psm_0502_material_approver_id"/>
+                <field name="x_psm_0502_material_auto_approve_limit"/>
+                <field name="x_psm_0502_default_vendor_id"/>
+                <field name="x_psm_0502_currency_id" invisible="1"/>
+                <field name="x_psm_0502_material_picking_type_id"/>
+                <field name="x_psm_0502_material_source_location_id"/>
+                <field name="x_psm_0502_material_destination_location_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ke thua list maintenance team de de kiem tra nhanh team nao da cau hinh 0502 lead -->
+    <record id="view_psm_maintenance_team_list" model="ir.ui.view">
+        <field name="name">psm.maintenance.team.list</field>
+        <field name="model">maintenance.team</field>
+        <field name="inherit_id" ref="maintenance.maintenance_team_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='member_ids']" position="after">
+                <field name="x_psm_0502_lead_user_id" optional="show"/>
+                <field name="x_psm_0502_intake_sla_hours" optional="hide"/>
+                <field name="x_psm_0502_proposal_approver_id" optional="hide"/>
+                <field name="x_psm_0502_proposal_auto_approve_limit" optional="hide"/>
+                <field name="x_psm_0502_material_approver_id" optional="hide"/>
+                <field name="x_psm_0502_material_auto_approve_limit" optional="hide"/>
+                <field name="x_psm_0502_default_vendor_id" optional="hide"/>
+                <field name="x_psm_0502_material_picking_type_id" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ke thua search maintenance team de loc nhanh team da co cau hinh lead -->
+    <record id="view_psm_maintenance_team_search" model="ir.ui.view">
+        <field name="name">psm.maintenance.team.search</field>
+        <field name="model">maintenance.team</field>
+        <field name="inherit_id" ref="maintenance.maintenance_team_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/field[@name='name']" position="after">
+                <field name="x_psm_0502_lead_user_id"/>
+                <field name="x_psm_0502_intake_sla_hours"/>
+                <field name="x_psm_0502_proposal_approver_id"/>
+                <field name="x_psm_0502_material_approver_id"/>
+                <field name="x_psm_0502_default_vendor_id"/>
+                <field name="x_psm_0502_material_picking_type_id"/>
+            </xpath>
+            <xpath expr="//search" position="inside">
+                <filter
+                    string="Configured 0502 Lead"
+                    name="filter_psm_configured_0502_lead"
+                    domain="[('x_psm_0502_lead_user_id', '!=', False)]"
+                />
+                <filter
+                    string="Configured 0502 Intake SLA"
+                    name="filter_psm_configured_0502_intake_sla"
+                    domain="[('x_psm_0502_intake_sla_hours', '>', 0)]"
+                />
+                <filter
+                    string="Configured 0502 Proposal Approver"
+                    name="filter_psm_configured_0502_proposal_approver"
+                    domain="[('x_psm_0502_proposal_approver_id', '!=', False)]"
+                />
+                <filter
+                    string="Configured 0502 Material Approver"
+                    name="filter_psm_configured_0502_material_approver"
+                    domain="[('x_psm_0502_material_approver_id', '!=', False)]"
+                />
+                <filter
+                    string="Configured 0502 Default Vendor"
+                    name="filter_psm_configured_0502_default_vendor"
+                    domain="[('x_psm_0502_default_vendor_id', '!=', False)]"
+                />
+                <filter
+                    string="Configured 0502 Material Flow"
+                    name="filter_psm_configured_0502_material_flow"
+                    domain="[('x_psm_0502_material_picking_type_id', '!=', False)]"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
